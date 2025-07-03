@@ -140,5 +140,26 @@
       }
     }
   </script>
+
+<script>
+  // Mostrar cartel si viene con ?verificado=1
+  window.addEventListener("DOMContentLoaded", () => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("verificado") === "1") {
+      const cartel = document.createElement("div");
+      cartel.className = "fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50";
+      cartel.innerHTML = `
+        <div class="bg-white rounded-xl p-6 shadow-lg max-w-md text-center">
+          <h2 class="text-2xl font-semibold text-green-600">🎉 ¡Felicitaciones!</h2>
+          <p class="mt-2 text-gray-700">Validaste tu email correctamente.</p>
+          <p class="mt-2 text-sm text-gray-500">El <strong>1 de agosto</strong> te enviaremos el acceso a <strong>Dialogo</strong>.</p>
+          <button onclick="this.parentElement.parentElement.remove()" class="mt-4 px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700">Cerrar</button>
+        </div>
+      `;
+      document.body.appendChild(cartel);
+    }
+  });
+</script>
+
 </body>
 </html>
