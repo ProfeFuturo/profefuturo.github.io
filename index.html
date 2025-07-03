@@ -6,14 +6,6 @@
   <title>Dialogo — Programar dibujando</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link rel="icon" href="logo.png" type="image/png">
-  <script>
-    function mostrarMensaje() {
-      const form = document.getElementById('formulario');
-      const mensaje = document.getElementById('mensaje-exito');
-      form.style.display = 'none';
-      mensaje.style.display = 'block';
-    }
-  </script>
 </head>
 <body class="bg-gray-100 text-gray-800">
   <header class="bg-white shadow p-6">
@@ -66,7 +58,7 @@
       <h2 class="text-2xl font-semibold text-indigo-600 text-center">📬 Quiero ser tester</h2>
       <p class="text-center text-gray-600 mt-2">Anotate y recibí el acceso anticipado + 20 monedas virtuales</p>
 
-      <form id="formulario" action="https://script.google.com/macros/s/AKfycbzqAjLn8FyYYtjX85KbNwTWQrt0KrdqB5Kkoa4X_3qjCKuTqu3mhqUJwmt3e1L6gq8-Gw/exec" method="POST" class="mt-6 space-y-4" onsubmit="mostrarMensaje()">
+      <form id="formulario" class="mt-6 space-y-4" onsubmit="enviarFormulario(event)">
         <input type="text" name="nombre" placeholder="Tu nombre" required class="w-full px-4 py-2 border rounded">
         <input type="email" name="email" placeholder="Tu email" required class="w-full px-4 py-2 border rounded">
         <input type="text" name="whatsapp" placeholder="WhatsApp (opcional)" class="w-full px-4 py-2 border rounded">
@@ -85,5 +77,28 @@
   <footer class="text-center text-gray-400 text-xs p-4 mt-12">
     © 2025 Dialogo. Todos los derechos reservados.
   </footer>
+
+  <script>
+    async function enviarFormulario(event) {
+      event.preventDefault();
+
+      const form = document.getElementById('formulario');
+      const mensaje = document.getElementById('mensaje-exito');
+      const datos = new FormData(form);
+
+      try {
+        await fetch("https://script.google.com/macros/s/AKfycbzqAjLn8FyYYtjX85KbNwTWQrt0KrdqB5Kkoa4X_3qjCKuTqu3mhqUJwmt3e1L6gq8-Gw/exec", {
+          method: "POST",
+          body: datos,
+        });
+
+        form.style.display = "none";
+        mensaje.style.display = "block";
+      } catch (error) {
+        alert("Hubo un error al enviar el formulario. Intentá de nuevo más tarde.");
+        console.error(error);
+      }
+    }
+  </script>
 </body>
 </html>
