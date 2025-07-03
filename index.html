@@ -10,7 +10,7 @@
 <body class="bg-gray-100 text-gray-800">
   <header class="bg-white shadow p-6">
     <div class="max-w-4xl mx-auto text-center">
-      <img src="logo.png" alt="Dialogo" class="mx-auto mb-4" style="width: 220px; height: auto;">
+      <img src="logo.png" alt="Dialogo" class="mx-auto mb-4" style="width: 440px; height: auto;">
       <h1 class="text-3xl md:text-5xl font-bold text-indigo-600 sr-only">Dialogo</h1>
       <p class="text-lg mt-2 text-gray-600">Programar dibujando, sin escribir una sola línea de código</p>
       <p class="mt-4 text-sm text-gray-500">Lanzamiento beta: <strong>1 de agosto</strong></p>
@@ -59,15 +59,30 @@
       <p class="text-center text-gray-600 mt-2">Anotate y recibí el acceso anticipado + 20 monedas virtuales</p>
 
       <form id="formulario" class="mt-6 space-y-4" onsubmit="enviarFormulario(event)">
-        <input type="text" name="nombre" placeholder="Tu nombre" required class="w-full px-4 py-2 border rounded">
-        <input type="email" name="email" placeholder="Tu email" required class="w-full px-4 py-2 border rounded" oninvalid="this.setCustomValidity('Ingresá un email válido')" oninput="this.setCustomValidity('')">
+        <input type="text" name="nombre" placeholder="Tu nombre" required pattern=".*\S.*" class="w-full px-4 py-2 border rounded">
+        <input type="email" name="email" placeholder="Tu email" required pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$" class="w-full px-4 py-2 border rounded" oninvalid="this.setCustomValidity('Ingresá un email válido')" oninput="this.setCustomValidity('')">
         <div class="flex gap-2">
           <select name="codigo" class="px-2 py-2 border rounded">
-            <option value="+54" selected>+54 🇦🇷</option>
-            <option value="+34">+34 🇪🇸</option>
-            <option value="+1">+1 🇺🇸</option>
-            <option value="+55">+55 🇧🇷</option>
-            <option value="+598">+598 🇺🇾</option>
+            <option value="+54" selected>+54 🇦🇷 Argentina</option>
+            <option value="+1">+1 🇺🇸 Estados Unidos</option>
+            <option value="+34">+34 🇪🇸 España</option>
+            <option value="+44">+44 🇬🇧 Reino Unido</option>
+            <option value="+55">+55 🇧🇷 Brasil</option>
+            <option value="+57">+57 🇨🇴 Colombia</option>
+            <option value="+51">+51 🇵🇪 Perú</option>
+            <option value="+52">+52 🇲🇽 México</option>
+            <option value="+56">+56 🇨🇱 Chile</option>
+            <option value="+591">+591 🇧🇴 Bolivia</option>
+            <option value="+598">+598 🇺🇾 Uruguay</option>
+            <option value="+593">+593 🇪🇨 Ecuador</option>
+            <option value="+507">+507 🇵🇦 Panamá</option>
+            <option value="+505">+505 🇳🇮 Nicaragua</option>
+            <option value="+502">+502 🇬🇹 Guatemala</option>
+            <option value="+503">+503 🇸🇻 El Salvador</option>
+            <option value="+504">+504 🇭🇳 Honduras</option>
+            <option value="+505">+505 🇳🇮 Nicaragua</option>
+            <option value="+506">+506 🇨🇷 Costa Rica</option>
+            <!-- Agregar más países según necesidad -->
           </select>
           <input type="tel" name="whatsapp" placeholder="Número sin el +" required pattern="\d{6,15}" class="flex-1 px-4 py-2 border rounded">
         </div>
@@ -97,7 +112,6 @@
       const boton = document.getElementById('boton-enviar');
       const enviando = document.getElementById('mensaje-enviando');
 
-      // Concatenar código + número para enviar
       const codigo = form.querySelector('select[name="codigo"]').value;
       const numero = form.querySelector('input[name="whatsapp"]').value;
       const completo = codigo + numero;
