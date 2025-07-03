@@ -17,6 +17,7 @@
       --dialogo-color-link: #003366;        /* Azul oscuro */
       --dialogo-color-fondo: #FAF9F6;       /* Fondo general */
       --dialogo-color-texto: #333333;       /* Texto principal */
+      --dialogo-color-violeta: #8B5CF6;     /* Violeta divertido */
     }
 
     body {
@@ -29,6 +30,7 @@
     .text-destacado   { color: var(--dialogo-color-destacado); }
     .text-subtitulo   { color: var(--dialogo-color-subtitulo); }
     .text-link        { color: var(--dialogo-color-link); }
+    .text-violeta     { color: var(--dialogo-color-violeta); }
     .bg-acento        { background-color: var(--dialogo-color-acento); }
     .bg-destacado     { background-color: var(--dialogo-color-destacado); }
     .bg-subtitulo     { background-color: var(--dialogo-color-subtitulo); }
@@ -37,6 +39,7 @@
     .bg-destacado     { background-color: var(--dialogo-color-destacado); }
     .bg-subtitulo     { background-color: var(--dialogo-color-subtitulo); }
     .bg-link          { background-color: var(--dialogo-color-link); }
+    .bg-violeta       { background-color: var(--dialogo-color-violeta); }
   </style>
 </head>
 
@@ -111,7 +114,7 @@
 
   <main class="max-w-3xl mx-auto px-6 py-12 space-y-16">
     <section class="animate-fade-in">
-      <h2 class="text-2xl font-semibold text-sky-500">¿Qué es Dialogo?</h2>
+      <h2 class="text-2xl font-semibold text-violeta">¿Qué es Dialogo?</h2>
       <p class="mt-2 text-gray-700 leading-relaxed">
         Dialogo es una herramienta para chicos de 6 a 12 años que permite crear videojuegos combinando dibujos y símbolos, sin necesidad de escribir código. Está diseñada para estimular el pensamiento lógico y la creatividad de forma accesible y divertida.
       </p>
@@ -138,7 +141,7 @@
 
 
     <section class="animate-fade-in">
-      <h2 class="text-xl font-semibold text-acento">¿Cómo funciona?</h2>
+      <h2 class="text-xl font-semibold text-violeta">¿Cómo funciona?</h2>
       <ol class="list-decimal list-inside text-gray-700 space-y-1 mt-2">
         <li>Descargás la app el 1 de agosto</li>
         <li>Elegís un personaje, lo dibujás o lo generás</li>
@@ -180,9 +183,11 @@
             <option value="+">Otro (ingresá número completo)</option>
             <!-- Agregar más países según necesidad -->
           </select>
-          <input type="tel" name="whatsapp" placeholder="Número sin el +" required pattern="\d{6,15}" class="flex-1 px-4 py-2 border rounded" />
+          <input type="tel" name="whatsapp" placeholder="Número sin el + (opcional)" class="flex-1 px-4 py-2 border rounded">
         </div>
-        <button type="submit" id="boton-enviar" class="w-full bg-sky-500 hover:bg-sky-600 text-white font-bold py-3 rounded-xl shadow-md transition">🚀 Quiero probar Dialogo</button>
+        <button type="submit" class="w-full bg-acento hover:bg-subtitulo text-white font-bold py-3 rounded-xl shadow-md transition">
+          🚀 Quiero probar Dialogo
+        </button>
         <p id="mensaje-enviando" class="hidden text-center text-sm text-gray-500">⏳ Enviando tus datos... ¡un momentito! 🙂</p>
       </form>
 
