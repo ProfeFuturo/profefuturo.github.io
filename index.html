@@ -84,7 +84,7 @@
             <option value="+1-809">+1-809 🇩🇴 República Dominicana</option>
             <option value="+598">+598 🇺🇾 Uruguay</option>
             <option value="+58">+58 🇻🇪 Venezuela</option>
-            <option value="+">Otro (ingresá código manual)</option>
+            <option value="+">Otro (ingresá número completo)</option>
             <!-- Agregar más países según necesidad -->
           </select>
           <input type="tel" name="whatsapp" placeholder="Número sin el +" required pattern="\d{6,15}" class="flex-1 px-4 py-2 border rounded">
@@ -127,7 +127,7 @@
       enviando.classList.remove("hidden");
 
       try {
-        await fetch("https://script.google.com/macros/s/AKfycbzqAjLn8FyYYtjX85KbNwTWQrt0KrdqB5Kkoa4X_3qjCKuTqu3mhqUJwmt3e1L6gq8-Gw/exec", {
+        await fetch("https://script.google.com/macros/s/AAKfycbwSdQNG62zbN68OO--PCvgup9dYSFAQ00GvQ7XtwIQ4hjns0-zLm1RoPuNk9IhNRSmGzQ/exec", {
           method: "POST",
           body: datos,
         });
