@@ -11,7 +11,7 @@
 
   <!-- Open Graph -->
   <meta property="og:title" content="Dialogo — Programar dibujando" />
-  <meta property="og:description" content="Crear videojuegos nunca fue tan visual." />
+  <meta property="og:description" content="Dibujos + IA + Lógica" />
   <meta property="og:image" content="https://dialog.ar/preview.jpg" />
   <meta property="og:url" content="https://profefuturo.github.io" />
   <meta property="og:type" content="website" />
@@ -19,7 +19,7 @@
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Dialogo — Programar dibujando" />
-  <meta name="twitter:description" content="Crear videojuegos nunca fue tan visual." />
+  <meta name="twitter:description" content="Dibujos + IA + Lógica" />
   <meta name="twitter:image" content="https://dialog.ar/preview.jpg" />
 
  
@@ -71,6 +71,22 @@
     .bg-subtitulo     { background-color: var(--dialogo-color-subtitulo); }
     .bg-link          { background-color: var(--dialogo-color-link); }
     .bg-violeta       { background-color: var(--dialogo-color-violeta); }
+
+    .aspect-w-16 {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
+      height: 0;
+    }
+
+    .aspect-w-16 iframe {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+    }
+
   </style>
 </head>
 
@@ -139,8 +155,8 @@
     <div class="max-w-4xl mx-auto text-center">
       <img src="logo.svg" alt="Dialogo" class="mx-auto mb-4" style="width: 440px; height: auto;">
       <h1 class="text-3xl md:text-5xl font-bold text-indigo-600 sr-only">Dialogo</h1>
-      <p class="text-lg mt-2 font-semibold">Programar dibujando: crear videojuegos nunca fue tan visual</p>
-      <p class="mt-4 text-sm text-gray-500">Lanzamiento beta: <strong>1 de agosto</strong></p>
+      <p class="text-lg mt-2 font-semibold">Dibujos, Iteligencia Artificial y Lógica</p>
+      <p class="mt-4 text-sm text-gray-500">Lanzamiento beta: <strong>1 de agosto</strong> ¡Anotate!</p>
     </div>
   </header>
 
@@ -148,7 +164,7 @@
     <section class="animate-fade-in">
       <h2 class="text-2xl font-semibold text-violeta">¿Qué es Dialogo?</h2>
       <p class="mt-2 text-gray-700 leading-relaxed">
-        Dialogo es una herramienta para chicos de 9 a 14 años que permite crear videojuegos combinando dibujos y símbolos visuales. Está diseñada para estimular el pensamiento lógico y la creatividad de forma accesible y divertida. Menores de 9 pueden jugar con ayuda y los más grandes, hacer volar su imaginación. 
+        Dialogo es una herramienta para chicos de 9 a 14 años que permite crear videojuegos combinando sus dibujos con íconos visuales. Está diseñada para estimular el pensamiento lógico y la creatividad de forma accesible y divertida. Menores de 9 pueden jugar con ayuda y los más grandes, hacer volar su imaginación. 
       </p>
     </section>
 
@@ -156,7 +172,7 @@
       <div>
         <h3 class="font-semibold text-lg text-yellow-500">🎮 Para chicos:</h3>
         <ul class="list-disc list-inside text-gray-700 space-y-1 mt-2">
-          <li>Crea juegos con tus propios dibujos</li>
+          <li>Creá juegos con tus propios dibujos</li>
           <li>Combiná íconos como cartas mágicas, activando poderes en los personajes</li>
           <li>¡Armá tu Pac-Man en 5 minutos!</li>
         </ul>
@@ -167,6 +183,7 @@
           <li>Estimula habilidades computacionales reales</li>
           <li>Fácil de usar, incluso sin saber leer</li>
           <li>Sin publicidad ni conexión permanente</li>
+          <li>Combina programación con IA</li>
         </ul>
       </div>
     </section>
@@ -176,15 +193,22 @@
       <h2 class="text-xl font-semibold text-violeta">¿Cómo funciona?</h2>
       <ol class="list-decimal list-inside text-gray-700 space-y-1 mt-2">
         <li>Descargás la app el 1 de agosto</li>
-        <li>Imaginás un personaje, lo dibujás o lo lanzás al tablero</li>
+        <li>Imaginás un personaje, lo dibujás y lo lanzás al tablero</li>
         <li>Usás tus dibujos e icónos predefinidos para definir el comportamiento</li>
         <li>Jugás, compartís y ganás monedas virtuales para tunear tus dibujos con IA</li>
       </ol>
     </section>
 
+    <section class="animate-fade-in">
+      <h2 class="text-xl font-semibold text-subtitulo text-center mb-4">🌀 Es muy fácil dar los primeros pasos y hay mucho para aprender</h2>
+      <img src="demo.gif" alt="Demo animado de cómo funciona Dialogo" class="mx-auto rounded-xl shadow-lg max-w-full h-auto" />
+    </section>
+
+
+    
     <section class="bg-white rounded-xl shadow p-6 animate-fade-in">
       <h2 class="text-2xl font-semibold text-acento text-center">📬 Quiero ser tester</h2>
-      <p class="text-center text-gray-600 mt-2">Anotate y recibí el acceso anticipado + 20 monedas virtuales</p>
+      <p class="text-center text-gray-600 mt-2">Anotate y recibí el acceso anticipado + 20 tuning-monedas</p>
 
       <form id="formulario" class="mt-6 space-y-4" onsubmit="enviarFormulario(event)">
         <input type="text" name="nombre" placeholder="Tu nombre" required class="w-full px-4 py-2 border rounded" />
@@ -228,14 +252,36 @@
       </div>
     </section>
 
+    <section class="animate-fade-in mt-16"></section>
+    <h2 class="text-2xl font-semibold text-violeta text-center mb-6">🎤 Show en Nerdearla donde presentamos Dialogo por primera vez</h2>
+    <div class="aspect-w-16 aspect-h-9 mx-auto max-w-3xl">
+      <iframe
+        class="w-full h-full rounded-xl shadow-lg"
+        src="https://www.youtube.com/embed/OMulIPUosDs"
+        title="Presentación de Dialogo en Nerdearla"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </div>
+  </section>
+
     <section class="text-center text-sm text-gray-500 animate-fade-in">
-      <p>Creado por Agustín, docente e investigador en UBA — También conocido como <strong>Profe Futuro</strong> 🚀</p>
+      <p>Sitio creado por Agustín, docente e investigador en UBA — También conocido como <strong>Profe Futuro</strong> 🚀</p>
     </section>
   </main>
 
-  <footer class="text-center text-gray-400 text-xs p-4 mt-12">
-    © 2025 Dialogo. Todos los derechos reservados.
-  </footer>
+<footer class="text-center text-gray-500 text-sm p-6 space-y-2 mt-16">
+  <div class="flex justify-center space-x-4 text-lg">
+    <a href="https://www.instagram.com/profefuturo" target="_blank" class="hover:text-subtitulo transition">
+      📸 Instagram
+    </a>
+    <a href="https://www.tiktok.com/@profefuturo" target="_blank" class="hover:text-subtitulo transition">
+      🎵 TikTok
+    </a>
+  </div>
+  <p class="text-xs text-gray-400">© 2025 Dialogo. Todos los derechos reservados.</p>
+</footer>
 
   <script>
     async function enviarFormulario(event) {
