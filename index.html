@@ -4,20 +4,51 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Dialogo — Programar dibujando</title>
 
+  <!-- SEO básico -->
+  <meta name="description" content="Dialogo es una herramienta para chicos de 6 a 12 años que les permite crear videojuegos dibujando personajes y comportamiento, sin escribir código." />
+  <meta name="keywords" content="programación para chicos, videojuegos sin código, educación digital, programación visual, crear juegos, scratch, no-code, niños" />
+  <meta name="author" content="Agustín Martínez" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Dialogo — Programar dibujando" />
+  <meta property="og:description" content="Dibujás personajes. Dibujás comportamiento. Todo se crea con imágenes." />
+  <meta property="og:image" content="https://dialog.ar/preview.jpg" />
+  <meta property="og:url" content="https://profefuturo.github.io" />
+  <meta property="og:type" content="website" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Dialogo — Programar dibujando" />
+  <meta name="twitter:description" content="Dibujás personajes. Dibujás comportamiento. Todo se crea con imágenes." />
+  <meta name="twitter:image" content="https://dialog.ar/preview.jpg" />
+
+ 
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZEE7HG86H1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-ZEE7HG86H1');
+</script>
+
+
   <!-- Tailwind + tipografía Fredoka -->
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet" />
   <link rel="icon" href="logo.png" type="image/png" />
+
   <!-- Paleta de colores declarativa -->
   <style>
     :root {
-      --dialogo-color-acento: #00B5E2;      /* Azul cielo vibrante */
-      --dialogo-color-destacado: #FFD447;   /* Amarillo dorado */
-      --dialogo-color-subtitulo: #FF7F50;   /* Coral suave */
-      --dialogo-color-link: #003366;        /* Azul oscuro */
-      --dialogo-color-fondo: #FAF9F6;       /* Fondo general */
-      --dialogo-color-texto: #333333;       /* Texto principal */
-      --dialogo-color-violeta: #8B5CF6;     /* Violeta divertido */
+      --dialogo-color-acento: #00B5E2;
+      --dialogo-color-destacado: #FFD447;
+      --dialogo-color-subtitulo: #FF7F50;
+      --dialogo-color-link: #003366;
+      --dialogo-color-fondo: #FAF9F6;
+      --dialogo-color-texto: #333333;
+      --dialogo-color-violeta: #8B5CF6;
     }
 
     body {
@@ -42,6 +73,7 @@
     .bg-violeta       { background-color: var(--dialogo-color-violeta); }
   </style>
 </head>
+
 
 <script>
   window.addEventListener("DOMContentLoaded", async () => {
@@ -107,7 +139,7 @@
     <div class="max-w-4xl mx-auto text-center">
       <img src="logo.svg" alt="Dialogo" class="mx-auto mb-4" style="width: 440px; height: auto;">
       <h1 class="text-3xl md:text-5xl font-bold text-indigo-600 sr-only">Dialogo</h1>
-      <p class="text-lg mt-2 font-semibold">Programar dibujando, sin escribir una sola línea de código</p>
+      <p class="text-lg mt-2 font-semibold">Programar dibujando: crear videojuegos nunca fue tan visual</p>
       <p class="mt-4 text-sm text-gray-500">Lanzamiento beta: <strong>1 de agosto</strong></p>
     </div>
   </header>
@@ -116,7 +148,7 @@
     <section class="animate-fade-in">
       <h2 class="text-2xl font-semibold text-violeta">¿Qué es Dialogo?</h2>
       <p class="mt-2 text-gray-700 leading-relaxed">
-        Dialogo es una herramienta para chicos de 6 a 12 años que permite crear videojuegos combinando dibujos y símbolos, sin necesidad de escribir código. Está diseñada para estimular el pensamiento lógico y la creatividad de forma accesible y divertida.
+        Dialogo es una herramienta para chicos de 9 a 14 años que permite crear videojuegos combinando dibujos y símbolos visuales. Está diseñada para estimular el pensamiento lógico y la creatividad de forma accesible y divertida. Menores de 9 pueden jugar con ayuda y los más grandes, hacer volar su imaginación. 
       </p>
     </section>
 
@@ -125,7 +157,7 @@
         <h3 class="font-semibold text-lg text-yellow-500">🎮 Para chicos:</h3>
         <ul class="list-disc list-inside text-gray-700 space-y-1 mt-2">
           <li>Crea juegos con tus propios dibujos</li>
-          <li>Combiná bloques visuales como si fueran LEGO</li>
+          <li>Combiná íconos como cartas mágicas, activando poderes en los personajes</li>
           <li>¡Armá tu Pac-Man en 5 minutos!</li>
         </ul>
       </div>
@@ -144,9 +176,9 @@
       <h2 class="text-xl font-semibold text-violeta">¿Cómo funciona?</h2>
       <ol class="list-decimal list-inside text-gray-700 space-y-1 mt-2">
         <li>Descargás la app el 1 de agosto</li>
-        <li>Elegís un personaje, lo dibujás o lo generás</li>
-        <li>Usás bloques visuales para definir su comportamiento</li>
-        <li>Jugás, compartís y ganás monedas virtuales</li>
+        <li>Imaginás un personaje, lo dibujás o lo lanzás al tablero</li>
+        <li>Usás tus dibujos e icónos predefinidos para definir el comportamiento</li>
+        <li>Jugás, compartís y ganás monedas virtuales para tunear tus dibujos con IA</li>
       </ol>
     </section>
 
