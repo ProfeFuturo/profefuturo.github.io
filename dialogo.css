@@ -1,0 +1,45 @@
+  :root {
+      --dialogo-color-acento: #00B5E2;
+      --dialogo-color-destacado: #FFD447;
+      --dialogo-color-subtitulo: #FF7F50;
+      --dialogo-color-link: #003366;
+      --dialogo-color-fondo: #FAF9F6;
+      --dialogo-color-texto: #333333;
+      --dialogo-color-violeta: #8B5CF6;
+    }
+
+    body {
+      font-family: 'Fredoka', sans-serif;
+      background-color: var(--dialogo-color-fondo);
+      color: var(--dialogo-color-texto);
+    }
+
+    .text-acento      { color: var(--dialogo-color-acento); }
+    .text-destacado   { color: var(--dialogo-color-destacado); }
+    .text-subtitulo   { color: var(--dialogo-color-subtitulo); }
+    .text-link        { color: var(--dialogo-color-link); }
+    .text-violeta     { color: var(--dialogo-color-violeta); }
+    .bg-acento        { background-color: var(--dialogo-color-acento); }
+    .bg-destacado     { background-color: var(--dialogo-color-destacado); }
+    .bg-subtitulo     { background-color: var(--dialogo-color-subtitulo); }
+    .bg-link          { background-color: var(--dialogo-color-link); }
+    .bg-acento        { background-color: var(--dialogo-color-acento); }
+    .bg-destacado     { background-color: var(--dialogo-color-destacado); }
+    .bg-subtitulo     { background-color: var(--dialogo-color-subtitulo); }
+    .bg-link          { background-color: var(--dialogo-color-link); }
+    .bg-violeta       { background-color: var(--dialogo-color-violeta); }
+
+    .aspect-w-16 {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
+      height: 0;
+    }
+
+    .aspect-w-16 iframe {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+    }

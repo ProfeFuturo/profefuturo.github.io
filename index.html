@@ -1,10 +1,12 @@
 <html lang="es">
 <head>
+
+  <!-- Basic -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Diálogo — Programar dibujando</title>
 
-  <!-- SEO básico -->
+  <!-- SEO + autor -->
   <meta name="description" content="Diálogo es una herramienta para chicos de 10 a 17 años que les permite crear videojuegos dibujando personajes y comportamiento, sin escribir código." />
   <meta name="keywords" content="programación para chicos, videojuegos sin código, educación digital, programación visual, crear juegos, scratch, no-code, niños" />
   <meta name="author" content="Agustín Profe Futuro" />
@@ -13,7 +15,7 @@
   <meta property="og:title" content="Diálogo — Programar dibujando" />
   <meta property="og:description" content="Dibujos + IA + Lógica" />
   <meta property="og:image" content="https://dialog.ar/preview.jpg" />
-  <meta property="og:url" content="https://profefuturo.github.io" />
+  <meta property="og:url" content="https://dialog.ar" />
   <meta property="og:type" content="website" />
 
   <!-- Twitter Card -->
@@ -24,131 +26,21 @@
 
  
 <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZEE7HG86H1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZEE7HG86H1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-ZEE7HG86H1');
+  </script>
 
-  gtag('config', 'G-ZEE7HG86H1');
-</script>
-
-
-  <!-- Tailwind + tipografía Fredoka -->
+<!-- Estilos -->
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet" />
   <link rel="icon" href="logo.png" type="image/png" />
-
-  <!-- Paleta de colores declarativa -->
-  <style>
-    :root {
-      --dialogo-color-acento: #00B5E2;
-      --dialogo-color-destacado: #FFD447;
-      --dialogo-color-subtitulo: #FF7F50;
-      --dialogo-color-link: #003366;
-      --dialogo-color-fondo: #FAF9F6;
-      --dialogo-color-texto: #333333;
-      --dialogo-color-violeta: #8B5CF6;
-    }
-
-    body {
-      font-family: 'Fredoka', sans-serif;
-      background-color: var(--dialogo-color-fondo);
-      color: var(--dialogo-color-texto);
-    }
-
-    .text-acento      { color: var(--dialogo-color-acento); }
-    .text-destacado   { color: var(--dialogo-color-destacado); }
-    .text-subtitulo   { color: var(--dialogo-color-subtitulo); }
-    .text-link        { color: var(--dialogo-color-link); }
-    .text-violeta     { color: var(--dialogo-color-violeta); }
-    .bg-acento        { background-color: var(--dialogo-color-acento); }
-    .bg-destacado     { background-color: var(--dialogo-color-destacado); }
-    .bg-subtitulo     { background-color: var(--dialogo-color-subtitulo); }
-    .bg-link          { background-color: var(--dialogo-color-link); }
-    .bg-acento        { background-color: var(--dialogo-color-acento); }
-    .bg-destacado     { background-color: var(--dialogo-color-destacado); }
-    .bg-subtitulo     { background-color: var(--dialogo-color-subtitulo); }
-    .bg-link          { background-color: var(--dialogo-color-link); }
-    .bg-violeta       { background-color: var(--dialogo-color-violeta); }
-
-    .aspect-w-16 {
-      position: relative;
-      width: 100%;
-      padding-bottom: 56.25%;
-      height: 0;
-    }
-
-    .aspect-w-16 iframe {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      left: 0;
-      top: 0;
-    }
-
-  </style>
+  <link rel="stylesheet" href="dialogo.css" />
 </head>
 
-
-<script>
-  window.addEventListener("DOMContentLoaded", async () => {
-    const params = new URLSearchParams(window.location.search);
-    const token = params.get("token");
-
-    if (token) {
-      mostrarCartelCarga();
-
-      try {
-        const resp = await fetch(`https://script.google.com/macros/s/AKfycbzvYAQFCKzzIQI6orJseiBruRGl9EYmqY-9bf_LdtoBZUC10pcgejfgupQAdiKluc_wKg/exec?token=${token}`);
-        const texto = await resp.text();
-        if (texto.trim() === "OK") {
-          mostrarCartelVerificado();
-        } else {
-          mostrarCartelError();
-        }
-      } catch (e) {
-        console.error("Error al verificar el token:", e);
-        mostrarCartelError();
-      }
-    }
-  });
-
-  function mostrarCartelCarga() {
-    const cartel = document.createElement("div");
-    cartel.id = "cartel-validacion";
-    cartel.className = "fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50";
-    cartel.innerHTML = `
-<div class="bg-white rounded-xl p-6 shadow-lg w-full max-w-md mx-4 text-center animate-pulse">
-        <p class="text-lg text-gray-700">🔄 Validando tu email...</p>
-      </div>
-    `;
-    document.body.appendChild(cartel);
-  }
-
-  function mostrarCartelVerificado() {
-    const cartel = document.getElementById("cartel-validacion");
-    cartel.innerHTML = `
-<div class="bg-white rounded-xl p-6 shadow-lg w-full max-w-md mx-4 text-center animate-pulse">
-        <h2 class="text-2xl font-semibold text-green-600">🎉 ¡Felicitaciones!</h2>
-        <p class="mt-2 text-gray-700">Validaste tu email correctamente.</p>
-        <p class="mt-2 text-sm text-gray-500">El <strong>1 de agosto</strong> te enviaremos el acceso a <strong>Diálogo</strong>.</p>
-        <button onclick="document.getElementById('cartel-validacion').remove()" class="w-full bg-acento hover:bg-subtitulo text-white font-bold py-3 rounded-xl shadow-md transition">Cerrar</button>
-      </div>
-    `;
-  }
-
-  function mostrarCartelError() {
-    const cartel = document.getElementById("cartel-validacion");
-    cartel.innerHTML = `
-<div class="bg-white rounded-xl p-6 shadow-lg w-full max-w-md mx-4 text-center animate-pulse">
-        <h2 class="text-2xl font-semibold text-red-600">❌ Token inválido</h2>
-        <p class="mt-2 text-gray-700">El enlace de validación es incorrecto o ya fue usado.</p>
-        <button onclick="document.getElementById('cartel-validacion').remove()" class="mt-4 px-4 py-2 bg-sky-500 text-white rounded hover:bg-sky-600">Cerrar</button>
-      </div>
-    `;
-  }
-</script>
 
 <body class="bg-gray-100 text-gray-800">
   <header class="bg-white shadow p-6">
@@ -188,7 +80,6 @@
       </div>
     </section>
 
-
     <section class="animate-fade-in">
       <h2 class="text-xl font-semibold text-violeta">¿Cómo funciona?</h2>
       <ol class="list-decimal list-inside text-gray-700 space-y-1 mt-2">
@@ -203,8 +94,6 @@
       <h2 class="text-xl font-semibold text-subtitulo text-center mb-4">🌀 Es muy fácil dar los primeros pasos y hay mucho para aprender</h2>
       <img src="demo.gif" alt="Demo animado de cómo funciona Diálogo" class="mx-auto rounded-xl shadow-lg max-w-full h-auto" />
     </section>
-
-
     
     <section class="bg-white rounded-xl shadow p-6 animate-fade-in">
       <h2 class="text-2xl font-semibold text-acento text-center">📬 Quiero ser tester</h2>
@@ -296,44 +185,8 @@
   <p class="text-xs text-gray-400">© 2025 Diálogo. Todos los derechos reservados.</p>
 </footer>
 
-
-
-  <script>
-    async function enviarFormulario(event) {
-      event.preventDefault();
-
-      const form = document.getElementById('formulario');
-      const mensaje = document.getElementById('mensaje-exito');
-      const boton = document.getElementById('boton-enviar');
-      const enviando = document.getElementById('mensaje-enviando');
-
-      const codigo = form.querySelector('select[name="codigo"]').value;
-      const numero = form.querySelector('input[name="whatsapp"]').value;
-      const completo = codigo + numero;
-
-      const datos = new FormData(form);
-      datos.set("whatsapp", completo);
-
-      boton.disabled = true;
-      boton.classList.add("hidden");
-      enviando.classList.remove("hidden");
-
-      try {
-        await fetch("https://script.google.com/macros/s/AKfycbz3kY0QW1TI1aICx_edBGw1VlM-3zO3JDacTLl4ScVf4uv9QyHqrxgKos0BbQtMckVhjw/exec", {
-          method: "POST",
-          body: datos,
-        });
-
-        form.style.display = "none";
-        mensaje.style.display = "block";
-      } catch (error) {
-        alert("Hubo un error al enviar el formulario. Intentá de nuevo más tarde o mañana.");
-        console.error(error);
-      }
-    }
-  </script>
-
-
+  <script src="formulario.js"></script>
+  <script src="validacion.js"></script>
 
 </body>
 </html>
