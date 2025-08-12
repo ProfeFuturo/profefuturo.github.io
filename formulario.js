@@ -38,7 +38,7 @@
 <div class="bg-white rounded-xl p-6 shadow-lg w-full max-w-md mx-4 text-center animate-pulse">
         <h2 class="text-2xl font-semibold text-green-600">🎉 ¡Felicitaciones!</h2>
         <p class="mt-2 text-gray-700">Validaste tu email correctamente.</p>
-        <p class="mt-2 text-sm text-gray-500">El <strong>1 de agosto</strong> te enviaremos el acceso a <strong>Diálogo</strong> y al taller.</p>
+        <p class="mt-2 text-sm text-gray-500">A principios del <strong>próximo mes</strong> te enviaremos el acceso a <strong>Diálogo</strong> y al taller.</p>
         <button onclick="document.getElementById('cartel-validacion').remove()" class="w-full bg-acento hover:bg-subtitulo text-white font-bold py-3 rounded-xl shadow-md transition">Cerrar</button>
       </div>
     `;
