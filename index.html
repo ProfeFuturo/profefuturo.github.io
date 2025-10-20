@@ -1,10 +1,9 @@
 <html lang="es">
 <head>
-
   <!-- Basic -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Diálogo — Programar dibujando</title>
+  <title>Diálogo – Programar dibujando</title>
 
   <!-- SEO + autor -->
   <meta name="description" content="Diálogo es una herramienta para chicos de 10 a 17 años que les permite crear videojuegos dibujando personajes y comportamiento, sin escribir código." />
@@ -12,7 +11,7 @@
   <meta name="author" content="Agustín Profe Futuro" />
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Diálogo — Programar dibujando" />
+  <meta property="og:title" content="Diálogo – Programar dibujando" />
   <meta property="og:description" content="Dibujos + IA + Lógica" />
   <meta property="og:image" content="https://dialog.ar/preview.jpg" />
   <meta property="og:url" content="https://dialog.ar" />
@@ -20,12 +19,11 @@
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Diálogo — Programar dibujando" />
+  <meta name="twitter:title" content="Diálogo – Programar dibujando" />
   <meta name="twitter:description" content="Dibujos + IA + Lógica" />
   <meta name="twitter:image" content="https://dialog.ar/preview.jpg" />
 
- 
-<!-- Google tag (gtag.js) -->
+  <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZEE7HG86H1"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -34,13 +32,12 @@
     gtag('config', 'G-ZEE7HG86H1');
   </script>
 
-<!-- Estilos -->
+  <!-- Estilos -->
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet" />
   <link rel="icon" href="logo.png" type="image/png" />
   <link rel="stylesheet" href="dialogo.css" />
 </head>
-
 
 <body class="bg-gray-100 text-gray-800">
   <header class="bg-white shadow p-6">
@@ -69,7 +66,7 @@
         </ul>
       </div>
       <div>
-        <h3 class="font-semibold text-lg text-yellow-500 ">👨‍👩‍👧‍👦 Para familias y docentes:</h3>
+        <h3 class="font-semibold text-lg text-yellow-500">👨‍👩‍👧‍👦 Para familias y docentes:</h3>
         <ul class="list-disc list-inside text-gray-700 space-y-1 mt-2">
           <li>Estimula habilidades computacionales reales</li>
           <li>Fácil de usar, incluso sin saber leer</li>
@@ -84,105 +81,159 @@
       <img src="demo.gif" alt="Demo animado de cómo funciona Diálogo" class="mx-auto rounded-xl shadow-lg max-w-full h-auto" />
     </section>
 
-    <section class="max-w-4xl mx-auto my-24 px-4" id="como-funciona">
-      <h2 class="text-3xl md:text-4xl font-bold text-center text-violeta mb-8">Propuesta gratuita</h2>
-      <p class="text-center text-lg text-gray-700 mb-10">
-        Al anotarte vas a acceder gratis a un <strong>taller completo de programación</strong> abierto a toda la comunidad, pensado para chicas y chicos de 10 a 17 años.
-        Son <strong>7 clases guiadas</strong> que se van a ir entregando cada 2 días en video. En ellas van a aprender a programar de forma creativa, con dibujos y símbolos visuales.
+    <!-- Sección de Descarga -->
+    <section class="max-w-4xl mx-auto my-16 px-4 bg-white rounded-2xl shadow-lg p-8" id="descargar">
+      <h2 class="text-3xl md:text-4xl font-bold text-center text-violeta mb-6">⬇️ Descargá Diálogo</h2>
+      <p class="text-center text-lg text-gray-700 mb-8">
+        Elegí la versión para tu sistema operativo y empezá a crear tus juegos:
       </p>
-      <div class="space-y-6">
-        <div class="bg-white shadow-md rounded-2xl p-6 border-l-4 border-indigo-500">
+      <div class="grid md:grid-cols-3 gap-6">
+        <a href="https://dialog.ar/DialogoSetup.exe" 
+           class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-6 px-4 rounded-xl text-center transition shadow-md hover:shadow-xl">
+          <div class="text-4xl mb-2">🪟</div>
+          <div class="text-xl">Windows</div>
+          <div class="text-sm mt-2 opacity-90">DialogoSetup.exe</div>
+        </a>
+        <a href="http://dialog.ar/Dialogo.dmg" 
+           class="bg-gray-700 hover:bg-gray-800 text-white font-bold py-6 px-4 rounded-xl text-center transition shadow-md hover:shadow-xl">
+          <div class="text-4xl mb-2">🍎</div>
+          <div class="text-xl">Mac</div>
+          <div class="text-sm mt-2 opacity-90">Dialogo.dmg</div>
+        </a>
+        <a href="http://dialog.ar/Dialogo.zip" 
+           class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-6 px-4 rounded-xl text-center transition shadow-md hover:shadow-xl">
+          <div class="text-4xl mb-2">💻</div>
+          <div class="text-xl">Multiplataforma</div>
+          <div class="text-sm mt-2 opacity-90">Dialogo.zip</div>
+        </a>
+      </div>
+      <p class="text-center text-sm text-gray-600 mt-6">
+        <em>El archivo ZIP funciona en Linux, Windows y Mac como alternativa</em>
+      </p>
+    </section>
+
+    <!-- Sección del Curso -->
+    <section class="max-w-4xl mx-auto my-24 px-4" id="curso">
+      <h2 class="text-3xl md:text-4xl font-bold text-center text-violeta mb-4">🎓 Curso completo gratuito</h2>
+      <p class="text-center text-lg text-gray-700 mb-10">
+        <strong>¡Ya está disponible!</strong> Accedé ahora a las <strong>7 clases completas</strong> del taller de programación.
+        Este curso está pensado para chicas y chicos de 10 a 17 años y te enseña a programar de forma creativa, con dibujos y símbolos visuales.
+      </p>
+      <div class="space-y-4">
+        <a href="https://youtu.be/CYuRk_dKHYg" target="_blank" 
+           class="block bg-white shadow-md rounded-2xl p-6 border-l-4 border-indigo-500 hover:shadow-xl transition hover:bg-gray-50">
           <h3 class="font-semibold text-xl mb-1 text-subtitulo">⚙️ Clase 0 — Instalación previa</h3>
           <p class="text-gray-700">Instalá Diálogo y empezá a explorar.</p>
-        </div>
-        <div class="bg-white shadow-md rounded-2xl p-6 border-l-4 border-indigo-500">
+        </a>
+        <a href="https://youtu.be/FuQt50J9T2I" target="_blank" 
+           class="block bg-white shadow-md rounded-2xl p-6 border-l-4 border-indigo-500 hover:shadow-xl transition hover:bg-gray-50">
           <h3 class="font-semibold text-xl mb-1 text-subtitulo">♟️ Clase 1 — Ajedrez</h3>
           <p class="text-gray-700">
             Primera forma de abstracción: uso de categorías. Diseño de un tablero y piezas que se comen entre sí.
           </p>
-        </div>
-        <div class="bg-white shadow-md rounded-2xl p-6 border-l-4 border-indigo-500">
+        </a>
+        <a href="https://youtu.be/qVxvzTLY3pM" target="_blank" 
+           class="block bg-white shadow-md rounded-2xl p-6 border-l-4 border-indigo-500 hover:shadow-xl transition hover:bg-gray-50">
           <h3 class="font-semibold text-xl mb-1 text-subtitulo">🐍 Clase 2 — La viborita</h3>
           <p class="text-gray-700">
             Sacar código repetido. Introducción al debugging (inspeccionar código).
           </p>
-        </div>
-        <div class="bg-white shadow-md rounded-2xl p-6 border-l-4 border-indigo-500">
+        </a>
+        <a href="https://youtu.be/oypNK7dX_rY" target="_blank" 
+           class="block bg-white shadow-md rounded-2xl p-6 border-l-4 border-indigo-500 hover:shadow-xl transition hover:bg-gray-50">
           <h3 class="font-semibold text-xl mb-1 text-subtitulo">👻 Clase 3 — Del Pacman al submarino del CONICET</h3>
           <p class="text-gray-700">
             Un clásico para poner en juego todos los símbolos de Diálogo. Reglas simples, resultado sorprendente.
           </p>
-        </div>
-        <div class="bg-white shadow-md rounded-2xl p-6 border-l-4 border-indigo-500">
+        </a>
+        <a href="https://youtu.be/AfAFcP5FNVg" target="_blank" 
+           class="block bg-white shadow-md rounded-2xl p-6 border-l-4 border-indigo-500 hover:shadow-xl transition hover:bg-gray-50">
           <h3 class="font-semibold text-xl mb-1 text-subtitulo">🧠 Clase 4 — Enigmas de metaprogramación</h3>
           <p class="text-gray-700">
             ¿Qué pasa cuando un programa se modifica a sí mismo? Acá empieza la magia.
           </p>
-        </div>
-        <div class="bg-white shadow-md rounded-2xl p-6 border-l-4 border-indigo-500">
+        </a>
+        <a href="https://youtu.be/VLwuOLksRy0" target="_blank" 
+           class="block bg-white shadow-md rounded-2xl p-6 border-l-4 border-indigo-500 hover:shadow-xl transition hover:bg-gray-50">
           <h3 class="font-semibold text-xl mb-1 text-subtitulo">🚀 Clase 5 — Naves espaciales</h3>
           <p class="text-gray-700">
             Ideas del desarrollo de videojuegos: gizmos, objetos ocultos, colisiones y más.
           </p>
-        </div>
-        <div class="bg-white shadow-md rounded-2xl p-6 border-l-4 border-indigo-500">
+        </a>
+        <a href="https://youtu.be/3AMOQ4n1YU0" target="_blank" 
+           class="block bg-white shadow-md rounded-2xl p-6 border-l-4 border-indigo-500 hover:shadow-xl transition hover:bg-gray-50">
           <h3 class="font-semibold text-xl mb-1 text-subtitulo">🔢 Clase 6 — Mi calculadora</h3>
           <p class="text-gray-700">
             Recursión. Hacer una calculadora desde cero.
           </p>
-        </div>
-        <div class="bg-white shadow-md rounded-2xl p-6 border-l-4 border-indigo-500">
+        </a>
+        <a href="https://youtu.be/ei_hErKm0IM" target="_blank" 
+           class="block bg-white shadow-md rounded-2xl p-6 border-l-4 border-indigo-500 hover:shadow-xl transition hover:bg-gray-50">
           <h3 class="font-semibold text-xl mb-1 text-subtitulo">🏁 Clase 7 — Puntaje y reuso</h3>
           <p class="text-gray-700">
             Mejorá tus juegos anteriores reutilizando proyectos y sumando sistema de puntaje.
           </p>
+        </a>
+      </div>
+    </section>
+
+    <!-- Sección de Videos de Nerdearla -->
+    <section class="animate-fade-in mt-16">
+      <h2 class="text-2xl font-semibold text-violeta text-center mb-6">🎤 Shows en Nerdearla</h2>
+      <p class="text-center text-gray-700 mb-8">Presentaciones completas de Diálogo en el evento Nerdearla</p>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="aspect-w-16 aspect-h-9">
+          <iframe
+            class="w-full h-full rounded-xl shadow-lg"
+            style="aspect-ratio: 16/9; min-height: 250px;"
+            src="https://www.youtube.com/embed/OMulIPUosDs"
+            title="Presentación de Diálogo en Nerdearla - Parte 1"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+          </iframe>
+        </div>
+        <div class="aspect-w-16 aspect-h-9">
+          <iframe
+            class="w-full h-full rounded-xl shadow-lg"
+            style="aspect-ratio: 16/9; min-height: 250px;"
+            src="https://www.youtube.com/embed/w2mqMSp40Hk"
+            title="Presentación de Diálogo en Nerdearla - Parte 2"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+          </iframe>
         </div>
       </div>
     </section>
 
-    <section class="animate-fade-in mt-16"></section>
-    <h2 class="text-2xl font-semibold text-violeta text-center mb-6">🎤 Show en Nerdearla donde presentamos Diálogo por primera vez</h2>
-    <div class="aspect-w-16 aspect-h-9 mx-auto max-w-3xl">
-      <iframe
-        class="w-full h-full rounded-xl shadow-lg"
-        src="https://www.youtube.com/embed/OMulIPUosDs"
-        title="Presentación de Diálogo en Nerdearla"
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen>
-      </iframe>
-    </div>
-  </section>
-
     <section class="text-center text-sm text-gray-500 animate-fade-in">
-      <p>Sitio creado por Agustín, docente e investigador en UBA — También conocido como <strong>Profe Futuro</strong> 🚀</p>
+      <p>Sitio creado por Agustín, docente e investigador en UBA – También conocido como <strong>Profe Futuro</strong> 🚀</p>
     </section>
   </main>
 
-<footer class="text-center text-gray-500 text-sm p-6 space-y-2 mt-16">
-  <div class="flex justify-center flex-wrap gap-4 text-lg">
-    <a href="https://www.instagram.com/elprofefuturo" target="_blank" class="hover:text-subtitulo transition">
-      📸 Instagram
-    </a>
-    <a href="https://www.tiktok.com/@elprofefuturo" target="_blank" class="hover:text-subtitulo transition">
-      🎵 TikTok
-    </a>
-    <a href="https://x.com/elprofefuturo" target="_blank" class="hover:text-subtitulo transition">
-      🐦 X
-    </a>
-    <a href="https://www.youtube.com/@elprofefuturo" target="_blank" class="hover:text-subtitulo transition">
-      ▶️ YouTube
-    </a>
-    <a href="mailto:agustin@dialog.ar" class="hover:text-subtitulo transition">
-      📬 agustin@dialog.ar
-    </a>
-  </div>
-  <p class="text-xs text-gray-400">© 2025 Diálogo. Todos los derechos reservados.</p>
-</footer>
-
+  <footer class="text-center text-gray-500 text-sm p-6 space-y-2 mt-16">
+    <div class="flex justify-center flex-wrap gap-4 text-lg">
+      <a href="https://www.instagram.com/elprofefuturo" target="_blank" class="hover:text-subtitulo transition">
+        📸 Instagram
+      </a>
+      <a href="https://www.tiktok.com/@elprofefuturo" target="_blank" class="hover:text-subtitulo transition">
+        🎵 TikTok
+      </a>
+      <a href="https://x.com/elprofefuturo" target="_blank" class="hover:text-subtitulo transition">
+        🦅 X
+      </a>
+      <a href="https://www.youtube.com/@elprofefuturo" target="_blank" class="hover:text-subtitulo transition">
+        ▶️ YouTube
+      </a>
+      <a href="mailto:agustin@dialog.ar" class="hover:text-subtitulo transition">
+        📬 agustin@dialog.ar
+      </a>
+    </div>
+    <p class="text-xs text-gray-400">© 2025 Diálogo. Todos los derechos reservados.</p>
+  </footer>
 
   <script src="formulario.js"></script>
   <script src="validacion.js"></script>
-
 </body>
 </html>
