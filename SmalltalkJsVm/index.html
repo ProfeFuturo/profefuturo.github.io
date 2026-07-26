@@ -3,10 +3,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 <title>Smalltalk in your browser — Squeak · Pharo · Cuis</title>
-<link rel="icon" type="image/png" href="squeakjs.png">
-<link rel="stylesheet" href="../lib/gh-fork-ribbon.css">
-<link rel="stylesheet" href="squeakjs.css">
-<script type="module" src="../squeak.js"></script>
+<link rel="icon" type="image/png" href="run/squeakjs.png">
+<link rel="stylesheet" href="lib/gh-fork-ribbon.css">
+<link rel="stylesheet" href="run/squeakjs.css">
+<script type="module" src="squeak.js"></script>
 <script>
     function runSqueak(imageName) {
         // Squeak.debugFiles = true;
@@ -130,7 +130,7 @@
         document.documentElement.style.overflow = "hidden";
         document.body.style.overflow = "hidden";
         var offscreen = sqCanvas.transferControlToOffscreen();
-        var worker = new Worker("../squeak_worker.js", { type: "module" });
+        var worker = new Worker("squeak_worker.js", { type: "module" });
         // image can be bytes (local, transfer it) or a URL string (worker fetches it)
         var image = imageSource, transfer = [offscreen];
         if (imageSource instanceof ArrayBuffer) transfer.push(imageSource);
@@ -509,7 +509,7 @@
 </head>
 <body>
     <div id="sqText">
-        <h1><img id="logo" src="squeakjs.png">Smalltalk in your browser</h1>
+        <h1><img id="logo" src="run/squeakjs.png">Smalltalk in your browser</h1>
         <div class="github-fork-ribbon-wrapper right">
             <div class="github-fork-ribbon">
                 <a href="https://github.com/agustincico/SqueakJS" target="_blank">Fork me on GitHub</a>
