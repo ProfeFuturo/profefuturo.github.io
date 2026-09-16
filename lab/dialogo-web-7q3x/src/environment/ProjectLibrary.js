@@ -1,3 +1,4 @@
+import { T } from './Texts.js';
 import { RepresentarVisualImporter } from '../io/RepresentarVisualImporter.js';
 import { RepresentarVisualExporter } from '../io/RepresentarVisualExporter.js';
 import { ZipArchive } from '../io/ZipArchive.js';
@@ -97,7 +98,7 @@ export class ProjectLibrary {
   async remix(entry) {
     await this.ensureBytesOf(entry);
     const project = await this.projectFromBytes(entry.bytes);
-    project.setProjectName('Mi versión de ' + this.titleOf(entry));
+    project.setProjectName(T('myVersionOf') + this.titleOf(entry));
     return project;
   }
 

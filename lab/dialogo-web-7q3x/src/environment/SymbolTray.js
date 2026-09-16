@@ -1,3 +1,4 @@
+import { T } from './Texts.js';
 import { SymbolPainter } from './SymbolPainter.js';
 import { VisualSymbolHalo } from './VisualSymbolHalo.js';
 import { Icons } from './Icons.js';
@@ -145,7 +146,7 @@ export class SymbolTray {
   tileFor(symbol, kind) {
     const tile = document.createElement('div');
     tile.className = 'symbol-tile ' + kind + ' palette-entry' + (this.project.isPrivate(symbol) ? ' private' : '');
-    tile.title = symbol.meaning() || (kind === 'user' ? 'Dibujo' : 'Símbolo');
+    tile.title = symbol.meaning() || (kind === 'user' ? T('tray.drawing') : T('tray.symbol'));
     tile.setAttribute('aria-label', tile.title);
     tile.setAttribute('role', 'button');
     tile.tabIndex = 0;

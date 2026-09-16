@@ -1,14 +1,24 @@
+import { T } from './Texts.js';
 // Los logros: cosas que se hacen por primera vez (soltar un símbolo, mover un personaje,
 // dibujar, remixar...). Se recuerdan en el navegador; al desbloquear uno se avisa a quien escuche.
+// Nombre y pista salen de Texts ('badge.<id>' = «nombre|pista»), en el idioma actual.
+class Achievement {
+  constructor(id, emoji) { this.id = id; this.emoji = emoji; }
+  get name() { return T('badge.' + this.id).split('|')[0]; }
+  get hint() { return T('badge.' + this.id).split('|')[1] || ''; }
+}
+
 export const ACHIEVEMENTS = [
-  { id: 'first-drop', emoji: '🧩', name: 'Primera ficha', hint: 'Poné una ficha en el tablero' },
-  { id: 'rule', emoji: '✨', name: 'Primera regla', hint: 'Armá una regla con fichas' },
-  { id: 'first-move', emoji: '🕹️', name: 'En movimiento', hint: 'Movete con el joystick' },
-  { id: 'artist', emoji: '🎨', name: 'Dibujante', hint: 'Dibujá una ficha nueva' },
-  { id: 'detective', emoji: '🔍', name: 'Detective', hint: 'Mirá cómo funciona una regla' },
-  { id: 'explorer', emoji: '🧭', name: 'Explorador', hint: 'Abrí tres proyectos' },
-  { id: 'remix', emoji: '🔁', name: 'Inventor', hint: 'Copiá un proyecto y cambialo' },
-  { id: 'saver', emoji: '💾', name: 'Coleccionista', hint: 'Guardá un proyecto tuyo' },
+  new Achievement('first-drop', '🧩'),
+  new Achievement('rule', '✨'),
+  new Achievement('first-move', '🕹️'),
+  new Achievement('artist', '🎨'),
+  new Achievement('detective', '🔍'),
+  new Achievement('explorer', '🧭'),
+  new Achievement('remix', '🔁'),
+  new Achievement('saver', '💾'),
+  new Achievement('world', '🌍'),
+  new Achievement('ladder', '👑'),
 ];
 
 export class Achievements {

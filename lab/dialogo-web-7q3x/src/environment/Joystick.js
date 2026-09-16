@@ -1,3 +1,4 @@
+import { T } from './Texts.js';
 import { Icons } from './Icons.js';
 
 // El joystick en pantalla: una cruz de flechas con Enter en el centro y Espacio al lado.
@@ -16,8 +17,8 @@ export class Joystick {
     for (const [name, icon] of [['up', 'arrowUp'], ['left', 'arrowLeft'], ['right', 'arrowRight'], ['down', 'arrowDown']]) {
       this.key(name, icon, name, board => { moves[name](board); board.recordCurrentBoard(); });
     }
-    this.key('go', 'play', 'Enter', () => environment.currentProject.enterKeyPressed());
-    this.key('space', 'space', 'Espacio', () => environment.currentProject.spaceBarPressed());
+    this.key('go', 'play', T('joystick.enter'), () => environment.currentProject.enterKeyPressed());
+    this.key('space', 'space', T('joystick.space'), () => environment.currentProject.spaceBarPressed());
     container.appendChild(this.element);
   }
 

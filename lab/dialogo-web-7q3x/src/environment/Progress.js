@@ -1,4 +1,4 @@
-import { Challenges } from './Challenge.js';
+import { Challenges, Builds } from './Challenge.js';
 import { Drawing } from '../metamodel/Drawing.js';
 import { VisualSymbol } from '../metamodel/VisualSymbol.js';
 
@@ -10,6 +10,8 @@ export class Progress {
     this.storage = storage;
     this.completed = new Set();
     this.listeners = [];
+    this.forcedFree = false;
+    try { this.forcedFree = storage !== null && storage.getItem('representar.free') === '1'; } catch (error) { /* sin storage */ }
     this.drawings = [];              // los últimos dibujos del chico (VisualSymbol), para los desafíos que los usan
     try {
       const saved = storage === null ? null : storage.getItem('representar.progress');
@@ -33,6 +35,19 @@ export class Progress {
 
   // El próximo desafío sin completar (el primero de la escalera al principio); null si terminó.
   next() { return Challenges.all().find(challenge => !this.completed.has(challenge.id)) || null; }
+  nextBuild() { return Builds.all().find(build => !this.completed.has(build.id)) || null; }
+
+  // --- las etapas: primero jugar y ganar medallas, después armar los juegos del curso, al final crear libre ---
+
+  ladderDone() { return Challenges.all().every(challenge => this.completed.has(challenge.id)); }
+  worldDone(world) { const inWorld = Challenges.inWorld(world.id); return inWorld.length > 0 && inWorld.every(challenge => this.completed.has(challenge.id)); }
+  buildsUnlocked() { return this.ladderDone(); }
+  buildsDone() { return Builds.all().every(build => this.completed.has(build.id)); }
+  freeUnlocked() { return this.forcedFree || (this.ladderDone() && this.buildsDone()); }
+  phase() { return !this.ladderDone() ? 'ladder' : !this.buildsDone() && !this.forcedFree ? 'builds' : 'free'; }
+
+  // Para docentes y pruebas: destrabar la creación libre sin pasar por todo (?free=1).
+  unlockFree() { this.forcedFree = true; try { if (this.storage !== null) this.storage.setItem('representar.free', '1'); } catch (error) { /* sin storage */ } for (const listener of this.listeners) listener(null); }
 
   save() {
     try { if (this.storage !== null) this.storage.setItem('representar.progress', JSON.stringify([...this.completed])); } catch (error) { /* sin storage */ }
@@ -67,5 +82,5 @@ export class Progress {
     return this.drawings;
   }
 
-  reset() { this.completed.clear(); this.drawings = []; this.save(); }
+  reset() { this.completed.clear(); this.drawings = []; this.forcedFree = false; try { if (this.storage !== null) this.storage.removeItem('representar.free'); } catch (error) { /* sin storage */ } this.save(); }
 }
