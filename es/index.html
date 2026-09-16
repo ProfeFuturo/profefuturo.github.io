@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <!-- Basic -->
@@ -6,29 +7,29 @@
   <title>Diálogo – Programar dibujando</title>
 
   <!-- SEO + autor -->
-  <meta name="description" content="Diálogo es una herramienta para chicos de 10 a 17 años que les permite crear videojuegos dibujando personajes y comportamiento, sin escribir código." />
-  <meta name="keywords" content="programación para chicos, videojuegos sin código, educación digital, programación visual, crear juegos, scratch, no-code, niños" />
-  <meta name="author" content="Agustín Profe Futuro" />
+  <meta name="description" content="Diálogo es un entorno de programación visual declarativa, gratuito, en el que los chicos construyen juegos y simulaciones a partir de símbolos que dibujan ellos mismos. Funciona sin conexión en Windows, Mac y Linux, con una secuencia didáctica de 7 clases." />
+  <meta name="keywords" content="programación visual, programación declarativa, programación para chicos, educación en computación, programar dibujando, metaprogramación, alternativas a bloques, pensamiento computacional, videojuegos sin código" />
+  <meta name="author" content="Agustín Rafael Martínez" />
 
   <!-- Idiomas -->
   <link rel="alternate" hreflang="es" href="https://dialog.ar/es/" />
   <link rel="alternate" hreflang="en" href="https://dialog.ar/" />
   <link rel="alternate" hreflang="x-default" href="https://dialog.ar/" />
   <link rel="canonical" href="https://dialog.ar/es/" />
-  <meta property="og:locale" content="es_AR" />
-  <meta property="og:locale:alternate" content="en_US" />
 
   <!-- Open Graph -->
   <meta property="og:title" content="Diálogo – Programar dibujando" />
-  <meta property="og:description" content="Videojuegos con tus propios dibujos, sin escribir código." />
+  <meta property="og:description" content="Un entorno de programación visual declarativa en el que los chicos dibujan sus propios símbolos." />
   <meta property="og:image" content="https://dialog.ar/preview.jpg" />
   <meta property="og:url" content="https://dialog.ar/es/" />
   <meta property="og:type" content="website" />
+  <meta property="og:locale" content="es_AR" />
+  <meta property="og:locale:alternate" content="en_US" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Diálogo – Programar dibujando" />
-  <meta name="twitter:description" content="Videojuegos con tus propios dibujos, sin escribir código." />
+  <meta name="twitter:description" content="Un entorno de programación visual declarativa en el que los chicos dibujan sus propios símbolos." />
   <meta name="twitter:image" content="https://dialog.ar/preview.jpg" />
 
   <!-- Idioma elegido: la raíz lo usa para no volver a redirigir -->
@@ -58,7 +59,7 @@
       </p>
       <img src="/logo.svg" alt="Diálogo" class="mx-auto mb-4" style="width: 440px; height: auto;">
       <h1 class="text-3xl md:text-5xl font-bold text-indigo-600 sr-only">Diálogo</h1>
-      <p class="text-lg mt-2 font-semibold">Programá videojuegos con tus propios dibujos</p>
+      <p class="text-lg mt-2 font-semibold">Un entorno de programación visual en el que los chicos dibujan sus propios símbolos</p>
     </div>
   </header>
 
@@ -66,55 +67,59 @@
     <section class="animate-fade-in">
       <h2 class="text-2xl font-semibold text-violeta">¿Qué es Diálogo?</h2>
       <p class="mt-2 text-gray-700 leading-relaxed">
-        Diálogo es una herramienta para chicos de 10 a 17 años que permite crear videojuegos combinando sus dibujos con íconos visuales. Está diseñada para estimular el pensamiento lógico y la creatividad de forma accesible y divertida. Menores de 10 pueden participar con ayuda de los grandes. 
+        Diálogo es un entorno de programación gratuito para chicos (de 10 a 17 años aproximadamente; los más chicos, con un adulto al lado) en el que los programas se construyen a partir de símbolos que los chicos dibujan ellos mismos, en vez de bloques predefinidos. El lenguaje se apoya en dos relaciones entre símbolos, la <strong>sustitución</strong> y la <strong>categorización</strong>, más una decena de combinadores visuales (empujar, atraer, teletransportar, colisionar, comodines, un visor de evaluación). Con ese conjunto tan chico, los chicos construyen juegos, simulaciones y modelos simbólicos abstractos, como los números y la suma desde cero.
+      </p>
+      <p class="mt-4 text-gray-700 leading-relaxed">
+        Las reglas viven en el mismo tablero que el juego. Un personaje puede empujar una regla y cambiar el programa mientras corre, así que la metaprogramación se vuelve algo que un chico puede ver y tocar. Un visualizador de ejecución paso a paso muestra qué regla se aplicó en cada paso, y sirve también como debugger.
       </p>
     </section>
 
     <section class="grid md:grid-cols-2 gap-8 animate-fade-in">
       <div>
-        <h3 class="font-semibold text-lg text-yellow-500">🎮 Para chicos:</h3>
+        <h3 class="font-semibold text-lg text-yellow-500">🎮 Para los chicos:</h3>
         <ul class="list-disc list-inside text-gray-700 space-y-1 mt-2">
-          <li>Creá juegos con tus propios dibujos</li>
-          <li>Combiná íconos como cartas mágicas, activando poderes en los personajes</li>
-          <li>¡Armá tu Pac-Man en 5 minutos!</li>
+          <li>Construí juegos con tus propios dibujos</li>
+          <li>Dales comportamiento a los personajes combinando unos pocos combinadores visuales</li>
+          <li>Mirá, paso a paso, por qué el juego hace lo que hace</li>
+          <li>Hacé juegos que reescriben sus propias reglas mientras jugás</li>
         </ul>
       </div>
       <div>
-        <h3 class="font-semibold text-lg text-yellow-500">👨‍👩‍👧‍👦 Para familias y docentes:</h3>
+        <h3 class="font-semibold text-lg text-yellow-500">🏫 Para docentes e investigadores:</h3>
         <ul class="list-disc list-inside text-gray-700 space-y-1 mt-2">
-          <li>Estimula habilidades computacionales reales</li>
-          <li>Fácil de usar, incluso sin saber leer</li>
-          <li>Sin publicidad ni conexión permanente</li>
-          <li>Muestra paso a paso por qué el juego hace lo que hace</li>
+          <li>Declarativo desde la primera clase, sin sintaxis y sin prerrequisito imperativo</li>
+          <li>Funciona sin conexión en computadoras modestas, sin cuenta ni servidor; los proyectos se guardan en la máquina</li>
+          <li>Interfaz en español e inglés; agregar un idioma es traducir un solo archivo de texto</li>
+          <li>Una secuencia didáctica de 7 clases en videos dirigidos a los chicos, así que podés adoptarla antes de dominar el paradigma</li>
         </ul>
       </div>
     </section>
 
     <section class="animate-fade-in">
-      <h2 class="text-xl font-semibold text-subtitulo text-center mb-4">🌀 Es muy fácil dar los primeros pasos y llegar a resultados sorprendentes</h2>
-      <img src="/demo.gif" alt="Demo animado de cómo funciona Diálogo" class="mx-auto rounded-xl shadow-lg max-w-full h-auto" />
+      <h2 class="text-xl font-semibold text-subtitulo text-center mb-4">🌀 De un primer dibujo a un juego jugable en minutos</h2>
+      <img src="/demo.gif" alt="Demo animada de Diálogo: dibujar símbolos y combinarlos en un juego" class="mx-auto rounded-xl shadow-lg max-w-full h-auto" />
     </section>
 
-    <!-- Sección de Descarga -->
+    <!-- Descarga -->
     <section class="max-w-4xl mx-auto my-16 px-4 bg-white rounded-2xl shadow-lg p-8" id="descargar">
       <h2 class="text-3xl md:text-4xl font-bold text-center text-violeta mb-6">⬇️ Descargá Diálogo</h2>
       <p class="text-center text-lg text-gray-700 mb-8">
-        Elegí la versión para tu sistema operativo y empezá a crear tus juegos:
+        Gratis y sin cuenta. Elegí la versión para tu sistema operativo:
       </p>
       <div class="grid md:grid-cols-3 gap-6">
-        <a href="/DialogoSetup.exe" 
+        <a href="/DialogoSetup.exe"
            class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-6 px-4 rounded-xl text-center transition shadow-md hover:shadow-xl">
           <div class="text-4xl mb-2">🪟</div>
           <div class="text-xl">Windows</div>
           <div class="text-sm mt-2 opacity-90">DialogoSetup.exe</div>
         </a>
-        <a href="/Dialogo.dmg" 
+        <a href="/Dialogo.dmg"
            class="bg-gray-700 hover:bg-gray-800 text-white font-bold py-6 px-4 rounded-xl text-center transition shadow-md hover:shadow-xl">
           <div class="text-4xl mb-2">🍎</div>
           <div class="text-xl">Mac</div>
           <div class="text-sm mt-2 opacity-90">Dialogo.dmg</div>
         </a>
-        <a href="/Dialogo.zip" 
+        <a href="/Dialogo.zip"
            class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-6 px-4 rounded-xl text-center transition shadow-md hover:shadow-xl">
           <div class="text-4xl mb-2">💻</div>
           <div class="text-xl">Multiplataforma</div>
@@ -122,86 +127,122 @@
         </a>
       </div>
       <p class="text-center text-sm text-gray-600 mt-6">
-        <em>El archivo ZIP funciona en Linux, Windows y Mac como alternativa</em>
+        <em>El ZIP funciona en Linux, y también en Windows y Mac como alternativa a los instaladores.</em>
+      </p>
+      <p class="text-center text-sm text-gray-600 mt-2">
+        Diálogo está en desarrollo activo. Los reportes de errores y las historias de aula son bienvenidos en <a href="mailto:agustin@dialog.ar" class="text-link underline">agustin@dialog.ar</a>.
       </p>
     </section>
 
-    <!-- Sección del Curso -->
+    <!-- Curso -->
     <section class="max-w-4xl mx-auto my-24 px-4" id="curso">
-      <h2 class="text-3xl md:text-4xl font-bold text-center text-violeta mb-4">🎓 Curso completo gratuito</h2>
-      <p class="text-center text-lg text-gray-700 mb-10">
-        <strong>¡Ya está disponible!</strong> Accedé ahora a las <strong>7 clases completas</strong> del taller de programación.
-        Este curso está pensado para chicas y chicos de 10 a 17 años y te enseña a programar de forma creativa, con dibujos y símbolos visuales.
+      <h2 class="text-3xl md:text-4xl font-bold text-center text-violeta mb-4">🎓 Curso gratuito de 7 clases</h2>
+      <p class="text-center text-lg text-gray-700 mb-4">
+        Cada clase introduce <strong>un mecanismo de abstracción</strong> a través de <strong>algo jugable</strong>. Las clases 1 a 5 construyen juegos; las clases 6 y 7 avanzan hacia modelos simbólicos abstractos. Las clases 1 a 3 forman una introducción autocontenida, con un juego jugable ya en la clase 2.
+      </p>
+      <p class="text-center text-gray-700 mb-10">
+        Las clases son videos dirigidos directamente a los chicos, con archivos de proyecto para descargar y entregar.
       </p>
       <div class="space-y-4">
-        <a href="https://youtu.be/CYuRk_dKHYg" target="_blank" 
+        <a href="https://youtu.be/CYuRk_dKHYg" target="_blank" rel="noopener"
            class="block bg-white shadow-md rounded-2xl p-6 border-l-4 border-indigo-500 hover:shadow-xl transition hover:bg-gray-50">
-          <h3 class="font-semibold text-xl mb-1 text-subtitulo">⚙️ Clase 0: Instalación previa</h3>
-          <p class="text-gray-700">Instalá Diálogo y empezá a explorar.</p>
+          <h3 class="font-semibold text-xl mb-1 text-subtitulo">⚙️ Clase 0: Instalación</h3>
+          <p class="text-gray-700">Instalá Diálogo en Windows, Mac o Linux y empezá a explorar.</p>
         </a>
-        <a href="https://youtu.be/FuQt50J9T2I" target="_blank" 
+        <a href="https://youtu.be/FuQt50J9T2I" target="_blank" rel="noopener"
            class="block bg-white shadow-md rounded-2xl p-6 border-l-4 border-indigo-500 hover:shadow-xl transition hover:bg-gray-50">
           <h3 class="font-semibold text-xl mb-1 text-subtitulo">♟️ Clase 1: Ajedrez</h3>
           <p class="text-gray-700">
-            Primera forma de abstracción: uso de categorías. Diseño de un tablero y piezas que se comen entre sí.
+            Categorización, el primer mecanismo de abstracción. Armá un tablero y piezas que se comen entre sí, y después reemplazá las reglas caso por caso por reglas sobre categorías.
           </p>
         </a>
-        <a href="https://youtu.be/qVxvzTLY3pM" target="_blank" 
+        <a href="https://youtu.be/qVxvzTLY3pM" target="_blank" rel="noopener"
            class="block bg-white shadow-md rounded-2xl p-6 border-l-4 border-indigo-500 hover:shadow-xl transition hover:bg-gray-50">
           <h3 class="font-semibold text-xl mb-1 text-subtitulo">🐍 Clase 2: La viborita</h3>
           <p class="text-gray-700">
-            Sacar código repetido. Introducción al debugging (inspeccionar código).
+            Sustitución, el segundo mecanismo. Una víbora que crece, sacar código repetido, y el visualizador de ejecución como debugger.
           </p>
         </a>
-        <a href="https://youtu.be/oypNK7dX_rY" target="_blank" 
+        <a href="https://youtu.be/oypNK7dX_rY" target="_blank" rel="noopener"
            class="block bg-white shadow-md rounded-2xl p-6 border-l-4 border-indigo-500 hover:shadow-xl transition hover:bg-gray-50">
-          <h3 class="font-semibold text-xl mb-1 text-subtitulo">👻 Clase 3: Del Pacman al submarino del CONICET</h3>
+          <h3 class="font-semibold text-xl mb-1 text-subtitulo">👻 Clase 3: Del Pac-Man al submarino del CONICET</h3>
           <p class="text-gray-700">
-            Un clásico para poner en juego todos los símbolos de Diálogo. Reglas simples, resultado sorprendente.
+            Un clásico que pone a trabajar todos los combinadores, y después cambia de piel a un dominio nuevo. Reglas simples, resultado sorprendente.
           </p>
         </a>
-        <a href="https://youtu.be/AfAFcP5FNVg" target="_blank" 
+        <a href="https://youtu.be/AfAFcP5FNVg" target="_blank" rel="noopener"
            class="block bg-white shadow-md rounded-2xl p-6 border-l-4 border-indigo-500 hover:shadow-xl transition hover:bg-gray-50">
           <h3 class="font-semibold text-xl mb-1 text-subtitulo">🧠 Clase 4: Enigmas de metaprogramación</h3>
           <p class="text-gray-700">
-            ¿Qué pasa cuando un programa se modifica a sí mismo? Acá empieza la magia.
+            ¿Qué pasa cuando un programa se modifica a sí mismo? Un laberinto cuyas reglas se pueden empujar y atraer mientras jugás.
           </p>
         </a>
-        <a href="https://youtu.be/VLwuOLksRy0" target="_blank" 
+        <a href="https://youtu.be/VLwuOLksRy0" target="_blank" rel="noopener"
            class="block bg-white shadow-md rounded-2xl p-6 border-l-4 border-indigo-500 hover:shadow-xl transition hover:bg-gray-50">
           <h3 class="font-semibold text-xl mb-1 text-subtitulo">🚀 Clase 5: Naves espaciales</h3>
           <p class="text-gray-700">
-            Ideas del desarrollo de videojuegos: gizmos, objetos ocultos, colisiones y más.
+            Ideas del desarrollo de videojuegos: reglas por eventos, objetos ocultos, colisiones y control del tiempo, todo combinado en un juego de disparos.
           </p>
         </a>
-        <a href="https://youtu.be/3AMOQ4n1YU0" target="_blank" 
+        <a href="https://youtu.be/3AMOQ4n1YU0" target="_blank" rel="noopener"
            class="block bg-white shadow-md rounded-2xl p-6 border-l-4 border-indigo-500 hover:shadow-xl transition hover:bg-gray-50">
           <h3 class="font-semibold text-xl mb-1 text-subtitulo">🔢 Clase 6: Mi calculadora</h3>
           <p class="text-gray-700">
-            Recursión. Hacer una calculadora desde cero.
+            Recursión y manipulación abstracta de símbolos. Los números y la suma construidos desde cero, sin juego y sin personaje.
           </p>
         </a>
-        <a href="https://youtu.be/ei_hErKm0IM" target="_blank" 
+        <a href="https://youtu.be/ei_hErKm0IM" target="_blank" rel="noopener"
            class="block bg-white shadow-md rounded-2xl p-6 border-l-4 border-indigo-500 hover:shadow-xl transition hover:bg-gray-50">
           <h3 class="font-semibold text-xl mb-1 text-subtitulo">🏁 Clase 7: Puntaje y reuso</h3>
           <p class="text-gray-700">
-            Mejorá tus juegos anteriores reutilizando proyectos y sumando sistema de puntaje.
+            Modularidad y reuso. Sumale un sistema de puntaje a un juego anterior, sin ninguna variable.
           </p>
         </a>
       </div>
     </section>
 
-    <!-- Sección de Videos de Nerdearla -->
+    <!-- Investigación -->
+    <section class="max-w-4xl mx-auto my-16 px-4 bg-white rounded-2xl shadow-lg p-8" id="investigacion">
+      <h2 class="text-3xl md:text-4xl font-bold text-center text-violeta mb-6">🔬 Para docentes e investigadores</h2>
+      <p class="text-center text-lg text-gray-700 mb-8">
+        Diálogo se desarrolla en la Universidad de Buenos Aires como un proyecto de investigación sobre programación declarativa para chicos. Tanto el entorno como la secuencia didáctica se publican como artefactos para su adopción y su estudio empírico.
+      </p>
+      <ul class="space-y-5 text-gray-700">
+        <li class="border-l-4 border-indigo-500 pl-4">
+          <p class="font-semibold text-subtitulo" lang="en">Programming with Drawings: A Declarative Visual Environment and Its Classroom Evolution</p>
+          <p>Agustín R. Martínez. <em>SIGCSE Technical Symposium 2027</em>, Sacramento, California, febrero de 2027. Aceptado, en prensa.</p>
+          <p class="text-sm text-gray-600">El diseño del entorno, su evolución a lo largo de un taller presencial y un curso online, y la secuencia de 7 clases.</p>
+        </li>
+        <li class="border-l-4 border-indigo-500 pl-4">
+          <p class="font-semibold text-subtitulo" lang="en">A Language Based on Two Relations between Symbols</p>
+          <p>Agustín R. Martínez. <em>Onward! 2022</em> (SPLASH), Auckland. ACM. <a href="https://doi.org/10.1145/3563835.3567660" target="_blank" rel="noopener" class="text-link underline">doi:10.1145/3563835.3567660</a></p>
+          <p class="text-sm text-gray-600">La base conceptual: sustitución y categorización como las dos relaciones a partir de las cuales se construye el lenguaje.</p>
+        </li>
+        <li class="border-l-4 border-indigo-500 pl-4">
+          <p class="font-semibold text-subtitulo" lang="en">Teaching Kids to Hack Their Own Games: Metaprogramming, Debugging, and Creativity from Age 7</p>
+          <p>Charla en <em>Smalltalks 2025</em>, Buenos Aires (en inglés). <a href="https://youtu.be/EqioMI1I5E8" target="_blank" rel="noopener" class="text-link underline">Ver el video</a></p>
+        </li>
+      </ul>
+      <p class="mt-8 text-gray-700 leading-relaxed">
+        ¿Te interesa usar Diálogo en tu aula o en tu investigación, traducir la secuencia didáctica, o hacer un estudio con él? Escribí a
+        <a href="mailto:agustin@dc.uba.ar" class="text-link underline">agustin@dc.uba.ar</a>.
+      </p>
+      <p class="mt-2 text-sm text-gray-600">
+        Agustín Rafael Martínez, Departamento de Computación, Facultad de Ciencias Exactas y Naturales, Universidad de Buenos Aires.
+      </p>
+    </section>
+
+    <!-- Shows en Nerdearla -->
     <section class="animate-fade-in mt-16">
       <h2 class="text-2xl font-semibold text-violeta text-center mb-6">🎤 Shows en Nerdearla</h2>
-      <p class="text-center text-gray-700 mb-8">Presentaciones completas de Diálogo en el evento Nerdearla</p>
+      <p class="text-center text-gray-700 mb-8">Dos shows completos armados con Diálogo para público general. Los subtítulos están activados por defecto, por si los mirás sin sonido.</p>
       <div class="grid md:grid-cols-2 gap-6">
         <div class="aspect-w-16 aspect-h-9">
           <iframe
             class="w-full h-full rounded-xl shadow-lg"
             style="aspect-ratio: 16/9; min-height: 250px;"
             src="https://www.youtube.com/embed/OMulIPUosDs?cc_load_policy=1&amp;cc_lang_pref=es&amp;hl=es"
-            title="Presentación de Diálogo en Nerdearla - Parte 1"
+            title="Diálogo en Nerdearla, parte 1"
             frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen>
@@ -212,7 +253,7 @@
             class="w-full h-full rounded-xl shadow-lg"
             style="aspect-ratio: 16/9; min-height: 250px;"
             src="https://www.youtube.com/embed/w2mqMSp40Hk?cc_load_policy=1&amp;cc_lang_pref=es&amp;hl=es"
-            title="Presentación de Diálogo en Nerdearla - Parte 2"
+            title="Diálogo en Nerdearla, parte 2"
             frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen>
@@ -222,22 +263,22 @@
     </section>
 
     <section class="text-center text-sm text-gray-500 animate-fade-in">
-      <p>Sitio creado por Agustín, docente e investigador en UBA – También conocido como <strong>Profe Futuro</strong> 🚀</p>
+      <p>Hecho por Agustín, docente e investigador en la Universidad de Buenos Aires, también conocido como <strong>Profe Futuro</strong> 🚀</p>
     </section>
   </main>
 
   <footer class="text-center text-gray-500 text-sm p-6 space-y-2 mt-16">
     <div class="flex justify-center flex-wrap gap-4 text-lg">
-      <a href="https://www.instagram.com/elprofefuturo" target="_blank" class="hover:text-subtitulo transition">
+      <a href="https://www.instagram.com/elprofefuturo" target="_blank" rel="noopener" class="hover:text-subtitulo transition">
         📸 Instagram
       </a>
-      <a href="https://www.tiktok.com/@elprofefuturo" target="_blank" class="hover:text-subtitulo transition">
+      <a href="https://www.tiktok.com/@elprofefuturo" target="_blank" rel="noopener" class="hover:text-subtitulo transition">
         🎵 TikTok
       </a>
-      <a href="https://x.com/elprofefuturo" target="_blank" class="hover:text-subtitulo transition">
+      <a href="https://x.com/elprofefuturo" target="_blank" rel="noopener" class="hover:text-subtitulo transition">
         🦅 X
       </a>
-      <a href="https://www.youtube.com/@elprofefuturo" target="_blank" class="hover:text-subtitulo transition">
+      <a href="https://www.youtube.com/@elprofefuturo" target="_blank" rel="noopener" class="hover:text-subtitulo transition">
         ▶️ YouTube
       </a>
       <a href="mailto:agustin@dialog.ar" class="hover:text-subtitulo transition">
