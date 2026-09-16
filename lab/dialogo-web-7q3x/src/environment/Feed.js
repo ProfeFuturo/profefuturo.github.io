@@ -1,3 +1,4 @@
+import { Challenges } from './Challenge.js';
 import { Icons } from './Icons.js';
 import { PreviewView } from './PreviewView.js';
 import { NullBoardView } from '../board/NullBoardView.js';
@@ -67,7 +68,8 @@ export class Feed {
     board.appendChild(canvas);
     const top = document.createElement('div');
     top.className = 'post-top';
-    top.innerHTML = '<div class="pill challenge-pill">' + Icons.svg('flag', { size: 14 }) + 'Desafío ' + challenge.number + '</div>';
+    const world = Challenges.worldOf(challenge);
+    top.innerHTML = '<div class="pill challenge-pill">' + Icons.svg('flag', { size: 14 }) + 'Desafío ' + challenge.number + '</div><div class="pill world-pill">' + world.emoji + ' ' + world.title + '</div>';
     board.appendChild(top);
     const state = { entry, post, board, canvas, view: new PreviewView(project, canvas, { maxCellFactor: 1.4, minCell: 34 * (window.devicePixelRatio || 1) }), playing: false, joystick: null, playButton: null };
     const caption = document.createElement('div');

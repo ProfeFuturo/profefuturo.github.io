@@ -186,13 +186,19 @@ export class RepresentarApp {
 
   renderBadges() {
     this.badgesGrid.innerHTML = '';
-    const ladder = this.element('div', 'ladder', this.badgesGrid);
-    for (const challenge of Challenges.all()) {
-      const done = this.progress.isCompleted(challenge);
-      const step = this.element('button', 'ladder-step' + (done ? ' done' : ''), ladder, '<span class="ladder-emoji">' + challenge.emoji + '</span><span class="ladder-title">' + challenge.number + '. ' + challenge.title + '</span>' + (done ? Icons.svg('check') : Icons.svg('play')));
-      step.type = 'button';
-      step.title = challenge.goal;
-      step.addEventListener('click', () => this.openChallenge(challenge));
+    for (const world of Challenges.worlds()) {
+      const challenges = Challenges.inWorld(world.id);
+      const done = challenges.filter(challenge => this.progress.isCompleted(challenge)).length;
+      const heading = this.element('div', 'world-heading', this.badgesGrid);
+      heading.innerHTML = '<span class="world-emoji">' + world.emoji + '</span><span class="world-title">' + world.title + '</span><span class="world-count">' + done + '/' + challenges.length + '</span>';
+      const ladder = this.element('div', 'ladder', this.badgesGrid);
+      for (const challenge of challenges) {
+        const completed = this.progress.isCompleted(challenge);
+        const step = this.element('button', 'ladder-step' + (completed ? ' done' : ''), ladder, '<span class="ladder-emoji">' + challenge.emoji + '</span><span class="ladder-title">' + challenge.number + '. ' + challenge.title + '</span>' + (completed ? Icons.svg('check') : Icons.svg('play')));
+        step.type = 'button';
+        step.title = challenge.goal;
+        step.addEventListener('click', () => this.openChallenge(challenge));
+      }
     }
     for (const achievement of Achievements.all()) {
       const unlocked = this.achievements.has(achievement.id);

@@ -46,6 +46,20 @@ const PAINTERS = {
   },
 };
 
+// Los demás dibujos son emojis pintados en el canvas: rápidos de agregar y se ven bien en el celular.
+const EMOJI = {
+  sheep: '🐑', grass: '🌿', sun: '☀️', moon: '🌙', apple: '🍎', door: '🚪', portal: '🌀', rock: '🪨', pawn: '🐴', rook: '🏰', king: '👑',
+  ghost: '👻', ship: '🚀', bullet: '🔥', key: '🔑', flag: '🏁', cat: '🐱', food: '🍽️', fish: '🐟', egg: '🥚', chick: '🐥', frog: '🐸', car: '🚗', cup: '🏆',
+};
+for (const [name, emoji] of Object.entries(EMOJI)) {
+  PAINTERS[name] = context => {
+    context.font = '76px "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif';
+    context.textAlign = 'center';
+    context.textBaseline = 'middle';
+    context.fillText(emoji, 48, 54);
+  };
+}
+
 function circle(context, x, y, radius) { context.beginPath(); context.arc(x, y, radius, 0, Math.PI * 2); context.fill(); }
 function roundRect(context, x, y, width, height, radius) {
   context.beginPath(); context.moveTo(x + radius, y); context.arcTo(x + width, y, x + width, y + height, radius); context.arcTo(x + width, y + height, x, y + height, radius);

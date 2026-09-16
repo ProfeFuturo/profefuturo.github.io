@@ -1,5 +1,5 @@
 import { Sentence } from './Sentence.js';
-import { TermMap, TermSet, termKey, entityKey, isSentence } from './Terms.js';
+import { TermMap, TermSet, termKey, entityKey, isSentence, isVisualSymbol } from './Terms.js';
 import { CategoryByExtension } from './categories/CategoryByExtension.js';
 import { CategoryByConstruction } from './categories/CategoryByConstruction.js';
 import { SubstitutionBetweenSymbols } from './SubstitutionBetweenSymbols.js';
@@ -245,8 +245,12 @@ export class StateOfArt {
 
   // ¿La entidad (término o frase) pertenece a la categoría? Recorre recursivamente los
   // elementos de la categoría, que pueden ser a su vez categorías.
+  // Un símbolo "en particular" (el que representa a un elemento del tablero) no es un símbolo
+  // individual cualquiera: no pertenece a 'visualSymbol' ni al comodín. Comparte el hash con
+  // el símbolo genérico, así que la memoria los distingue aparte.
   symbolBelongsTo(entity, categoryName) {
-    const key = entityKey(entity) + '|' + termKey(categoryName);
+    const particular = !isSentence(entity) && isVisualSymbol(entity) && entity.doesReferenceAParticularElementOnBoard();
+    const key = entityKey(entity) + (particular ? '#p' : '') + '|' + termKey(categoryName);
     const memo = this.belongsToMemo.get(key);
     if (memo !== undefined) return memo;
     const answer = this.belongsToIgnoring(entity, categoryName, new TermSet());
