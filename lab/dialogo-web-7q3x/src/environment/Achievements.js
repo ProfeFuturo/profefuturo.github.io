@@ -1,13 +1,13 @@
 // Los logros: cosas que se hacen por primera vez (soltar un símbolo, mover un personaje,
 // dibujar, remixar...). Se recuerdan en el navegador; al desbloquear uno se avisa a quien escuche.
 export const ACHIEVEMENTS = [
-  { id: 'first-drop', emoji: '🧩', name: 'Primer símbolo', hint: 'Poné un símbolo en el tablero' },
-  { id: 'rule', emoji: '✨', name: 'Primera regla', hint: 'Armá una regla con símbolos' },
+  { id: 'first-drop', emoji: '🧩', name: 'Primera ficha', hint: 'Poné una ficha en el tablero' },
+  { id: 'rule', emoji: '✨', name: 'Primera regla', hint: 'Armá una regla con fichas' },
   { id: 'first-move', emoji: '🕹️', name: 'En movimiento', hint: 'Movete con el joystick' },
-  { id: 'artist', emoji: '🎨', name: 'Dibujante', hint: 'Dibujá un símbolo nuevo' },
-  { id: 'detective', emoji: '🔍', name: 'Detective', hint: 'Mirá cómo se evaluó una regla' },
+  { id: 'artist', emoji: '🎨', name: 'Dibujante', hint: 'Dibujá una ficha nueva' },
+  { id: 'detective', emoji: '🔍', name: 'Detective', hint: 'Mirá cómo funciona una regla' },
   { id: 'explorer', emoji: '🧭', name: 'Explorador', hint: 'Abrí tres proyectos' },
-  { id: 'remix', emoji: '🔁', name: 'Remixer', hint: 'Hacé un remix de un proyecto' },
+  { id: 'remix', emoji: '🔁', name: 'Inventor', hint: 'Copiá un proyecto y cambialo' },
   { id: 'saver', emoji: '💾', name: 'Coleccionista', hint: 'Guardá un proyecto tuyo' },
 ];
 

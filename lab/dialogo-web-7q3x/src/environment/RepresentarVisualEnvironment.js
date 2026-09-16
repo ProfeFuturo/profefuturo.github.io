@@ -144,7 +144,7 @@ export class RepresentarVisualEnvironment {
     item('zoomIn', dictionaryAt('ZoomIn'), () => this.withProject(project => project.boardModel.zoomIn()), 'menu-zoom-in');
     item('zoomOut', dictionaryAt('ZoomOut'), () => this.withProject(project => project.boardModel.zoomOut()), 'menu-zoom-out');
     item('flag', 'Fijar este inicio', () => this.withProject(project => { project.boardModel.setCurrentAsResetBoard(); this.flash(); }), 'menu-set');
-    item('share', dictionaryAt('ChooseOtherProjectsToReuse'), () => this.openMenuToChooseProjectsToReuse(), 'menu-reuse');
+    item('share', 'Usar fichas de otros proyectos', () => this.openMenuToChooseProjectsToReuse(), 'menu-reuse');
     item('save', dictionaryAt('FileOut') + ' (.dialog.ar)', () => this.fileOut(), 'menu-file-out');
   }
 
@@ -252,7 +252,7 @@ export class RepresentarVisualEnvironment {
     const next = session.next();
     const overlay = this.element('div', 'challenge-success', this.root);
     overlay.setAttribute('role', 'dialog');
-    overlay.innerHTML = '<div class="success-card"><div class="success-medal">' + challenge.emoji + '</div><div class="success-title">¡Lo lograste!</div><div class="success-subtitle">' + challenge.title + '</div><div class="success-actions"></div></div>';
+    overlay.innerHTML = '<div class="success-card"><div class="success-medal">' + challenge.emoji + '</div><div class="success-title">¡Lo lograste!</div><div class="success-subtitle">' + (challenge.praise || challenge.title) + '</div><div class="success-actions"></div></div>';
     const actions = overlay.querySelector('.success-actions');
     const button = (label, iconName, action, className) => {
       const created = this.element('button', 'success-button ' + className, actions, Icons.svg(iconName) + '<span>' + label + '</span>');
@@ -262,7 +262,7 @@ export class RepresentarVisualEnvironment {
     };
     if (next !== null) button('Siguiente', 'arrowRight', () => { this.closeSuccess(); this.openChallenge(next); }, 'primary next-challenge');
     else button('Al inicio', 'home', () => { this.closeSuccess(); this.backAction(); }, 'primary next-challenge');
-    button('Hacelo tuyo', 'pencil', () => { this.closeSuccess(); this.makeItMine(); }, 'secondary make-it-mine');
+    button('Quedarme a inventar', 'pencil', () => { this.closeSuccess(); this.makeItMine(); }, 'secondary make-it-mine');
     this.success = overlay;
   }
 
@@ -284,6 +284,7 @@ export class RepresentarVisualEnvironment {
     this.tray.rebuild();
     this.markDirty();
     if (this.usage !== null) this.usage.record('challenge.remix', {});
+    if (this.mainSpace !== null && this.mainSpace.toast) this.mainSpace.toast('🧪', 'Ahora es tuyo. Cambiá lo que quieras. Lo vas a encontrar en Míos.');
   }
 
   show() { this.root.hidden = false; }

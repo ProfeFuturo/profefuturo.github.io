@@ -258,7 +258,7 @@ export class RepresentarApp {
       this.environment.markDirty();        // un remix es tuyo desde el primer momento
     } catch (error) {
       console.error(error);
-      this.toast('⚠️', 'No se pudo hacer el remix');
+      this.toast('⚠️', 'No se pudo copiar el proyecto');
     }
   }
 
@@ -313,7 +313,7 @@ export class RepresentarApp {
       button.addEventListener('click', async () => { sheet.close(); this.sounds.tap(); await action(); });
     };
     item('pencil', 'Abrir', () => this.openEntry(entry));
-    item('remix', 'Remix', () => this.remix(entry));
+    item('remix', 'Copiar y cambiar', () => this.remix(entry));
     item('save', 'Descargar .dialog.ar', () => this.download(entry));
     if (entry.source === 'stored') item('trash', dictionaryAt('Delete'), () => this.removeEntry(entry));
   }

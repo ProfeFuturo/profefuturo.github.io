@@ -114,7 +114,7 @@ export class Feed {
     board.appendChild(rail);
     state.playButton = this.railButton(rail, 'play', 'Jugar', () => this.togglePlay(state));
     this.railButton(rail, 'pencil', 'Abrir', () => this.app.openEntry(entry));
-    this.railButton(rail, 'remix', 'Remix', () => this.app.remix(entry));
+    this.railButton(rail, 'remix', 'Copiar y cambiar', () => this.app.remix(entry));
     if (entry.source === 'stored') this.railButton(rail, 'more', 'Más', button => this.app.openEntryMenu(entry, button));
 
     const caption = document.createElement('div');

@@ -286,3 +286,5 @@ img { max-width: 100%; }
 .ladder-step.done .icon { color: var(--good); }
 .menu-group { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); padding: 10px 10px 2px; font-weight: 700; }
 .success-button.secondary { background: var(--surface); color: var(--ink); box-shadow: inset 0 0 0 2px var(--accent); }
+.challenge-goal.changed { animation: goal-change 0.5s ease-out; }
+@keyframes goal-change { 0% { opacity: 0; transform: translateY(6px); } 100% { opacity: 1; transform: none; } }

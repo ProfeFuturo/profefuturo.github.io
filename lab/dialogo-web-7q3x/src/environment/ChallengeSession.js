@@ -30,7 +30,7 @@ export class ChallengeSession {
     this.banner = document.createElement('div');
     this.banner.className = 'challenge-banner';
     this.banner.setAttribute('role', 'status');
-    this.banner.innerHTML = '<span class="challenge-emoji">' + this.challenge.emoji + '</span><span class="challenge-goal">' + this.challenge.goal + '</span>';
+    this.banner.innerHTML = '<span class="challenge-emoji">' + this.challenge.emoji + '</span><span class="challenge-goal">' + this.challenge.goalIn(this.project) + '</span>';
     const restart = document.createElement('button');
     restart.type = 'button';
     restart.className = 'icon-button ghost challenge-restart';
@@ -58,8 +58,16 @@ export class ChallengeSession {
     this.check();
   }
 
+  // La consigna cambia con lo que el chico ya hizo (un paso por vez).
+  refreshGoal() {
+    const goal = this.banner.querySelector('.challenge-goal');
+    const text = this.challenge.goalIn(this.project);
+    if (goal !== null && goal.textContent !== text) { goal.textContent = text; goal.classList.remove('changed'); void goal.offsetWidth; goal.classList.add('changed'); }
+  }
+
   check() {
     if (this.completed || this.environment.currentProject !== this.project) return false;
+    this.refreshGoal();
     if (!this.challenge.completedIn(this.project)) return false;
     this.completed = true;
     this.clearHint();

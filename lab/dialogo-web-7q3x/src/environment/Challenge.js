@@ -8,7 +8,7 @@ const ROWS = 8;
 // Un desafío de la escalera (ver docs/desafios.md): arma un tablero chico con la regla casi
 // hecha, dice qué símbolos van en la bandeja, sabe cuándo se logró la meta y qué pista dar.
 export class Challenge {
-  constructor({ id, number, title, goal, emoji, symbols, pencil = false, slots = [], build, isCompleted, hint = () => null }) {
+  constructor({ id, number, title, goal, steps = null, praise = '', emoji, symbols, pencil = false, slots = [], build, isCompleted, hint = () => null }) {
     this.id = id;
     this.number = number;
     this.title = title;
@@ -17,6 +17,8 @@ export class Challenge {
     this.symbols = symbols;             // selectores de predefinidos disponibles en la bandeja
     this.pencil = pencil;               // si la bandeja muestra el lápiz
     this.slots = slots;                 // celdas vacías de la regla que hay que completar
+    this.steps = steps || [{ text: goal, done: null }];   // la consigna, de a un paso: [{ text, done(project) }]
+    this.praise = praise;               // al lograrlo: la idea, en una línea
     this.build = build;                 // (project, drawings, predefined, userDrawings) → void
     this.isCompleted = isCompleted;     // (project, drawings) → boolean
     this.hintFor = hint;                // (project, drawings) → { cell, selector, drawing } | null
@@ -43,6 +45,12 @@ export class Challenge {
   }
 
   completedIn(project) { return this.isCompleted(project, project.challengeDrawings); }
+
+  // La consigna de este momento: el primer paso que falta (el último es lograr el desafío).
+  goalIn(project) {
+    for (const step of this.steps) if (step.done !== null && !step.done(project)) return step.text;
+    return this.steps[this.steps.length - 1].text;
+  }
   hintIn(project) { return this.hintFor(project, project.challengeDrawings); }
 
   // --- ayudas para armar tableros ---
@@ -93,7 +101,8 @@ export class Challenges {
 // principio, tenues, para que la pieza tenga adónde ir.
 const LADDER = [
   new Challenge({
-    id: 'reach-star', number: 1, title: 'Llegá a la estrella', goal: 'Llevá al personaje hasta la estrella', emoji: '⭐',
+    id: 'reach-star', number: 1, title: 'Llegá a la estrella', goal: 'Llevá al personaje hasta la estrella con las flechas', emoji: '⭐',
+    praise: 'El personaje está al lado de las flechas: por eso se mueve.',
     symbols: [],
     build(project, drawings, predefined) {
       Challenge.rule(project, [drawings.kid, predefined.arrowKeysSymbol], 7);
@@ -104,7 +113,12 @@ const LADDER = [
     hint: (project, drawings) => ({ cell: Challenge.positionsOf(project, drawings.star)[0] || null, joystick: true }),
   }),
   new Challenge({
-    id: 'make-rule', number: 2, title: 'Armá la regla', goal: 'Poné las flechas al lado del personaje y llegá a la estrella', emoji: '🧩',
+    id: 'make-rule', number: 2, title: 'Armá la regla', goal: 'Arrastrá las flechas hasta el cuadradito, al lado del personaje', emoji: '🧩',
+    steps: [
+      { text: 'Arrastrá las flechas hasta el cuadradito, al lado del personaje', done: project => !Challenge.ruleCellIsEmpty(project, 1, 7) },
+      { text: '¡Ahora se mueve! Llevalo hasta la estrella', done: null },
+    ],
+    praise: 'Personaje + flechas = se mueve. Eso es una regla.',
     symbols: ['arrowKeysSymbol'], slots: [Point.at(1, 7)],
     build(project, drawings) {
       Challenge.rule(project, [drawings.kid], 7);
@@ -115,7 +129,12 @@ const LADDER = [
     hint: project => Challenge.ruleCellIsEmpty(project, 1, 7) ? { cell: Point.at(1, 7), selector: 'arrowKeysSymbol' } : { joystick: true },
   }),
   new Challenge({
-    id: 'eat-star', number: 3, title: 'Comé la estrella', goal: 'Completá la regla con el agujero negro y chocá la estrella', emoji: '🕳️',
+    id: 'eat-star', number: 3, title: 'Comé las estrellas', goal: 'Arrastrá el agujero negro hasta el cuadradito del final de la regla', emoji: '🕳️',
+    steps: [
+      { text: 'Arrastrá el agujero negro hasta el cuadradito del final de la regla', done: project => !Challenge.ruleCellIsEmpty(project, 6, 7) },
+      { text: 'Ahora chocá las dos estrellas', done: null },
+    ],
+    praise: 'Cuando el personaje choca una estrella, la estrella se va al agujero negro.',
     symbols: ['blackHoleSymbol'], slots: [Point.at(6, 7)],
     build(project, drawings, predefined) {
       Challenge.rule(project, [drawings.kid, predefined.arrowKeysSymbol], 6);
@@ -128,14 +147,20 @@ const LADDER = [
     hint: project => Challenge.ruleCellIsEmpty(project, 6, 7) ? { cell: Point.at(6, 7), selector: 'blackHoleSymbol' } : { joystick: true },
   }),
   new Challenge({
-    id: 'draw', number: 4, title: 'Dibujá', goal: 'Tocá el lápiz y dibujá tu personaje', emoji: '🎨',
+    id: 'draw', number: 4, title: 'Dibujá', goal: 'Tocá el lápiz. Dibujá tu personaje', emoji: '🎨',
+    praise: 'Tu dibujo ya es un personaje. Ahora vamos a hacer que se mueva.',
     symbols: [], pencil: true,
     build() {},
     isCompleted: project => project.drawingsMadeByUser().length > 0,
     hint: () => ({ pencil: true }),
   }),
   new Challenge({
-    id: 'bring-to-life', number: 5, title: 'Dale vida', goal: 'Poné tu dibujo en la regla y movelo hasta la estrella', emoji: '✨',
+    id: 'bring-to-life', number: 5, title: 'Dale vida', goal: 'Arrastrá tu dibujo hasta el cuadradito, al lado de las flechas', emoji: '✨',
+    steps: [
+      { text: 'Arrastrá tu dibujo hasta el cuadradito, al lado de las flechas', done: project => !Challenge.ruleCellIsEmpty(project, 0, 7) },
+      { text: '¡Tu dibujo se mueve! Llevalo hasta la estrella', done: null },
+    ],
+    praise: 'Tu dibujo + flechas = tu dibujo se mueve. Vos armaste esa regla.',
     symbols: [], slots: [Point.at(0, 7)],
     // Usa el dibujo que el chico hizo en el desafío anterior; si no hay, el monstruo.
     build(project, drawings, predefined, userDrawings) {
@@ -149,7 +174,12 @@ const LADDER = [
     hint: project => Challenge.ruleCellIsEmpty(project, 0, 7) ? { cell: Point.at(0, 7), drawing: project.drawingsMadeByUser()[0] } : { joystick: true },
   }),
   new Challenge({
-    id: 'run', number: 6, title: 'El monstruo corre', goal: 'Completá la regla para que el monstruo corra solo a la estrella', emoji: '🏃',
+    id: 'run', number: 6, title: 'El monstruo corre', goal: 'Arrastrá «correr» hasta el cuadradito, entre el monstruo y la estrella', emoji: '🏃',
+    steps: [
+      { text: 'Arrastrá «correr» hasta el cuadradito, entre el monstruo y la estrella', done: project => !Challenge.ruleCellIsEmpty(project, 1, 7) },
+      { text: 'Mirá: el monstruo corre solo', done: null },
+    ],
+    praise: 'Monstruo + correr + estrella: el monstruo va solo hasta la estrella, sin que toques nada.',
     symbols: ['runSymbol'], slots: [Point.at(1, 7)],
     build(project, drawings) {
       Challenge.rule(project, [drawings.monster, null, drawings.star], 7);
@@ -160,7 +190,12 @@ const LADDER = [
     hint: () => ({ cell: Point.at(1, 7), selector: 'runSymbol' }),
   }),
   new Challenge({
-    id: 'push', number: 7, title: 'Empujá la caja', goal: 'Completá la regla y empujá la caja hasta la estrella', emoji: '📦',
+    id: 'push', number: 7, title: 'Empujá la caja', goal: 'Arrastrá «empujar» hasta el cuadradito, entre el personaje y la caja', emoji: '📦',
+    steps: [
+      { text: 'Arrastrá «empujar» hasta el cuadradito, entre el personaje y la caja', done: project => !Challenge.ruleCellIsEmpty(project, 1, 7) },
+      { text: 'Ahora empujá la caja hasta la estrella', done: null },
+    ],
+    praise: 'Personaje + empujar + caja: cuando el personaje choca la caja, la caja se mueve.',
     symbols: ['pushSymbol'], slots: [Point.at(1, 7)],
     build(project, drawings, predefined) {
       Challenge.rule(project, [drawings.kid, predefined.arrowKeysSymbol], 6);
@@ -173,7 +208,12 @@ const LADDER = [
     hint: project => Challenge.ruleCellIsEmpty(project, 1, 7) ? { cell: Point.at(1, 7), selector: 'pushSymbol' } : { joystick: true },
   }),
   new Challenge({
-    id: 'walls', number: 8, title: 'Paredes', goal: 'Completá la regla: el monstruo no pasa la pared y no te alcanza', emoji: '🧱',
+    id: 'walls', number: 8, title: 'La pared', goal: 'Arrastrá «no pasa» hasta el cuadradito, entre el monstruo y la pared', emoji: '🧱',
+    steps: [
+      { text: 'Arrastrá «no pasa» hasta el cuadradito, entre el monstruo y la pared', done: project => !Challenge.ruleCellIsEmpty(project, 1, 7) },
+      { text: 'Mirá qué hace el monstruo', done: null },
+    ],
+    praise: 'Monstruo + no pasa + pared: el monstruo corre, pero la pared lo frena.',
     symbols: ['canNotTranspassSymbol'], slots: [Point.at(1, 7)],
     build(project, drawings, predefined) {
       Challenge.rule(project, [drawings.monster, predefined.runSymbol, drawings.kid], 6);
@@ -190,7 +230,8 @@ const LADDER = [
     hint: () => ({ cell: Point.at(1, 7), selector: 'canNotTranspassSymbol' }),
   }),
   new Challenge({
-    id: 'button', number: 9, title: 'El botón', goal: 'Tocá la campana: el personaje aparece en la estrella', emoji: '🔔',
+    id: 'button', number: 9, title: 'La campana', goal: 'Tocá la campana. Mirá qué pasa', emoji: '🔔',
+    praise: 'La campana es un botón: cuando la tocás, el personaje aparece en la estrella.',
     symbols: [],
     build(project, drawings, predefined) {
       Challenge.rule(project, [drawings.bell, predefined.pointsSymbol, drawings.kid, predefined.teleportSymbol, drawings.star], 7);
@@ -203,7 +244,8 @@ const LADDER = [
     hint: (project, drawings) => ({ cell: Challenge.positionsOf(project, drawings.bell)[0] || null, tap: true }),
   }),
   new Challenge({
-    id: 'eyes', number: 10, title: 'Los ojos', goal: 'Poné los ojos después de la estrella y mirá qué aparece', emoji: '👀',
+    id: 'eyes', number: 10, title: 'Los ojos', goal: 'Arrastrá los ojos hasta el cuadradito, al lado de la estrella', emoji: '👀',
+    praise: 'Los ojos muestran lo que dice la regla: acá, la estrella se hace corazón.',
     symbols: ['replSymbol'], slots: [Point.at(1, 3)],
     build(project, drawings, predefined) {
       Challenge.rule(project, [drawings.star, predefined.pointsSymbol, drawings.heart], 7);
