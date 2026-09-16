@@ -17,6 +17,7 @@ export class ChallengeSession {
     this.hintsShown = 0;
     this.startedAt = clock();
     this.buildBanner();
+    environment.boardView.showSlots(this.challenge.slots);
     this.log('challenge.start');
     this.armHint();
   }
@@ -67,6 +68,9 @@ export class ChallengeSession {
     return true;
   }
 
+  // Los símbolos del tablero: las reglas que hicieron que pase lo que pasó.
+  ruleItems() { return this.project.boardModel.items().filter(item => item.consideredSymbol); }
+
   // --- pistas ---
 
   armHint() {
@@ -113,5 +117,6 @@ export class ChallengeSession {
     clearTimeout(this.hintTimer);
     this.clearHint();
     this.banner.remove();
+    if (this.environment.boardView !== null) this.environment.boardView.showSlots([]);
   }
 }

@@ -105,6 +105,17 @@ export class SymbolPainter {
     return null;
   }
 
+  // Un ítem con una escala (el "pop" al aparecer): se dibuja centrado y más chico.
+  static paintItemScaled(context, item, x, y, gridSize, scale) {
+    if (scale >= 1) return SymbolPainter.paintItem(context, item, x, y, gridSize);
+    const size = gridSize * item.gridResizeFactor();
+    context.save();
+    context.translate(x + size / 2, y + size / 2);
+    context.scale(scale, scale);
+    SymbolPainter.paintItem(context, item, -size / 2, -size / 2, gridSize);
+    context.restore();
+  }
+
   static paintItem(context, item, x, y, gridSize) {
     if (!item.isVisible()) return;
     const size = gridSize * item.gridResizeFactor();

@@ -1,4 +1,8 @@
 import { Challenges } from './Challenge.js';
+import { Drawing } from '../metamodel/Drawing.js';
+import { VisualSymbol } from '../metamodel/VisualSymbol.js';
+
+const DRAWINGS_TO_KEEP = 3;
 
 // El progreso del chico en la escalera: qué desafíos completó. Se recuerda en el navegador.
 export class Progress {
@@ -6,6 +10,7 @@ export class Progress {
     this.storage = storage;
     this.completed = new Set();
     this.listeners = [];
+    this.drawings = [];              // los últimos dibujos del chico (VisualSymbol), para los desafíos que los usan
     try {
       const saved = storage === null ? null : storage.getItem('representar.progress');
       if (saved) JSON.parse(saved).forEach(id => this.completed.add(id));
@@ -33,5 +38,34 @@ export class Progress {
     try { if (this.storage !== null) this.storage.setItem('representar.progress', JSON.stringify([...this.completed])); } catch (error) { /* sin storage */ }
   }
 
-  reset() { this.completed.clear(); this.save(); }
+  // --- los dibujos del chico viajan de un desafío al siguiente ---
+
+  rememberDrawing(symbol) {
+    this.drawings = [symbol, ...this.drawings.filter(each => !each.equals(symbol))].slice(0, DRAWINGS_TO_KEEP);
+    try {
+      if (this.storage !== null) {
+        const urls = this.drawings.map(each => each.drawing.image && each.drawing.image.toDataURL ? each.drawing.image.toDataURL('image/png') : null).filter(url => url !== null);
+        this.storage.setItem('representar.drawings', JSON.stringify(urls));
+      }
+    } catch (error) { /* sin storage o sin canvas */ }
+  }
+
+  userDrawings() { return this.drawings.slice(); }
+
+  // Recupera los dibujos guardados (sólo en el navegador; las imágenes se cargan de a poco).
+  async loadDrawings() {
+    if (this.storage === null || typeof Image === 'undefined') return this.drawings;
+    let urls = [];
+    try { urls = JSON.parse(this.storage.getItem('representar.drawings') || '[]'); } catch (error) { return this.drawings; }
+    const loaded = await Promise.all(urls.map(url => new Promise(resolve => {
+      const image = new Image();
+      image.onload = () => resolve(VisualSymbol.fromDrawing(new Drawing({ hash: 'mine:' + url.length + ':' + url.slice(-24), image, width: image.width, height: image.height })));
+      image.onerror = () => resolve(null);
+      image.src = url;
+    })));
+    this.drawings = loaded.filter(symbol => symbol !== null).concat(this.drawings).slice(0, DRAWINGS_TO_KEEP);
+    return this.drawings;
+  }
+
+  reset() { this.completed.clear(); this.drawings = []; this.save(); }
 }

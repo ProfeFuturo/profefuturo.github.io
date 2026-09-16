@@ -1425,6 +1425,7 @@ export class BoardModel {
     for (const item of this.itemPositions.keys()) if (!this.zOrder.includes(item)) this.zOrder.unshift(item);
     this.clearMemoizedMovableItems();
     this.refreshItems();
+    this.boardView.boardRestored();
     this.changed();
   }
 
