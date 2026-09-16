@@ -601,26 +601,32 @@ const LADDER = [
   // ---------- Mundo 8: Puntos ----------
   new Challenge({
     id: 'score', number: 26, world: 'puntos', title: 'Puntos', emoji: '🏆',
-    goal: 'Arrastrá el 1 hasta el cuadradito: los puntos suben a 1',
+    goal: 'Arrastrá «apunta a» hasta el cuadradito del final de la regla',
     steps: [
-      { text: 'Arrastrá el 1 hasta el cuadradito: los puntos suben a 1', done: project => !Challenge.ruleCellIsEmpty(project, 5, 6) },
-      { text: 'Poné los ojitos al lado de los puntos, abajo', done: project => project.boardModel.itemsInPosition(Point.at(1, 7)).length > 0 },
-      { text: 'Chocá la estrella y mirá los puntos', done: null },
+      { text: 'Arrastrá «apunta a» hasta el cuadradito del final de la regla', done: project => !Challenge.ruleCellIsEmpty(project, 6, 7) },
+      { text: 'Poné los ojitos al lado de los puntos', done: project => project.boardModel.itemsInPosition(Point.at(5, 1)).length > 0 },
+      { text: 'Chocá las dos estrellas y mirá los puntos', done: null },
     ],
-    praise: 'Los puntos son una regla: «puntos → 0». Chocar la estrella la cambia por «puntos → 1». Sin variables.',
-    symbols: ['replSymbol'], slots: [Point.at(5, 6), Point.at(1, 7)],
+    praise: 'Chocar no pone un número: cambia la regla «puntos → 0» por «puntos → el siguiente». Suma uno cada vez. Sin variables.',
+    symbols: ['replSymbol'], slots: [Point.at(6, 7), Point.at(5, 1)],
+    // «apunta a» va después del número para que el número se calcule antes de guardarse:
+    // «siguiente · puntos · apunta a» → «siguiente · 0 · apunta a» → «1 · apunta a» → «puntos → 1».
     build(project, drawings, predefined) {
-      project.receiveDrawnSymbol(drawings.one);
-      Challenge.rule(project, [drawings.kid, predefined.arrowKeysSymbol], 3);
-      Challenge.rule(project, [drawings.cup, predefined.pointsSymbol, drawings.zero], 4);
-      Challenge.rule(project, [drawings.kid, predefined.collisionSymbol, drawings.star, predefined.pointsSymbol, drawings.cup, drawings.up], 5);
-      Challenge.rule(project, [drawings.cup, drawings.up, predefined.pointsSymbol, drawings.cup, predefined.pointsSymbol, null], 6);
-      Challenge.symbol(project, drawings.cup, 0, 7);
-      Challenge.element(project, drawings.kid, 0, 1);
-      Challenge.element(project, drawings.star, 2, 1);
+      project.receiveDrawnSymbol(drawings.pin);
+      Challenge.element(project, drawings.kid, 0, 0);
+      Challenge.element(project, drawings.star, 2, 0);
+      Challenge.element(project, drawings.star, 4, 0);
+      Challenge.symbol(project, drawings.cup, 4, 1);
+      Challenge.rule(project, [drawings.kid, predefined.arrowKeysSymbol], 2);
+      Challenge.rule(project, [drawings.cup, predefined.pointsSymbol, drawings.zero], 2, 3);
+      Challenge.rule(project, [drawings.next, drawings.zero, predefined.pointsSymbol, drawings.one], 3);
+      Challenge.rule(project, [drawings.next, drawings.one, predefined.pointsSymbol, drawings.two], 4);
+      Challenge.rule(project, [drawings.one, drawings.pin, predefined.pointsSymbol, drawings.cup, predefined.pointsSymbol, drawings.one], 5);
+      Challenge.rule(project, [drawings.two, drawings.pin, predefined.pointsSymbol, drawings.cup, predefined.pointsSymbol, drawings.two], 6);
+      Challenge.rule(project, [drawings.kid, predefined.collisionSymbol, drawings.star, predefined.pointsSymbol, drawings.next, drawings.cup, null], 7);
     },
-    isCompleted: (project, drawings) => project.boardModel.symbolsInPosition(Point.at(2, 7)).some(item => item.visualSymbolAssociated.equals(drawings.one)),
-    hint: (project, drawings) => Challenge.ruleCellIsEmpty(project, 5, 6) ? { cell: Point.at(5, 6), drawing: drawings.one } : Challenge.ruleCellIsEmpty(project, 1, 7) ? { cell: Point.at(1, 7), selector: 'replSymbol' } : { joystick: true },
-    solution: play => { play.dropDrawing('one', 5, 6); play.drop('replSymbol', 1, 7); play.right(2); play.steps(1); },
+    isCompleted: (project, drawings) => project.boardModel.symbolsInPosition(Point.at(6, 1)).some(item => item.visualSymbolAssociated.equals(drawings.two)),
+    hint: (project, drawings) => Challenge.ruleCellIsEmpty(project, 6, 7) ? { cell: Point.at(6, 7), drawing: drawings.pin } : Challenge.ruleCellIsEmpty(project, 5, 1) ? { cell: Point.at(5, 1), selector: 'replSymbol' } : { joystick: true },
+    solution: play => { play.dropDrawing('pin', 6, 7); play.drop('replSymbol', 5, 1); play.right(4); play.steps(1); },
   }),
 ];
