@@ -1,0 +1,51 @@
+[
+  {
+    "file": "didactic-13.dialog.ar",
+    "name": "Suma de Números Naturales",
+    "category": "didactic",
+    "title": "Suma de números",
+    "goal": "Reglas para sumar"
+  },
+  {
+    "file": "games-10.dialog.ar",
+    "name": "#1 Llevá la oveja al pastizal para que salga el sol (alt-R vuelve a empezar)",
+    "category": "games",
+    "title": "La oveja y el sol",
+    "goal": "Llevá la oveja al pastizal"
+  },
+  {
+    "file": "games-3.dialog.ar",
+    "name": "Conway's Game of Life (un proyecto curioso)",
+    "category": "games",
+    "title": "El juego de la vida",
+    "goal": "Mirá cómo cambia solo"
+  },
+  {
+    "file": "games-9.dialog.ar",
+    "name": "#2 Llevá el auto a la bandera a cuadros para ganar la copa (alt-R vuelve a empezar)",
+    "category": "games",
+    "title": "Carrera a la bandera",
+    "goal": "Llevá el auto a la bandera a cuadros"
+  },
+  {
+    "file": "KingFrog.dialog.ar",
+    "name": "King Frog with moving car",
+    "category": "games",
+    "title": "King Frog",
+    "goal": "Esquivá las ranas con las flechas"
+  },
+  {
+    "file": "Puntosdeljuego.dialog.ar",
+    "name": "Puntos del juego",
+    "category": "didactic",
+    "title": "Puntos del juego",
+    "goal": "Sumá puntos con reglas"
+  },
+  {
+    "file": "Conicet.dialog.ar",
+    "name": "Conicet al fondo del mar (ex Pacman)",
+    "category": "games",
+    "title": "Conicet al fondo del mar",
+    "goal": "Un Pac-Man hecho con reglas"
+  }
+]

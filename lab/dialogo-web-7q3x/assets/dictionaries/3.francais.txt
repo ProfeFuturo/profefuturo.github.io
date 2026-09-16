@@ -1,0 +1,104 @@
+Français
+inconnu
+Nouveau projet
+Galerie de projets
+Défis et jeux
+Retour
+Enregistrer dans un fichier
+Projet sans nom approprié
+Appliqué
+Autres options non appliquées
+...se déplace avec les flèches
+...ne peut pas traverser...
+...est à l'intérieur de...
+...entre en collision avec (...) -> ...
+Touche Entrée -> ...
+Joker pour tous les symboles individuels
+Joker pour toute séquence de symboles et tout élément
+...remplacé par...
+...tire...
+...pousse...
+...évalue et le résultat est affiché
+...court (vers...)
+Barre d'espace -> ...
+...se téléporte (vers...)
+...se déplace avec les lettres WASD
+Lorsque les dessins sont posés, ils sont des symboles
+Lorsque les dessins sont posés, ils sont des éléments
+Mettre en lançant
+Mettre en tamponnant
+Dessiner un nouveau symbole
+Transformer en symbole
+Transformer en élément
+Supprimer
+Voir l'exécution
+Fermer
+Modifier
+Nouveau dessin à partir de ceci
+Définir un nouveau nom de thème
+Nom du thème
+Définir un nouveau nom de section
+Nom de la section
+Annuler
+Rétablir
+Thème
+Créer
+Renommer
+Supprimer
+Débloquer
+Verrouiller
+Substitution
+Priorité
+Changer
+Basse
+Moyenne
+Haute
+Section
+Catégorie
+Nouveau
+Résultat
+Inspecter l'exécution
+Arrêter l'évaluation
+Fondamental
+mot
+phrase
+Remplacer
+Catégoriser
+Manipuler les mots
+Modifier l'organisation
+Espace de test
+caractère
+premier
+dernier
+sans
+joindre
+Espace de résultat
+Essayez une phrase ici
+Voir le résultat ici
+c'est une substitution fondamentale
+Catégorie fondamentale qui inclut tous les mots individuellement
+Catégorie fondamentale qui inclut toutes les phrases, c'est-à-dire, des séquences non vides de mots
+Ralentir
+Accélérer
+Oui
+Non
+Êtes-vous sûr de vouloir quitter?
+Êtes-vous sûr de vouloir supprimer le projet?
+Choisissez d'autres projets à réutiliser
+Rendre tout visible
+Voir tous les symboles
+Masquer tous les symboles
+Voir tous les éléments de ce type
+Masquer tous les éléments de ce type
+Voir
+Masquer
+...nulle part
+Changer de direction
+Toutes les directions
+Transformer en bouton
+Redimensionner
+L'exécution sera inspectée lorsqu'elle sera appliquée
+Inspecter l'exécution lorsqu'elle est appliquée
+Public lorsqu'il est réutilisé par d'autres projets
+Privé pour d'autres projets
+Pointer vers une direction

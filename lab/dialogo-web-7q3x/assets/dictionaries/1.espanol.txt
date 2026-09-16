@@ -1,0 +1,104 @@
+Español
+desconocido
+Nuevo Proyecto
+Galería de Proyectos
+Desafíos y Juegos
+Volver
+Guardar en archivo
+Proyecto sin nombre adecuado
+Se aplicó
+Otras opciones no aplicadas
+... se mueve con flechas
+... no puede atravesar a ...
+... está dentro de ...
+... colisiona con (...) -> ...
+Tecla Enter -> ...
+Comodín para todo símbolo individual
+Comodín para toda secuencia de símbolos y todo elemento
+... se sustituye por ...
+... jala o tira de ...
+... empuja a ...
+... se evalúa y se muestra el resultado
+... corre (hacia ...)
+Barra espaciadora -> ...
+... se tele-porta (hacia ...)
+... se mueve con letras WASD
+Al poner los dibujos son símbolos
+Al poner los dibujos son elementos
+Poner arrojando
+Poner estampando
+Dibujar un nuevo símbolo
+Transformar en símbolo
+Transformar en elemento
+Eliminar
+Ver la ejecución
+Cerrar
+Modificar
+Nuevo dibujo a partir de este
+Poner un nuevo nombre de tema
+Nombre de tema
+Poner un nuevo nombre de sección
+Nombre de sección
+Deshacer
+Rehacer
+Tema
+Crear
+Renombrar
+Borrar
+Desbloquear
+Bloquear
+Sustitución
+Prioridad
+Cambiar
+Baja
+Media
+Alta
+Sección
+Categoría	
+Nuevo
+Resultado	
+Inspeccionar ejecución
+Detener evaluación
+Fundamental
+palabra
+frase
+Sustituir
+Categorizar
+Manipular palabras
+Editar organización
+Espacio de prueba
+caracter
+primer
+último
+sin
+unir
+Espacio de resultado
+Pruebe una oración acá
+Vea el resultado acá
+es una sustitución fundamental
+Categoría fundamental que incluye todas las palabras individualmente
+Categoría fundamental que incluye todas las frases, es decir, secuencias no vacías de palabras
+Bajar velocidad
+Subir velocidad
+Sí
+No
+¿Seguro quieres salir?
+¿Seguro quieres eliminar proyecto?
+Elige otros proyectos a re-utilizar
+Visibilizar todo
+Ver todos los símbolos
+Ocultar todos los símbolos
+Ver todos los elementos de este tipo
+Ocultar todos los elementos de este tipo
+Ver
+Ocultar
+... a ningún lugar
+Cambiar dirección
+Todas las direcciones
+Transformar en botón
+Cambiar tamaño
+La ejecución se inspeccionará cuando se aplique
+Inspeccionar la ejecución cuando se aplique
+Público al ser reutilizado por otros proyectos
+Privado para otros proyectos
+Apuntar en una dirección

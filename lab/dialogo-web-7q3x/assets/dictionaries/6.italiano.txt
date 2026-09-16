@@ -1,0 +1,104 @@
+Italiano
+sconosciuto
+Nuovo progetto
+Galleria dei progetti
+Sfide e giochi
+Indietro
+Salva in file
+Progetto senza nome appropriato
+Applicato
+Altre opzioni non applicate
+...si muove con le frecce
+...non può attraversare...
+...è dentro...
+...collide con (...) -> ...
+Tasto Invio -> ...
+Jolly per tutti i simboli individuali
+Jolly per ogni sequenza di simboli e ogni elemento
+...sostituito da...
+...tira...
+...spinge...
+...viene valutato e il risultato viene mostrato
+...corre (verso...)
+Barra spaziatrice -> ...
+...si teletrasporta (verso...)
+...si muove con le lettere WASD
+Quando si mettono i disegni sono simboli
+Quando si mettono i disegni sono elementi
+Mettere lanciando
+Mettere timbrando
+Disegnare un nuovo simbolo
+Trasformare in simbolo
+Trasformare in elemento
+Elimina
+Visualizza l'esecuzione
+Chiudi
+Modifica
+Nuovo disegno a partire da questo
+Imposta un nuovo nome per il tema
+Nome del tema
+Imposta un nuovo nome per la sezione
+Nome della sezione
+Annulla
+Ripristina
+Tema
+Crea
+Rinomina
+Elimina
+Sblocca
+Blocca
+Sostituzione
+Priorità
+Cambia
+Bassa
+Media
+Alta
+Sezione
+Categoria
+Nuovo
+Risultato
+Ispeziona l'esecuzione
+Ferma la valutazione
+Fondamentale
+parola
+frase
+Sostituisci
+Categorizza
+Manipola le parole
+Modifica organizzazione
+Spazio di prova
+carattere
+primo
+ultimo
+senza
+unisci
+Spazio dei risultati
+Prova una frase qui
+Vedi il risultato qui
+è una sostituzione fondamentale
+Categoria fondamentale che include tutte le parole singolarmente
+Categoria fondamentale che include tutte le frasi, cioè sequenze non vuote di parole
+Rallenta
+Accelera
+Sì
+No
+Sei sicuro di voler uscire?
+Sei sicuro di voler eliminare il progetto?
+Scegli altri progetti da riutilizzare
+Rendi tutto visibile
+Visualizza tutti i simboli
+Nascondi tutti i simboli
+Visualizza tutti gli elementi di questo tipo
+Nascondi tutti gli elementi di questo tipo
+Visualizza
+Nascondi
+...da nessuna parte
+Cambia direzione
+Tutte le direzioni
+Trasforma in pulsante
+Ridimensiona
+L'esecuzione sarà ispezionata quando applicata
+Ispeziona l'esecuzione quando applicata
+Pubblico quando riutilizzato in altri progetti
+Privato per altri progetti
+Punta in una direzione
