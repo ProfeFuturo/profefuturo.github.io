@@ -10,9 +10,17 @@
   <meta name="keywords" content="programación para chicos, videojuegos sin código, educación digital, programación visual, crear juegos, scratch, no-code, niños" />
   <meta name="author" content="Agustín Profe Futuro" />
 
+  <!-- Idiomas -->
+  <link rel="alternate" hreflang="es" href="https://dialog.ar/" />
+  <link rel="alternate" hreflang="en" href="https://dialog.ar/en/" />
+  <link rel="alternate" hreflang="x-default" href="https://dialog.ar/" />
+  <link rel="canonical" href="https://dialog.ar/" />
+  <meta property="og:locale" content="es_AR" />
+  <meta property="og:locale:alternate" content="en_US" />
+
   <!-- Open Graph -->
   <meta property="og:title" content="Diálogo – Programar dibujando" />
-  <meta property="og:description" content="Dibujos + IA + Lógica" />
+  <meta property="og:description" content="Videojuegos con tus propios dibujos, sin escribir código." />
   <meta property="og:image" content="https://dialog.ar/preview.jpg" />
   <meta property="og:url" content="https://dialog.ar" />
   <meta property="og:type" content="website" />
@@ -20,7 +28,7 @@
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Diálogo – Programar dibujando" />
-  <meta name="twitter:description" content="Dibujos + IA + Lógica" />
+  <meta name="twitter:description" content="Videojuegos con tus propios dibujos, sin escribir código." />
   <meta name="twitter:image" content="https://dialog.ar/preview.jpg" />
 
   <!-- Google tag (gtag.js) -->
@@ -41,10 +49,13 @@
 
 <body class="bg-gray-100 text-gray-800">
   <header class="bg-white shadow p-6">
-    <div class="max-w-4xl mx-auto text-center">
+    <div class="max-w-4xl mx-auto text-center relative">
+      <p class="text-sm text-right md:absolute md:top-0 md:right-0">
+        <a href="/en/" lang="en" hreflang="en" class="text-link hover:text-subtitulo transition">🌐 English</a>
+      </p>
       <img src="logo.svg" alt="Diálogo" class="mx-auto mb-4" style="width: 440px; height: auto;">
       <h1 class="text-3xl md:text-5xl font-bold text-indigo-600 sr-only">Diálogo</h1>
-      <p class="text-lg mt-2 font-semibold">Dibujos, Inteligencia Artificial y Lógica</p>
+      <p class="text-lg mt-2 font-semibold">Programá videojuegos con tus propios dibujos</p>
     </div>
   </header>
 
@@ -71,7 +82,7 @@
           <li>Estimula habilidades computacionales reales</li>
           <li>Fácil de usar, incluso sin saber leer</li>
           <li>Sin publicidad ni conexión permanente</li>
-          <li>Combina programación con IA</li>
+          <li>Muestra paso a paso por qué el juego hace lo que hace</li>
         </ul>
       </div>
     </section>
@@ -88,19 +99,19 @@
         Elegí la versión para tu sistema operativo y empezá a crear tus juegos:
       </p>
       <div class="grid md:grid-cols-3 gap-6">
-        <a href="https://dialog.ar/DialogoSetup.exe" 
+        <a href="/DialogoSetup.exe" 
            class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-6 px-4 rounded-xl text-center transition shadow-md hover:shadow-xl">
           <div class="text-4xl mb-2">🪟</div>
           <div class="text-xl">Windows</div>
           <div class="text-sm mt-2 opacity-90">DialogoSetup.exe</div>
         </a>
-        <a href="http://dialog.ar/Dialogo.dmg" 
+        <a href="/Dialogo.dmg" 
            class="bg-gray-700 hover:bg-gray-800 text-white font-bold py-6 px-4 rounded-xl text-center transition shadow-md hover:shadow-xl">
           <div class="text-4xl mb-2">🍎</div>
           <div class="text-xl">Mac</div>
           <div class="text-sm mt-2 opacity-90">Dialogo.dmg</div>
         </a>
-        <a href="http://dialog.ar/Dialogo.zip" 
+        <a href="/Dialogo.zip" 
            class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-6 px-4 rounded-xl text-center transition shadow-md hover:shadow-xl">
           <div class="text-4xl mb-2">💻</div>
           <div class="text-xl">Multiplataforma</div>
@@ -122,54 +133,54 @@
       <div class="space-y-4">
         <a href="https://youtu.be/CYuRk_dKHYg" target="_blank" 
            class="block bg-white shadow-md rounded-2xl p-6 border-l-4 border-indigo-500 hover:shadow-xl transition hover:bg-gray-50">
-          <h3 class="font-semibold text-xl mb-1 text-subtitulo">⚙️ Clase 0 — Instalación previa</h3>
+          <h3 class="font-semibold text-xl mb-1 text-subtitulo">⚙️ Clase 0: Instalación previa</h3>
           <p class="text-gray-700">Instalá Diálogo y empezá a explorar.</p>
         </a>
         <a href="https://youtu.be/FuQt50J9T2I" target="_blank" 
            class="block bg-white shadow-md rounded-2xl p-6 border-l-4 border-indigo-500 hover:shadow-xl transition hover:bg-gray-50">
-          <h3 class="font-semibold text-xl mb-1 text-subtitulo">♟️ Clase 1 — Ajedrez</h3>
+          <h3 class="font-semibold text-xl mb-1 text-subtitulo">♟️ Clase 1: Ajedrez</h3>
           <p class="text-gray-700">
             Primera forma de abstracción: uso de categorías. Diseño de un tablero y piezas que se comen entre sí.
           </p>
         </a>
         <a href="https://youtu.be/qVxvzTLY3pM" target="_blank" 
            class="block bg-white shadow-md rounded-2xl p-6 border-l-4 border-indigo-500 hover:shadow-xl transition hover:bg-gray-50">
-          <h3 class="font-semibold text-xl mb-1 text-subtitulo">🐍 Clase 2 — La viborita</h3>
+          <h3 class="font-semibold text-xl mb-1 text-subtitulo">🐍 Clase 2: La viborita</h3>
           <p class="text-gray-700">
             Sacar código repetido. Introducción al debugging (inspeccionar código).
           </p>
         </a>
         <a href="https://youtu.be/oypNK7dX_rY" target="_blank" 
            class="block bg-white shadow-md rounded-2xl p-6 border-l-4 border-indigo-500 hover:shadow-xl transition hover:bg-gray-50">
-          <h3 class="font-semibold text-xl mb-1 text-subtitulo">👻 Clase 3 — Del Pacman al submarino del CONICET</h3>
+          <h3 class="font-semibold text-xl mb-1 text-subtitulo">👻 Clase 3: Del Pacman al submarino del CONICET</h3>
           <p class="text-gray-700">
             Un clásico para poner en juego todos los símbolos de Diálogo. Reglas simples, resultado sorprendente.
           </p>
         </a>
         <a href="https://youtu.be/AfAFcP5FNVg" target="_blank" 
            class="block bg-white shadow-md rounded-2xl p-6 border-l-4 border-indigo-500 hover:shadow-xl transition hover:bg-gray-50">
-          <h3 class="font-semibold text-xl mb-1 text-subtitulo">🧠 Clase 4 — Enigmas de metaprogramación</h3>
+          <h3 class="font-semibold text-xl mb-1 text-subtitulo">🧠 Clase 4: Enigmas de metaprogramación</h3>
           <p class="text-gray-700">
             ¿Qué pasa cuando un programa se modifica a sí mismo? Acá empieza la magia.
           </p>
         </a>
         <a href="https://youtu.be/VLwuOLksRy0" target="_blank" 
            class="block bg-white shadow-md rounded-2xl p-6 border-l-4 border-indigo-500 hover:shadow-xl transition hover:bg-gray-50">
-          <h3 class="font-semibold text-xl mb-1 text-subtitulo">🚀 Clase 5 — Naves espaciales</h3>
+          <h3 class="font-semibold text-xl mb-1 text-subtitulo">🚀 Clase 5: Naves espaciales</h3>
           <p class="text-gray-700">
             Ideas del desarrollo de videojuegos: gizmos, objetos ocultos, colisiones y más.
           </p>
         </a>
         <a href="https://youtu.be/3AMOQ4n1YU0" target="_blank" 
            class="block bg-white shadow-md rounded-2xl p-6 border-l-4 border-indigo-500 hover:shadow-xl transition hover:bg-gray-50">
-          <h3 class="font-semibold text-xl mb-1 text-subtitulo">🔢 Clase 6 — Mi calculadora</h3>
+          <h3 class="font-semibold text-xl mb-1 text-subtitulo">🔢 Clase 6: Mi calculadora</h3>
           <p class="text-gray-700">
             Recursión. Hacer una calculadora desde cero.
           </p>
         </a>
         <a href="https://youtu.be/ei_hErKm0IM" target="_blank" 
            class="block bg-white shadow-md rounded-2xl p-6 border-l-4 border-indigo-500 hover:shadow-xl transition hover:bg-gray-50">
-          <h3 class="font-semibold text-xl mb-1 text-subtitulo">🏁 Clase 7 — Puntaje y reuso</h3>
+          <h3 class="font-semibold text-xl mb-1 text-subtitulo">🏁 Clase 7: Puntaje y reuso</h3>
           <p class="text-gray-700">
             Mejorá tus juegos anteriores reutilizando proyectos y sumando sistema de puntaje.
           </p>
@@ -230,7 +241,7 @@
         📬 agustin@dialog.ar
       </a>
     </div>
-    <p class="text-xs text-gray-400">© 2025 Diálogo. Todos los derechos reservados.</p>
+    <p class="text-xs text-gray-400">© 2026 Diálogo. Todos los derechos reservados.</p>
   </footer>
 
   <script src="formulario.js"></script>
