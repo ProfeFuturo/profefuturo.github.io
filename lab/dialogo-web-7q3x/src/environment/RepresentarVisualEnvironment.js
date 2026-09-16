@@ -9,6 +9,7 @@ import { Icons } from './Icons.js';
 import { Sounds } from './Sounds.js';
 import { Achievements } from './Achievements.js';
 import { ChallengeSession } from './ChallengeSession.js';
+import { COLUMNS as CHALLENGE_COLUMNS } from './Challenge.js';
 import { RepresentarVisualExporter } from '../io/RepresentarVisualExporter.js';
 import { dictionaryAt } from '../io/LanguageProvider.js';
 
@@ -205,7 +206,16 @@ export class RepresentarVisualEnvironment {
   openChallenge(challenge) {
     const userDrawings = this.mainSpace !== null && this.mainSpace.progress ? this.mainSpace.progress.userDrawings() : [];
     this.openProject(challenge.projectFor({ gridSize: RepresentarVisualEnvironment.sideOfSymbolsOnEnvironmentPalet(), userDrawings }));
+    const fit = this.challengeGridSize();
+    if (fit < this.currentProject.boardModel.gridSize) this.currentProject.boardModel.changeGridSizeTo(fit);
     return this.session;
+  }
+
+  // En un desafío las siete columnas entran enteras en el ancho: nada queda fuera de la pantalla.
+  challengeGridSize() {
+    const side = RepresentarVisualEnvironment.sideOfSymbolsOnEnvironmentPalet();
+    const width = this.boardContainer.clientWidth || (typeof window === 'undefined' ? 1440 : window.innerWidth - 24);
+    return Math.max(36, Math.min(side, Math.floor((width - 6) / CHALLENGE_COLUMNS)));
   }
 
   isInChallenge() { return this.session !== null; }
