@@ -2,7 +2,7 @@ import { Point } from '../board/Point.js';
 import { VisualProject } from './VisualProject.js';
 import { ChallengeDrawings } from './ChallengeDrawings.js';
 
-const COLUMNS = 7;
+export const COLUMNS = 7;
 const ROWS = 8;
 
 // Un desafío de la escalera (ver docs/desafios.md): arma un tablero chico con la regla casi
@@ -116,29 +116,27 @@ const LADDER = [
   }),
   new Challenge({
     id: 'eat-star', number: 3, title: 'Comé la estrella', goal: 'Completá la regla con el agujero negro y chocá la estrella', emoji: '🕳️',
-    symbols: ['blackHoleSymbol'], slots: [Point.at(6, 6)],
+    symbols: ['blackHoleSymbol'], slots: [Point.at(6, 7)],
     build(project, drawings, predefined) {
-      Challenge.rule(project, [drawings.kid, predefined.arrowKeysSymbol], 7);
-      Challenge.rule(project, [drawings.kid, predefined.collisionSymbol, drawings.star, predefined.pointsSymbol, drawings.star, predefined.teleportSymbol], 6);
+      Challenge.rule(project, [drawings.kid, predefined.arrowKeysSymbol], 6);
+      Challenge.rule(project, [drawings.kid, predefined.collisionSymbol, drawings.star, predefined.pointsSymbol, drawings.star, predefined.teleportSymbol], 7);
       Challenge.element(project, drawings.kid, 1, 3);
       Challenge.element(project, drawings.star, 3, 3);
       Challenge.element(project, drawings.star, 5, 4);
     },
     isCompleted: (project, drawings) => Challenge.elementsOf(project, drawings.star).length === 0 && Challenge.elementsOf(project, drawings.kid).length > 0,
-    hint: project => Challenge.ruleCellIsEmpty(project, 6, 6) ? { cell: Point.at(6, 6), selector: 'blackHoleSymbol' } : { joystick: true },
+    hint: project => Challenge.ruleCellIsEmpty(project, 6, 7) ? { cell: Point.at(6, 7), selector: 'blackHoleSymbol' } : { joystick: true },
   }),
   new Challenge({
-    id: 'draw', number: 4, title: 'Dibujá', goal: 'Dibujá algo con el lápiz y ponelo en el tablero', emoji: '🎨',
+    id: 'draw', number: 4, title: 'Dibujá', goal: 'Tocá el lápiz y dibujá tu personaje', emoji: '🎨',
     symbols: [], pencil: true,
-    build(project, drawings) {
-      Challenge.element(project, drawings.star, 5, 3);
-    },
-    isCompleted: project => project.drawingsMadeByUser().some(symbol => Challenge.elementsOf(project, symbol).length > 0),
-    hint: project => project.drawingsMadeByUser().length === 0 ? { pencil: true } : { cell: Point.at(1, 3), drawing: project.drawingsMadeByUser()[0] },
+    build() {},
+    isCompleted: project => project.drawingsMadeByUser().length > 0,
+    hint: () => ({ pencil: true }),
   }),
   new Challenge({
     id: 'bring-to-life', number: 5, title: 'Dale vida', goal: 'Poné tu dibujo en la regla y movelo hasta la estrella', emoji: '✨',
-    symbols: ['arrowKeysSymbol'], pencil: true, slots: [Point.at(0, 7)],
+    symbols: [], slots: [Point.at(0, 7)],
     // Usa el dibujo que el chico hizo en el desafío anterior; si no hay, el monstruo.
     build(project, drawings, predefined, userDrawings) {
       const mine = userDrawings[0] || drawings.monster;
@@ -163,23 +161,23 @@ const LADDER = [
   }),
   new Challenge({
     id: 'push', number: 7, title: 'Empujá la caja', goal: 'Completá la regla y empujá la caja hasta la estrella', emoji: '📦',
-    symbols: ['pushSymbol'], slots: [Point.at(1, 6)],
+    symbols: ['pushSymbol'], slots: [Point.at(1, 7)],
     build(project, drawings, predefined) {
-      Challenge.rule(project, [drawings.kid, predefined.arrowKeysSymbol], 7);
-      Challenge.rule(project, [drawings.kid, null, drawings.box], 6);
+      Challenge.rule(project, [drawings.kid, predefined.arrowKeysSymbol], 6);
+      Challenge.rule(project, [drawings.kid, null, drawings.box], 7);
       Challenge.element(project, drawings.kid, 1, 3);
       Challenge.element(project, drawings.box, 2, 3);
       Challenge.element(project, drawings.star, 5, 3);
     },
     isCompleted: (project, drawings) => Challenge.anyOnTopOf(project, drawings.box, drawings.star),
-    hint: project => Challenge.ruleCellIsEmpty(project, 1, 6) ? { cell: Point.at(1, 6), selector: 'pushSymbol' } : { joystick: true },
+    hint: project => Challenge.ruleCellIsEmpty(project, 1, 7) ? { cell: Point.at(1, 7), selector: 'pushSymbol' } : { joystick: true },
   }),
   new Challenge({
     id: 'walls', number: 8, title: 'Paredes', goal: 'Completá la regla: el monstruo no pasa la pared y no te alcanza', emoji: '🧱',
-    symbols: ['canNotTranspassSymbol'], slots: [Point.at(1, 6)],
+    symbols: ['canNotTranspassSymbol'], slots: [Point.at(1, 7)],
     build(project, drawings, predefined) {
-      Challenge.rule(project, [drawings.monster, predefined.runSymbol, drawings.kid], 7);
-      Challenge.rule(project, [drawings.monster, null, drawings.wall], 6);
+      Challenge.rule(project, [drawings.monster, predefined.runSymbol, drawings.kid], 6);
+      Challenge.rule(project, [drawings.monster, null, drawings.wall], 7);
       for (let row = 0; row < 8; row++) Challenge.element(project, drawings.wall, 3, row);
       Challenge.element(project, drawings.monster, 0, 3);
       Challenge.element(project, drawings.kid, 6, 3);
@@ -187,9 +185,9 @@ const LADDER = [
     // Con la regla puesta, el monstruo corre hasta la pared y se queda pegado a ella.
     isCompleted: (project, drawings) => {
       const monsters = Challenge.positionsOf(project, drawings.monster);
-      return !Challenge.ruleCellIsEmpty(project, 1, 6) && monsters.length > 0 && monsters.every(position => position.x <= 2) && monsters.some(position => position.x === 2);
+      return !Challenge.ruleCellIsEmpty(project, 1, 7) && monsters.length > 0 && monsters.every(position => position.x <= 2) && monsters.some(position => position.x === 2);
     },
-    hint: () => ({ cell: Point.at(1, 6), selector: 'canNotTranspassSymbol' }),
+    hint: () => ({ cell: Point.at(1, 7), selector: 'canNotTranspassSymbol' }),
   }),
   new Challenge({
     id: 'button', number: 9, title: 'El botón', goal: 'Tocá la campana: el personaje aparece en la estrella', emoji: '🔔',

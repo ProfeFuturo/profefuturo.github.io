@@ -14,11 +14,14 @@ export class UsageLog {
       if (saved) this.events = JSON.parse(saved);
     } catch (error) { /* sin storage */ }
     this.sessionStart = this.clock();
+    this.session = UsageLog.newSessionId();       // al azar por apertura de la app: agrupa, no identifica
     this.record('session.start');
   }
 
+  static newSessionId() { return Math.random().toString(36).slice(2, 10); }
+
   record(name, data = {}) {
-    const event = { name, at: this.clock(), ...UsageLog.safe(data) };
+    const event = { name, at: this.clock(), session: this.session, ...UsageLog.safe(data) };
     this.events.push(event);
     if (this.events.length > LIMIT) this.events.splice(0, this.events.length - LIMIT);
     this.save();
@@ -41,6 +44,8 @@ export class UsageLog {
 
   all() { return this.events.slice(); }
   named(name) { return this.events.filter(event => event.name === name); }
+  unsent() { return this.events.filter(event => !event.sent); }
+  markSent(events) { for (const event of events) event.sent = true; this.save(); }
 
   // El embudo del primer minuto por desafío: empezados, completados, tiempo mediano, pistas.
   funnel() {

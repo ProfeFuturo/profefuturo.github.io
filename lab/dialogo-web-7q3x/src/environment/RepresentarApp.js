@@ -6,6 +6,7 @@ import { Sounds } from './Sounds.js';
 import { Achievements } from './Achievements.js';
 import { Progress } from './Progress.js';
 import { UsageLog } from './UsageLog.js';
+import { UsageSync } from './UsageSync.js';
 import { Challenges } from './Challenge.js';
 import { ProjectLibrary } from './ProjectLibrary.js';
 import { RepresentarVisualEnvironment } from './RepresentarVisualEnvironment.js';
@@ -24,6 +25,9 @@ export class RepresentarApp {
     this.achievements = new Achievements({ storage });
     this.progress = new Progress({ storage });
     this.usage = new UsageLog({ storage });
+    this.usageSync = new UsageSync(this.usage).start();
+    const record = this.usage.record.bind(this.usage);
+    this.usage.record = (name, data) => { const event = record(name, data); this.usageSync.eventRecorded(); return event; };
     this.progress.onChange(() => { this.feed.rebuild(); if (this.currentScreen === 'badges') this.renderBadges(); });
     this.progress.loadDrawings().catch(() => {});
     this.confirmRemoval = confirmRemoval || (entry => confirm(dictionaryAt('AreYouSureYouWantToDeleteProject') + ' (' + entry.name + ')'));
@@ -37,6 +41,7 @@ export class RepresentarApp {
   dispose() {
     this.feed.dispose();
     this.environment.dispose();
+    this.usageSync.stop();
   }
 
   dictionaryAt(key) { return dictionaryAt(key); }
