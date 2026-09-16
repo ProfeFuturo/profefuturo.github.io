@@ -1,0 +1,104 @@
+Deutsch
+unbekannt
+Neues Projekt
+Projektgalerie
+Herausforderungen und Spiele
+Zurück
+In Datei speichern
+Projekt ohne richtigen Namen
+Angewendet
+Andere Optionen nicht angewendet
+...bewegt sich mit den Pfeilen
+...kann nicht durch...
+...ist innerhalb von...
+...kollidiert mit (...) -> ...
+Eingabetaste -> ...
+Platzhalter für alle einzelnen Symbole
+Platzhalter für jede Symbolsequenz und jedes Element
+...ersetzt durch...
+...zieht...
+...schiebt...
+...wird ausgewertet und das Ergebnis wird angezeigt
+...läuft (in Richtung...)
+Leertaste -> ...
+...teleportiert sich (in Richtung...)
+...bewegt sich mit den WASD-Buchstaben
+Beim Platzieren sind die Zeichnungen Symbole
+Beim Platzieren sind die Zeichnungen Elemente
+Setzen durch Werfen
+Setzen durch Stempeln
+Ein neues Symbol zeichnen
+In Symbol umwandeln
+In Element umwandeln
+Löschen
+Ausführung anzeigen
+Schließen
+Bearbeiten
+Neue Zeichnung basierend auf diesem
+Einen neuen Themennamen festlegen
+Themenname
+Einen neuen Abschnittsnamen festlegen
+Abschnittsname
+Rückgängig machen
+Wiederholen
+Thema
+Erstellen
+Umbenennen
+Löschen
+Entsperren
+Sperren
+Ersetzung
+Priorität
+Ändern
+Niedrig
+Mittel
+Hoch
+Abschnitt
+Kategorie
+Neu
+Ergebnis
+Ausführung inspizieren
+Bewertung stoppen
+Grundlegend
+Wort
+Satz
+Ersetzen
+Kategorisieren
+Wörter manipulieren
+Organisation bearbeiten
+Testbereich
+Zeichen
+erstes
+letztes
+ohne
+verbinden
+Ergebnisbereich
+Versuchen Sie hier einen Satz
+Ergebnis hier sehen
+es ist eine grundlegende Ersetzung
+Grundlegende Kategorie, die alle Wörter einzeln umfasst
+Grundlegende Kategorie, die alle Sätze umfasst, also nicht-leere Wortsequenzen
+Verlangsamen
+Beschleunigen
+Ja
+Nein
+Sind Sie sicher, dass Sie beenden möchten?
+Sind Sie sicher, dass Sie das Projekt löschen möchten?
+Wählen Sie andere Projekte zur Wiederverwendung aus
+Alles sichtbar machen
+Alle Symbole anzeigen
+Alle Symbole ausblenden
+Alle Elemente dieses Typs anzeigen
+Alle Elemente dieses Typs ausblenden
+Anzeigen
+Ausblenden
+...zu nirgendwo
+Richtung ändern
+Alle Richtungen
+In Schaltfläche umwandeln
+Größe ändern
+Die Ausführung wird inspiziert, wenn sie angewendet wird
+Ausführung inspizieren, wenn sie angewendet wird
+Öffentlich, wenn von anderen Projekten wiederverwendet
+Privat für andere Projekte
+In eine Richtung zeigen

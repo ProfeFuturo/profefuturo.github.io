@@ -1,0 +1,104 @@
+English
+unknown
+New project
+Project Gallery
+Challenges and Games
+Back
+Save to file
+Project without proper name
+Applied
+Other options not applied
+...moves with arrows
+...can't get through...
+...is inside of...
+...collides with (...) -> ...
+Enter key -> ...
+Wildcard for all individual symbols
+Wildcard for every sequence of symbols and every element
+...substituted by...
+...pulls...
+...pushes ...
+...evaluates and the result is shown
+...run (towards...)
+Space bar -> ...
+...teleports (towards...)
+...moves with WASD letters
+When putting the drawings are symbols
+When putting the drawings are elements
+Put throwing
+Put stamping
+Draw a new symbol
+Transform into symbol
+Transform into element
+Delete
+View the execution
+Close
+Modify
+New drawing from this
+Set a new topic name
+Topic Name
+Set a new section name
+Section name
+Undo
+Redo
+Topic
+Create
+Rename
+Delete
+Unlock
+Lock
+Substitution
+Priority
+Change
+Low
+Medium
+High
+Section
+Category
+New
+Result
+Inspect execution
+Stop evaluation
+Fundamental
+word
+phrase
+Substitute
+Categorize
+Manipulate words
+Edit organization
+Testing space
+character
+first
+last
+without
+join
+Result space
+Try a sentence here
+See the result here
+it is a fundamental substitution
+Fundamental category that includes all words individually
+Fundamental category that includes all phrases, that is, non-empty sequences of words
+Slow down
+Speed up
+Yes
+No
+Are you sure you want to exit?
+Are you sure you want to delete project?
+Choose other projects to reuse
+Make everything visible
+Show all symbols
+Hide all symbols
+Show all elements of this kind
+Hide all elements of this kind
+Show
+Hide
+...to nowhere
+Change direction
+All directions
+Became button
+Resize
+Execution will be inspected when applied
+Inspect execution when applied
+Public when reused by other projects
+Private for other projects
+Point to a direction
