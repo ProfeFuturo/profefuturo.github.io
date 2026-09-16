@@ -51,7 +51,7 @@
       var chosen = params.get("lang");
       if (chosen) {
         if (chosen === DEFAULT || AVAILABLE[chosen]) store(chosen);
-        if (AVAILABLE[chosen]) { location.replace(AVAILABLE[chosen]); return; }
+        if (AVAILABLE[chosen]) { location.replace(AVAILABLE[chosen] + location.hash); return; }
         params.delete("lang");
         var q = params.toString();
         history.replaceState(null, "", location.pathname + (q ? "?" + q : "") + location.hash);
@@ -59,13 +59,13 @@
       }
 
       var pref = stored();
-      if (pref) { if (AVAILABLE[pref]) location.replace(AVAILABLE[pref]); return; }
+      if (pref) { if (AVAILABLE[pref]) location.replace(AVAILABLE[pref] + location.hash); return; }
 
       var langs = navigator.languages || [navigator.language || ""];
       for (var i = 0; i < langs.length; i++) {
         var code = String(langs[i]).toLowerCase().split("-")[0];
         if (code === DEFAULT) return;
-        if (AVAILABLE[code]) { location.replace(AVAILABLE[code]); return; }
+        if (AVAILABLE[code]) { location.replace(AVAILABLE[code] + location.hash); return; }
       }
     })();
   </script>
