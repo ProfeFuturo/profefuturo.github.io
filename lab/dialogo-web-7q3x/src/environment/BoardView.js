@@ -2,6 +2,7 @@ import { Point } from '../board/Point.js';
 import { SymbolPainter } from './SymbolPainter.js';
 import { ItemHalo } from './ItemHalo.js';
 import { ItemsClipboard } from '../board/ItemsClipboard.js';
+import { ItemMotion } from './ItemMotion.js';
 
 const LONG_PRESS_MS = 500;
 const DRAG_THRESHOLD_PX = 6;
@@ -29,6 +30,9 @@ export class BoardView {
     this.selecting = null;
     this.halo = null;
     this.hintCell = null;
+    this.slots = [];                 // celdas vacías por completar (desafíos), siempre visibles
+    this.glowing = null;             // { items, until }: la regla que hizo funcionar algo, iluminada
+    this.motion = new ItemMotion();
     this.lastPointerCell = Point.at(0, 0);
     this.boardModel.boardView = this;
     this.bindPointerEvents();
@@ -48,6 +52,7 @@ export class BoardView {
   changed() { this.needsRedraw = true; if (this.halo !== null) this.halo.refresh(); }
   refreshItems() { this.resize(); this.needsRedraw = true; }
   gridSizeChanged() { this.resize(); this.needsRedraw = true; }
+  boardRestored() { this.motion.reset(); this.needsRedraw = true; }
   informUsersOfMeThatIChanged() { this.environment.projectChanged(this.project); }
   boardRecorded() { if (typeof this.environment.boardRecorded === 'function') this.environment.boardRecorded(this.project); }
   addInspectorFrom(monitor) { this.environment.showInspector(monitor, this.project); }
@@ -110,13 +115,37 @@ export class BoardView {
     const gridSize = this.gridSize;
     context.fillStyle = 'white';                 // el tablero de Cuis es blanco liso, sin grilla
     context.fillRect(0, 0, this.canvas.width, this.canvas.height);
-    const items = this.boardModel.itemsFrontFirst().reverse();
-    for (const item of items) {
-      const position = this.boardModel.positionOfIfAbsent(item, () => null);
-      if (position === null) continue;
-      if (this.pressed !== null && this.pressed.dragging && this.pressed.item === item) continue;
-      SymbolPainter.paintItem(context, item, position.x * gridSize, position.y * gridSize, gridSize);
+    for (const slot of this.slots) {
+      if (this.boardModel.itemsInPosition(slot).length > 0) continue;
+      context.save();
+      context.lineWidth = 3;
+      context.setLineDash([7, 6]);
+      context.strokeStyle = 'rgba(16, 19, 24, 0.28)';
+      SymbolPainter.roundedRect(context, slot.x * gridSize + 4, slot.y * gridSize + 4, gridSize - 8, gridSize - 8, gridSize * 0.2);
+      context.stroke();
+      context.restore();
     }
+    const { placed, animating } = this.motion.update(this.boardModel.itemPositions);
+    const items = this.boardModel.itemsFrontFirst().reverse();
+    const glowing = this.glowing !== null && performance.now() < this.glowing.until ? this.glowing.items : null;
+    if (this.glowing !== null && glowing === null) this.glowing = null;
+    for (const item of items) {
+      const where = placed.get(item);
+      if (where === undefined) continue;
+      if (this.pressed !== null && this.pressed.dragging && this.pressed.item === item) continue;
+      if (glowing !== null && glowing.includes(item)) {
+        const size = gridSize * item.gridResizeFactor();
+        const pulse = 0.5 + 0.5 * Math.sin(performance.now() / 120);
+        context.save();
+        context.shadowColor = 'rgba(255, 106, 0, ' + (0.6 + 0.4 * pulse).toFixed(2) + ')';
+        context.shadowBlur = 18 + 10 * pulse;
+        context.fillStyle = 'rgba(255, 106, 0, 0.001)';
+        context.fillRect(where.x * gridSize, where.y * gridSize, size, size);
+        context.restore();
+      }
+      SymbolPainter.paintItemScaled(context, item, where.x * gridSize, where.y * gridSize, gridSize, where.scale);
+    }
+    if (animating || glowing !== null) this.needsRedraw = true;
     if (this.hintCell !== null) {
       const pulse = 0.55 + 0.45 * Math.sin(performance.now() / 250);
       context.save();
@@ -139,6 +168,11 @@ export class BoardView {
 
   // La celda que señala una pista (null para sacarla).
   showHintCell(cell) { this.hintCell = cell; this.needsRedraw = true; }
+
+  showSlots(cells) { this.slots = cells; this.needsRedraw = true; }
+
+  // Ilumina unos ítems un rato (la regla que hizo funcionar algo).
+  glow(items, ms = 1100) { this.glowing = { items, until: performance.now() + ms }; this.needsRedraw = true; }
 
   // El tamaño de celda con el que lo usado del tablero entra en el contenedor.
   gridSizeToFit({ minimum = 28, maximum = 72 } = {}) {

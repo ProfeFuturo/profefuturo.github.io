@@ -102,6 +102,7 @@ export class RepresentarVisualEnvironment {
     this.titleText.setAttribute('aria-label', dictionaryAt('TopicName'));
     this.titleText.addEventListener('change', () => this.withProject(project => { project.setProjectName(this.titleText.value.trim() || dictionaryAt('projectWithoutProperName')); this.markDirty(); }));
     this.titleText.addEventListener('keydown', event => { if (event.key === 'Enter') this.titleText.blur(); });
+    this.undoButton = this.iconButton(this.topBar, 'undo', dictionaryAt('Undo'), () => this.withProject(project => { project.boardModel.backToPreviousBoardState(); if (this.session !== null) this.session.userActed(); }), 'undo-button');
     this.badgeChip = this.element('button', 'chip badge-chip', this.topBar, '<span class="star">' + Icons.svg('medal', { size: 18 }) + '</span><span class="count">0</span>');
     this.badgeChip.type = 'button';
     this.badgeChip.title = 'Logros';
@@ -110,7 +111,11 @@ export class RepresentarVisualEnvironment {
     this.refreshBadgeChip();
   }
 
-  refreshBadgeChip() { this.badgeChip.querySelector('.count').textContent = String(this.achievements.count()); }
+  // El contador de logros aparece recién con el primero: en cero parecería un marcador vacío.
+  refreshBadgeChip() {
+    this.badgeChip.querySelector('.count').textContent = String(this.achievements.count());
+    this.badgeChip.hidden = this.achievements.count() === 0;
+  }
 
   achievementUnlocked() { this.refreshBadgeChip(); }
 
@@ -130,14 +135,16 @@ export class RepresentarVisualEnvironment {
       button.addEventListener('click', () => { sheet.close(); this.sounds.tap(); action(); });
       return button;
     };
+    const group = label => { const heading = this.element('div', 'menu-group', sheet.body); heading.textContent = label; };
     item('undo', dictionaryAt('Undo'), () => this.withProject(project => project.boardModel.backToPreviousBoardState()), 'menu-undo');
+    item('reset', 'Volver al inicio', () => this.withProject(project => project.boardModel.resetBoard()), 'menu-reset');
+    item(this.sounds.enabled ? 'sound' : 'soundOff', this.sounds.enabled ? 'Sonido: sí' : 'Sonido: no', () => this.sounds.setEnabled(!this.sounds.enabled), 'menu-sound');
+    group('Para armar');
     item('zoomIn', dictionaryAt('ZoomIn'), () => this.withProject(project => project.boardModel.zoomIn()), 'menu-zoom-in');
     item('zoomOut', dictionaryAt('ZoomOut'), () => this.withProject(project => project.boardModel.zoomOut()), 'menu-zoom-out');
     item('flag', 'Fijar este inicio', () => this.withProject(project => { project.boardModel.setCurrentAsResetBoard(); this.flash(); }), 'menu-set');
-    item('reset', 'Volver al inicio', () => this.withProject(project => project.boardModel.resetBoard()), 'menu-reset');
     item('share', dictionaryAt('ChooseOtherProjectsToReuse'), () => this.openMenuToChooseProjectsToReuse(), 'menu-reuse');
     item('save', dictionaryAt('FileOut') + ' (.dialog.ar)', () => this.fileOut(), 'menu-file-out');
-    item(this.sounds.enabled ? 'sound' : 'soundOff', this.sounds.enabled ? 'Sonido: sí' : 'Sonido: no', () => this.sounds.setEnabled(!this.sounds.enabled), 'menu-sound');
   }
 
   openAchievements() {
@@ -196,7 +203,8 @@ export class RepresentarVisualEnvironment {
   // --- desafíos ---
 
   openChallenge(challenge) {
-    this.openProject(challenge.projectFor({ gridSize: RepresentarVisualEnvironment.sideOfSymbolsOnEnvironmentPalet() }));
+    const userDrawings = this.mainSpace !== null && this.mainSpace.progress ? this.mainSpace.progress.userDrawings() : [];
+    this.openProject(challenge.projectFor({ gridSize: RepresentarVisualEnvironment.sideOfSymbolsOnEnvironmentPalet(), userDrawings }));
     return this.session;
   }
 
@@ -210,13 +218,23 @@ export class RepresentarVisualEnvironment {
   }
 
   // El desafío se logró: celebrar y ofrecer seguir o quedarse jugando.
+  // Primero se ilumina la regla que lo hizo posible (la causa), después la celebración.
   challengeCompleted(session) {
     const challenge = session.challenge;
     if (this.mainSpace !== null && this.mainSpace.progress) this.mainSpace.progress.complete(challenge);
-    this.sounds.tada();
-    if (this.mainSpace !== null && this.mainSpace.confetti) this.mainSpace.confetti(this.root);
-    this.showSuccess(session);
+    this.celebrating = true;
+    if (this.mainSpace !== null && this.mainSpace.hideToast) this.mainSpace.hideToast();     // una sola celebración a la vez
+    this.boardView.glow(session.ruleItems(), 1100);
+    this.sounds.pop();
+    clearTimeout(this.successTimer);
+    this.successTimer = setTimeout(() => {
+      this.sounds.tada();
+      if (this.mainSpace !== null && this.mainSpace.confetti) this.mainSpace.confetti(this.root);
+      this.showSuccess(session);
+    }, this.successDelayMs === undefined ? 1000 : this.successDelayMs);
   }
+
+  isCelebrating() { return this.celebrating === true; }
 
   showSuccess(session) {
     this.closeSuccess();
@@ -234,11 +252,16 @@ export class RepresentarVisualEnvironment {
     };
     if (next !== null) button('Siguiente', 'arrowRight', () => { this.closeSuccess(); this.openChallenge(next); }, 'primary next-challenge');
     else button('Al inicio', 'home', () => { this.closeSuccess(); this.backAction(); }, 'primary next-challenge');
-    button('Hacelo tuyo', 'pencil', () => { this.closeSuccess(); this.makeItMine(); }, 'make-it-mine');
+    button('Hacelo tuyo', 'pencil', () => { this.closeSuccess(); this.makeItMine(); }, 'secondary make-it-mine');
     this.success = overlay;
   }
 
-  closeSuccess() { if (this.success) { this.success.remove(); this.success = null; } }
+  closeSuccess() {
+    clearTimeout(this.successTimer);
+    if (this.success) { this.success.remove(); this.success = null; }
+    this.celebrating = false;
+    if (this.mainSpace !== null && this.mainSpace.flushToasts) this.mainSpace.flushToasts();
+  }
 
   // El desafío se vuelve un proyecto libre del chico: toda la bandeja, se guarda en Míos.
   makeItMine() {
@@ -402,7 +425,9 @@ export class RepresentarVisualEnvironment {
       project.receiveDrawnSymbol(symbol);
       this.tray.rebuild();
       this.achievements.unlock('artist');
+      if (this.mainSpace !== null && this.mainSpace.progress) this.mainSpace.progress.rememberDrawing(symbol);
       this.markDirty();
+      if (this.session !== null) this.session.userActed();
     } });
   }
 

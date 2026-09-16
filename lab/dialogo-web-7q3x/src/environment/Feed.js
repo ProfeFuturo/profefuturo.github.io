@@ -20,9 +20,15 @@ export class Feed {
     this.element.addEventListener('scroll', () => this.scrolled(), { passive: true });
     this.library.onChange(() => this.rebuild());
     this.stepping = setInterval(() => this.step(), STEP_INTERVAL_MS);
+    this.animationLoop = () => {                       // los deslizamientos entre pasos
+      const state = this.currentPost();
+      if (state !== null && state.view !== null && state.view.needsRedraw && this.isVisible()) state.view.draw();
+      this.frame = requestAnimationFrame(this.animationLoop);
+    };
+    this.frame = requestAnimationFrame(this.animationLoop);
   }
 
-  dispose() { clearInterval(this.stepping); }
+  dispose() { clearInterval(this.stepping); cancelAnimationFrame(this.frame); }
 
   rebuild() {
     const currentId = this.currentPost() === null ? null : this.currentPost().entry.id;

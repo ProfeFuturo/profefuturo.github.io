@@ -25,6 +25,7 @@ export class RepresentarApp {
     this.progress = new Progress({ storage });
     this.usage = new UsageLog({ storage });
     this.progress.onChange(() => { this.feed.rebuild(); if (this.currentScreen === 'badges') this.renderBadges(); });
+    this.progress.loadDrawings().catch(() => {});
     this.confirmRemoval = confirmRemoval || (entry => confirm(dictionaryAt('AreYouSureYouWantToDeleteProject') + ' (' + entry.name + ')'));
     this.achievements.onUnlock(achievement => this.celebrate(achievement));
     this.build();
@@ -381,11 +382,21 @@ export class RepresentarApp {
   // --- avisos ---
 
   toast(emoji, text) {
+    if (this.environment && this.environment.isCelebrating()) { this.pendingToasts = (this.pendingToasts || []).concat([[emoji, text]]); return; }
     if (this.toastElement) this.toastElement.remove();
     const toast = this.element('div', 'toast', this.root, '<span class="emoji">' + emoji + '</span><span>' + text + '</span>');
     toast.setAttribute('role', 'status');
     this.toastElement = toast;
     setTimeout(() => { toast.classList.add('leaving'); setTimeout(() => toast.remove(), 300); }, 2000);
+  }
+
+  hideToast() { if (this.toastElement) { this.toastElement.remove(); this.toastElement = null; } }
+
+  // Los avisos que esperaron mientras se celebraba un desafío (uno solo a la vez).
+  flushToasts() {
+    const pending = this.pendingToasts || [];
+    this.pendingToasts = [];
+    pending.forEach(([emoji, text], index) => setTimeout(() => this.toast(emoji, text), index * 2300));
   }
 
   confetti(container = this.root) {

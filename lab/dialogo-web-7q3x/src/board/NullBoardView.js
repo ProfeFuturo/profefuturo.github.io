@@ -6,4 +6,5 @@ export class NullBoardView {
   changed() {}
   gridSizeChanged() {}
   boardRecorded() {}
+  boardRestored() {}
 }

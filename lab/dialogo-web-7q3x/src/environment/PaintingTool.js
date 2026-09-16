@@ -1,15 +1,17 @@
 import { Drawing } from '../metamodel/Drawing.js';
 import { VisualSymbol } from '../metamodel/VisualSymbol.js';
-import { dictionaryAt } from '../io/LanguageProvider.js';
+import { Icons } from './Icons.js';
 
 const CANVAS_SIDE = 425;
-const COLORS = ['#000000', '#7f7f7f', '#ffffff', '#c0392b', '#e74c3c', '#e67e22', '#f1c40f', '#f9e79f', '#2ecc71', '#1e8449',
-  '#3498db', '#1a5276', '#9b59b6', '#f5b7b1', '#a0522d', '#00bcd4'];
-const BRUSH_SIZES = [4, 10, 22, 44];
+// Pocos colores, vivos, con nombre (para el título del botón): lo que un chico busca primero.
+const COLORS = [['#101318', 'Negro'], ['#FFFFFF', 'Blanco'], ['#E53935', 'Rojo'], ['#FB8C00', 'Naranja'], ['#FDD835', 'Amarillo'], ['#43A047', 'Verde'],
+  ['#1E88E5', 'Azul'], ['#8E24AA', 'Violeta'], ['#F48FB1', 'Rosa'], ['#8D6E63', 'Marrón'], ['#00ACC1', 'Celeste'], ['#9E9E9E', 'Gris']];
+const BRUSH_SIZES = [6, 14, 30];
 const MAX_UNDO = 30;
 
-// La herramienta de dibujo: un canvas cuadrado con pincel redondo, paleta de colores,
-// tamaños, goma, balde (relleno) y deshacer. Al terminar entrega un VisualSymbol nuevo.
+// La herramienta de dibujo, pensada para el dedo: el lienzo ocupa la pantalla, una fila de
+// colores grandes, tres grosores, goma, balde, deshacer, y un botón "Listo" que no se pierde.
+// Al terminar entrega un VisualSymbol nuevo.
 export class PaintingTool {
   static open({ template = null, onFinish }) {
     return new PaintingTool(template, onFinish);
@@ -17,7 +19,7 @@ export class PaintingTool {
 
   constructor(template, onFinish) {
     this.onFinish = onFinish;
-    this.color = COLORS[0];
+    this.color = COLORS[0][0];
     this.brushSize = BRUSH_SIZES[1];
     this.mode = 'brush';                // 'brush' | 'eraser' | 'bucket'
     this.undoHistory = [];
@@ -33,36 +35,26 @@ export class PaintingTool {
   build() {
     this.overlay = document.createElement('div');
     this.overlay.className = 'painting-tool';
-    const toolbar = document.createElement('div');
-    toolbar.className = 'painting-toolbar';
-    this.overlay.appendChild(toolbar);
+    this.overlay.setAttribute('role', 'dialog');
+    this.overlay.setAttribute('aria-label', 'Dibujar');
 
-    this.colorButtons = COLORS.map(color => {
-      const button = document.createElement('button');
-      button.type = 'button';
-      button.className = 'color';
-      button.style.background = color;
-      button.title = color;
-      button.addEventListener('click', () => { this.color = color; this.mode = this.mode === 'bucket' ? 'bucket' : 'brush'; this.updateToolbar(); });
-      toolbar.appendChild(button);
-      return button;
-    });
-    this.sizeButtons = BRUSH_SIZES.map(size => {
-      const button = document.createElement('button');
-      button.type = 'button';
-      button.className = 'size';
-      const dot = document.createElement('span');
-      dot.style.width = dot.style.height = Math.max(6, size / 2) + 'px';
-      button.appendChild(dot);
-      button.addEventListener('click', () => { this.brushSize = size; this.updateToolbar(); });
-      toolbar.appendChild(button);
-      return button;
-    });
-    this.eraserButton = this.toolButton(toolbar, '◻', 'Goma', () => { this.mode = this.mode === 'eraser' ? 'brush' : 'eraser'; this.updateToolbar(); });
-    this.bucketButton = this.toolButton(toolbar, '🪣', 'Balde', () => { this.mode = this.mode === 'bucket' ? 'brush' : 'bucket'; this.updateToolbar(); });
-    this.toolButton(toolbar, '↶ ' + dictionaryAt('Undo'), dictionaryAt('Undo'), () => this.undo());
-    this.toolButton(toolbar, '✕ ' + dictionaryAt('Close'), dictionaryAt('Close'), () => this.cancel(), 'cancel');
-    this.toolButton(toolbar, '✓ ' + dictionaryAt('Yes'), 'Terminar', () => this.finish(), 'finish');
+    const top = document.createElement('div');
+    top.className = 'painting-top';
+    this.overlay.appendChild(top);
+    this.iconButton(top, 'x', 'Cerrar sin guardar', () => this.cancel(), 'cancel');
+    const tools = document.createElement('div');
+    tools.className = 'painting-tools';
+    top.appendChild(tools);
+    this.brushButton = this.iconButton(tools, 'brush', 'Pincel', () => { this.mode = 'brush'; this.updateToolbar(); }, 'tool brush');
+    this.eraserButton = this.iconButton(tools, 'eraser', 'Goma', () => { this.mode = 'eraser'; this.updateToolbar(); }, 'tool eraser');
+    this.bucketButton = this.iconButton(tools, 'bucket', 'Balde', () => { this.mode = 'bucket'; this.updateToolbar(); }, 'tool bucket');
+    this.iconButton(tools, 'undo', 'Deshacer', () => this.undo(), 'tool undo');
+    const finish = document.createElement('button');
+    finish.type = 'button';
+    finish.className = 'painting-finish finish';
+    finish.innerHTML = Icons.svg('check') + '<span>Listo</span>';
+    finish.addEventListener('click', () => this.finish());
+    top.appendChild(finish);
 
     const frame = document.createElement('div');
     frame.className = 'painting-frame';
@@ -70,28 +62,66 @@ export class PaintingTool {
     this.canvas.width = CANVAS_SIDE;
     this.canvas.height = CANVAS_SIDE;
     this.canvas.className = 'painting-canvas';
+    this.canvas.setAttribute('aria-label', 'Lienzo');
     frame.appendChild(this.canvas);
     this.overlay.appendChild(frame);
+
+    const bottom = document.createElement('div');
+    bottom.className = 'painting-bottom';
+    this.overlay.appendChild(bottom);
+    const sizes = document.createElement('div');
+    sizes.className = 'painting-sizes';
+    bottom.appendChild(sizes);
+    this.sizeButtons = BRUSH_SIZES.map(size => {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'size';
+      button.title = 'Grosor ' + size;
+      button.setAttribute('aria-label', button.title);
+      const dot = document.createElement('span');
+      dot.style.width = dot.style.height = Math.max(8, size * 0.8) + 'px';
+      button.appendChild(dot);
+      button.addEventListener('click', () => { this.brushSize = size; this.updateToolbar(); });
+      sizes.appendChild(button);
+      return button;
+    });
+    const colors = document.createElement('div');
+    colors.className = 'painting-colors';
+    bottom.appendChild(colors);
+    this.colorButtons = COLORS.map(([color, name]) => {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'color';
+      button.style.background = color;
+      button.title = name;
+      button.setAttribute('aria-label', name);
+      button.addEventListener('click', () => { this.color = color; if (this.mode === 'eraser') this.mode = 'brush'; this.updateToolbar(); });
+      colors.appendChild(button);
+      return button;
+    });
+
     this.context = this.canvas.getContext('2d', { willReadFrequently: true });
     this.bindPointerEvents();
     document.body.appendChild(this.overlay);
     this.updateToolbar();
   }
 
-  toolButton(toolbar, label, title, action, className = '') {
+  iconButton(parent, iconName, title, action, className = '') {
     const button = document.createElement('button');
     button.type = 'button';
-    button.className = ('tool ' + className).trim();
-    button.textContent = label;
+    button.className = 'icon-button ' + className;
     button.title = title;
+    button.setAttribute('aria-label', title);
+    button.innerHTML = Icons.svg(iconName);
     button.addEventListener('click', action);
-    toolbar.appendChild(button);
+    parent.appendChild(button);
     return button;
   }
 
   updateToolbar() {
-    this.colorButtons.forEach((button, index) => button.classList.toggle('selected', COLORS[index] === this.color && this.mode !== 'eraser'));
+    this.colorButtons.forEach((button, index) => button.classList.toggle('selected', COLORS[index][0] === this.color && this.mode !== 'eraser'));
     this.sizeButtons.forEach((button, index) => button.classList.toggle('selected', BRUSH_SIZES[index] === this.brushSize));
+    this.brushButton.classList.toggle('selected', this.mode === 'brush');
     this.eraserButton.classList.toggle('selected', this.mode === 'eraser');
     this.bucketButton.classList.toggle('selected', this.mode === 'bucket');
     this.canvas.style.cursor = this.mode === 'bucket' ? 'cell' : 'crosshair';

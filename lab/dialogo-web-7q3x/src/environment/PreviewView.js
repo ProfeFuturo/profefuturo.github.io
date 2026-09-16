@@ -1,6 +1,7 @@
 import { NullBoardView } from '../board/NullBoardView.js';
 import { Point } from '../board/Point.js';
 import { SymbolPainter } from './SymbolPainter.js';
+import { ItemMotion } from './ItemMotion.js';
 
 // Una vista del tablero en un canvas cualquiera (el feed, la miniatura de un proyecto):
 // encuadra el juego (los elementos) y, si queda muy chico, se acerca a su centro.
@@ -14,12 +15,14 @@ export class PreviewView extends NullBoardView {
     this.maxCellFactor = maxCellFactor;
     this.minCell = minCell;
     this.needsRedraw = true;
+    this.motion = new ItemMotion();
   }
 
   changed() { this.needsRedraw = true; }
   refreshItems() { this.needsRedraw = true; }
   gridSizeChanged() { this.needsRedraw = true; }
   boardRecorded() {}
+  boardRestored() { this.motion.reset(); this.needsRedraw = true; }
 
   // El encuadre: los elementos si hay, si no todo lo que hay en el tablero.
   framing() {
@@ -60,14 +63,16 @@ export class PreviewView extends NullBoardView {
     }
     const originX = width / 2 - centerX * cell, originY = height / 2 - centerY * cell;
     this.cell = cell; this.originX = originX; this.originY = originY;
+    const { placed, animating } = this.motion.update(board.itemPositions);
     for (const item of board.itemsFrontFirst().reverse()) {
-      const position = board.positionOfIfAbsent(item, () => null);
-      if (position === null) continue;
-      const x = originX + position.x * cell, y = originY + position.y * cell;
+      const where = placed.get(item);
+      if (where === undefined) continue;
+      const x = originX + where.x * cell, y = originY + where.y * cell;
       const size = cell * item.gridResizeFactor();
       if (x > width || y > height || x + size < 0 || y + size < 0) continue;
-      SymbolPainter.paintItem(context, item, x, y, cell);
+      SymbolPainter.paintItemScaled(context, item, x, y, cell, where.scale);
     }
+    this.needsRedraw = animating;
   }
 
   // Un canvas chico con la imagen del proyecto (para guardar como vista previa).
