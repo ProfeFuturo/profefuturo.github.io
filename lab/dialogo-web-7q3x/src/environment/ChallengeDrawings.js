@@ -49,7 +49,7 @@ const PAINTERS = {
 // Los demás dibujos son emojis pintados en el canvas: rápidos de agregar y se ven bien en el celular.
 const EMOJI = {
   sheep: '🐑', grass: '🌿', sun: '☀️', moon: '🌙', apple: '🍎', door: '🚪', portal: '🌀', rock: '🪨', pawn: '🐴', rook: '🏰', king: '👑',
-  ghost: '👻', ship: '🚀', bullet: '🔥', key: '🔑', flag: '🏁', cat: '🐱', food: '🍽️', fish: '🐟', zero: '0️⃣', one: '1️⃣', two: '2️⃣', three: '3️⃣', next: '⬆️', plus: '➕', number: '🔢', up: '🔼', egg: '🥚', chick: '🐥', frog: '🐸', car: '🚗', cup: '🏆',
+  ghost: '👻', ship: '🚀', bullet: '🔥', key: '🔑', flag: '🏁', cat: '🐱', food: '🍽️', fish: '🐟', zero: '0️⃣', one: '1️⃣', two: '2️⃣', three: '3️⃣', next: '⬆️', plus: '➕', number: '🔢', up: '🔼', pin: '📌', egg: '🥚', chick: '🐥', frog: '🐸', car: '🚗', cup: '🏆',
 };
 for (const [name, emoji] of Object.entries(EMOJI)) {
   PAINTERS[name] = context => {
