@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Basic -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Diálogo – Programming with drawings</title>
+
+  <!-- SEO + author -->
+  <meta name="description" content="Diálogo is a free declarative visual programming environment in which children build games and simulations from symbols they draw themselves. Runs offline on Windows, Mac and Linux, with a seven-session curriculum." />
+  <meta name="keywords" content="visual programming, declarative programming, programming for kids, K-12 computing education, drawing-based programming, metaprogramming, block-based alternatives, computational thinking, games without code" />
+  <meta name="author" content="Agustín Rafael Martínez" />
+
+  <!-- Language alternates -->
+  <link rel="alternate" hreflang="es" href="https://dialog.ar/" />
+  <link rel="alternate" hreflang="en" href="https://dialog.ar/en/" />
+  <link rel="alternate" hreflang="x-default" href="https://dialog.ar/" />
+  <link rel="canonical" href="https://dialog.ar/en/" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Diálogo – Programming with drawings" />
+  <meta property="og:description" content="A declarative visual programming environment where children draw their own symbols." />
+  <meta property="og:image" content="https://dialog.ar/preview.jpg" />
+  <meta property="og:url" content="https://dialog.ar/en/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:locale:alternate" content="es_AR" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Diálogo – Programming with drawings" />
+  <meta name="twitter:description" content="A declarative visual programming environment where children draw their own symbols." />
+  <meta name="twitter:image" content="https://dialog.ar/preview.jpg" />
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZEE7HG86H1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-ZEE7HG86H1');
+  </script>
+
+  <!-- Styles -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="icon" href="/logo.png" type="image/png" />
+  <link rel="stylesheet" href="/dialogo.css" />
+</head>
+
+<body class="bg-gray-100 text-gray-800">
+  <header class="bg-white shadow p-6">
+    <div class="max-w-4xl mx-auto text-center relative">
+      <p class="text-sm text-right md:absolute md:top-0 md:right-0">
+        <a href="/" lang="es" hreflang="es" class="text-link hover:text-subtitulo transition">🌐 Español</a>
+      </p>
+      <img src="/logo.svg" alt="Diálogo" class="mx-auto mb-4" style="width: 440px; height: auto;">
+      <h1 class="text-3xl md:text-5xl font-bold text-indigo-600 sr-only">Diálogo</h1>
+      <p class="text-lg mt-2 font-semibold">A visual programming environment where children draw their own symbols</p>
+    </div>
+  </header>
+
+  <main class="max-w-3xl mx-auto px-6 py-12 space-y-16">
+    <section class="animate-fade-in">
+      <h2 class="text-2xl font-semibold text-violeta">What is Diálogo?</h2>
+      <p class="mt-2 text-gray-700 leading-relaxed">
+        Diálogo is a free programming environment for children (roughly ages 10 to 17; younger kids with an adult alongside) in which programs are built from symbols the children draw themselves, rather than from predefined blocks. The language rests on two relations between symbols, <strong>substitution</strong> and <strong>categorization</strong>, plus about ten visual combinators (push, pull, teleport, collide, wildcards, an evaluation viewer). From that small set, children build games, simulations and abstract symbolic models, such as numbers and addition from scratch.
+      </p>
+      <p class="mt-4 text-gray-700 leading-relaxed">
+        Rules live on the same board as the game. A character can push a rule out of the way and change the program while it runs, so metaprogramming becomes something a child can see and touch. A step-by-step execution viewer shows which rule fired at each step, and doubles as the debugger.
+      </p>
+    </section>
+
+    <section class="grid md:grid-cols-2 gap-8 animate-fade-in">
+      <div>
+        <h3 class="font-semibold text-lg text-yellow-500">🎮 For learners:</h3>
+        <ul class="list-disc list-inside text-gray-700 space-y-1 mt-2">
+          <li>Build games from your own drawings</li>
+          <li>Give characters behavior by combining a handful of visual combinators</li>
+          <li>See, step by step, why the game does what it does</li>
+          <li>Make games that rewrite their own rules while you play</li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="font-semibold text-lg text-yellow-500">🏫 For teachers and researchers:</h3>
+        <ul class="list-disc list-inside text-gray-700 space-y-1 mt-2">
+          <li>Declarative from the first session, with no syntax and no imperative prerequisite</li>
+          <li>Runs offline on modest hardware, with no account or server; projects are saved locally</li>
+          <li>Interface in English and Spanish; adding a language means translating one text file</li>
+          <li>A seven-session curriculum delivered as videos addressed to the children, so you can adopt it before mastering the paradigm</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="animate-fade-in">
+      <h2 class="text-xl font-semibold text-subtitulo text-center mb-4">🌀 From a first drawing to a playable game in minutes</h2>
+      <img src="/demo.gif" alt="Animated demo of Diálogo: drawing symbols and combining them into a game" class="mx-auto rounded-xl shadow-lg max-w-full h-auto" />
+    </section>
+
+    <!-- Download -->
+    <section class="max-w-4xl mx-auto my-16 px-4 bg-white rounded-2xl shadow-lg p-8" id="download">
+      <h2 class="text-3xl md:text-4xl font-bold text-center text-violeta mb-6">⬇️ Download Diálogo</h2>
+      <p class="text-center text-lg text-gray-700 mb-8">
+        Free, no account needed. Pick the version for your operating system:
+      </p>
+      <div class="grid md:grid-cols-3 gap-6">
+        <a href="/DialogoSetup.exe"
+           class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-6 px-4 rounded-xl text-center transition shadow-md hover:shadow-xl">
+          <div class="text-4xl mb-2">🪟</div>
+          <div class="text-xl">Windows</div>
+          <div class="text-sm mt-2 opacity-90">DialogoSetup.exe</div>
+        </a>
+        <a href="/Dialogo.dmg"
+           class="bg-gray-700 hover:bg-gray-800 text-white font-bold py-6 px-4 rounded-xl text-center transition shadow-md hover:shadow-xl">
+          <div class="text-4xl mb-2">🍎</div>
+          <div class="text-xl">Mac</div>
+          <div class="text-sm mt-2 opacity-90">Dialogo.dmg</div>
+        </a>
+        <a href="/Dialogo.zip"
+           class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-6 px-4 rounded-xl text-center transition shadow-md hover:shadow-xl">
+          <div class="text-4xl mb-2">💻</div>
+          <div class="text-xl">Cross-platform</div>
+          <div class="text-sm mt-2 opacity-90">Dialogo.zip</div>
+        </a>
+      </div>
+      <p class="text-center text-sm text-gray-600 mt-6">
+        <em>The ZIP runs on Linux, and also on Windows and Mac as an alternative to the installers.</em>
+      </p>
+      <p class="text-center text-sm text-gray-600 mt-2">
+        Diálogo is under active development. Bug reports and classroom stories are welcome at <a href="mailto:agustin@dialog.ar" class="text-link underline">agustin@dialog.ar</a>.
+      </p>
+    </section>
+
+    <!-- Course -->
+    <section class="max-w-4xl mx-auto my-24 px-4" id="course">
+      <h2 class="text-3xl md:text-4xl font-bold text-center text-violeta mb-4">🎓 A free seven-session course</h2>
+      <p class="text-center text-lg text-gray-700 mb-4">
+        Each session introduces <strong>one abstraction mechanism</strong> through a <strong>playable artifact</strong>. Sessions 1 to 5 build games; sessions 6 and 7 move toward abstract symbolic models. Sessions 1 to 3 form a self-contained introduction, with a playable game already in session 2.
+      </p>
+      <p class="text-center text-gray-700 mb-10">
+        The lessons are videos addressed directly to the children, with project files to download and return. <strong>The videos are currently in Spanish; an English version is in preparation.</strong>
+      </p>
+      <div class="space-y-4">
+        <a href="https://youtu.be/CYuRk_dKHYg" target="_blank" rel="noopener"
+           class="block bg-white shadow-md rounded-2xl p-6 border-l-4 border-indigo-500 hover:shadow-xl transition hover:bg-gray-50">
+          <h3 class="font-semibold text-xl mb-1 text-subtitulo">⚙️ Session 0: Installation</h3>
+          <p class="text-gray-700">Install Diálogo on Windows, Mac or Linux and start exploring.</p>
+        </a>
+        <a href="https://youtu.be/FuQt50J9T2I" target="_blank" rel="noopener"
+           class="block bg-white shadow-md rounded-2xl p-6 border-l-4 border-indigo-500 hover:shadow-xl transition hover:bg-gray-50">
+          <h3 class="font-semibold text-xl mb-1 text-subtitulo">♟️ Session 1: Chess</h3>
+          <p class="text-gray-700">
+            Categorization, the first mechanism of abstraction. Build a board and pieces that capture each other, then replace case-by-case rules with rules over categories.
+          </p>
+        </a>
+        <a href="https://youtu.be/qVxvzTLY3pM" target="_blank" rel="noopener"
+           class="block bg-white shadow-md rounded-2xl p-6 border-l-4 border-indigo-500 hover:shadow-xl transition hover:bg-gray-50">
+          <h3 class="font-semibold text-xl mb-1 text-subtitulo">🐍 Session 2: The Snake</h3>
+          <p class="text-gray-700">
+            Substitution, the second mechanism. A growing-body snake, removing duplicated code, and the execution viewer as a debugger.
+          </p>
+        </a>
+        <a href="https://youtu.be/oypNK7dX_rY" target="_blank" rel="noopener"
+           class="block bg-white shadow-md rounded-2xl p-6 border-l-4 border-indigo-500 hover:shadow-xl transition hover:bg-gray-50">
+          <h3 class="font-semibold text-xl mb-1 text-subtitulo">👻 Session 3: From Pac-Man to a research submarine</h3>
+          <p class="text-gray-700">
+            A classic that puts every combinator to work, then re-skinned into a new domain. Simple rules, surprising results.
+          </p>
+        </a>
+        <a href="https://youtu.be/AfAFcP5FNVg" target="_blank" rel="noopener"
+           class="block bg-white shadow-md rounded-2xl p-6 border-l-4 border-indigo-500 hover:shadow-xl transition hover:bg-gray-50">
+          <h3 class="font-semibold text-xl mb-1 text-subtitulo">🧠 Session 4: Metaprogramming puzzles</h3>
+          <p class="text-gray-700">
+            What happens when a program modifies itself? A labyrinth whose rules can be pushed and pulled during play.
+          </p>
+        </a>
+        <a href="https://youtu.be/VLwuOLksRy0" target="_blank" rel="noopener"
+           class="block bg-white shadow-md rounded-2xl p-6 border-l-4 border-indigo-500 hover:shadow-xl transition hover:bg-gray-50">
+          <h3 class="font-semibold text-xl mb-1 text-subtitulo">🚀 Session 5: Space ships</h3>
+          <p class="text-gray-700">
+            Ideas from game development: event-driven rules, hidden objects, collisions and time control, all combined in one shooter.
+          </p>
+        </a>
+        <a href="https://youtu.be/3AMOQ4n1YU0" target="_blank" rel="noopener"
+           class="block bg-white shadow-md rounded-2xl p-6 border-l-4 border-indigo-500 hover:shadow-xl transition hover:bg-gray-50">
+          <h3 class="font-semibold text-xl mb-1 text-subtitulo">🔢 Session 6: My calculator</h3>
+          <p class="text-gray-700">
+            Recursion and abstract symbol manipulation. Numbers and addition built from scratch, with no game and no character.
+          </p>
+        </a>
+        <a href="https://youtu.be/ei_hErKm0IM" target="_blank" rel="noopener"
+           class="block bg-white shadow-md rounded-2xl p-6 border-l-4 border-indigo-500 hover:shadow-xl transition hover:bg-gray-50">
+          <h3 class="font-semibold text-xl mb-1 text-subtitulo">🏁 Session 7: Score and reuse</h3>
+          <p class="text-gray-700">
+            Modularity and reuse. Add a scoring system to an earlier game, with no variables at all.
+          </p>
+        </a>
+      </div>
+    </section>
+
+    <!-- Research -->
+    <section class="max-w-4xl mx-auto my-16 px-4 bg-white rounded-2xl shadow-lg p-8" id="research">
+      <h2 class="text-3xl md:text-4xl font-bold text-center text-violeta mb-6">🔬 For educators and researchers</h2>
+      <p class="text-center text-lg text-gray-700 mb-8">
+        Diálogo is developed at the University of Buenos Aires as a research project on declarative programming for children. Both the environment and the curriculum are released as artifacts for adoption and empirical study.
+      </p>
+      <ul class="space-y-5 text-gray-700">
+        <li class="border-l-4 border-indigo-500 pl-4">
+          <p class="font-semibold text-subtitulo">Programming with Drawings: A Declarative Visual Environment and Its Classroom Evolution</p>
+          <p>Agustín R. Martínez. <em>SIGCSE Technical Symposium 2027</em>, Sacramento, California, February 2027. To appear.</p>
+          <p class="text-sm text-gray-600">The environment's design, its evolution across an in-person workshop and an online course, and the seven-session sequence.</p>
+        </li>
+        <li class="border-l-4 border-indigo-500 pl-4">
+          <p class="font-semibold text-subtitulo">A Language Based on Two Relations between Symbols</p>
+          <p>Agustín R. Martínez. <em>Onward! 2022</em> (SPLASH), Auckland. ACM. <a href="https://doi.org/10.1145/3563835.3567660" target="_blank" rel="noopener" class="text-link underline">doi:10.1145/3563835.3567660</a></p>
+          <p class="text-sm text-gray-600">The conceptual foundation: substitution and categorization as the two relations from which the language is built.</p>
+        </li>
+        <li class="border-l-4 border-indigo-500 pl-4">
+          <p class="font-semibold text-subtitulo">Teaching Kids to Hack Their Own Games: Metaprogramming, Debugging, and Creativity from Age 7</p>
+          <p>Talk at <em>Smalltalks 2025</em>, Buenos Aires. <a href="https://youtu.be/EqioMI1I5E8" target="_blank" rel="noopener" class="text-link underline">Watch the video</a></p>
+        </li>
+      </ul>
+      <p class="mt-8 text-gray-700 leading-relaxed">
+        Interested in using Diálogo in your classroom or your research, in translating the curriculum, or in running a study with it? Write to
+        <a href="mailto:agustin@dc.uba.ar" class="text-link underline">agustin@dc.uba.ar</a>.
+      </p>
+      <p class="mt-2 text-sm text-gray-600">
+        Agustín Rafael Martínez, Departamento de Computación, Facultad de Ciencias Exactas y Naturales, Universidad de Buenos Aires.
+      </p>
+    </section>
+
+    <!-- Talks (Spanish) -->
+    <section class="animate-fade-in mt-16">
+      <h2 class="text-2xl font-semibold text-violeta text-center mb-6">🎤 Shows at Nerdearla (in Spanish)</h2>
+      <p class="text-center text-gray-700 mb-8">Two full stage shows built with Diálogo for a general audience.</p>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="aspect-w-16 aspect-h-9">
+          <iframe
+            class="w-full h-full rounded-xl shadow-lg"
+            style="aspect-ratio: 16/9; min-height: 250px;"
+            src="https://www.youtube.com/embed/OMulIPUosDs"
+            title="Diálogo at Nerdearla, part 1"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+          </iframe>
+        </div>
+        <div class="aspect-w-16 aspect-h-9">
+          <iframe
+            class="w-full h-full rounded-xl shadow-lg"
+            style="aspect-ratio: 16/9; min-height: 250px;"
+            src="https://www.youtube.com/embed/w2mqMSp40Hk"
+            title="Diálogo at Nerdearla, part 2"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+    </section>
+
+    <section class="text-center text-sm text-gray-500 animate-fade-in">
+      <p>Made by Agustín, teacher and researcher at the University of Buenos Aires, also known as <strong>Profe Futuro</strong> 🚀</p>
+    </section>
+  </main>
+
+  <footer class="text-center text-gray-500 text-sm p-6 space-y-2 mt-16">
+    <div class="flex justify-center flex-wrap gap-4 text-lg">
+      <a href="https://www.instagram.com/elprofefuturo" target="_blank" rel="noopener" class="hover:text-subtitulo transition">
+        📸 Instagram
+      </a>
+      <a href="https://www.tiktok.com/@elprofefuturo" target="_blank" rel="noopener" class="hover:text-subtitulo transition">
+        🎵 TikTok
+      </a>
+      <a href="https://x.com/elprofefuturo" target="_blank" rel="noopener" class="hover:text-subtitulo transition">
+        🦅 X
+      </a>
+      <a href="https://www.youtube.com/@elprofefuturo" target="_blank" rel="noopener" class="hover:text-subtitulo transition">
+        ▶️ YouTube
+      </a>
+      <a href="mailto:agustin@dialog.ar" class="hover:text-subtitulo transition">
+        📬 agustin@dialog.ar
+      </a>
+    </div>
+    <p class="text-xs text-gray-400">© 2026 Diálogo. All rights reserved.</p>
+  </footer>
+</body>
+</html>
