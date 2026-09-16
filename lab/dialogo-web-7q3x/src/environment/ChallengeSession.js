@@ -1,5 +1,5 @@
 import { Icons } from './Icons.js';
-import { Challenges } from './Challenge.js';
+import { Challenge, Challenges } from './Challenge.js';
 
 const HINT_DELAY_MS = 20000;
 
@@ -18,6 +18,7 @@ export class ChallengeSession {
     this.startedAt = clock();
     this.buildBanner();
     environment.boardView.showSlots(this.challenge.slots);
+    this.refreshPause();
     this.log('challenge.start');
     this.armHint();
   }
@@ -55,8 +56,15 @@ export class ChallengeSession {
   userActed() {
     this.clearHint();
     this.armHint();
+    this.refreshPause();
     this.check();
   }
+
+  // Mientras falte completar un cuadradito de la regla, el tiempo no corre: nada corre solo hasta
+  // que el chico armó la regla (si no, el monstruo llega antes de que exista la pared).
+  slotsPending() { return this.challenge.slots.some(slot => Challenge.ruleCellIsEmpty(this.project, slot.x, slot.y)); }
+
+  refreshPause() { this.environment.pausedBySlots = !this.completed && this.slotsPending(); }
 
   // La consigna cambia con lo que el chico ya hizo (un paso por vez).
   refreshGoal() {
@@ -128,5 +136,6 @@ export class ChallengeSession {
     this.clearHint();
     this.banner.remove();
     if (this.environment.boardView !== null) this.environment.boardView.showSlots([]);
+    this.environment.pausedBySlots = false;
   }
 }

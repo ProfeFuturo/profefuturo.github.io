@@ -32,7 +32,9 @@ export class Joystick {
       event.preventDefault();
       if (this.environment.currentProject === null) return;
       this.environment.sounds.step();
-      action(this.environment.currentProject.boardModel);
+      const board = this.environment.currentProject.boardModel;
+      action(board);
+      if (this.environment.pausedBySlots) { board.makeAllEnqueuedActions(); if (this.environment.session !== null) this.environment.session.check(); }   // el chico se mueve; lo que corre solo, espera
       this.environment.achievements.unlock('first-move');
     });
     button.addEventListener('contextmenu', event => event.preventDefault());

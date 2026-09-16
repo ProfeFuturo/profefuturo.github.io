@@ -29,6 +29,7 @@ export class RepresentarVisualEnvironment {
     this.currentProject = null;
     this.boardView = null;
     this.paused = false;
+    this.pausedBySlots = false;          // un desafío con cuadraditos vacíos: el tiempo espera
     this.dirty = false;
     this.session = null;                 // el desafío en curso, si el proyecto es un desafío
     this.usage = mainSpace !== null && mainSpace.usage ? mainSpace.usage : null;
@@ -177,6 +178,7 @@ export class RepresentarVisualEnvironment {
     this.boardView = new BoardView(this, project, this.boardContainer, this.dragController);
     this.tray.bind(project);
     this.paused = false;
+    this.pausedBySlots = false;
     this.titleText.value = project.projectName;
     this.refreshJoysticks();
     try {
@@ -380,7 +382,7 @@ export class RepresentarVisualEnvironment {
   // --- simulación ---
 
   simulatorStep() {
-    if (this.currentProject === null || this.paused || this.root.hidden) return;
+    if (this.currentProject === null || this.paused || this.pausedBySlots || this.root.hidden) return;
     try {
       this.currentProject.boardModel.step();
     } catch (error) {
