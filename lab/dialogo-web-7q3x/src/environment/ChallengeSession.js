@@ -99,7 +99,8 @@ export class ChallengeSession {
     else if (hint.pencil) environment.tray.highlightPencil();
     if (hint.cell) environment.boardView.showHintCell(hint.cell);
     if (hint.joystick) environment.joysticks.arrows.element.classList.add('hint');
-    this.log('challenge.hint', { kind: hint.selector ? 'symbol' : hint.drawing ? 'drawing' : hint.pencil ? 'pencil' : hint.joystick ? 'joystick' : 'cell' });
+    if (hint.space) { const key = environment.joysticks.arrows.element.querySelector('.joystick-key.space'); if (key !== null) key.classList.add('hint'); }
+    this.log('challenge.hint', { kind: hint.selector ? 'symbol' : hint.drawing ? 'drawing' : hint.pencil ? 'pencil' : hint.joystick ? 'joystick' : hint.space ? 'space' : 'cell' });
     environment.sounds.tap();
   }
 
@@ -110,6 +111,7 @@ export class ChallengeSession {
     this.environment.tray.clearHighlights();
     this.environment.boardView.showHintCell(null);
     this.environment.joysticks.arrows.element.classList.remove('hint');
+    for (const key of this.environment.joysticks.arrows.element.querySelectorAll('.joystick-key.hint')) key.classList.remove('hint');
   }
 
   // --- cierre ---

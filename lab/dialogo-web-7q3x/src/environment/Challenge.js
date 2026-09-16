@@ -8,7 +8,7 @@ const ROWS = 8;
 // Un desafío de la escalera (ver docs/desafios.md): arma un tablero chico con la regla casi
 // hecha, dice qué símbolos van en la bandeja, sabe cuándo se logró la meta y qué pista dar.
 export class Challenge {
-  constructor({ id, number, title, goal, steps = null, praise = '', emoji, symbols, pencil = false, slots = [], build, isCompleted, hint = () => null }) {
+  constructor({ id, number, world = 'primeros', title, goal, steps = null, praise = '', emoji, symbols, pencil = false, slots = [], build, isCompleted, hint = () => null, solution = null }) {
     this.id = id;
     this.number = number;
     this.title = title;
@@ -19,6 +19,8 @@ export class Challenge {
     this.slots = slots;                 // celdas vacías de la regla que hay que completar
     this.steps = steps || [{ text: goal, done: null }];   // la consigna, de a un paso: [{ text, done(project) }]
     this.praise = praise;               // al lograrlo: la idea, en una línea
+    this.world = world;                 // el mundo (capítulo) al que pertenece
+    this.solution = solution;           // cómo se resuelve, para los tests: (play) → void
     this.build = build;                 // (project, drawings, predefined, userDrawings) → void
     this.isCompleted = isCompleted;     // (project, drawings) → boolean
     this.hintFor = hint;                // (project, drawings) → { cell, selector, drawing } | null
@@ -88,9 +90,20 @@ export class Challenge {
   }
 }
 
-// La escalera. Cada desafío entra en 7 × 8 celdas; la regla va arriba, el juego abajo.
+// Los mundos: capítulos de la escalera, cada uno alrededor de una idea del lenguaje.
+export const WORLDS = [
+  { id: 'primeros', title: 'Primeros pasos', emoji: '🚀' },
+  { id: 'choques', title: 'Choques', emoji: '💥' },
+  { id: 'categorias', title: 'Categorías', emoji: '🏷️' },
+  { id: 'sustitucion', title: 'Sustitución', emoji: '🔁' },
+];
+
+// La escalera. Cada desafío entra en 7 × 8 celdas; la regla va abajo, el juego arriba.
 export class Challenges {
   static all() { return LADDER; }
+  static worlds() { return WORLDS; }
+  static inWorld(worldId) { return LADDER.filter(challenge => challenge.world === worldId); }
+  static worldOf(challenge) { return WORLDS.find(world => world.id === challenge.world) || WORLDS[0]; }
   static withId(id) { return LADDER.find(challenge => challenge.id === id) || null; }
   static first() { return LADDER[0]; }
   static after(challenge) { return LADDER[challenge.number] || null; }
@@ -253,5 +266,221 @@ const LADDER = [
     },
     isCompleted: (project, drawings) => project.boardModel.symbolsInPosition(Point.at(2, 3)).some(item => item.visualSymbolAssociated.equals(drawings.heart)),
     hint: () => ({ cell: Point.at(1, 3), selector: 'replSymbol' }),
+    solution: play => play.drop('replSymbol', 1, 3),
+  }),
+
+  // ---------- Mundo 2: Choques ----------
+  new Challenge({
+    id: 'sun', number: 11, world: 'choques', title: 'Sale el sol', emoji: '☀️',
+    goal: 'Arrastrá «teletransportar» hasta el cuadradito, entre el sol y el pasto',
+    steps: [
+      { text: 'Arrastrá «teletransportar» hasta el cuadradito, entre el sol y el pasto', done: project => !Challenge.ruleCellIsEmpty(project, 5, 7) },
+      { text: 'Llevá la oveja hasta el pasto', done: null },
+    ],
+    praise: 'Cuando la oveja choca el pasto, el sol aparece ahí. Un choque puede hacer aparecer cosas.',
+    symbols: ['teleportSymbol'], slots: [Point.at(5, 7)],
+    build(project, drawings, predefined) {
+      Challenge.rule(project, [drawings.sheep, predefined.arrowKeysSymbol], 6);
+      Challenge.rule(project, [drawings.sheep, predefined.collisionSymbol, drawings.grass, predefined.pointsSymbol, drawings.sun, null, drawings.grass], 7);
+      Challenge.element(project, drawings.sheep, 1, 3);
+      Challenge.element(project, drawings.grass, 5, 3);
+    },
+    isCompleted: (project, drawings) => Challenge.anyOnTopOf(project, drawings.sun, drawings.grass),
+    hint: project => Challenge.ruleCellIsEmpty(project, 5, 7) ? { cell: Point.at(5, 7), selector: 'teleportSymbol' } : { joystick: true },
+    solution: play => { play.drop('teleportSymbol', 5, 7); play.right(4); },
+  }),
+  new Challenge({
+    id: 'eat-all', number: 12, world: 'choques', title: 'Comé todo', emoji: '🍎',
+    goal: 'Arrastrá el agujero negro hasta el cuadradito',
+    steps: [
+      { text: 'Arrastrá el agujero negro hasta el cuadradito', done: project => !Challenge.ruleCellIsEmpty(project, 6, 7) },
+      { text: 'Ahora comé las manzanas y las estrellas', done: null },
+    ],
+    praise: 'Una regla por cada cosa que se come. Con dos reglas, el personaje come dos cosas.',
+    symbols: ['blackHoleSymbol'], slots: [Point.at(6, 7)],
+    build(project, drawings, predefined) {
+      Challenge.rule(project, [drawings.kid, predefined.arrowKeysSymbol], 5);
+      Challenge.rule(project, [drawings.kid, predefined.collisionSymbol, drawings.star, predefined.pointsSymbol, drawings.star, predefined.teleportSymbol, predefined.blackHoleSymbol], 6);
+      Challenge.rule(project, [drawings.kid, predefined.collisionSymbol, drawings.apple, predefined.pointsSymbol, drawings.apple, predefined.teleportSymbol, null], 7);
+      Challenge.element(project, drawings.kid, 0, 2);
+      Challenge.element(project, drawings.apple, 2, 2);
+      Challenge.element(project, drawings.star, 4, 2);
+      Challenge.element(project, drawings.apple, 4, 3);
+      Challenge.element(project, drawings.star, 1, 3);
+    },
+    isCompleted: (project, drawings) => Challenge.elementsOf(project, drawings.apple).length === 0 && Challenge.elementsOf(project, drawings.star).length === 0,
+    hint: project => Challenge.ruleCellIsEmpty(project, 6, 7) ? { cell: Point.at(6, 7), selector: 'blackHoleSymbol' } : { joystick: true },
+    solution: play => { play.drop('blackHoleSymbol', 6, 7); play.right(4); play.down(1); play.left(3); },
+  }),
+  new Challenge({
+    id: 'portal', number: 13, world: 'choques', title: 'El portal', emoji: '🌀',
+    goal: 'Arrastrá «teletransportar» hasta el cuadradito, entre el personaje y la puerta',
+    steps: [
+      { text: 'Arrastrá «teletransportar» hasta el cuadradito, entre el personaje y la puerta', done: project => !Challenge.ruleCellIsEmpty(project, 5, 7) },
+      { text: 'Entrá al portal y llegá a la estrella', done: null },
+    ],
+    praise: 'Personaje choca portal → el personaje aparece en la puerta. Así se cruza una pared.',
+    symbols: ['teleportSymbol'], slots: [Point.at(5, 7)],
+    build(project, drawings, predefined) {
+      Challenge.rule(project, [drawings.kid, predefined.canNotTranspassSymbol, drawings.wall], 5);
+      Challenge.rule(project, [drawings.kid, predefined.arrowKeysSymbol], 6);
+      Challenge.rule(project, [drawings.kid, predefined.collisionSymbol, drawings.portal, predefined.pointsSymbol, drawings.kid, null, drawings.door], 7);
+      for (let row = 0; row < 5; row++) Challenge.element(project, drawings.wall, 3, row);
+      Challenge.element(project, drawings.kid, 0, 3);
+      Challenge.element(project, drawings.portal, 2, 3);
+      Challenge.element(project, drawings.door, 4, 1);
+      Challenge.element(project, drawings.star, 6, 3);
+    },
+    isCompleted: (project, drawings) => Challenge.anyOnTopOf(project, drawings.kid, drawings.star),
+    hint: project => Challenge.ruleCellIsEmpty(project, 5, 7) ? { cell: Point.at(5, 7), selector: 'teleportSymbol' } : { joystick: true },
+    solution: play => { play.drop('teleportSymbol', 5, 7); play.right(2); play.down(2); play.right(2); },
+  }),
+  new Challenge({
+    id: 'pull', number: 14, world: 'choques', title: 'Tirar', emoji: '🧲',
+    goal: 'Arrastrá «tirar» hasta el cuadradito, entre el personaje y la caja',
+    steps: [
+      { text: 'Arrastrá «tirar» hasta el cuadradito, entre el personaje y la caja', done: project => !Challenge.ruleCellIsEmpty(project, 1, 7) },
+      { text: 'Llevá al personaje hasta la estrella. La caja lo sigue', done: null },
+    ],
+    praise: 'Personaje + tirar + caja: la caja va detrás del personaje.',
+    symbols: ['pullSymbol'], slots: [Point.at(1, 7)],
+    build(project, drawings, predefined) {
+      Challenge.rule(project, [drawings.kid, predefined.arrowKeysSymbol], 6);
+      Challenge.rule(project, [drawings.kid, null, drawings.box], 7);
+      Challenge.element(project, drawings.box, 0, 3);
+      Challenge.element(project, drawings.kid, 1, 3);
+      Challenge.element(project, drawings.star, 5, 3);
+    },
+    isCompleted: (project, drawings) => Challenge.anyOnTopOf(project, drawings.kid, drawings.star) && Challenge.positionsOf(project, drawings.box).some(position => position.x === 4),
+    hint: project => Challenge.ruleCellIsEmpty(project, 1, 7) ? { cell: Point.at(1, 7), selector: 'pullSymbol' } : { joystick: true },
+    solution: play => { play.drop('pullSymbol', 1, 7); play.right(4); },
+  }),
+  new Challenge({
+    id: 'nobody-passes', number: 15, world: 'choques', title: 'Nadie pasa', emoji: '🚧',
+    goal: 'Arrastrá «todos» hasta el cuadradito, antes de «no pasa»',
+    steps: [
+      { text: 'Arrastrá «todos» hasta el cuadradito, antes de «no pasa»', done: project => !Challenge.ruleCellIsEmpty(project, 0, 7) },
+      { text: 'Llevá al personaje hasta la estrella. El fantasma no pasa', done: null },
+    ],
+    praise: '«Todos» vale por cualquier ficha: nadie pasa la pared, ni el fantasma ni vos.',
+    symbols: ['jokerWithBalls'], slots: [Point.at(0, 7)],
+    build(project, drawings, predefined) {
+      Challenge.rule(project, [drawings.ghost, predefined.runSymbol, drawings.kid], 5);
+      Challenge.rule(project, [drawings.kid, predefined.arrowKeysSymbol], 6);
+      Challenge.rule(project, [null, predefined.canNotTranspassSymbol, drawings.wall], 7);
+      for (let row = 0; row < 5; row++) Challenge.element(project, drawings.wall, 3, row);
+      Challenge.element(project, drawings.ghost, 0, 2);
+      Challenge.element(project, drawings.kid, 5, 4);
+      Challenge.element(project, drawings.star, 5, 0);
+    },
+    isCompleted: (project, drawings) => !Challenge.ruleCellIsEmpty(project, 0, 7) && Challenge.anyOnTopOf(project, drawings.kid, drawings.star) && Challenge.positionsOf(project, drawings.ghost).every(position => position.x <= 2),
+    hint: project => Challenge.ruleCellIsEmpty(project, 0, 7) ? { cell: Point.at(0, 7), selector: 'jokerWithBalls' } : { joystick: true },
+    solution: play => { play.drop('jokerWithBalls', 0, 7); play.up(4); play.steps(6); },
+  }),
+
+  // ---------- Mundo 3: Categorías ----------
+  new Challenge({
+    id: 'food', number: 16, world: 'categorias', title: 'Todo es comida', emoji: '🍽️',
+    goal: 'Arrastrá «es un» hasta el cuadradito, entre el pescado y la comida',
+    steps: [
+      { text: 'Arrastrá «es un» hasta el cuadradito, entre el pescado y la comida', done: project => !Challenge.ruleCellIsEmpty(project, 1, 7) },
+      { text: 'Ahora comé todo', done: null },
+    ],
+    praise: 'Manzana es comida, pescado es comida: una sola regla come las dos. Eso es una categoría.',
+    symbols: ['categorizeSymbol'], slots: [Point.at(1, 7)],
+    build(project, drawings, predefined) {
+      Challenge.rule(project, [drawings.kid, predefined.arrowKeysSymbol], 4);
+      Challenge.rule(project, [drawings.kid, predefined.collisionSymbol, drawings.food, predefined.pointsSymbol, drawings.food, predefined.teleportSymbol, predefined.blackHoleSymbol], 5);
+      Challenge.rule(project, [drawings.apple, predefined.categorizeSymbol, drawings.food], 6);
+      Challenge.rule(project, [drawings.fish, null, drawings.food], 7);
+      Challenge.element(project, drawings.kid, 0, 1);
+      Challenge.element(project, drawings.apple, 2, 1);
+      Challenge.element(project, drawings.fish, 4, 1);
+      Challenge.element(project, drawings.fish, 4, 3);
+    },
+    isCompleted: (project, drawings) => Challenge.elementsOf(project, drawings.apple).length === 0 && Challenge.elementsOf(project, drawings.fish).length === 0,
+    hint: project => Challenge.ruleCellIsEmpty(project, 1, 7) ? { cell: Point.at(1, 7), selector: 'categorizeSymbol' } : { joystick: true },
+    solution: play => { play.drop('categorizeSymbol', 1, 7); play.right(4); play.down(2); },
+  }),
+  new Challenge({
+    id: 'one-rule', number: 17, world: 'categorias', title: 'Una regla para todo', emoji: '🥚',
+    goal: 'Arrastrá «comida» hasta los dos cuadraditos de la regla',
+    steps: [
+      { text: 'Arrastrá «comida» hasta los dos cuadraditos de la regla', done: project => !Challenge.ruleCellIsEmpty(project, 2, 7) && !Challenge.ruleCellIsEmpty(project, 4, 7) },
+      { text: 'Ahora comé todo', done: null },
+    ],
+    praise: 'Tres cosas distintas, una sola regla: la regla habla de la categoría, no de cada cosa.',
+    symbols: [], slots: [Point.at(2, 7), Point.at(4, 7)],
+    build(project, drawings, predefined) {
+      project.receiveDrawnSymbol(drawings.food);
+      Challenge.rule(project, [drawings.kid, predefined.arrowKeysSymbol], 3);
+      Challenge.rule(project, [drawings.apple, predefined.categorizeSymbol, drawings.food], 4);
+      Challenge.rule(project, [drawings.fish, predefined.categorizeSymbol, drawings.food], 5);
+      Challenge.rule(project, [drawings.egg, predefined.categorizeSymbol, drawings.food], 6);
+      Challenge.rule(project, [drawings.kid, predefined.collisionSymbol, null, predefined.pointsSymbol, null, predefined.teleportSymbol, predefined.blackHoleSymbol], 7);
+      Challenge.element(project, drawings.kid, 0, 1);
+      Challenge.element(project, drawings.apple, 2, 1);
+      Challenge.element(project, drawings.fish, 4, 1);
+      Challenge.element(project, drawings.egg, 6, 1);
+    },
+    isCompleted: (project, drawings) => ['apple', 'fish', 'egg'].every(name => Challenge.elementsOf(project, drawings[name]).length === 0),
+    hint: (project, drawings) => Challenge.ruleCellIsEmpty(project, 2, 7) ? { cell: Point.at(2, 7), drawing: drawings.food } : Challenge.ruleCellIsEmpty(project, 4, 7) ? { cell: Point.at(4, 7), drawing: drawings.food } : { joystick: true },
+    solution: play => { play.dropDrawing('food', 2, 7); play.dropDrawing('food', 4, 7); play.right(6); },
+  }),
+
+  // ---------- Mundo 4: Sustitución ----------
+  new Challenge({
+    id: 'day-night', number: 18, world: 'sustitucion', title: 'Día y noche', emoji: '🌙',
+    goal: 'Arrastrá la flecha hasta el cuadradito, entre el sol y la luna',
+    steps: [
+      { text: 'Arrastrá la flecha hasta el cuadradito, entre el sol y la luna', done: project => !Challenge.ruleCellIsEmpty(project, 1, 7) },
+      { text: 'Ahora poné los ojos al lado del sol de arriba', done: null },
+    ],
+    praise: 'Sol → luna: el sol se convierte en luna. Eso es una sustitución.',
+    symbols: ['pointsSymbol', 'replSymbol'], slots: [Point.at(1, 7), Point.at(1, 3)],
+    build(project, drawings) {
+      Challenge.symbol(project, drawings.sun, 0, 3);
+      Challenge.rule(project, [drawings.sun, null, drawings.moon], 7);
+    },
+    isCompleted: (project, drawings) => project.boardModel.symbolsInPosition(Point.at(2, 3)).some(item => item.visualSymbolAssociated.equals(drawings.moon)),
+    hint: project => Challenge.ruleCellIsEmpty(project, 1, 7) ? { cell: Point.at(1, 7), selector: 'pointsSymbol' } : { cell: Point.at(1, 3), selector: 'replSymbol' },
+    solution: play => { play.drop('pointsSymbol', 1, 7); play.drop('replSymbol', 1, 3); },
+  }),
+  new Challenge({
+    id: 'chain', number: 19, world: 'sustitucion', title: 'En cadena', emoji: '⛓️',
+    goal: 'Arrastrá la flecha hasta el cuadradito, entre la luna y la estrella',
+    steps: [
+      { text: 'Arrastrá la flecha hasta el cuadradito, entre la luna y la estrella', done: project => !Challenge.ruleCellIsEmpty(project, 1, 7) },
+      { text: 'Ahora poné los ojos al lado del sol de arriba', done: null },
+    ],
+    praise: 'Sol → luna → estrella: las sustituciones se encadenan hasta el final.',
+    symbols: ['pointsSymbol', 'replSymbol'], slots: [Point.at(1, 7), Point.at(1, 3)],
+    build(project, drawings, predefined) {
+      Challenge.symbol(project, drawings.sun, 0, 3);
+      Challenge.rule(project, [drawings.sun, predefined.pointsSymbol, drawings.moon], 6);
+      Challenge.rule(project, [drawings.moon, null, drawings.star], 7);
+    },
+    isCompleted: (project, drawings) => project.boardModel.symbolsInPosition(Point.at(2, 3)).some(item => item.visualSymbolAssociated.equals(drawings.star)),
+    hint: project => Challenge.ruleCellIsEmpty(project, 1, 7) ? { cell: Point.at(1, 7), selector: 'pointsSymbol' } : { cell: Point.at(1, 3), selector: 'replSymbol' },
+    solution: play => { play.drop('pointsSymbol', 1, 7); play.drop('replSymbol', 1, 3); },
+  }),
+  new Challenge({
+    id: 'fire', number: 20, world: 'sustitucion', title: 'Disparar', emoji: '🚀',
+    goal: 'Arrastrá «teletransportar» hasta el cuadradito, entre el fuego y la nave',
+    steps: [
+      { text: 'Arrastrá «teletransportar» hasta el cuadradito, entre el fuego y la nave', done: project => !Challenge.ruleCellIsEmpty(project, 3, 7) },
+      { text: 'Tocá la barra de espacio', done: null },
+    ],
+    praise: 'Barra de espacio → el fuego aparece en la nave. Una regla que se dispara con una tecla.',
+    symbols: ['teleportSymbol'], slots: [Point.at(3, 7)],
+    build(project, drawings, predefined) {
+      Challenge.rule(project, [drawings.ship, predefined.arrowKeysSymbol], 6);
+      Challenge.rule(project, [predefined.spaceBarSymbol, predefined.pointsSymbol, drawings.bullet, null, drawings.ship], 7);
+      Challenge.element(project, drawings.ship, 1, 4);
+      Challenge.element(project, drawings.ghost, 5, 1);
+    },
+    isCompleted: (project, drawings) => Challenge.anyOnTopOf(project, drawings.bullet, drawings.ship),
+    hint: project => Challenge.ruleCellIsEmpty(project, 3, 7) ? { cell: Point.at(3, 7), selector: 'teleportSymbol' } : { space: true },
+    solution: play => { play.drop('teleportSymbol', 3, 7); play.space(); },
   }),
 ];
