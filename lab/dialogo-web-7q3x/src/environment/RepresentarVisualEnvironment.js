@@ -1,3 +1,4 @@
+import { T } from './Texts.js';
 import { BoardView } from './BoardView.js';
 import { SymbolTray } from './SymbolTray.js';
 import { DragController } from './DragController.js';
@@ -109,7 +110,7 @@ export class RepresentarVisualEnvironment {
     this.badgeChip.type = 'button';
     this.badgeChip.title = 'Logros';
     this.badgeChip.addEventListener('click', () => this.openAchievements());
-    this.moreButton = this.iconButton(this.topBar, 'more', 'Más', () => this.openMenu(), 'more-button');
+    this.moreButton = this.iconButton(this.topBar, 'more', T('more'), () => this.openMenu(), 'more-button');
     this.refreshBadgeChip();
   }
 
@@ -139,13 +140,13 @@ export class RepresentarVisualEnvironment {
     };
     const group = label => { const heading = this.element('div', 'menu-group', sheet.body); heading.textContent = label; };
     item('undo', dictionaryAt('Undo'), () => this.withProject(project => project.boardModel.backToPreviousBoardState()), 'menu-undo');
-    item('reset', 'Volver al inicio', () => this.withProject(project => project.boardModel.resetBoard()), 'menu-reset');
-    item(this.sounds.enabled ? 'sound' : 'soundOff', this.sounds.enabled ? 'Sonido: sí' : 'Sonido: no', () => this.sounds.setEnabled(!this.sounds.enabled), 'menu-sound');
-    group('Para armar');
+    item('reset', T('menu.backToStart'), () => this.withProject(project => project.boardModel.resetBoard()), 'menu-reset');
+    item(this.sounds.enabled ? 'sound' : 'soundOff', this.sounds.enabled ? T('sound.on') : T('sound.off'), () => this.sounds.setEnabled(!this.sounds.enabled), 'menu-sound');
+    group(T('menu.forBuilding'));
     item('zoomIn', dictionaryAt('ZoomIn'), () => this.withProject(project => project.boardModel.zoomIn()), 'menu-zoom-in');
     item('zoomOut', dictionaryAt('ZoomOut'), () => this.withProject(project => project.boardModel.zoomOut()), 'menu-zoom-out');
-    item('flag', 'Fijar este inicio', () => this.withProject(project => { project.boardModel.setCurrentAsResetBoard(); this.flash(); }), 'menu-set');
-    item('share', 'Usar fichas de otros proyectos', () => this.openMenuToChooseProjectsToReuse(), 'menu-reuse');
+    item('flag', T('menu.setStart'), () => this.withProject(project => { project.boardModel.setCurrentAsResetBoard(); this.flash(); }), 'menu-set');
+    item('share', T('menu.reuse'), () => this.openMenuToChooseProjectsToReuse(), 'menu-reuse');
     item('save', dictionaryAt('FileOut') + ' (.dialog.ar)', () => this.fileOut(), 'menu-file-out');
   }
 
@@ -208,16 +209,16 @@ export class RepresentarVisualEnvironment {
   openChallenge(challenge) {
     const userDrawings = this.mainSpace !== null && this.mainSpace.progress ? this.mainSpace.progress.userDrawings() : [];
     this.openProject(challenge.projectFor({ gridSize: RepresentarVisualEnvironment.sideOfSymbolsOnEnvironmentPalet(), userDrawings }));
-    const fit = this.challengeGridSize();
+    const fit = this.challengeGridSize(challenge.columns);
     if (fit < this.currentProject.boardModel.gridSize) this.currentProject.boardModel.changeGridSizeTo(fit);
     return this.session;
   }
 
-  // En un desafío las siete columnas entran enteras en el ancho: nada queda fuera de la pantalla.
-  challengeGridSize() {
+  // En un desafío todas las columnas entran enteras en el ancho: nada queda fuera de la pantalla.
+  challengeGridSize(columns = CHALLENGE_COLUMNS) {
     const side = RepresentarVisualEnvironment.sideOfSymbolsOnEnvironmentPalet();
     const width = this.boardContainer.clientWidth || (typeof window === 'undefined' ? 1440 : window.innerWidth - 24);
-    return Math.max(36, Math.min(side, Math.floor((width - 6) / CHALLENGE_COLUMNS)));
+    return Math.max(36, Math.min(side, Math.floor((width - 6) / columns)));
   }
 
   isInChallenge() { return this.session !== null; }
@@ -254,7 +255,7 @@ export class RepresentarVisualEnvironment {
     const next = session.next();
     const overlay = this.element('div', 'challenge-success', this.root);
     overlay.setAttribute('role', 'dialog');
-    overlay.innerHTML = '<div class="success-card"><div class="success-medal">' + challenge.emoji + '</div><div class="success-title">¡Lo lograste!</div><div class="success-subtitle">' + (challenge.praise || challenge.title) + '</div><div class="success-actions"></div></div>';
+    overlay.innerHTML = '<div class="success-card"><div class="success-medal">' + challenge.emoji + '</div><div class="success-title">' + T('success.title') + '</div><div class="success-subtitle">' + (challenge.praise || challenge.title) + '</div><div class="success-actions"></div></div>';
     const actions = overlay.querySelector('.success-actions');
     const button = (label, iconName, action, className) => {
       const created = this.element('button', 'success-button ' + className, actions, Icons.svg(iconName) + '<span>' + label + '</span>');
@@ -262,9 +263,9 @@ export class RepresentarVisualEnvironment {
       created.addEventListener('click', () => { this.sounds.tap(); action(); });
       return created;
     };
-    if (next !== null) button('Siguiente', 'arrowRight', () => { this.closeSuccess(); this.openChallenge(next); }, 'primary next-challenge');
-    else button('Al inicio', 'home', () => { this.closeSuccess(); this.backAction(); }, 'primary next-challenge');
-    button('Quedarme a inventar', 'pencil', () => { this.closeSuccess(); this.makeItMine(); }, 'secondary make-it-mine');
+    if (next !== null) button(T('success.next'), 'arrowRight', () => { this.closeSuccess(); this.openChallenge(next); }, 'primary next-challenge');
+    else button(T('success.home'), 'home', () => { this.closeSuccess(); this.backAction(); }, 'primary next-challenge');
+    if (this.mainSpace === null || !this.mainSpace.progress || this.mainSpace.progress.freeUnlocked()) button(T('success.stay'), 'pencil', () => { this.closeSuccess(); this.makeItMine(); }, 'secondary make-it-mine');
     this.success = overlay;
   }
 
@@ -281,12 +282,12 @@ export class RepresentarVisualEnvironment {
     this.endSession();
     project.challenge = null;
     project.availableSymbols = null;
-    project.setProjectName(project.projectName + ' (mío)');
+    project.setProjectName(project.projectName + T('mineSuffix'));
     this.titleText.value = project.projectName;
     this.tray.rebuild();
     this.markDirty();
     if (this.usage !== null) this.usage.record('challenge.remix', {});
-    if (this.mainSpace !== null && this.mainSpace.toast) this.mainSpace.toast('🧪', 'Ahora es tuyo. Cambiá lo que quieras. Lo vas a encontrar en Míos.');
+    if (this.mainSpace !== null && this.mainSpace.toast) this.mainSpace.toast('🧪', T('success.yours'));
   }
 
   show() { this.root.hidden = false; }

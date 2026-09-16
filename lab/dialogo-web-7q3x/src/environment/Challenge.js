@@ -1,6 +1,7 @@
 import { Point } from '../board/Point.js';
 import { VisualProject } from './VisualProject.js';
 import { ChallengeDrawings } from './ChallengeDrawings.js';
+import { Texts } from './Texts.js';
 
 export const COLUMNS = 7;
 const ROWS = 8;
@@ -8,17 +9,20 @@ const ROWS = 8;
 // Un desafío de la escalera (ver docs/desafios.md): arma un tablero chico con la regla casi
 // hecha, dice qué símbolos van en la bandeja, sabe cuándo se logró la meta y qué pista dar.
 export class Challenge {
-  constructor({ id, number, world = 'primeros', title, goal, steps = null, praise = '', emoji, symbols, pencil = false, slots = [], build, isCompleted, hint = () => null, solution = null }) {
+  constructor({ id, number, world = 'primeros', title, goal, steps = null, praise = '', emoji, symbols, pencil = false, slots = [], build, isCompleted, hint = () => null, solution = null, columns = COLUMNS, rows = ROWS, kind = 'challenge' }) {
+    this.kind = kind;                   // 'challenge' (la escalera) o 'build' (armar un juego del curso, con toda la bandeja)
+    this.columns = columns;
+    this.rows = rows;
     this.id = id;
     this.number = number;
-    this.title = title;
-    this.goal = goal;
+    const english = ENGLISH[id] || { title, steps: [], praise };
+    this.texts = { title: { es: title, en: english.title }, praise: { es: praise, en: english.praise || praise } };
     this.emoji = emoji;
     this.symbols = symbols;             // selectores de predefinidos disponibles en la bandeja
     this.pencil = pencil;               // si la bandeja muestra el lápiz
     this.slots = slots;                 // celdas vacías de la regla que hay que completar
-    this.steps = steps || [{ text: goal, done: null }];   // la consigna, de a un paso: [{ text, done(project) }]
-    this.praise = praise;               // al lograrlo: la idea, en una línea
+    // la consigna, de a un paso: [{ text: { en, es }, done(project) }]; el último paso es lograr el desafío
+    this.steps = (steps || [{ text: goal, done: null }]).map((step, index) => ({ text: { es: step.text, en: english.steps[index] || step.text }, done: step.done }));
     this.world = world;                 // el mundo (capítulo) al que pertenece
     this.solution = solution;           // cómo se resuelve, para los tests: (play) → void
     this.build = build;                 // (project, drawings, predefined, userDrawings) → void
@@ -28,7 +32,7 @@ export class Challenge {
 
   // Un proyecto nuevo con este desafío armado. Los dibujos se crean para cada proyecto.
   projectFor({ gridSize = 52, random = Math.random, userDrawings = [] } = {}) {
-    const project = new VisualProject({ name: this.title, gridSize, columns: COLUMNS, rows: ROWS, random }).connect();
+    const project = new VisualProject({ name: this.title, gridSize, columns: this.columns, rows: this.rows, random }).connect();
     const drawings = ChallengeDrawings.all();
     project.challenge = this;
     project.challengeDrawings = drawings;
@@ -46,12 +50,16 @@ export class Challenge {
     return predefined;
   }
 
+  get title() { return Texts.pick(this.texts.title); }
+  get praise() { return Texts.pick(this.texts.praise); }
+  get goal() { return Texts.pick(this.steps[0].text); }
+
   completedIn(project) { return this.isCompleted(project, project.challengeDrawings); }
 
   // La consigna de este momento: el primer paso que falta (el último es lograr el desafío).
   goalIn(project) {
-    for (const step of this.steps) if (step.done !== null && !step.done(project)) return step.text;
-    return this.steps[this.steps.length - 1].text;
+    for (const step of this.steps) if (step.done !== null && !step.done(project)) return Texts.pick(step.text);
+    return Texts.pick(this.steps[this.steps.length - 1].text);
   }
   hintIn(project) { return this.hintFor(project, project.challengeDrawings); }
 
@@ -88,29 +96,84 @@ export class Challenge {
   static ruleCellIsEmpty(project, column, row) {
     return project.boardModel.itemsInPosition(Point.at(column, row)).length === 0;
   }
+
+  // Las reglas del tablero como listas de símbolos (para ver si el chico armó la que se pide).
+  static rulesOf(project) {
+    return project.boardModel.consecutiveSymbolicSequences().map(sequence => sequence.symbolSequence());
+  }
+
+  static hasRule(project, matches) { return Challenge.rulesOf(project).some(rule => matches(rule)); }
+
+  static userDrawing(project, index) { return project.drawingsMadeByUser()[index] || null; }
 }
 
 // Los mundos: capítulos de la escalera, cada uno alrededor de una idea del lenguaje.
+class World {
+  constructor(id, emoji, titles) { this.id = id; this.emoji = emoji; this.titles = titles; }
+  get title() { return Texts.pick(this.titles); }
+}
+
 export const WORLDS = [
-  { id: 'primeros', title: 'Primeros pasos', emoji: '🚀' },
-  { id: 'choques', title: 'Choques', emoji: '💥' },
-  { id: 'categorias', title: 'Categorías', emoji: '🏷️' },
-  { id: 'sustitucion', title: 'Sustitución', emoji: '🔁' },
-  { id: 'metaprogramacion', title: 'Reglas que cambian', emoji: '🧠' },
-  { id: 'naves', title: 'Naves y tiempo', emoji: '🚀' },
-  { id: 'numeros', title: 'Números', emoji: '🔢' },
-  { id: 'puntos', title: 'Puntos', emoji: '🏆' },
+  new World('primeros', '🚀', { en: 'First steps', es: 'Primeros pasos' }),
+  new World('choques', '💥', { en: 'Collisions', es: 'Choques' }),
+  new World('categorias', '🏷️', { en: 'Categories', es: 'Categorías' }),
+  new World('sustitucion', '🔁', { en: 'Substitution', es: 'Sustitución' }),
+  new World('metaprogramacion', '🧠', { en: 'Rules that change', es: 'Reglas que cambian' }),
+  new World('naves', '🚀', { en: 'Ships and time', es: 'Naves y tiempo' }),
+  new World('numeros', '🔢', { en: 'Numbers', es: 'Números' }),
+  new World('puntos', '🏆', { en: 'Score', es: 'Puntos' }),
 ];
+
+// Los textos en inglés de cada desafío (los de español están en la definición, al lado de la
+// lógica). Mismo criterio: un verbo por frase, la ficha entre comillas, la idea al lograrlo.
+const ENGLISH = {
+  'reach-star': { title: 'Reach the star', steps: ['Take the character to the star with the arrows'], praise: 'The character is next to the arrows: that is why it moves.' },
+  'make-rule': { title: 'Make the rule', steps: ['Drag the arrows to the little square, next to the character', 'Now it moves! Take it to the star'], praise: 'Character + arrows = it moves. That is a rule.' },
+  'eat-star': { title: 'Eat the stars', steps: ['Drag the black hole to the little square at the end of the rule', 'Now bump into both stars'], praise: 'When the character bumps into a star, the star goes into the black hole.' },
+  'draw': { title: 'Draw', steps: ['Tap the pencil. Draw your character'], praise: 'Your drawing is a character now. Next, we make it move.' },
+  'bring-to-life': { title: 'Bring it to life', steps: ['Drag your drawing to the little square, next to the arrows', 'Your drawing moves! Take it to the star'], praise: 'Your drawing + arrows = your drawing moves. You made that rule.' },
+  'run': { title: 'The monster runs', steps: ['Drag "runs to" to the little square, between the monster and the star', 'Look: the monster runs by itself'], praise: 'Monster + runs to + star: the monster goes to the star on its own, without you touching anything.' },
+  'push': { title: 'Push the box', steps: ['Drag "pushes" to the little square, between the character and the box', 'Now push the box to the star'], praise: 'Character + pushes + box: when the character bumps into the box, the box moves.' },
+  'walls': { title: 'The wall', steps: ['Drag "can\'t pass" to the little square, between the monster and the wall', 'Watch what the monster does'], praise: "Monster + can't pass + wall: the monster runs, but the wall stops it." },
+  'button': { title: 'The bell', steps: ['Tap the bell. Watch what happens'], praise: 'The bell is a button: when you tap it, the character appears on the star.' },
+  'eyes': { title: 'The eyes', steps: ['Drag the eyes to the little square, next to the star'], praise: 'The eyes show what the rule says: here, the star becomes a heart.' },
+  'sun': { title: 'The sun comes out', steps: ['Drag "teleport" to the little square, between the sun and the grass', 'Take the sheep to the grass'], praise: 'When the sheep bumps into the grass, the sun appears there. A bump can make things appear.' },
+  'eat-all': { title: 'Eat everything', steps: ['Drag the black hole to the little square', 'Now eat the apples and the stars'], praise: 'One rule for each thing you eat. With two rules, the character eats two things.' },
+  'portal': { title: 'The portal', steps: ['Drag "teleport" to the little square, between the character and the door', 'Go into the portal and reach the star'], praise: 'Character bumps into portal → the character appears at the door. That is how you cross a wall.' },
+  'pull': { title: 'Pull the box', steps: ['Drag "pulls" to the little square, between the character and the box', 'Take the character to the star. The box follows'], praise: 'Character + pulls + box: the box goes behind the character.' },
+  'nobody-passes': { title: 'Nobody passes', steps: ['Drag the wildcard to the little square, before "can\'t pass"', "Take the character to the star. The ghost can't pass"], praise: 'The wildcard stands for anything: nobody passes the wall, not the ghost, not you.' },
+  'food': { title: 'It is all food', steps: ['Drag "is inside" to the little square, between the fish and the food', 'Now eat everything'], praise: 'The apple is inside food, and so is the fish: one rule eats both. That is a category.' },
+  'one-rule': { title: 'One rule for everything', steps: ['Drag "food" to both little squares of the rule', 'Now eat everything'], praise: 'Three different things, one rule: the rule talks about the category, not about each thing.' },
+  'day-night': { title: 'Day and night', steps: ['Drag "turns into" to the little square, between the sun and the moon', 'Now put the eyes next to the sun at the top'], praise: 'Sun → moon: the sun turns into the moon. That is a substitution.' },
+  'chain': { title: 'In a chain', steps: ['Drag "turns into" to the little square, between the moon and the star', 'Now put the eyes next to the sun at the top'], praise: 'Sun → moon → star: substitutions chain all the way to the end.' },
+  'break-rule': { title: 'Break the rule', steps: ['Push "can\'t pass" out of the rule', 'Now walk through the wall to the star'], praise: 'You pushed a piece of your program. The game changes its own rules while you play.' },
+  'rule-by-playing': { title: 'Make a rule by playing', steps: ['Push "pulls" into the little square of the rule', 'Now take the character to the star. The box follows'], praise: 'You made a rule without the tray: by pushing its pieces around the board.' },
+  'fire': { title: 'Fire!', steps: ['Drag "teleport" to the little square, between the fire and the ship', 'Tap the space bar'], praise: 'Space bar → the fire appears at the ship. A rule that fires with a key.' },
+  'missile': { title: 'The fire flies', steps: ['Drag "runs to" to the little square, between the fire and the flag', 'Tap the space bar and knock the ghost down'], praise: 'The fire runs to the flag and bumps into the ghost on the way. The flag is a mark: it is only there to aim at.' },
+  'next': { title: 'The next one', steps: ['Drag the 3 to the little square: the next one after 2 is 3', 'Put the eyes next to the 2 at the top'], praise: 'There are no numbers in Diálogo: you invent them. "Next of 2 → 3" is a rule like any other.' },
+  'add-zero': { title: 'Adding zero', steps: ['Drag "number" to the little square at the end of the rule', 'Put the eyes next to the 2 at the top'], praise: 'Zero plus a number is that number. Addition starts with that rule: the base case.' },
+  'build-chess': { title: 'Chess', steps: ['Tap the pencil and draw a black piece', 'Now draw a white piece', 'Put a black piece and a white piece on the board', 'Make the rule: black piece · arrows', 'Make the eating rule: black · bumps · white · turns into · white · teleport · black hole', 'Eat the white piece'], praise: 'You built a tiny chess: your pieces, your rules. The real one adds categories: "black piece" for all the black ones.' },
+  'score': { title: 'Score', steps: ['Drag "points to" to the little square at the end of the rule', 'Put the eyes next to the score', 'Bump into both stars and watch the score'], praise: 'Bumping does not set a number: it swaps the rule "score → 0" for "score → the next one". It adds one every time. No variables.' },
+};
 
 // La escalera. Cada desafío entra en 7 × 8 celdas; la regla va abajo, el juego arriba.
 export class Challenges {
   static all() { return LADDER; }
   static worlds() { return WORLDS; }
+  static isBuild(challenge) { return challenge.kind === 'build'; }
   static inWorld(worldId) { return LADDER.filter(challenge => challenge.world === worldId); }
   static worldOf(challenge) { return WORLDS.find(world => world.id === challenge.world) || WORLDS[0]; }
   static withId(id) { return LADDER.find(challenge => challenge.id === id) || null; }
   static first() { return LADDER[0]; }
-  static after(challenge) { return LADDER[challenge.number] || null; }
+  static after(challenge) { return challenge.kind === 'build' ? Builds.after(challenge) : (LADDER[challenge.number] || null); }
+}
+
+// Armar los juegos del curso, guiado paso a paso, en el editor completo (toda la bandeja y el
+// lápiz). Se destraban al terminar la escalera; al terminarlos todos se destraba crear libre.
+export class Builds {
+  static all() { return BUILDS; }
+  static withId(id) { return BUILDS.find(build => build.id === id) || null; }
+  static after(build) { return BUILDS[build.number] || null; }
 }
 
 // Las reglas van abajo (filas 6 y 7), pegadas a la bandeja de donde salen las fichas; el juego
@@ -128,6 +191,7 @@ const LADDER = [
     },
     isCompleted: (project, drawings) => Challenge.anyOnTopOf(project, drawings.kid, drawings.star),
     hint: (project, drawings) => ({ cell: Challenge.positionsOf(project, drawings.star)[0] || null, joystick: true }),
+    solution: play => play.right(4),
   }),
   new Challenge({
     id: 'make-rule', number: 2, title: 'Armá la regla', goal: 'Arrastrá las flechas hasta el cuadradito, al lado del personaje', emoji: '🧩',
@@ -144,6 +208,7 @@ const LADDER = [
     },
     isCompleted: (project, drawings) => Challenge.anyOnTopOf(project, drawings.kid, drawings.star),
     hint: project => Challenge.ruleCellIsEmpty(project, 1, 7) ? { cell: Point.at(1, 7), selector: 'arrowKeysSymbol' } : { joystick: true },
+    solution: play => { play.drop('arrowKeysSymbol', 1, 7); play.right(4); },
   }),
   new Challenge({
     id: 'eat-star', number: 3, title: 'Comé las estrellas', goal: 'Arrastrá el agujero negro hasta el cuadradito del final de la regla', emoji: '🕳️',
@@ -162,6 +227,7 @@ const LADDER = [
     },
     isCompleted: (project, drawings) => Challenge.elementsOf(project, drawings.star).length === 0 && Challenge.elementsOf(project, drawings.kid).length > 0,
     hint: project => Challenge.ruleCellIsEmpty(project, 6, 7) ? { cell: Point.at(6, 7), selector: 'blackHoleSymbol' } : { joystick: true },
+    solution: play => { play.drop('blackHoleSymbol', 6, 7); play.right(4); play.down(1); },
   }),
   new Challenge({
     id: 'draw', number: 4, title: 'Dibujá', goal: 'Tocá el lápiz. Dibujá tu personaje', emoji: '🎨',
@@ -170,6 +236,7 @@ const LADDER = [
     build() {},
     isCompleted: project => project.drawingsMadeByUser().length > 0,
     hint: () => ({ pencil: true }),
+    solution: play => play.draw('heart'),
   }),
   new Challenge({
     id: 'bring-to-life', number: 5, title: 'Dale vida', goal: 'Arrastrá tu dibujo hasta el cuadradito, al lado de las flechas', emoji: '✨',
@@ -189,6 +256,7 @@ const LADDER = [
     },
     isCompleted: (project, drawings) => Challenge.anyOnTopOf(project, project.drawingsMadeByUser()[0], drawings.star),
     hint: project => Challenge.ruleCellIsEmpty(project, 0, 7) ? { cell: Point.at(0, 7), drawing: project.drawingsMadeByUser()[0] } : { joystick: true },
+    solution: play => { play.dropUserDrawing(0, 0, 7); play.right(4); },
   }),
   new Challenge({
     id: 'run', number: 6, title: 'El monstruo corre', goal: 'Arrastrá «corre hacia» hasta el cuadradito, entre el monstruo y la estrella', emoji: '🏃',
@@ -205,6 +273,7 @@ const LADDER = [
     },
     isCompleted: (project, drawings) => Challenge.anyOnTopOf(project, drawings.monster, drawings.star),
     hint: () => ({ cell: Point.at(1, 7), selector: 'runSymbol' }),
+    solution: play => { play.drop('runSymbol', 1, 7); play.steps(14); },
   }),
   new Challenge({
     id: 'push', number: 7, title: 'Empujá la caja', goal: 'Arrastrá «empuja» hasta el cuadradito, entre el personaje y la caja', emoji: '📦',
@@ -223,6 +292,7 @@ const LADDER = [
     },
     isCompleted: (project, drawings) => Challenge.anyOnTopOf(project, drawings.box, drawings.star),
     hint: project => Challenge.ruleCellIsEmpty(project, 1, 7) ? { cell: Point.at(1, 7), selector: 'pushSymbol' } : { joystick: true },
+    solution: play => { play.drop('pushSymbol', 1, 7); play.right(3); },
   }),
   new Challenge({
     id: 'walls', number: 8, title: 'La pared', goal: 'Arrastrá «no puede pasar» hasta el cuadradito, entre el monstruo y la pared', emoji: '🧱',
@@ -245,6 +315,7 @@ const LADDER = [
       return !Challenge.ruleCellIsEmpty(project, 1, 7) && monsters.length > 0 && monsters.every(position => position.x <= 2) && monsters.some(position => position.x === 2);
     },
     hint: () => ({ cell: Point.at(1, 7), selector: 'canNotTranspassSymbol' }),
+    solution: play => { play.drop('canNotTranspassSymbol', 1, 7); play.steps(12); },
   }),
   new Challenge({
     id: 'button', number: 9, title: 'La campana', goal: 'Tocá la campana. Mirá qué pasa', emoji: '🔔',
@@ -259,6 +330,7 @@ const LADDER = [
     },
     isCompleted: (project, drawings) => Challenge.anyOnTopOf(project, drawings.kid, drawings.star),
     hint: (project, drawings) => ({ cell: Challenge.positionsOf(project, drawings.bell)[0] || null, tap: true }),
+    solution: play => play.tap('bell'),
   }),
   new Challenge({
     id: 'eyes', number: 10, title: 'Los ojos', goal: 'Arrastrá los ojitos hasta el cuadradito, al lado de la estrella', emoji: '👀',
@@ -630,3 +702,38 @@ const LADDER = [
     solution: play => { play.dropDrawing('pin', 6, 7); play.drop('replSymbol', 5, 1); play.right(4); play.steps(1); },
   }),
 ];
+
+// Los juegos del curso, en versión chica y guiada. Cada uno enseña la idea de su clase con el
+// menor tablero posible; el chico dibuja sus piezas y arma las reglas con toda la bandeja.
+const BUILDS = [
+  new Challenge({
+    id: 'build-chess', number: 1, world: 'builds', kind: 'build', columns: 8, rows: 12, emoji: '♟️',
+    title: 'Ajedrez',
+    goal: 'Tocá el lápiz y dibujá una pieza negra',
+    steps: [
+      { text: 'Tocá el lápiz y dibujá una pieza negra', done: project => project.drawingsMadeByUser().length >= 1 },
+      { text: 'Ahora dibujá una pieza blanca', done: project => project.drawingsMadeByUser().length >= 2 },
+      { text: 'Poné una pieza negra y una blanca en el tablero', done: project => { const [black, white] = project.drawingsMadeByUser(); return black && white && Challenge.elementsOf(project, black).length > 0 && (Challenge.elementsOf(project, white).length > 0 || Challenge.hasRule(project, rule => rule.some(symbol => symbol.buildingSelector === 'collisionSymbol'))); } },
+      { text: 'Armá la regla: pieza negra · flechas', done: project => project.boardModel.itemsMovableByArrows().length > 0 },
+      { text: 'Armá la regla de comer: negra · choca · blanca · se transforma en · blanca · teletransportar · agujero negro', done: project => Challenge.hasRule(project, rule => rule.length >= 7 && rule.some(symbol => symbol.buildingSelector === 'collisionSymbol') && rule.some(symbol => symbol.buildingSelector === 'blackHoleSymbol')) },
+      { text: 'Comé la pieza blanca', done: null },
+    ],
+    praise: 'Armaste un ajedrez chiquito: tus piezas, tus reglas. El de verdad agrega categorías: «pieza negra» para todas las negras.',
+    symbols: 'all', pencil: true,
+    build() {},
+    isCompleted: project => {
+      const drawings = project.drawingsMadeByUser();
+      return drawings.length >= 2 && Challenge.hasRule(project, rule => rule.some(symbol => symbol.buildingSelector === 'collisionSymbol'))
+        && Challenge.elementsOf(project, drawings[0]).length > 0 && Challenge.elementsOf(project, drawings[1]).length === 0 && project.boardModel.itemsMovableByArrows().length > 0;
+    },
+    hint: project => project.drawingsMadeByUser().length < 2 ? { pencil: true } : project.boardModel.itemsMovableByArrows().length === 0 ? { selector: 'arrowKeysSymbol' } : { joystick: true },
+    solution: play => {
+      play.draw('pawn'); play.draw('rook');
+      play.dropUserDrawing(0, 1, 1); play.dropUserDrawing(1, 3, 1);
+      play.dropUserDrawing(0, 0, 9); play.drop('arrowKeysSymbol', 1, 9);
+      play.dropUserDrawing(0, 0, 10); play.drop('collisionSymbol', 1, 10); play.dropUserDrawing(1, 2, 10); play.drop('pointsSymbol', 3, 10); play.dropUserDrawing(1, 4, 10); play.drop('teleportSymbol', 5, 10); play.drop('blackHoleSymbol', 6, 10);
+      play.right(2);
+    },
+  }),
+];
+

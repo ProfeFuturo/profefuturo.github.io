@@ -1,3 +1,4 @@
+import { T } from './Texts.js';
 import { Icons } from './Icons.js';
 import { Challenge, Challenges } from './Challenge.js';
 
@@ -35,7 +36,7 @@ export class ChallengeSession {
     const restart = document.createElement('button');
     restart.type = 'button';
     restart.className = 'icon-button ghost challenge-restart';
-    restart.title = 'Volver a empezar';
+    restart.title = T('challenge.restart');
     restart.setAttribute('aria-label', restart.title);
     restart.appendChild(Icons.element('reset'));
     restart.addEventListener('click', () => this.restart());

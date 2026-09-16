@@ -1,11 +1,12 @@
+import { T } from './Texts.js';
 import { Drawing } from '../metamodel/Drawing.js';
 import { VisualSymbol } from '../metamodel/VisualSymbol.js';
 import { Icons } from './Icons.js';
 
 const CANVAS_SIDE = 425;
 // Pocos colores, vivos, con nombre (para el título del botón): lo que un chico busca primero.
-const COLORS = [['#101318', 'Negro'], ['#FFFFFF', 'Blanco'], ['#E53935', 'Rojo'], ['#FB8C00', 'Naranja'], ['#FDD835', 'Amarillo'], ['#43A047', 'Verde'],
-  ['#1E88E5', 'Azul'], ['#8E24AA', 'Violeta'], ['#F48FB1', 'Rosa'], ['#8D6E63', 'Marrón'], ['#00ACC1', 'Celeste'], ['#9E9E9E', 'Gris']];
+const COLORS = [['#101318', 'color.black'], ['#FFFFFF', 'color.white'], ['#E53935', 'color.red'], ['#FB8C00', 'color.orange'], ['#FDD835', 'color.yellow'], ['#43A047', 'color.green'],
+  ['#1E88E5', 'color.blue'], ['#8E24AA', 'color.purple'], ['#F48FB1', 'color.pink'], ['#8D6E63', 'color.brown'], ['#00ACC1', 'color.cyan'], ['#9E9E9E', 'color.gray']];
 const BRUSH_SIZES = [6, 14, 30];
 const MAX_UNDO = 30;
 
@@ -36,23 +37,23 @@ export class PaintingTool {
     this.overlay = document.createElement('div');
     this.overlay.className = 'painting-tool';
     this.overlay.setAttribute('role', 'dialog');
-    this.overlay.setAttribute('aria-label', 'Dibujar');
+    this.overlay.setAttribute('aria-label', T('paint.title'));
 
     const top = document.createElement('div');
     top.className = 'painting-top';
     this.overlay.appendChild(top);
-    this.iconButton(top, 'x', 'Cerrar sin guardar', () => this.cancel(), 'cancel');
+    this.iconButton(top, 'x', T('paint.close'), () => this.cancel(), 'cancel');
     const tools = document.createElement('div');
     tools.className = 'painting-tools';
     top.appendChild(tools);
-    this.brushButton = this.iconButton(tools, 'brush', 'Pincel', () => { this.mode = 'brush'; this.updateToolbar(); }, 'tool brush');
-    this.eraserButton = this.iconButton(tools, 'eraser', 'Goma', () => { this.mode = 'eraser'; this.updateToolbar(); }, 'tool eraser');
-    this.bucketButton = this.iconButton(tools, 'bucket', 'Balde', () => { this.mode = 'bucket'; this.updateToolbar(); }, 'tool bucket');
-    this.iconButton(tools, 'undo', 'Deshacer', () => this.undo(), 'tool undo');
+    this.brushButton = this.iconButton(tools, 'brush', T('paint.brush'), () => { this.mode = 'brush'; this.updateToolbar(); }, 'tool brush');
+    this.eraserButton = this.iconButton(tools, 'eraser', T('paint.eraser'), () => { this.mode = 'eraser'; this.updateToolbar(); }, 'tool eraser');
+    this.bucketButton = this.iconButton(tools, 'bucket', T('paint.bucket'), () => { this.mode = 'bucket'; this.updateToolbar(); }, 'tool bucket');
+    this.iconButton(tools, 'undo', T('paint.undo'), () => this.undo(), 'tool undo');
     const finish = document.createElement('button');
     finish.type = 'button';
     finish.className = 'painting-finish finish';
-    finish.innerHTML = Icons.svg('check') + '<span>Listo</span>';
+    finish.innerHTML = Icons.svg('check') + '<span>' + T('paint.done') + '</span>';
     finish.addEventListener('click', () => this.finish());
     top.appendChild(finish);
 
@@ -62,7 +63,7 @@ export class PaintingTool {
     this.canvas.width = CANVAS_SIDE;
     this.canvas.height = CANVAS_SIDE;
     this.canvas.className = 'painting-canvas';
-    this.canvas.setAttribute('aria-label', 'Lienzo');
+    this.canvas.setAttribute('aria-label', T('paint.canvas'));
     frame.appendChild(this.canvas);
     this.overlay.appendChild(frame);
 
@@ -76,7 +77,7 @@ export class PaintingTool {
       const button = document.createElement('button');
       button.type = 'button';
       button.className = 'size';
-      button.title = 'Grosor ' + size;
+      button.title = T('paint.size') + ' ' + size;
       button.setAttribute('aria-label', button.title);
       const dot = document.createElement('span');
       dot.style.width = dot.style.height = Math.max(8, size * 0.8) + 'px';
@@ -93,8 +94,8 @@ export class PaintingTool {
       button.type = 'button';
       button.className = 'color';
       button.style.background = color;
-      button.title = name;
-      button.setAttribute('aria-label', name);
+      button.title = T(name);
+      button.setAttribute('aria-label', T(name));
       button.addEventListener('click', () => { this.color = color; if (this.mode === 'eraser') this.mode = 'brush'; this.updateToolbar(); });
       colors.appendChild(button);
       return button;

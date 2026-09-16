@@ -1,10 +1,11 @@
+import { T } from './Texts.js';
 import { Challenges } from './Challenge.js';
 import { Icons } from './Icons.js';
 import { PreviewView } from './PreviewView.js';
 import { NullBoardView } from '../board/NullBoardView.js';
 
 const STEP_INTERVAL_MS = 100;
-const CATEGORY_NAMES = { games: 'Desafío', didactic: 'Didáctico', mine: 'Mío' };
+const CATEGORY_NAMES = { games: 'category.games', didactic: 'category.didactic', mine: 'category.mine' };
 
 // El feed: un proyecto por pantalla, corriendo en vivo; se pasa al siguiente deslizando.
 // Cada uno se puede jugar ahí mismo (aparece el joystick), abrir en el editor o remixar.
@@ -49,7 +50,7 @@ export class Feed {
   emptyPost() {
     const post = document.createElement('div');
     post.className = 'post empty';
-    post.innerHTML = '<div class="post-board empty-board"><div class="empty-message">' + Icons.svg('pencil', { size: 48 }) + '<span>Creá tu primer proyecto</span></div></div>';
+    post.innerHTML = '<div class="post-board empty-board"><div class="empty-message">' + Icons.svg('pencil', { size: 48 }) + '<span>' + T('feed.empty') + '</span></div></div>';
     post.querySelector('.empty-board').addEventListener('click', () => this.app.createProject());
     return post;
   }
@@ -69,13 +70,13 @@ export class Feed {
     const top = document.createElement('div');
     top.className = 'post-top';
     const world = Challenges.worldOf(challenge);
-    top.innerHTML = '<div class="pill challenge-pill">' + Icons.svg('flag', { size: 14 }) + 'Desafío ' + challenge.number + '</div><div class="pill world-pill">' + world.emoji + ' ' + world.title + '</div>';
+    top.innerHTML = '<div class="pill challenge-pill">' + Icons.svg('flag', { size: 14 }) + T('feed.challenge') + ' ' + challenge.number + '</div><div class="pill world-pill">' + world.emoji + ' ' + world.title + '</div>';
     board.appendChild(top);
     const state = { entry, post, board, canvas, view: new PreviewView(project, canvas, { maxCellFactor: 1.4, minCell: 34 * (window.devicePixelRatio || 1) }), playing: false, joystick: null, playButton: null };
     const caption = document.createElement('div');
     caption.className = 'post-caption';
     caption.style.right = '12px';
-    caption.innerHTML = '<div class="who"><span class="avatar">' + challenge.emoji + '</span><span>Tu próximo desafío</span></div>';
+    caption.innerHTML = '<div class="who"><span class="avatar">' + challenge.emoji + '</span><span>' + T('feed.nextChallenge') + '</span></div>';
     const title = document.createElement('div');
     title.className = 'title';
     title.textContent = challenge.title;
@@ -88,7 +89,7 @@ export class Feed {
     const go = document.createElement('button');
     go.type = 'button';
     go.className = 'challenge-go';
-    go.innerHTML = Icons.svg('play') + '<span>Jugar</span>';
+    go.innerHTML = Icons.svg('play') + '<span>' + T('feed.play') + '</span>';
     go.addEventListener('click', () => this.app.openChallenge(challenge));
     board.appendChild(go);
     this.posts.push(state);
@@ -107,23 +108,23 @@ export class Feed {
     board.appendChild(canvas);
     const top = document.createElement('div');
     top.className = 'post-top';
-    top.innerHTML = '<div class="pill live"><i></i>en vivo</div><div class="pill">' + Icons.svg(entry.category === 'games' ? 'trophy' : (entry.category === 'didactic' ? 'book' : 'user'), { size: 14 }) + CATEGORY_NAMES[entry.category] + '</div>';
+    top.innerHTML = '<div class="pill live"><i></i>' + T('feed.live') + '</div><div class="pill">' + Icons.svg(entry.category === 'games' ? 'trophy' : (entry.category === 'didactic' ? 'book' : 'user'), { size: 14 }) + T(CATEGORY_NAMES[entry.category]) + '</div>';
     board.appendChild(top);
 
     const state = { entry, post, board, canvas, view: null, playing: false, joystick: null, playButton: null };
     const rail = document.createElement('div');
     rail.className = 'post-rail';
     board.appendChild(rail);
-    state.playButton = this.railButton(rail, 'play', 'Jugar', () => this.togglePlay(state));
-    this.railButton(rail, 'pencil', 'Abrir', () => this.app.openEntry(entry));
-    this.railButton(rail, 'remix', 'Copiar y cambiar', () => this.app.remix(entry));
-    if (entry.source === 'stored') this.railButton(rail, 'more', 'Más', button => this.app.openEntryMenu(entry, button));
+    state.playButton = this.railButton(rail, 'play', T('feed.play'), () => this.togglePlay(state));
+    this.railButton(rail, 'pencil', T('open'), () => this.app.openEntry(entry));
+    this.railButton(rail, 'remix', T('copyAndChange'), () => this.app.remix(entry));
+    if (entry.source === 'stored') this.railButton(rail, 'more', T('more'), button => this.app.openEntryMenu(entry, button));
 
     const caption = document.createElement('div');
     caption.className = 'post-caption';
     const who = document.createElement('div');
     who.className = 'who';
-    who.innerHTML = '<span class="avatar">' + (entry.source === 'stored' ? 'V' : 'R') + '</span><span>' + (entry.source === 'stored' ? 'Vos' : 'Representar') + '</span>';
+    who.innerHTML = '<span class="avatar">' + (entry.source === 'stored' ? 'V' : 'R') + '</span><span>' + (entry.source === 'stored' ? T('feed.you') : 'Representar') + '</span>';
     caption.appendChild(who);
     const title = document.createElement('div');
     title.className = 'title';
@@ -136,7 +137,7 @@ export class Feed {
     this.library.projectOf(entry).then(project => {
       state.view = new PreviewView(project, canvas, { maxCellFactor: 1.4, minCell: 34 * (window.devicePixelRatio || 1) });
       this.layoutPost(state);
-    }).catch(error => { console.error(error); title.textContent = 'No se pudo abrir: ' + this.library.titleOf(entry); });
+    }).catch(error => { console.error(error); title.textContent = T('error.openNamed') + this.library.titleOf(entry); });
     return post;
   }
 
@@ -160,7 +161,7 @@ export class Feed {
     if (state.playing) {
       const board = state.entry.project.boardModel;
       const movable = board.itemsMovableByArrows().length > 0 || board.itemsMovableByWASD().length > 0;
-      if (!movable) { this.app.toast('👀', 'Este proyecto se mira, no se maneja'); }
+      if (!movable) { this.app.toast('👀', T('feed.watchOnly')); }
       else if (state.joystick === null) state.joystick = this.app.joystickFor(state.board, state.entry.project);
       if (state.joystick !== null) state.joystick.show(true);
     } else if (state.joystick !== null) {

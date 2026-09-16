@@ -1,3 +1,4 @@
+import { T } from './Texts.js';
 import { Icons } from './Icons.js';
 import { Feed } from './Feed.js';
 import { Sheet } from './Sheet.js';
@@ -7,7 +8,7 @@ import { Achievements } from './Achievements.js';
 import { Progress } from './Progress.js';
 import { UsageLog } from './UsageLog.js';
 import { UsageSync } from './UsageSync.js';
-import { Challenges } from './Challenge.js';
+import { Challenges, Builds } from './Challenge.js';
 import { ProjectLibrary } from './ProjectLibrary.js';
 import { RepresentarVisualEnvironment } from './RepresentarVisualEnvironment.js';
 import { LanguageProvider, dictionaryAt } from '../io/LanguageProvider.js';
@@ -28,7 +29,15 @@ export class RepresentarApp {
     this.usageSync = new UsageSync(this.usage).start();
     const record = this.usage.record.bind(this.usage);
     this.usage.record = (name, data) => { const event = record(name, data); this.usageSync.eventRecorded(); return event; };
-    this.progress.onChange(() => { this.feed.rebuild(); if (this.currentScreen === 'badges') this.renderBadges(); });
+    this.progress.onChange(challenge => {
+      this.feed.rebuild();
+      if (challenge !== null && Challenges.worldOf(challenge) && this.progress.worldDone(Challenges.worldOf(challenge))) this.achievements.unlock('world');
+      if (this.progress.ladderDone()) this.achievements.unlock('ladder');
+      this.refreshPhase();
+      if (challenge === null && this.progress.freeUnlocked() && this.currentScreen === 'play') this.showScreen('feed');   // destrabado a mano: al inicio
+      if (this.currentScreen === 'badges') this.renderBadges();
+      if (this.currentScreen === 'play') this.renderPlay();
+    });
     this.progress.loadDrawings().catch(() => {});
     this.confirmRemoval = confirmRemoval || (entry => confirm(dictionaryAt('AreYouSureYouWantToDeleteProject') + ' (' + entry.name + ')'));
     this.achievements.onUnlock(achievement => this.celebrate(achievement));
@@ -52,10 +61,12 @@ export class RepresentarApp {
     this.root.innerHTML = '';
     this.root.classList.add('app');
     this.body = this.element('div', 'app-body', this.root);
+    this.playScreen = this.element('div', 'screen screen-play list-screen', this.body);
     this.feedScreen = this.element('div', 'screen screen-feed', this.body);
     this.feed = new Feed(this.feedScreen, this);
     this.mineScreen = this.element('div', 'screen screen-mine list-screen', this.body);
     this.badgesScreen = this.element('div', 'screen screen-badges list-screen', this.body);
+    this.buildPlay();
     this.buildMine();
     this.buildBadges();
     this.edgeTab = this.element('button', 'edge-tab', this.body, Icons.svg('pencil') + '<span>' + dictionaryAt('Create') + '</span>');
@@ -64,7 +75,7 @@ export class RepresentarApp {
     this.edgeTab.addEventListener('click', () => this.createProject());
     this.buildNav();
     this.editorRoot = this.element('div', 'editor', this.root);
-    this.showScreen('feed');
+    this.showScreen(this.progress.freeUnlocked() ? 'feed' : 'play');
   }
 
   element(tag, className, parent, html) {
@@ -94,16 +105,28 @@ export class RepresentarApp {
       this.navButtons[key] = button;
       return button;
     };
-    add('feed', 'Inicio', 'home');
-    add('mine', 'Míos', 'user');
+    add('play', T('nav.play'), 'flag');
+    add('feed', T('nav.home'), 'home');
+    add('mine', T('nav.mine'), 'user');
     const create = this.element('button', 'nav-button create', this.nav, '<span class="plus">' + Icons.svg('plus') + '</span>');
     create.type = 'button';
     create.title = dictionaryAt('NewProject');
     create.setAttribute('aria-label', dictionaryAt('NewProject'));
     create.addEventListener('click', () => this.createProject());
-    const badges = add('badges', 'Logros', 'medal');
+    this.createButton = create;
+    const badges = add('badges', T('nav.badges'), 'medal');
     this.navBadge = this.element('span', 'nav-count', badges);
     this.refreshNavBadge();
+    this.refreshPhase();
+  }
+
+  // Primero se juega y se ganan medallas; los juegos del curso y la creación libre se destraban después.
+  refreshPhase() {
+    const free = this.progress.freeUnlocked();
+    this.navButtons.feed.hidden = !free;
+    this.navButtons.mine.hidden = !free;
+    this.createButton.hidden = !free;
+    this.edgeTab.hidden = !free || this.currentScreen !== 'feed';
   }
 
   refreshNavBadge() {
@@ -113,12 +136,15 @@ export class RepresentarApp {
   }
 
   showScreen(name) {
+    if ((name === 'feed' || name === 'mine') && !this.progress.freeUnlocked()) name = 'play';
     this.currentScreen = name;
+    this.playScreen.hidden = name !== 'play';
     this.feedScreen.hidden = name !== 'feed';
     this.mineScreen.hidden = name !== 'mine';
     this.badgesScreen.hidden = name !== 'badges';
-    this.edgeTab.hidden = name !== 'feed';
+    this.edgeTab.hidden = name !== 'feed' || !this.progress.freeUnlocked();
     for (const [key, button] of Object.entries(this.navButtons)) button.setAttribute('aria-selected', String(key === name));
+    if (name === 'play') this.renderPlay();
     if (name === 'feed') this.feed.layout();
     if (name === 'mine') this.renderMine();
     if (name === 'badges') this.renderBadges();
@@ -127,7 +153,8 @@ export class RepresentarApp {
   show() {
     this.body.hidden = false;
     this.nav.hidden = false;
-    this.showScreen(this.currentScreen || 'feed');
+    this.refreshPhase();
+    this.showScreen(this.currentScreen || (this.progress.freeUnlocked() ? 'feed' : 'play'));
   }
 
   hide() {
@@ -141,10 +168,10 @@ export class RepresentarApp {
 
   buildMine() {
     const top = this.element('div', 'list-top', this.mineScreen);
-    this.element('h2', '', top).textContent = 'Míos';
-    this.iconButton(top, 'globe', 'Idioma', button => this.openLanguageMenu(button), 'ghost');
-    this.soundButton = this.iconButton(top, this.sounds.enabled ? 'sound' : 'soundOff', 'Sonido', () => this.toggleSound(), 'ghost');
-    this.iconButton(top, 'folder', 'Abrir un archivo .dialog.ar', () => this.fileInput.click(), 'ghost');
+    this.element('h2', '', top).textContent = T('mine.title');
+    this.iconButton(top, 'globe', T('language'), button => this.openLanguageMenu(button), 'ghost');
+    this.soundButton = this.iconButton(top, this.sounds.enabled ? 'sound' : 'soundOff', T('sound'), () => this.toggleSound(), 'ghost');
+    this.iconButton(top, 'folder', T('openFile'), () => this.fileInput.click(), 'ghost');
     this.fileInput = this.element('input', 'file-input', top);
     this.fileInput.type = 'file';
     this.fileInput.accept = '.ar,.zip,application/zip';
@@ -158,7 +185,7 @@ export class RepresentarApp {
 
   renderMine() {
     const mine = this.library.mine();
-    this.mineStats.innerHTML = '<span><b>' + mine.length + '</b>proyectos</span><span><b>' + this.achievements.count() + '</b>logros</span>';
+    this.mineStats.innerHTML = '<span><b>' + mine.length + '</b>' + T('mine.projects') + '</span><span><b>' + this.achievements.count() + '</b>' + T('mine.badges') + '</span>';
     this.mineGrid.innerHTML = '';
     const add = this.element('button', 'mini new', this.mineGrid, '<span class="plus">' + Icons.svg('plus') + '</span><span>Nuevo</span>');
     add.type = 'button';
@@ -178,28 +205,65 @@ export class RepresentarApp {
 
   // --- logros ---
 
+  buildPlay() {
+    const top = this.element('div', 'list-top', this.playScreen);
+    this.element('h2', '', top).textContent = T('play.title');
+    this.iconButton(top, 'globe', T('language'), button => this.openLanguageMenu(button), 'ghost');
+    this.playSoundButton = this.iconButton(top, this.sounds.enabled ? 'sound' : 'soundOff', T('sound'), () => this.toggleSound(), 'ghost');
+    this.playList = this.element('div', 'play-list', this.playScreen);
+  }
+
+  renderPlay() {
+    this.playList.innerHTML = '';
+    const next = this.progress.next();
+    if (next !== null) {
+      const button = this.element('button', 'next-card', this.playList, '<span class="next-emoji">' + next.emoji + '</span><span class="next-text"><b>' + T('play.next') + '</b><span>' + next.number + '. ' + next.title + '</span></span>' + Icons.svg('play'));
+      button.type = 'button';
+      button.addEventListener('click', () => this.openChallenge(next));
+    }
+    for (const world of Challenges.worlds()) this.renderWorld(world, this.playList);
+    const builds = this.element('div', 'world-heading' + (this.progress.buildsUnlocked() ? '' : ' locked'), this.playList);
+    builds.innerHTML = '<span class="world-emoji">🛠️</span><span class="world-title">' + T('play.builds') + '</span><span class="world-count">' + (this.progress.buildsUnlocked() ? Builds.all().filter(build => this.progress.isCompleted(build)).length + '/' + Builds.all().length : Icons.svg('lock')) + '</span>';
+    if (this.progress.buildsUnlocked()) {
+      const ladder = this.element('div', 'ladder', this.playList);
+      for (const build of Builds.all()) this.renderStep(build, ladder);
+    } else this.element('div', 'locked-hint', this.playList).textContent = T('play.locked');
+    const free = this.element('div', 'world-heading' + (this.progress.freeUnlocked() ? '' : ' locked'), this.playList);
+    free.innerHTML = '<span class="world-emoji">🎨</span><span class="world-title">' + T('play.free') + '</span><span class="world-count">' + (this.progress.freeUnlocked() ? Icons.svg('check') : Icons.svg('lock')) + '</span>';
+    if (!this.progress.freeUnlocked()) this.element('div', 'locked-hint', this.playList).textContent = T('play.freeHint');
+  }
+
+  // Un mundo terminado se muestra cerrado (sólo su título y 10/10); tocarlo lo abre.
+  renderWorld(world, container) {
+    const challenges = Challenges.inWorld(world.id);
+    const done = challenges.filter(challenge => this.progress.isCompleted(challenge)).length;
+    this.expandedWorlds = this.expandedWorlds || new Set();
+    const expanded = done < challenges.length || this.expandedWorlds.has(world.id);
+    const heading = this.element('button', 'world-heading' + (expanded ? '' : ' collapsed'), container);
+    heading.type = 'button';
+    heading.innerHTML = '<span class="world-emoji">' + world.emoji + '</span><span class="world-title">' + world.title + '</span><span class="world-count">' + done + '/' + challenges.length + '</span>' + Icons.svg(expanded ? 'chevronDown' : 'chevronRight', { size: 18 });
+    heading.addEventListener('click', () => { if (this.expandedWorlds.has(world.id)) this.expandedWorlds.delete(world.id); else this.expandedWorlds.add(world.id); this.renderPlay(); });
+    if (!expanded) return;
+    const ladder = this.element('div', 'ladder', container);
+    for (const challenge of challenges) this.renderStep(challenge, ladder);
+  }
+
+  renderStep(challenge, ladder) {
+    const completed = this.progress.isCompleted(challenge);
+    const step = this.element('button', 'ladder-step' + (completed ? ' done' : ''), ladder, '<span class="ladder-emoji">' + challenge.emoji + '</span><span class="ladder-title">' + challenge.number + '. ' + challenge.title + '</span>' + (completed ? Icons.svg('check') : Icons.svg('play')));
+    step.type = 'button';
+    step.title = challenge.goal;
+    step.addEventListener('click', () => this.openChallenge(challenge));
+  }
+
   buildBadges() {
     const top = this.element('div', 'list-top', this.badgesScreen);
-    this.element('h2', '', top).textContent = 'Logros';
+    this.element('h2', '', top).textContent = T('badges.title');
     this.badgesGrid = this.element('div', 'badges', this.badgesScreen);
   }
 
   renderBadges() {
     this.badgesGrid.innerHTML = '';
-    for (const world of Challenges.worlds()) {
-      const challenges = Challenges.inWorld(world.id);
-      const done = challenges.filter(challenge => this.progress.isCompleted(challenge)).length;
-      const heading = this.element('div', 'world-heading', this.badgesGrid);
-      heading.innerHTML = '<span class="world-emoji">' + world.emoji + '</span><span class="world-title">' + world.title + '</span><span class="world-count">' + done + '/' + challenges.length + '</span>';
-      const ladder = this.element('div', 'ladder', this.badgesGrid);
-      for (const challenge of challenges) {
-        const completed = this.progress.isCompleted(challenge);
-        const step = this.element('button', 'ladder-step' + (completed ? ' done' : ''), ladder, '<span class="ladder-emoji">' + challenge.emoji + '</span><span class="ladder-title">' + challenge.number + '. ' + challenge.title + '</span>' + (completed ? Icons.svg('check') : Icons.svg('play')));
-        step.type = 'button';
-        step.title = challenge.goal;
-        step.addEventListener('click', () => this.openChallenge(challenge));
-      }
-    }
     for (const achievement of Achievements.all()) {
       const unlocked = this.achievements.has(achievement.id);
       const card = this.element('div', 'badge-card' + (unlocked ? '' : ' locked'), this.badgesGrid);
@@ -222,6 +286,7 @@ export class RepresentarApp {
   start() {
     const next = this.progress.next();
     if (!this.progress.hasStarted() && next !== null) this.openChallenge(next);
+    else if (!this.progress.freeUnlocked()) { this.show(); this.showScreen('play'); }
     return this;
   }
 
@@ -239,7 +304,7 @@ export class RepresentarApp {
       this.openProject(project);
     } catch (error) {
       console.error(error);
-      this.toast('⚠️', 'No se pudo abrir el proyecto');
+      this.toast('⚠️', T('error.open'));
     }
   }
 
@@ -264,7 +329,7 @@ export class RepresentarApp {
       this.environment.markDirty();        // un remix es tuyo desde el primer momento
     } catch (error) {
       console.error(error);
-      this.toast('⚠️', 'No se pudo copiar el proyecto');
+      this.toast('⚠️', T('error.copy'));
     }
   }
 
@@ -278,7 +343,7 @@ export class RepresentarApp {
       this.openProject(project);
     } catch (error) {
       console.error(error);
-      this.toast('⚠️', 'No se pudo abrir el archivo');
+      this.toast('⚠️', T('error.file'));
     }
   }
 
@@ -318,9 +383,9 @@ export class RepresentarApp {
       button.type = 'button';
       button.addEventListener('click', async () => { sheet.close(); this.sounds.tap(); await action(); });
     };
-    item('pencil', 'Abrir', () => this.openEntry(entry));
-    item('remix', 'Copiar y cambiar', () => this.remix(entry));
-    item('save', 'Descargar .dialog.ar', () => this.download(entry));
+    item('pencil', T('open'), () => this.openEntry(entry));
+    item('remix', T('copyAndChange'), () => this.remix(entry));
+    item('save', T('download'), () => this.download(entry));
     if (entry.source === 'stored') item('trash', dictionaryAt('Delete'), () => this.removeEntry(entry));
   }
 
@@ -361,7 +426,7 @@ export class RepresentarApp {
 
   openLanguageMenu() {
     if (this.languages.length === 0) return this.toast('🌐', LanguageProvider.current().name);
-    const sheet = new Sheet(this.root, { title: 'Idioma', className: 'menu-sheet' });
+    const sheet = new Sheet(this.root, { title: T('language'), className: 'menu-sheet' });
     for (const language of this.languages) {
       const current = LanguageProvider.current() === language;
       const button = this.element('button', 'menu-item' + (current ? ' checked' : ''), sheet.body, Icons.svg(current ? 'check' : 'globe') + '<span>' + language.name + '</span>');

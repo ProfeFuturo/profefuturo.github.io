@@ -292,3 +292,16 @@ img { max-width: 100%; }
 .world-heading .world-count { margin-left: auto; font-size: 12px; color: var(--muted); font-weight: 700; }
 .world-heading .world-emoji { font-size: 20px; }
 .pill.world-pill { background: var(--surface); color: var(--muted); }
+/* ---------- pantalla Jugar: mundos, juegos del curso, creación libre ---------- */
+.play-list { display: flex; flex-direction: column; gap: 4px; padding-bottom: 24px; }
+.next-card { display: flex; align-items: center; gap: 12px; width: 100%; padding: 14px; border: none; border-radius: 18px; background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: white; text-align: left; cursor: pointer; box-shadow: 0 8px 20px rgba(255, 90, 60, 0.3); margin-bottom: 8px; font-family: var(--font); }
+.next-card .next-emoji { font-size: 30px; }
+.next-card .next-text { display: flex; flex-direction: column; flex: 1; gap: 2px; }
+.next-card .next-text b { font-size: 13px; text-transform: uppercase; letter-spacing: 0.06em; opacity: 0.9; }
+.next-card .next-text span { font-size: 17px; font-weight: 800; }
+.next-card .icon { width: 28px; height: 28px; }
+.world-heading.locked { opacity: 0.55; }
+.locked-hint { font-size: 13px; color: var(--muted); padding: 0 6px 10px; }
+button.world-heading { width: 100%; border: none; background: none; font-family: var(--font); color: var(--ink); cursor: pointer; text-align: left; }
+button.world-heading .icon { color: var(--muted); margin-left: 6px; }
+button.world-heading .world-count { margin-left: auto; }
