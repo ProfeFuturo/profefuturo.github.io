@@ -55,6 +55,11 @@ export async function start(root) {
   const [dictionaries, bundledProjects] = await Promise.all([loadDictionaries(), loadBundledProjectsIndex(), loadPredefinedImages()]);
   let storage = null;
   try { storage = window.localStorage; } catch (error) { /* sin storage */ }
+  // ?reset=1: empezar de cero con el mismo link (sin incógnito ni borrar caché); el parámetro se saca de la URL.
+  if (new URLSearchParams(window.location.search).has('reset')) {
+    try { for (const key of Object.keys(storage || {})) if (key.startsWith('representar.')) storage.removeItem(key); } catch (error) { /* sin storage */ }
+    try { window.history.replaceState(null, '', window.location.pathname); } catch (error) { /* sin history */ }
+  }
   let preferred = null;
   try { preferred = storage === null ? null : storage.getItem('representar.language'); } catch (error) { /* sin storage */ }
   // Inglés por defecto; el chico (o el docente) puede cambiarlo y queda guardado.

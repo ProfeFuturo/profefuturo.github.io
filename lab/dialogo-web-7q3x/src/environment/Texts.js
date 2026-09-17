@@ -19,6 +19,8 @@ const TEXTS = {
   'play.locked': { en: 'Finish the challenges to unlock', es: 'Terminá los desafíos para destrabar' },
   'play.builds': { en: 'Build your own games', es: 'Armá tus propios juegos' },
   'play.free': { en: 'Free creation', es: 'Creación libre' },
+  'play.startOver': { en: 'Start over from zero', es: 'Empezar de cero' },
+  'play.startOverConfirm': { en: 'Start over from zero? Your challenges and badges will be erased. Your projects stay.', es: '¿Empezar de cero? Se borran tus desafíos y medallas. Tus proyectos quedan.' },
   'play.freeHint': { en: 'Unlocks when you finish building the games', es: 'Se destraba cuando termines de armar los juegos' },
   'language': { en: 'Language', es: 'Idioma' },
   'sound': { en: 'Sound', es: 'Sonido' },

@@ -38,6 +38,7 @@ export class Challenge {
     project.challengeDrawings = drawings;
     project.availableSymbols = this.symbols;
     this.build(project, drawings, Challenge.predefinedOf(project), userDrawings);
+    if (this.kind === 'challenge') for (const item of project.boardModel.items()) item.locked = true;   // lo que viene armado no se toca
     project.boardModel.lockArea();
     project.boardModel.evaluateAllExpressionsAndReprintREPLSInformingUsers();
     project.boardModel.recordCurrentBoard();

@@ -309,3 +309,8 @@ button.world-heading .icon { color: var(--muted); margin-left: 6px; }
 button.world-heading .world-count { margin-left: auto; }
 .board-container.arena { display: flex; align-items: flex-end; justify-content: center; background: #eceef1; }   /* en el celular, las reglas pegadas a la bandeja */
 .board-container.arena .board-canvas { border-radius: 12px; box-shadow: var(--shadow-s); }
+.joystick-key.go.unused { visibility: hidden; }              /* el centro queda vacío cuando Enter no hace nada */
+.board-area.arena-band .board-container.arena { align-items: flex-start; }
+.board-area.arena-band .joystick { bottom: 2px; right: 50%; transform: translateX(50%); width: 120px; height: 114px; grid-template-columns: repeat(3, 40px); grid-template-rows: repeat(3, 38px); }
+.board-area.arena-band .joystick-key .icon { width: 20px; height: 20px; }
+.start-over { display: inline-flex; align-items: center; gap: 6px; align-self: center; margin-top: 18px; padding: 10px 14px; border-radius: 999px; border: none; background: var(--surface); color: var(--muted); font-family: var(--font); font-size: 13px; font-weight: 700; cursor: pointer; box-shadow: var(--shadow-s); min-height: 44px; }

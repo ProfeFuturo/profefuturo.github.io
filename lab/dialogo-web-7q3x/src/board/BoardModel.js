@@ -1428,6 +1428,9 @@ export class BoardModel {
     if (this.gridSize !== record.recordedGridSize()) { this.gridSize = record.recordedGridSize(); this.boardView.gridSizeChanged(); }
     this.zOrder = this.zOrder.filter(item => this.itemPositions.has(item));
     for (const item of this.itemPositions.keys()) if (!this.zOrder.includes(item)) this.zOrder.unshift(item);
+    for (const [item, wasSymbol] of record.recordedSymbolicStates()) {   // un elemento vuelto símbolo vuelve a ser elemento
+      if (this.itemPositions.has(item) && item.consideredSymbol !== wasSymbol && item.invertSymbolicStateIfCanBeElement) item.invertSymbolicStateIfCanBeElement();
+    }
     this.clearMemoizedMovableItems();
     this.refreshItems();
     this.boardView.boardRestored();

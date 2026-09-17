@@ -74,6 +74,9 @@ export class BoardView {
     const pixelWidth = this.boardModel.columns * gridSize;
     const pixelHeight = this.boardModel.rows * gridSize;
     this.container.classList.toggle('arena', this.boardModel.areaLocked);
+    // En el celular, si bajo el área de juego queda una franja libre, el joystick va ahí y no tapa las reglas.
+    const band = this.boardModel.areaLocked ? this.container.clientHeight - pixelHeight : 0;
+    if (this.container.parentElement) this.container.parentElement.classList.toggle('arena-band', band >= 116);
     if (this.canvas.width !== pixelWidth || this.canvas.height !== pixelHeight) {
       this.canvas.width = pixelWidth;
       this.canvas.height = pixelHeight;
@@ -235,7 +238,8 @@ export class BoardView {
   pointerDown(event) {
     this.canvas.focus({ preventScroll: true });
     this.closeHalo();
-    const item = this.itemAt(event.clientX, event.clientY);
+    let item = this.itemAt(event.clientX, event.clientY);
+    if (item !== null && item.locked && !item.isButton()) item = null;      // lo armado de un desafío no se arrastra ni se toca
     if (event.button === 2) {
       if (item !== null) this.openHaloFor(item);
       else this.startSelection(this.cellUnder(event.clientX, event.clientY), event.pointerId);
@@ -251,10 +255,8 @@ export class BoardView {
       return;
     }
     if (item.isButton()) { item.buttonPressed(); return; }
+    // Mantener apretado no abre nada: un chico que duda antes de arrastrar no tiene que encontrarse con un menú.
     this.pressed = { item, startX: event.clientX, startY: event.clientY, dragging: false, pointerId: event.pointerId };
-    this.pressed.longPressTimer = setTimeout(() => {
-      if (this.pressed !== null && !this.pressed.dragging) { this.openHaloFor(item); this.clearPressed(); }
-    }, LONG_PRESS_MS);
     event.preventDefault();
   }
 
@@ -289,7 +291,7 @@ export class BoardView {
     const pressed = this.pressed;
     this.clearPressed();
     // Un toque sobre un ítem (sin arrastrarlo) abre sus acciones.
-    if (pressed !== null && pressed.item !== null && !pressed.dragging && !pressed.item.isButton()) this.openHaloFor(pressed.item);
+    if (pressed !== null && pressed.item !== null && !pressed.dragging && !pressed.item.isButton() && this.environment.halosEnabled()) this.openHaloFor(pressed.item);
   }
 
   clearPressed() {
