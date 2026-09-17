@@ -10,6 +10,7 @@ import { Icons } from './Icons.js';
 import { Sounds } from './Sounds.js';
 import { Achievements } from './Achievements.js';
 import { ChallengeSession } from './ChallengeSession.js';
+import { Sentence } from '../metamodel/Sentence.js';
 import { COLUMNS as CHALLENGE_COLUMNS } from './Challenge.js';
 import { RepresentarVisualExporter } from '../io/RepresentarVisualExporter.js';
 import { dictionaryAt } from '../io/LanguageProvider.js';
@@ -210,7 +211,7 @@ export class RepresentarVisualEnvironment {
     const userDrawings = this.mainSpace !== null && this.mainSpace.progress ? this.mainSpace.progress.userDrawings() : [];
     this.openProject(challenge.projectFor({ gridSize: RepresentarVisualEnvironment.sideOfSymbolsOnEnvironmentPalet(), userDrawings }));
     const fit = this.challengeGridSize(challenge.columns, challenge.rows);
-    if (fit !== this.currentProject.boardModel.gridSize) this.currentProject.boardModel.changeGridSizeTo(fit);
+    if (fit !== this.currentProject.boardModel.gridSize) { this.currentProject.boardModel.changeGridSizeTo(fit); this.currentProject.boardModel.setCurrentAsResetBoard(); }
     return this.session;
   }
 
@@ -222,6 +223,8 @@ export class RepresentarVisualEnvironment {
   }
 
   isInChallenge() { return this.session !== null; }
+  // En un desafío de la escalera no hay halos (acciones sobre fichas): sólo arrastrar, tocar y jugar.
+  halosEnabled() { return this.session === null || this.session.challenge.kind !== 'challenge'; }
 
   endSession({ abandon = false } = {}) {
     if (this.session === null) return;
@@ -300,8 +303,11 @@ export class RepresentarVisualEnvironment {
     const board = this.currentProject.boardModel;
     const arrows = board.itemsMovableByArrows().length > 0;
     const wasd = board.itemsMovableByWASD().length > 0;
-    if (this.joysticks.arrows.element.hidden === !arrows && this.joysticks.wasd.element.hidden === !wasd) return;
-    this.joysticks.arrows.show(arrows);
+    const space = board.existsASubstitutionThatAppliesTo(Sentence.of('spaceBar'));
+    const enter = board.existsASubstitutionThatAppliesTo(Sentence.of('enterKey'));
+    this.joysticks.arrows.showExtraKeys({ enter, space });
+    if (this.joysticks.arrows.element.hidden === !(arrows || space || enter) && this.joysticks.wasd.element.hidden === !wasd) return;
+    this.joysticks.arrows.show(arrows || space || enter);
     this.joysticks.wasd.show(wasd);
   }
 

@@ -175,9 +175,8 @@ export class SymbolTray {
       const up = () => {
         clearTimeout(pressTimer);
         cleanup();
-        if (!started) this.openHaloFor(symbol, tile);     // un toque: las acciones del símbolo
+        if (!started && this.environment.halosEnabled()) this.openHaloFor(symbol, tile);     // un toque: las acciones del símbolo
       };
-      pressTimer = setTimeout(() => { cleanup(); this.openHaloFor(symbol, tile); }, LONG_PRESS_MS);
       window.addEventListener('pointermove', move);
       window.addEventListener('pointerup', up);
       window.addEventListener('pointercancel', up);

@@ -17,7 +17,7 @@ import { LanguageProvider, dictionaryAt } from '../io/LanguageProvider.js';
 // pestaña para crear y el editor (RepresentarVisualEnvironment). Es la dueña de la
 // biblioteca de proyectos, los sonidos y los logros. Reemplaza al WelcomeSpace de Cuis.
 export class RepresentarApp {
-  constructor(root, { library = new ProjectLibrary(), languages = [], storage = null, confirmRemoval = null } = {}) {
+  constructor(root, { library = new ProjectLibrary(), languages = [], storage = null, confirmRemoval = null, confirmStartOver = null } = {}) {
     this.root = root;
     this.library = library;
     this.languages = languages;
@@ -40,6 +40,7 @@ export class RepresentarApp {
     });
     this.progress.loadDrawings().catch(() => {});
     this.confirmRemoval = confirmRemoval || (entry => confirm(dictionaryAt('AreYouSureYouWantToDeleteProject') + ' (' + entry.name + ')'));
+    this.confirmStartOver = confirmStartOver || (() => confirm(T('play.startOverConfirm')));
     this.achievements.onUnlock(achievement => this.celebrate(achievement));
     this.build();
     this.environment = new RepresentarVisualEnvironment(this.editorRoot, { mainSpace: this });
@@ -231,6 +232,20 @@ export class RepresentarApp {
     const free = this.element('div', 'world-heading' + (this.progress.freeUnlocked() ? '' : ' locked'), this.playList);
     free.innerHTML = '<span class="world-emoji">🎨</span><span class="world-title">' + T('play.free') + '</span><span class="world-count">' + (this.progress.freeUnlocked() ? Icons.svg('check') : Icons.svg('lock')) + '</span>';
     if (!this.progress.freeUnlocked()) this.element('div', 'locked-hint', this.playList).textContent = T('play.freeHint');
+    const startOver = this.element('button', 'start-over', this.playList, Icons.svg('reset', { size: 16 }) + '<span>' + T('play.startOver') + '</span>');
+    startOver.type = 'button';
+    startOver.addEventListener('click', () => { if (this.confirmStartOver()) this.startOver(); });
+  }
+
+  // Empezar de cero con el mismo link: desafíos, medallas y dibujos; los proyectos quedan.
+  startOver() {
+    this.progress.reset();
+    this.achievements.reset();
+    this.usage.clear();
+    this.refreshNavBadge();
+    this.refreshPhase();
+    this.currentScreen = null;
+    this.start();
   }
 
   // Un mundo terminado se muestra cerrado (sólo su título y 10/10); tocarlo lo abre.

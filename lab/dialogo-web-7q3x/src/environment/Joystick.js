@@ -17,9 +17,15 @@ export class Joystick {
     for (const [name, icon] of [['up', 'arrowUp'], ['left', 'arrowLeft'], ['right', 'arrowRight'], ['down', 'arrowDown']]) {
       this.key(name, icon, name, board => { moves[name](board); board.recordCurrentBoard(); });
     }
-    this.key('go', 'play', T('joystick.enter'), () => environment.currentProject.enterKeyPressed());
-    this.key('space', 'space', T('joystick.space'), () => environment.currentProject.spaceBarPressed());
+    this.goKey = this.key('go', 'play', T('joystick.enter'), () => environment.currentProject.enterKeyPressed());
+    this.spaceKey = this.key('space', 'space', T('joystick.space'), () => environment.currentProject.spaceBarPressed());
     container.appendChild(this.element);
+  }
+
+  // Enter y Espacio sólo cuando alguna regla los usa: si no, son botones "al pedo".
+  showExtraKeys({ enter, space }) {
+    this.goKey.classList.toggle('unused', !enter);
+    this.spaceKey.hidden = !space;
   }
 
   key(name, icon, label, action) {
