@@ -209,16 +209,16 @@ export class RepresentarVisualEnvironment {
   openChallenge(challenge) {
     const userDrawings = this.mainSpace !== null && this.mainSpace.progress ? this.mainSpace.progress.userDrawings() : [];
     this.openProject(challenge.projectFor({ gridSize: RepresentarVisualEnvironment.sideOfSymbolsOnEnvironmentPalet(), userDrawings }));
-    const fit = this.challengeGridSize(challenge.columns);
-    if (fit < this.currentProject.boardModel.gridSize) this.currentProject.boardModel.changeGridSizeTo(fit);
+    const fit = this.challengeGridSize(challenge.columns, challenge.rows);
+    if (fit !== this.currentProject.boardModel.gridSize) this.currentProject.boardModel.changeGridSizeTo(fit);
     return this.session;
   }
 
-  // En un desafío todas las columnas entran enteras en el ancho: nada queda fuera de la pantalla.
-  challengeGridSize(columns = CHALLENGE_COLUMNS) {
-    const side = RepresentarVisualEnvironment.sideOfSymbolsOnEnvironmentPalet();
+  // En un desafío el área de juego entra entera en la pantalla (ancho y alto): nada queda afuera.
+  challengeGridSize(columns = CHALLENGE_COLUMNS, rows = 8) {
     const width = this.boardContainer.clientWidth || (typeof window === 'undefined' ? 1440 : window.innerWidth - 24);
-    return Math.max(36, Math.min(side, Math.floor((width - 6) / columns)));
+    const height = this.boardContainer.clientHeight || (typeof window === 'undefined' ? 900 : window.innerHeight - 300);
+    return Math.max(36, Math.min(96, Math.floor((width - 6) / columns), Math.floor((height - 6) / rows)));
   }
 
   isInChallenge() { return this.session !== null; }

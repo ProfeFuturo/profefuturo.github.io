@@ -22,6 +22,7 @@ export class BoardModel {
     this.gridSize = gridSize;
     this.columns = columns;
     this.rows = rows;
+    this.areaLocked = false;             // un desafío: el área de juego no crece con la pantalla (nadie se escapa por afuera)
     this.random = random;
     this.boardView = new NullBoardView();
     this.topicName = 'Board';
@@ -151,8 +152,11 @@ export class BoardModel {
 
   normalizePositionToGrid(position) { return position.rounded(); }
 
+  lockArea() { this.areaLocked = true; }
+
   changePositionWithoutEvaluationsOf(item, position) {
-    const adapted = this.normalizePositionToGrid(position).max(Point.ZERO);
+    let adapted = this.normalizePositionToGrid(position).max(Point.ZERO);
+    if (this.areaLocked) adapted = Point.at(Math.min(adapted.x, this.columns - 1), Math.min(adapted.y, this.rows - 1));
     this.itemPositions.set(item, adapted);
     if (!this.zOrder.includes(item)) this.zOrder.unshift(item);
     this.ensureExtentUpTo(adapted);
@@ -165,6 +169,7 @@ export class BoardModel {
   }
 
   ensureExtentUpTo(position) {
+    if (this.areaLocked) return;
     const factor = 1;
     if (position.x + factor > this.columns) this.columns = position.x + factor;
     if (position.y + factor > this.rows) this.rows = position.y + factor;

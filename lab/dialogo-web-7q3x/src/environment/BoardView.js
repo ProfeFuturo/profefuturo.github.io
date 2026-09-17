@@ -44,6 +44,7 @@ export class BoardView {
 
   dispose() {
     cancelAnimationFrame(this.frame);
+    document.removeEventListener('keydown', this.documentKeyDown);
     this.closeHalo();
   }
 
@@ -65,10 +66,14 @@ export class BoardView {
     const gridSize = this.gridSize;
     const columns = Math.ceil(Math.max(this.boardModel.columns * gridSize, this.container.clientWidth) / gridSize);
     const rows = Math.ceil(Math.max(this.boardModel.rows * gridSize, this.container.clientHeight) / gridSize);
-    if (columns > this.boardModel.columns) this.boardModel.columns = columns;
-    if (rows > this.boardModel.rows) this.boardModel.rows = rows;
+    if (!this.boardModel.areaLocked) {
+      if (columns > this.boardModel.columns) this.boardModel.columns = columns;
+      if (rows > this.boardModel.rows) this.boardModel.rows = rows;
+    }
+    // Un área bloqueada (desafío) se dibuja justo de su tamaño y se centra en el contenedor.
     const pixelWidth = this.boardModel.columns * gridSize;
     const pixelHeight = this.boardModel.rows * gridSize;
+    this.container.classList.toggle('arena', this.boardModel.areaLocked);
     if (this.canvas.width !== pixelWidth || this.canvas.height !== pixelHeight) {
       this.canvas.width = pixelWidth;
       this.canvas.height = pixelHeight;
@@ -215,6 +220,16 @@ export class BoardView {
     this.canvas.addEventListener('pointercancel', () => { this.clearPressed(); this.selecting = null; });
     this.canvas.addEventListener('contextmenu', event => event.preventDefault());
     this.canvas.addEventListener('keydown', event => this.keyDown(event));
+    // En una PC las flechas tienen que andar sin tocar antes el tablero: se escuchan en toda la
+    // página mientras el editor está a la vista y nadie está escribiendo.
+    this.documentKeyDown = event => {
+      if (event.target === this.canvas || this.environment.root.hidden || !this.canvas.isConnected) return;
+      const tag = (event.target && event.target.tagName) || '';
+      if (tag === 'INPUT' || tag === 'TEXTAREA' || (event.target && event.target.isContentEditable)) return;
+      if (document.querySelector('.painting-tool') !== null) return;
+      this.keyDown(event);
+    };
+    document.addEventListener('keydown', this.documentKeyDown);
   }
 
   pointerDown(event) {
@@ -393,6 +408,8 @@ export class BoardView {
     if (action === undefined) return;
     action();
     if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'w', 'a', 's', 'd', 'q', 'e', 'z', 'c'].includes(event.key)) board.recordCurrentBoard();
+    if (this.environment.pausedBySlots) { board.makeAllEnqueuedActions(); if (this.environment.session !== null) this.environment.session.check(); }
+    if (this.environment.achievements) this.environment.achievements.unlock('first-move');
     event.preventDefault();
   }
 }
