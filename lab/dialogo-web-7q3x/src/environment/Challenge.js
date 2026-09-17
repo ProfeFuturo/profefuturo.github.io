@@ -38,6 +38,7 @@ export class Challenge {
     project.challengeDrawings = drawings;
     project.availableSymbols = this.symbols;
     this.build(project, drawings, Challenge.predefinedOf(project), userDrawings);
+    project.boardModel.lockArea();
     project.boardModel.evaluateAllExpressionsAndReprintREPLSInformingUsers();
     project.boardModel.recordCurrentBoard();
     project.boardModel.setCurrentAsResetBoard();
