@@ -16,12 +16,12 @@
   "nav_label": "Languages",
   "tagline": "A visual programming environment where children draw their own symbols",
   "what_h2": "What is Diálogo?",
-  "what_p1": "Diálogo is a free programming environment for children (roughly ages 10 to 17; younger kids with an adult alongside) in which programs are built from symbols the children draw themselves, rather than from predefined blocks. The language rests on two relations between symbols, <strong>substitution</strong> and <strong>categorization</strong>, plus about ten visual combinators (push, pull, teleport, collide, wildcards, an evaluation viewer). From that small set, children build games, simulations and abstract symbolic models, such as numbers and addition from scratch.",
+  "what_p1": "It is a programming environment for children over 10 (younger ones with an adult alongside). In Diálogo, programs are built from symbols the children draw themselves. The language rests on two relations between symbols, <strong>substitution</strong> and <strong>categorization</strong>, plus about ten combinators (push, pull, teleport, collide, wildcards, an evaluation viewer). With their own drawings and these predefined visual symbols, children build games, simulations and abstract symbolic models, such as numbers and addition from scratch.",
   "what_p2": "Rules live on the same board as the game. A character can push a rule out of the way and change the program while it runs, so metaprogramming becomes something a child can see and touch. A step-by-step execution viewer shows which rule fired at each step, and doubles as the debugger.",
   "for_learners": "For learners:",
   "para_chicos": [
     "Build games from your own drawings",
-    "Give characters behavior by combining a handful of visual combinators",
+    "Give characters behavior by combining a few visual symbols",
     "See, step by step, why the game does what it does",
     "Make games that rewrite their own rules while you play"
   ],
@@ -30,15 +30,15 @@
     "Declarative from the first session, with no syntax and no imperative prerequisite",
     "Runs offline on modest hardware, with no account or server; projects are saved locally",
     "Interface in ten languages; adding one more means translating a single text file",
-    "A seven-session curriculum delivered as videos addressed to the children, so you can adopt it before mastering the paradigm"
+    "A seven-session curriculum delivered as videos addressed to the children, so the tool is easy to adopt"
   ],
   "gif_h2": "From a first drawing to a playable game in minutes",
   "gif_alt": "Animated demo of Diálogo: drawing symbols and combining them into a game",
   "step1_h2": "Start with the tutorial",
-  "step1_p": "An introduction you play in the browser, solving small challenges. It teaches the two relations the language is built on, and it needs no installation and no account.",
+  "step1_p": "An online introduction built around short challenges. It teaches the basics, with nothing to install and no account.",
   "step1_cta": "Start the tutorial",
   "step2_h2": "Download Diálogo",
-  "step2_p": "Free, no account needed. Pick the version for your operating system:",
+  "step2_p": "Pick the version for your operating system:",
   "cross_platform": "Cross-platform",
   "zip_note": "The ZIP runs on Linux, and also on Windows and Mac as an alternative to the installers.",
   "install_help": "Trouble installing? There is a video that walks you through it",
@@ -80,7 +80,7 @@
     }
   ],
   "research_h2": "For educators and researchers",
-  "research_intro": "Diálogo is developed at the University of Buenos Aires as a research project on declarative programming for children. Both the environment and the curriculum are released as artifacts for adoption and empirical study.",
+  "research_intro": "Some papers and academic talks where the project has been presented:",
   "paper1_when": "February 2027. To appear.",
   "paper1_note": "The environment's design, its evolution across an in-person workshop and an online course, and the seven-session sequence.",
   "paper2_note": "The conceptual foundation: substitution and categorization as the two relations from which the language is built.",
@@ -90,7 +90,5 @@
   "affiliation": "Agustín Rafael Martínez, Departamento de Computación, Facultad de Ciencias Exactas y Naturales, Universidad de Buenos Aires.",
   "shows_h2": "Shows at Nerdearla (with English subtitles)",
   "shows_p": "Two full stage shows built with Diálogo for a general audience. Spoken in Spanish; English subtitles are on by default.",
-  "made_by": "Made by Agustín, teacher and researcher at the University of Buenos Aires, also known as <strong>Profe Futuro</strong> 🚀",
-  "rights": "All rights reserved.",
   "step_format": "Step {n}"
 }

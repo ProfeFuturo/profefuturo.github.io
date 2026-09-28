@@ -16,12 +16,12 @@
   "nav_label": "Langues",
   "tagline": "Un environnement de programmation visuelle où les enfants dessinent leurs propres symboles",
   "what_h2": "Qu'est-ce que Diálogo ?",
-  "what_p1": "Diálogo est un environnement de programmation gratuit pour les enfants (environ 10 à 17 ans ; les plus jeunes accompagnés d'un adulte) où les programmes se construisent à partir de symboles que les enfants dessinent eux-mêmes, plutôt qu'avec des blocs prédéfinis. Le langage repose sur deux relations entre symboles, la <strong>substitution</strong> et la <strong>catégorisation</strong>, plus une dizaine de combinateurs visuels (pousser, attirer, téléporter, entrer en collision, jokers, un visualiseur d'évaluation). À partir de cet ensemble réduit, les enfants construisent des jeux, des simulations et des modèles symboliques abstraits, comme les nombres et l'addition à partir de rien.",
+  "what_p1": "C'est un environnement de programmation pour les enfants de plus de 10 ans (les plus jeunes accompagnés d'un adulte). Dans Diálogo, les programmes se construisent à partir de symboles que les enfants dessinent eux-mêmes. Le langage repose sur deux relations entre symboles, la <strong>substitution</strong> et la <strong>catégorisation</strong>, plus une dizaine de combinateurs (pousser, attirer, téléporter, entrer en collision, jokers, un visualiseur d'évaluation). Avec leurs dessins et ces symboles visuels prédéfinis, les enfants construisent des jeux, des simulations et des modèles symboliques abstraits, comme les nombres et l'addition à partir de rien.",
   "what_p2": "Les règles vivent sur le même plateau que le jeu. Un personnage peut pousser une règle et modifier le programme pendant qu'il tourne : la métaprogrammation devient ainsi quelque chose qu'un enfant peut voir et toucher. Un visualiseur d'exécution pas à pas montre quelle règle s'est appliquée à chaque étape, et sert aussi de débogueur.",
   "for_learners": "Pour les enfants :",
   "para_chicos": [
     "Construis des jeux avec tes propres dessins",
-    "Donne un comportement aux personnages en combinant quelques combinateurs visuels",
+    "Donne un comportement aux personnages en combinant quelques symboles visuels",
     "Regarde, pas à pas, pourquoi le jeu fait ce qu'il fait",
     "Fais des jeux qui réécrivent leurs propres règles pendant que tu joues"
   ],
@@ -30,15 +30,15 @@
     "Déclaratif dès la première séance, sans syntaxe et sans prérequis impératif",
     "Fonctionne hors ligne sur du matériel modeste, sans compte ni serveur ; les projets sont enregistrés sur la machine",
     "Interface en dix langues ; en ajouter une de plus revient à traduire un seul fichier texte",
-    "Une séquence de sept séances en vidéos adressées directement aux enfants : vous pouvez l'adopter avant de maîtriser le paradigme"
+    "Une séquence de sept séances en vidéos adressées aux enfants : l'outil s'adopte facilement"
   ],
   "gif_h2": "D'un premier dessin à un jeu jouable en quelques minutes",
   "gif_alt": "Démo animée de Diálogo : dessiner des symboles et les combiner en un jeu",
   "step1_h2": "Commencez par le tutoriel",
-  "step1_p": "Une introduction qui se joue dans le navigateur, en résolvant de courts défis. Elle enseigne les deux relations sur lesquelles repose le langage, sans rien installer et sans créer de compte.",
+  "step1_p": "Une introduction en ligne, faite de courts défis à résoudre. Elle enseigne les bases, sans rien installer et sans créer de compte.",
   "step1_cta": "Commencer le tutoriel",
   "step2_h2": "Téléchargez Diálogo",
-  "step2_p": "Gratuit et sans compte. Choisissez la version pour votre système d'exploitation :",
+  "step2_p": "Choisissez la version pour votre système d'exploitation :",
   "cross_platform": "Multiplateforme",
   "zip_note": "Le ZIP fonctionne sous Linux, et aussi sous Windows et Mac comme alternative aux installateurs.",
   "install_help": "Des difficultés à l'installer ? Une vidéo l'explique",
@@ -80,7 +80,7 @@
     }
   ],
   "research_h2": "Pour les enseignants et les chercheurs",
-  "research_intro": "Diálogo est développé à l'Université de Buenos Aires comme projet de recherche sur la programmation déclarative pour les enfants. L'environnement comme la séquence pédagogique sont publiés en tant qu'artefacts, pour l'adoption et l'étude empirique.",
+  "research_intro": "Quelques articles et conférences académiques où le projet a été présenté :",
   "paper1_when": "février 2027. Accepté, à paraître.",
   "paper1_note": "La conception de l'environnement, son évolution au fil d'un atelier en présentiel et d'un cours en ligne, et la séquence de sept séances.",
   "paper2_note": "La base conceptuelle : la substitution et la catégorisation comme les deux relations à partir desquelles le langage est construit.",
@@ -90,7 +90,5 @@
   "affiliation": "Agustín Rafael Martínez, Departamento de Computación, Facultad de Ciencias Exactas y Naturales, Universidad de Buenos Aires.",
   "shows_h2": "Spectacles à Nerdearla",
   "shows_p": "Deux spectacles complets construits avec Diálogo pour le grand public. En espagnol, avec sous-titres.",
-  "made_by": "Réalisé par Agustín, enseignant et chercheur à l'Université de Buenos Aires, connu aussi comme <strong>Profe Futuro</strong> 🚀",
-  "rights": "Tous droits réservés.",
   "step_format": "Étape {n}"
 }

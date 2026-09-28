@@ -16,12 +16,12 @@
   "nav_label": "Idiomas",
   "tagline": "Um ambiente de programação visual em que as crianças desenham seus próprios símbolos",
   "what_h2": "O que é o Diálogo?",
-  "what_p1": "Diálogo é um ambiente de programação gratuito para crianças (mais ou menos dos 10 aos 17 anos; as menores, com um adulto ao lado) em que os programas são construídos a partir de símbolos que as próprias crianças desenham, em vez de blocos predefinidos. A linguagem se apoia em duas relações entre símbolos, a <strong>substituição</strong> e a <strong>categorização</strong>, mais uma dezena de combinadores visuais (empurrar, puxar, teletransportar, colidir, curingas, um visualizador de avaliação). Com esse conjunto tão pequeno, as crianças constroem jogos, simulações e modelos simbólicos abstratos, como os números e a soma do zero.",
+  "what_p1": "É um ambiente de programação para crianças a partir dos 10 anos (as menores, com um adulto acompanhando). No Diálogo os programas são construídos a partir de símbolos que as próprias crianças desenham. A linguagem se apoia em duas relações entre símbolos, a <strong>substituição</strong> e a <strong>categorização</strong>, mais uma dezena de combinadores (empurrar, puxar, teletransportar, colidir, curingas, um visualizador de avaliação). Com os seus desenhos e esses símbolos visuais predefinidos, as crianças constroem jogos, simulações e modelos simbólicos abstratos, como os números e a soma do zero.",
   "what_p2": "As regras ficam no mesmo tabuleiro que o jogo. Um personagem pode empurrar uma regra e mudar o programa enquanto ele roda, de modo que a metaprogramação vira algo que uma criança pode ver e tocar. Um visualizador de execução passo a passo mostra qual regra foi aplicada em cada passo, e serve também como depurador.",
   "for_learners": "Para as crianças:",
   "para_chicos": [
     "Construa jogos com os seus próprios desenhos",
-    "Dê comportamento aos personagens combinando alguns poucos combinadores visuais",
+    "Dê comportamento aos personagens combinando alguns símbolos visuais",
     "Veja, passo a passo, por que o jogo faz o que faz",
     "Faça jogos que reescrevem as próprias regras enquanto você joga"
   ],
@@ -30,15 +30,15 @@
     "Declarativo desde a primeira aula, sem sintaxe e sem pré-requisito imperativo",
     "Funciona off-line em máquinas modestas, sem conta nem servidor; os projetos são salvos no computador",
     "Interface em dez idiomas; acrescentar mais um é traduzir um único arquivo de texto",
-    "Uma sequência de sete aulas em vídeos dirigidos às crianças, então dá para adotá-la antes de dominar o paradigma"
+    "Uma sequência de sete aulas em vídeos dirigidos às crianças, então a ferramenta é fácil de adotar"
   ],
   "gif_h2": "De um primeiro desenho a um jogo jogável em minutos",
   "gif_alt": "Demonstração animada do Diálogo: desenhar símbolos e combiná-los em um jogo",
   "step1_h2": "Comece pelo tutorial",
-  "step1_p": "Uma introdução que se joga no navegador, resolvendo desafios curtos. Ensina as duas relações em que a linguagem se apoia, sem instalar nada e sem criar conta.",
+  "step1_p": "Uma introdução online com desafios curtos para resolver. Ensina o básico, sem instalar nada e sem criar conta.",
   "step1_cta": "Começar o tutorial",
   "step2_h2": "Baixe o Diálogo",
-  "step2_p": "Grátis e sem conta. Escolha a versão do seu sistema operacional:",
+  "step2_p": "Escolha a versão do seu sistema operacional:",
   "cross_platform": "Multiplataforma",
   "zip_note": "O ZIP funciona no Linux, e também no Windows e no Mac como alternativa aos instaladores.",
   "install_help": "Problemas para instalar? Tem um vídeo que explica",
@@ -80,7 +80,7 @@
     }
   ],
   "research_h2": "Para professores e pesquisadores",
-  "research_intro": "O Diálogo é desenvolvido na Universidade de Buenos Aires como um projeto de pesquisa sobre programação declarativa para crianças. Tanto o ambiente quanto a sequência didática são publicados como artefatos, para adoção e estudo empírico.",
+  "research_intro": "Alguns artigos e palestras acadêmicas em que o projeto foi apresentado:",
   "paper1_when": "fevereiro de 2027. Aceito, no prelo.",
   "paper1_note": "O projeto do ambiente, sua evolução ao longo de uma oficina presencial e de um curso online, e a sequência de sete aulas.",
   "paper2_note": "A base conceitual: substituição e categorização como as duas relações a partir das quais a linguagem é construída.",
@@ -90,7 +90,5 @@
   "affiliation": "Agustín Rafael Martínez, Departamento de Computación, Facultad de Ciencias Exactas y Naturales, Universidad de Buenos Aires.",
   "shows_h2": "Shows na Nerdearla",
   "shows_p": "Dois shows completos feitos com o Diálogo para o público geral. Em espanhol, com legendas.",
-  "made_by": "Feito por Agustín, professor e pesquisador na Universidade de Buenos Aires, também conhecido como <strong>Profe Futuro</strong> 🚀",
-  "rights": "Todos os direitos reservados.",
   "step_format": "Passo {n}"
 }

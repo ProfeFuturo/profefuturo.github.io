@@ -16,12 +16,12 @@
   "nav_label": "Idiomas",
   "tagline": "Un entorno de programación visual en el que los chicos dibujan sus propios símbolos",
   "what_h2": "¿Qué es Diálogo?",
-  "what_p1": "Diálogo es un entorno de programación gratuito para chicos (de 10 a 17 años aproximadamente; los más chicos, con un adulto al lado) en el que los programas se construyen a partir de símbolos que los chicos dibujan ellos mismos, en vez de bloques predefinidos. El lenguaje se apoya en dos relaciones entre símbolos, la <strong>sustitución</strong> y la <strong>categorización</strong>, más una decena de combinadores visuales (empujar, atraer, teletransportar, colisionar, comodines, un visor de evaluación). Con ese conjunto tan chico, los chicos construyen juegos, simulaciones y modelos simbólicos abstractos, como los números y la suma desde cero.",
-  "what_p2": "Las reglas viven en el mismo tablero que el juego. Un personaje puede empujar una regla y cambiar el programa mientras corre, así que la metaprogramación se vuelve algo que un chico puede ver y tocar. Un visualizador de ejecución paso a paso muestra qué regla se aplicó en cada paso, y sirve también como debugger.",
+  "what_p1": "Es un entorno de programación para chicos de más de 10 años (los más chicos, con un adulto acompañando). En Diálogo los programas se construyen a partir de símbolos que los chicos dibujan ellos mismos. El lenguaje se apoya en dos relaciones entre símbolos, la <strong>sustitución</strong> y la <strong>categorización</strong>, más una decena de combinadores (empujar, atraer, teletransportar, colisionar, comodines, un visor de evaluación). Con sus dibujos y estos símbolos visuales predefinidos, los chicos construyen juegos, simulaciones y modelos simbólicos abstractos, como los números y la suma desde cero.",
+  "what_p2": "Las reglas viven en el mismo tablero que el juego. Un personaje puede empujar una regla y cambiar el programa mientras corre, así que la metaprogramación se vuelve algo que un niño puede ver y tocar. Un visualizador de ejecución paso a paso muestra qué regla se aplicó en cada paso, y sirve también como debugger.",
   "for_learners": "Para los chicos:",
   "para_chicos": [
     "Construí juegos con tus propios dibujos",
-    "Dales comportamiento a los personajes combinando unos pocos combinadores visuales",
+    "Dales comportamiento a los personajes combinando unos pocos símbolos visuales",
     "Mirá, paso a paso, por qué el juego hace lo que hace",
     "Hacé juegos que reescriben sus propias reglas mientras jugás"
   ],
@@ -30,15 +30,15 @@
     "Declarativo desde la primera clase, sin sintaxis y sin prerrequisito imperativo",
     "Funciona sin conexión en computadoras modestas, sin cuenta ni servidor; los proyectos se guardan en la máquina",
     "Interfaz en diez idiomas; agregar uno más es traducir un solo archivo de texto",
-    "Una secuencia didáctica de 7 clases en videos dirigidos a los chicos, así que podés adoptarla antes de dominar el paradigma"
+    "Una secuencia didáctica de 7 clases en videos dirigidos a los chicos, así podés adoptar la herramienta fácilmente"
   ],
   "gif_h2": "De un primer dibujo a un juego jugable en minutos",
   "gif_alt": "Demo animada de Diálogo: dibujar símbolos y combinarlos en un juego",
   "step1_h2": "Empezá por el tutorial",
-  "step1_p": "Una introducción que se juega en el navegador, resolviendo desafíos cortos. Enseña las dos relaciones sobre las que se apoya el lenguaje, y no hay que instalar nada ni crear una cuenta.",
+  "step1_p": "Una introducción online para resolver desafíos cortos. Enseña lo básico y no hay que instalar nada ni crear una cuenta.",
   "step1_cta": "Empezar el tutorial",
   "step2_h2": "Descargá Diálogo",
-  "step2_p": "Gratis y sin cuenta. Elegí la versión para tu sistema operativo:",
+  "step2_p": "Elegí la versión para tu sistema operativo:",
   "cross_platform": "Multiplataforma",
   "zip_note": "El ZIP funciona en Linux, y también en Windows y Mac como alternativa a los instaladores.",
   "install_help": "¿Tenés problemas para instalarlo? Acá hay un video que lo explica",
@@ -80,7 +80,7 @@
     }
   ],
   "research_h2": "Para docentes e investigadores",
-  "research_intro": "Diálogo se desarrolla en la Universidad de Buenos Aires como un proyecto de investigación sobre programación declarativa para chicos. Tanto el entorno como la secuencia didáctica se publican como artefactos para su adopción y su estudio empírico.",
+  "research_intro": "Algunos artículos y charlas académicas donde se ha presentado el proyecto:",
   "paper1_when": "febrero de 2027. Aceptado, en prensa.",
   "paper1_note": "El diseño del entorno, su evolución a lo largo de un taller presencial y un curso online, y la secuencia de 7 clases.",
   "paper2_note": "La base conceptual: sustitución y categorización como las dos relaciones a partir de las cuales se construye el lenguaje.",
@@ -90,7 +90,5 @@
   "affiliation": "Agustín Rafael Martínez, Departamento de Computación, Facultad de Ciencias Exactas y Naturales, Universidad de Buenos Aires.",
   "shows_h2": "Shows en Nerdearla",
   "shows_p": "Dos shows completos armados con Diálogo para público general. Los subtítulos están activados por defecto, por si los mirás sin sonido.",
-  "made_by": "Hecho por Agustín, docente e investigador en la Universidad de Buenos Aires, también conocido como <strong>Profe Futuro</strong> 🚀",
-  "rights": "Todos los derechos reservados.",
   "step_format": "Paso {n}"
 }

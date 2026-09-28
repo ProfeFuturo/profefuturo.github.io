@@ -16,12 +16,12 @@
   "nav_label": "Sprachen",
   "tagline": "Eine visuelle Programmierumgebung, in der Kinder ihre eigenen Symbole zeichnen",
   "what_h2": "Was ist Diálogo?",
-  "what_p1": "Diálogo ist eine kostenlose Programmierumgebung für Kinder und Jugendliche (etwa 10 bis 17 Jahre; Jüngere mit einer erwachsenen Person daneben), in der Programme aus Symbolen entstehen, die die Kinder selbst zeichnen, statt aus vorgefertigten Blöcken. Die Sprache beruht auf zwei Beziehungen zwischen Symbolen, der <strong>Ersetzung</strong> und der <strong>Kategorisierung</strong>, dazu etwa zehn visuelle Kombinatoren (schieben, ziehen, teleportieren, zusammenstoßen, Platzhalter, ein Auswertungsfenster). Aus dieser kleinen Menge bauen Kinder Spiele, Simulationen und abstrakte symbolische Modelle, etwa Zahlen und Addition von Grund auf.",
+  "what_p1": "Es ist eine Programmierumgebung für Kinder ab 10 Jahren (Jüngere mit einer erwachsenen Person daneben). In Diálogo entstehen Programme aus Symbolen, die die Kinder selbst zeichnen. Die Sprache beruht auf zwei Beziehungen zwischen Symbolen, der <strong>Ersetzung</strong> und der <strong>Kategorisierung</strong>, dazu etwa zehn Kombinatoren (schieben, ziehen, teleportieren, zusammenstoßen, Platzhalter, ein Auswertungsfenster). Mit ihren eigenen Zeichnungen und diesen vorgefertigten visuellen Symbolen bauen Kinder Spiele, Simulationen und abstrakte symbolische Modelle, etwa Zahlen und Addition von Grund auf.",
   "what_p2": "Die Regeln liegen auf demselben Spielfeld wie das Spiel. Eine Figur kann eine Regel wegschieben und das Programm im laufenden Betrieb verändern, so wird Metaprogrammierung zu etwas, das ein Kind sehen und anfassen kann. Ein Schritt-für-Schritt-Ausführungsfenster zeigt, welche Regel in jedem Schritt angewendet wurde, und dient zugleich als Debugger.",
   "for_learners": "Für Kinder:",
   "para_chicos": [
     "Bau Spiele aus deinen eigenen Zeichnungen",
-    "Gib den Figuren Verhalten, indem du ein paar visuelle Kombinatoren zusammensetzt",
+    "Gib den Figuren Verhalten, indem du ein paar visuelle Symbole kombinierst",
     "Sieh Schritt für Schritt, warum das Spiel tut, was es tut",
     "Bau Spiele, die ihre eigenen Regeln beim Spielen umschreiben"
   ],
@@ -30,15 +30,15 @@
     "Deklarativ von der ersten Einheit an, ohne Syntax und ohne imperative Vorkenntnisse",
     "Läuft offline auf bescheidener Hardware, ohne Konto und ohne Server; Projekte bleiben auf dem Rechner",
     "Oberfläche in zehn Sprachen; eine weitere hinzuzufügen heißt, eine einzige Textdatei zu übersetzen",
-    "Eine Reihe aus sieben Einheiten als Videos, die sich direkt an die Kinder richten, also übernehmbar, bevor man das Paradigma beherrscht"
+    "Eine Reihe aus sieben Einheiten als Videos für die Kinder, so lässt sich das Werkzeug leicht übernehmen"
   ],
   "gif_h2": "Von der ersten Zeichnung zum spielbaren Spiel in Minuten",
   "gif_alt": "Animierte Demo von Diálogo: Symbole zeichnen und zu einem Spiel zusammensetzen",
   "step1_h2": "Fang mit dem Tutorial an",
-  "step1_p": "Eine Einführung, die im Browser gespielt wird, mit kurzen Aufgaben. Sie vermittelt die zwei Beziehungen, auf denen die Sprache beruht, ohne Installation und ohne Konto.",
+  "step1_p": "Eine Einführung im Browser, aufgebaut aus kurzen Aufgaben. Sie vermittelt die Grundlagen, ohne Installation und ohne Konto.",
   "step1_cta": "Tutorial starten",
   "step2_h2": "Diálogo herunterladen",
-  "step2_p": "Kostenlos und ohne Konto. Wähle die Version für dein Betriebssystem:",
+  "step2_p": "Wähle die Version für dein Betriebssystem:",
   "cross_platform": "Plattformübergreifend",
   "zip_note": "Das ZIP läuft unter Linux und, als Alternative zu den Installationsprogrammen, auch unter Windows und Mac.",
   "install_help": "Probleme bei der Installation? Ein Video erklärt sie",
@@ -80,7 +80,7 @@
     }
   ],
   "research_h2": "Für Lehrkräfte und Forschende",
-  "research_intro": "Diálogo entsteht an der Universität von Buenos Aires als Forschungsprojekt zur deklarativen Programmierung für Kinder. Sowohl die Umgebung als auch die Unterrichtsreihe werden als Artefakte veröffentlicht, zur Übernahme und zur empirischen Untersuchung.",
+  "research_intro": "Einige Aufsätze und wissenschaftliche Vorträge, in denen das Projekt vorgestellt wurde:",
   "paper1_when": "Februar 2027. Angenommen, im Erscheinen.",
   "paper1_note": "Der Entwurf der Umgebung, ihre Entwicklung über einen Präsenzworkshop und einen Onlinekurs hinweg, und die Reihe aus sieben Einheiten.",
   "paper2_note": "Die begriffliche Grundlage: Ersetzung und Kategorisierung als die zwei Beziehungen, aus denen die Sprache aufgebaut ist.",
@@ -90,7 +90,5 @@
   "affiliation": "Agustín Rafael Martínez, Departamento de Computación, Facultad de Ciencias Exactas y Naturales, Universidad de Buenos Aires.",
   "shows_h2": "Bühnenshows bei Nerdearla",
   "shows_p": "Zwei vollständige Bühnenshows, mit Diálogo gebaut, für ein allgemeines Publikum. Auf Spanisch, mit Untertiteln.",
-  "made_by": "Gemacht von Agustín, Lehrender und Forscher an der Universität von Buenos Aires, auch bekannt als <strong>Profe Futuro</strong> 🚀",
-  "rights": "Alle Rechte vorbehalten.",
   "step_format": "Schritt {n}"
 }
