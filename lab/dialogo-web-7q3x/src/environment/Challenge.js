@@ -154,8 +154,8 @@ const ENGLISH = {
   'rule-by-playing': { mission: "Make a rule by pushing its pieces, then reach the star.", title: 'Make a rule by playing', steps: ['Push "pulls" into the little square of the rule', 'Now take the character to the star. The box follows'], praise: 'You made a rule without the tray: by pushing its pieces around the board.' },
   'fire': { mission: "Shoot an arrow at the ghost.", title: 'Bullseye', steps: ['Drag "runs to" to the little square, between the arrow and the ghost', 'Tap the space bar'], praise: 'The space bar makes the arrow appear at the ship, and the arrow runs to the ghost. Two rules, one bullseye.' },
   'missile': { mission: "Shoot the ghost down so it disappears.", title: 'Make it vanish', steps: ['Drag the black hole to the little square at the end of the top rule', 'Tap the space bar'], praise: 'One more rule: when the arrow crashes into the ghost, the ghost falls into the black hole. It disappears for good.' },
-  'next': { mission: "Invent the number 3.", title: 'The next one', steps: ['Drag the 3 to the little square: the next one after 2 is 3', 'Put the eyes next to the 2 at the top'], praise: 'There are no numbers in Diálogo: you invent them. "Next of 2 → 3" is a rule like any other.' },
-  'add-zero': { mission: "Teach Diálogo to add zero.", title: 'Adding zero', steps: ['Drag "number" to the little square at the end of the rule', 'Put the eyes next to the 2 at the top'], praise: 'Zero plus a number is that number. Addition starts with that rule: the base case.' },
+  'next': { mission: "Invent the number 3.", title: 'The next one', steps: ['Put the eyes next to the 2 at the top', 'Now drag the 3 to the little square: the next one after 2 is 3'], praise: 'There are no numbers in Diálogo: you invent them. "Next of 2 → 3" is a rule like any other.' },
+  'add-zero': { mission: "Teach Diálogo to add zero.", title: 'Adding zero', steps: ['Put the eyes next to the 2 at the top', 'Now drag "number" to the little square at the end of the rule'], praise: 'Zero plus a number is that number. Addition starts with that rule: the base case.' },
   'build-chess': { title: 'Chess', steps: ['Tap the pencil and draw a black piece', 'Now draw a white piece', 'Put a black piece and a white piece on the board', 'Make the rule: black piece · arrows', 'Make the eating rule: black · bumps · white · turns into · white · teleport · black hole', 'Eat the white piece'], praise: 'You built a tiny chess: your pieces, your rules. The real one adds categories: "black piece" for all the black ones.' },
   'score': { mission: "Make the score go up when you eat a star.", title: 'Score', steps: ['Drag "points to" to the little square at the end of the rule', 'Put the eyes next to the score', 'Crash into both stars and watch the score'], praise: 'Crashing does not set a number: it swaps the rule "score → 0" for "score → the next one". It adds one every time. No variables.' },
 };
@@ -648,10 +648,10 @@ const LADDER = [
   new Challenge({
     id: 'next', number: 23, world: 'numeros', title: 'El siguiente', emoji: '⬆️',
     mission: 'Inventá el número 3.',
-    goal: 'Arrastrá el 3 hasta el cuadradito: el siguiente de 2 es 3',
+    goal: 'Poné los ojitos al lado del 2 de arriba',
     steps: [
-      { text: 'Arrastrá el 3 hasta el cuadradito: el siguiente de 2 es 3', done: project => !Challenge.ruleCellIsEmpty(project, 3, 6) },
-      { text: 'Poné los ojitos al lado del 2 de arriba', done: null },
+      { text: 'Poné los ojitos al lado del 2 de arriba', done: project => !Challenge.ruleCellIsEmpty(project, 2, 3) },
+      { text: 'Ahora arrastrá el 3 hasta el cuadradito: el siguiente de 2 es 3', done: null },
     ],
     praise: 'No hay números en Diálogo: los inventás vos. «Siguiente de 2 → 3» es una regla como cualquier otra.',
     symbols: ['replSymbol'], slots: [Point.at(3, 6), Point.at(2, 3)],
@@ -662,8 +662,8 @@ const LADDER = [
       Challenge.rule(project, [drawings.next, drawings.two, predefined.pointsSymbol, null], 6);
     },
     isCompleted: (project, drawings) => project.boardModel.symbolsInPosition(Point.at(3, 3)).some(item => item.visualSymbolAssociated.equals(drawings.three)),
-    hint: (project, drawings) => Challenge.ruleCellIsEmpty(project, 3, 6) ? { cell: Point.at(3, 6), drawing: drawings.three } : { cell: Point.at(2, 3), selector: 'replSymbol' },
-    solution: play => { play.dropDrawing('three', 3, 6); play.drop('replSymbol', 2, 3); },
+    hint: (project, drawings) => Challenge.ruleCellIsEmpty(project, 2, 3) ? { cell: Point.at(2, 3), selector: 'replSymbol' } : { cell: Point.at(3, 6), drawing: drawings.three },
+    solution: play => { play.drop('replSymbol', 2, 3); play.dropDrawing('three', 3, 6); },
   }),
 
   // ---------- Mundo 8: Puntos ----------
@@ -701,10 +701,10 @@ const LADDER = [
   new Challenge({
     id: 'add-zero', number: 25, world: 'numeros', title: 'Sumar cero', emoji: '➕',
     mission: 'Enseñale a Diálogo a sumar cero.',
-    goal: 'Arrastrá «número» hasta el cuadradito del final de la regla',
+    goal: 'Poné los ojitos al lado del 2 de arriba',
     steps: [
-      { text: 'Arrastrá «número» hasta el cuadradito del final de la regla', done: project => !Challenge.ruleCellIsEmpty(project, 4, 7) },
-      { text: 'Poné los ojitos al lado del 2 de arriba', done: null },
+      { text: 'Poné los ojitos al lado del 2 de arriba', done: project => !Challenge.ruleCellIsEmpty(project, 3, 2) },
+      { text: 'Ahora arrastrá «número» hasta el cuadradito del final de la regla', done: null },
     ],
     praise: 'Cero más un número es ese número. Con esa regla empieza la suma: es el caso base.',
     symbols: ['replSymbol'], slots: [Point.at(4, 7), Point.at(3, 2)],
@@ -716,8 +716,8 @@ const LADDER = [
       Challenge.rule(project, [drawings.zero, drawings.plus, drawings.number, predefined.pointsSymbol, null], 7);
     },
     isCompleted: (project, drawings) => project.boardModel.symbolsInPosition(Point.at(4, 2)).some(item => item.visualSymbolAssociated.equals(drawings.two)),
-    hint: (project, drawings) => Challenge.ruleCellIsEmpty(project, 4, 7) ? { cell: Point.at(4, 7), drawing: drawings.number } : { cell: Point.at(3, 2), selector: 'replSymbol' },
-    solution: play => { play.dropDrawing('number', 4, 7); play.drop('replSymbol', 3, 2); },
+    hint: (project, drawings) => Challenge.ruleCellIsEmpty(project, 3, 2) ? { cell: Point.at(3, 2), selector: 'replSymbol' } : { cell: Point.at(4, 7), drawing: drawings.number },
+    solution: play => { play.drop('replSymbol', 3, 2); play.dropDrawing('number', 4, 7); },
   }),
 ];
 

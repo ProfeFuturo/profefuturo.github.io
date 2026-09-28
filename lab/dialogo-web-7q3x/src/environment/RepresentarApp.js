@@ -31,6 +31,7 @@ export class RepresentarApp {
     this.usage.record = (name, data) => { const event = record(name, data); this.usageSync.eventRecorded(); return event; };
     this.progress.onChange(challenge => {
       this.feed.rebuild();
+      if (challenge !== null && challenge.id === 'eyes') this.achievements.unlock('detective');
       if (challenge !== null && Challenges.worldOf(challenge) && this.progress.worldDone(Challenges.worldOf(challenge))) this.achievements.unlock('world');
       if (this.progress.ladderDone()) this.achievements.unlock('ladder');
       this.refreshPhase();
@@ -61,6 +62,7 @@ export class RepresentarApp {
   build() {
     this.root.innerHTML = '';
     this.root.classList.add('app');
+    if (typeof document !== 'undefined') document.title = T('app.title');
     this.body = this.element('div', 'app-body', this.root);
     this.playScreen = this.element('div', 'screen screen-play list-screen', this.body);
     this.feedScreen = this.element('div', 'screen screen-feed', this.body);
@@ -479,13 +481,22 @@ export class RepresentarApp {
     }
   }
 
+  // Cambiar el idioma rehace toda la app (menús, pantallas y editor) y vuelve a donde estaba.
   currentLanguageName(language) {
     LanguageProvider.setCurrent(language);
     try { if (this.storage !== null) this.storage.setItem('representar.language', language.name); } catch (error) { /* sin storage */ }
-    this.environment.build();
+    const challenge = this.environment.isInChallenge() ? this.environment.currentProject.challenge : null;
+    const project = challenge === null && this.environment.isVisible() ? this.environment.currentProject : null;
+    const screen = this.currentScreen;
+    this.environment.dispose();
+    this.build();
+    this.environment = new RepresentarVisualEnvironment(this.editorRoot, { mainSpace: this });
     this.environment.hide();
     this.refreshSoundButtons();
-    this.edgeTab.querySelector('span').textContent = dictionaryAt('Create');
+    this.refreshNavBadge();
+    if (challenge !== null) this.openChallenge(challenge);
+    else if (project !== null) { this.hide(); this.environment.openProject(project); this.environment.show(); }
+    else { this.show(); this.showScreen(screen || 'play'); }
   }
 
   toggleSound() {

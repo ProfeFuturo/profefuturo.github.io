@@ -117,8 +117,8 @@ export class RepresentarVisualEnvironment {
     this.levelCounter = this.element('span', 'level-counter', this.topBar);
     this.levelCounter.hidden = true;
     this.previousButton = this.iconButton(this.topBar, 'skipBack', T('play.previous'), () => this.openPreviousChallenge(), 'previous-button');
-    this.zoomOutButton = this.iconButton(this.topBar, 'zoomOut', dictionaryAt('ZoomOut'), () => this.withProject(project => project.boardModel.zoomOut()), 'zoom-button');
-    this.zoomInButton = this.iconButton(this.topBar, 'zoomIn', dictionaryAt('ZoomIn'), () => this.withProject(project => project.boardModel.zoomIn()), 'zoom-button');
+    this.zoomOutButton = this.iconButton(this.topBar, 'zoomOut', dictionaryAt('ZoomOut'), () => this.zoomBy(-8), 'zoom-button');
+    this.zoomInButton = this.iconButton(this.topBar, 'zoomIn', dictionaryAt('ZoomIn'), () => this.zoomBy(8), 'zoom-button');
     this.soundButton = this.iconButton(this.topBar, this.sounds.enabled ? 'sound' : 'soundOff', T('sound'), () => { if (this.mainSpace !== null) this.mainSpace.toggleSound(); }, 'sound-button');
     this.soundButton.classList.toggle('muted', !this.sounds.enabled);
     this.languageButton = this.iconButton(this.topBar, 'globe', T('language'), button => { if (this.mainSpace !== null) this.mainSpace.openLanguageMenu(button); }, 'language-button');
@@ -255,7 +255,25 @@ export class RepresentarVisualEnvironment {
 
   openPreviousChallenge() { const previous = this.previousChallenge(); if (previous !== null) this.openChallenge(previous); }
 
+  // Zoom a la vista: cambia el tamaño de las celdas ya mismo (el tiempo puede estar detenido).
+  zoomBy(delta) {
+    this.withProject(project => {
+      const board = project.boardModel;
+      const size = Math.max(24, Math.min(120, board.gridSize + delta));
+      if (size === board.gridSize) return;
+      board.changeGridSizeTo(size);
+      this.refreshZoomButtons();
+    });
+  }
+
+  refreshZoomButtons() {
+    const size = this.currentProject === null ? 0 : this.currentProject.boardModel.gridSize;
+    this.zoomOutButton.disabled = size <= 24;
+    this.zoomInButton.disabled = size >= 120;
+  }
+
   refreshChallengeButtons() {
+    this.refreshZoomButtons();
     this.previousButton.hidden = this.previousChallenge() === null;
     // En un nivel del tutorial, arriba va el contador (3/25): el nombre largo no entra y el objetivo ya se lee abajo.
     const challenge = this.session === null ? null : this.session.challenge;
@@ -303,7 +321,8 @@ export class RepresentarVisualEnvironment {
     const next = session.next();
     const overlay = this.element('div', 'challenge-success', this.root);
     overlay.setAttribute('role', 'dialog');
-    overlay.innerHTML = '<div class="success-card"><div class="success-medal">' + challenge.emoji + '</div><div class="success-title">' + T('success.title') + '</div><div class="success-subtitle">' + (challenge.praise || challenge.title) + '</div><div class="success-actions"></div></div>';
+    const last = next === null && challenge.kind === 'challenge';
+    overlay.innerHTML = '<div class="success-card"><div class="success-medal">' + (last ? '🎓' : challenge.emoji) + '</div><div class="success-title">' + (last ? T('end.title') : T('success.title')) + '</div><div class="success-subtitle">' + (last ? T('end.text') : (challenge.praise || challenge.title)) + '</div><div class="success-actions"></div></div>';
     const actions = overlay.querySelector('.success-actions');
     const button = (label, iconName, action, className) => {
       const created = this.element('button', 'success-button ' + className, actions, Icons.svg(iconName) + '<span>' + label + '</span>');
@@ -312,7 +331,16 @@ export class RepresentarVisualEnvironment {
       return created;
     };
     if (next !== null) button(T('success.next'), 'arrowRight', () => { this.closeSuccess(); this.openChallenge(next); }, 'primary next-challenge');
-    else button(T('end.download'), 'home', () => { this.closeSuccess(); this.backAction(); }, 'primary next-challenge');
+    else {
+      const download = document.createElement('a');           // el final del tutorial: bajar el ambiente
+      download.className = 'success-button primary download-link';
+      download.href = 'https://dialog.ar/';
+      download.target = '_blank';
+      download.rel = 'noopener';
+      download.innerHTML = Icons.svg('save') + '<span>' + T('end.download') + '</span>';
+      actions.appendChild(download);
+      button(T('success.home'), 'home', () => { this.closeSuccess(); this.backAction(); }, 'secondary next-challenge');
+    }
     if (this.mainSpace === null || !this.mainSpace.progress || this.mainSpace.progress.freeUnlocked()) button(T('success.stay'), 'pencil', () => { this.closeSuccess(); this.makeItMine(); }, 'secondary make-it-mine');
     this.success = overlay;
   }
