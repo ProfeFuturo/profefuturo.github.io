@@ -12,12 +12,7 @@
 </head>
 <body>
 <div id="app"></div>
-<script type="module">
-  import { start } from './src/main.js';
-  start(document.getElementById('app')).catch(error => {
-    console.error(error);
-    document.getElementById('app').textContent = 'Error al iniciar: ' + error.message;
-  });
-</script>
+<script src="app.js"></script>
+<script>Dialogo.start(document.getElementById('app')).catch(error => { document.getElementById('app').textContent = 'Error: ' + error.message; });</script>
 </body>
 </html>
