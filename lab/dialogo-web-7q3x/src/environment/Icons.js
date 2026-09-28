@@ -56,6 +56,7 @@ const PATHS = {
   soundOff: '<path d="M4 10v4h4l5 4V6L8 10z"/><path d="M17 9l4 6M21 9l-4 6"/>',
   chevronDown: '<path d="M6 9l6 6 6-6"/>',
   chevronRight: '<path d="M9 6l6 6-6 6"/>',
+  skipBack: '<path d="M18 6v12L9 12z"/><path d="M6 6v12"/>',
   chevronUp: '<path d="M6 15l6-6 6 6"/>',
   check: '<path d="M5 12l5 5 9-10"/>',
   flag: '<path d="M5 21V4h11l-2 4 2 4H5"/>',

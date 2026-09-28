@@ -62,8 +62,13 @@ export async function start(root) {
   }
   let preferred = null;
   try { preferred = storage === null ? null : storage.getItem('representar.language'); } catch (error) { /* sin storage */ }
-  // Inglés por defecto; el chico (o el docente) puede cambiarlo y queda guardado.
-  const current = dictionaries.find(each => each.name === preferred) || dictionaries.find(each => /english/i.test(each.name)) || dictionaries[0];
+  // El idioma sale de ?lang=es|en, de lo elegido antes, o del idioma del navegador (inglés si no se reconoce).
+  const requestedLanguage = new URLSearchParams(window.location.search).get('lang');
+  if (requestedLanguage) {
+    try { if (storage !== null) storage.removeItem('representar.language'); } catch (error) { /* sin storage */ }
+    preferred = null;
+  }
+  const current = LanguageProvider.choose(dictionaries, { requested: requestedLanguage, preferred, browser: (navigator.languages && navigator.languages[0]) || navigator.language || '' });
   if (current) LanguageProvider.setCurrent(current);
   const loader = await WelcomeSpaceLoader.open().catch(() => new WelcomeSpaceLoader(null));
   const library = new ProjectLibrary({ loader, bundledProjects });

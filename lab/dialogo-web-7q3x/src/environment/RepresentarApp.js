@@ -130,6 +130,17 @@ export class RepresentarApp {
     this.edgeTab.hidden = !free || this.currentScreen !== 'feed';
   }
 
+  // Todos los botones de sonido de la app: tachados cuando está en silencio.
+  refreshSoundButtons() {
+    const buttons = [this.soundButton, this.playSoundButton, this.environment && this.environment.soundButton].filter(button => button);
+    for (const button of buttons) {
+      button.innerHTML = Icons.svg(this.sounds.enabled ? 'sound' : 'soundOff');
+      button.classList.toggle('muted', !this.sounds.enabled);
+      button.title = this.sounds.enabled ? T('sound.on') : T('sound.off');
+      button.setAttribute('aria-label', button.title);
+    }
+  }
+
   refreshNavBadge() {
     const count = this.achievements.count();
     this.navBadge.textContent = count > 0 ? String(count) : '';
@@ -211,12 +222,14 @@ export class RepresentarApp {
     this.element('h2', '', top).textContent = T('play.title');
     this.iconButton(top, 'globe', T('language'), button => this.openLanguageMenu(button), 'ghost');
     this.playSoundButton = this.iconButton(top, this.sounds.enabled ? 'sound' : 'soundOff', T('sound'), () => this.toggleSound(), 'ghost');
+    this.element('p', 'play-subtitle', this.playScreen).textContent = T('play.subtitle');
     this.playList = this.element('div', 'play-list', this.playScreen);
   }
 
   renderPlay() {
     this.playList.innerHTML = '';
     const next = this.progress.next();
+    if (next === null) this.renderEnd(this.playList);
     if (next !== null) {
       const button = this.element('button', 'next-card', this.playList, '<span class="next-emoji">' + next.emoji + '</span><span class="next-text"><b>' + T('play.next') + '</b><span>' + next.number + '. ' + next.title + '</span></span>' + Icons.svg('play'));
       button.type = 'button';
@@ -249,15 +262,31 @@ export class RepresentarApp {
   }
 
   // Un mundo terminado se muestra cerrado (sólo su título y 10/10); tocarlo lo abre.
+  // Terminado el tutorial: bajar Diálogo y seguir con la Clase 1 (Ajedrez), en video.
+  renderEnd(container) {
+    const card = this.element('div', 'end-card', container);
+    card.innerHTML = '<span class="end-emoji">🎓</span><b>' + T('end.title') + '</b><span>' + T('end.text') + '</span>';
+    const actions = this.element('div', 'end-actions', card);
+    const link = (label, href, className) => {
+      const anchor = this.element('a', 'end-link ' + className, actions);
+      anchor.href = href;
+      anchor.target = '_blank';
+      anchor.rel = 'noopener';
+      anchor.textContent = label;
+    };
+    link(T('end.download'), 'https://dialog.ar/', 'primary');
+    link(T('end.watch'), 'https://youtu.be/CYuRk_dKHYg', 'secondary');
+  }
+
   renderWorld(world, container) {
     const challenges = Challenges.inWorld(world.id);
     const done = challenges.filter(challenge => this.progress.isCompleted(challenge)).length;
-    this.expandedWorlds = this.expandedWorlds || new Set();
-    const expanded = done < challenges.length || this.expandedWorlds.has(world.id);
+    this.collapsedWorlds = this.collapsedWorlds || new Set();
+    const expanded = !this.collapsedWorlds || !this.collapsedWorlds.has(world.id);
     const heading = this.element('button', 'world-heading' + (expanded ? '' : ' collapsed'), container);
     heading.type = 'button';
     heading.innerHTML = '<span class="world-emoji">' + world.emoji + '</span><span class="world-title">' + world.title + '</span><span class="world-count">' + done + '/' + challenges.length + '</span>' + Icons.svg(expanded ? 'chevronDown' : 'chevronRight', { size: 18 });
-    heading.addEventListener('click', () => { if (this.expandedWorlds.has(world.id)) this.expandedWorlds.delete(world.id); else this.expandedWorlds.add(world.id); this.renderPlay(); });
+    heading.addEventListener('click', () => { if (this.collapsedWorlds.has(world.id)) this.collapsedWorlds.delete(world.id); else this.collapsedWorlds.add(world.id); this.renderPlay(); });
     if (!expanded) return;
     const ladder = this.element('div', 'ladder', container);
     for (const challenge of challenges) this.renderStep(challenge, ladder);
@@ -265,9 +294,9 @@ export class RepresentarApp {
 
   renderStep(challenge, ladder) {
     const completed = this.progress.isCompleted(challenge);
-    const step = this.element('button', 'ladder-step' + (completed ? ' done' : ''), ladder, '<span class="ladder-emoji">' + challenge.emoji + '</span><span class="ladder-title">' + challenge.number + '. ' + challenge.title + '</span>' + (completed ? Icons.svg('check') : Icons.svg('play')));
+    const step = this.element('button', 'ladder-step' + (completed ? ' done' : '') + (challenge.kind === 'build' ? ' build' : ''), ladder, '<span class="ladder-emoji">' + challenge.emoji + '</span><span class="ladder-title">' + challenge.number + '. ' + challenge.title + '</span>' + (completed ? Icons.svg('check') : '') + Icons.svg('play'));
     step.type = 'button';
-    step.title = challenge.goal;
+    step.title = completed ? T('play.redo') : challenge.mission;
     step.addEventListener('click', () => this.openChallenge(challenge));
   }
 
@@ -455,12 +484,13 @@ export class RepresentarApp {
     try { if (this.storage !== null) this.storage.setItem('representar.language', language.name); } catch (error) { /* sin storage */ }
     this.environment.build();
     this.environment.hide();
+    this.refreshSoundButtons();
     this.edgeTab.querySelector('span').textContent = dictionaryAt('Create');
   }
 
   toggleSound() {
     this.sounds.setEnabled(!this.sounds.enabled);
-    this.soundButton.innerHTML = Icons.svg(this.sounds.enabled ? 'sound' : 'soundOff');
+    this.refreshSoundButtons();
     if (this.sounds.enabled) this.sounds.pop();
   }
 

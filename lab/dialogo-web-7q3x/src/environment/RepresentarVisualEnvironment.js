@@ -11,7 +11,7 @@ import { Sounds } from './Sounds.js';
 import { Achievements } from './Achievements.js';
 import { ChallengeSession } from './ChallengeSession.js';
 import { Sentence } from '../metamodel/Sentence.js';
-import { COLUMNS as CHALLENGE_COLUMNS } from './Challenge.js';
+import { COLUMNS as CHALLENGE_COLUMNS, Challenges } from './Challenge.js';
 import { RepresentarVisualExporter } from '../io/RepresentarVisualExporter.js';
 import { dictionaryAt } from '../io/LanguageProvider.js';
 
@@ -55,6 +55,14 @@ export class RepresentarVisualEnvironment {
 
   // Como en Cuis (StateOfArtBuilderForVisualEnvironment>>sideOfSymbolsOnEnvironmentPalet): la grilla
   // de un proyecto nuevo es 1/20 del ancho de la pantalla, nunca menos de 44 px (un dedo).
+  // El joystick en pantalla es para dedos: en una PC con teclado no hace falta.
+  static isTouchDevice() {
+    if (typeof window === 'undefined') return true;
+    if (window.representarForceTouch !== undefined) return window.representarForceTouch;
+    const coarse = typeof window.matchMedia === 'function' && window.matchMedia('(pointer: coarse)').matches;
+    return coarse || (navigator.maxTouchPoints || 0) > 0;
+  }
+
   static sideOfSymbolsOnEnvironmentPalet() {
     const width = typeof window === 'undefined' ? 1440 : window.innerWidth;
     return Math.max(44, Math.min(72, Math.round(width / 20)));
@@ -106,6 +114,14 @@ export class RepresentarVisualEnvironment {
     this.titleText.setAttribute('aria-label', dictionaryAt('TopicName'));
     this.titleText.addEventListener('change', () => this.withProject(project => { project.setProjectName(this.titleText.value.trim() || dictionaryAt('projectWithoutProperName')); this.markDirty(); }));
     this.titleText.addEventListener('keydown', event => { if (event.key === 'Enter') this.titleText.blur(); });
+    this.levelCounter = this.element('span', 'level-counter', this.topBar);
+    this.levelCounter.hidden = true;
+    this.previousButton = this.iconButton(this.topBar, 'skipBack', T('play.previous'), () => this.openPreviousChallenge(), 'previous-button');
+    this.zoomOutButton = this.iconButton(this.topBar, 'zoomOut', dictionaryAt('ZoomOut'), () => this.withProject(project => project.boardModel.zoomOut()), 'zoom-button');
+    this.zoomInButton = this.iconButton(this.topBar, 'zoomIn', dictionaryAt('ZoomIn'), () => this.withProject(project => project.boardModel.zoomIn()), 'zoom-button');
+    this.soundButton = this.iconButton(this.topBar, this.sounds.enabled ? 'sound' : 'soundOff', T('sound'), () => { if (this.mainSpace !== null) this.mainSpace.toggleSound(); }, 'sound-button');
+    this.soundButton.classList.toggle('muted', !this.sounds.enabled);
+    this.languageButton = this.iconButton(this.topBar, 'globe', T('language'), button => { if (this.mainSpace !== null) this.mainSpace.openLanguageMenu(button); }, 'language-button');
     this.undoButton = this.iconButton(this.topBar, 'undo', dictionaryAt('Undo'), () => this.withProject(project => { project.boardModel.backToPreviousBoardState(); if (this.session !== null) this.session.userActed(); }), 'undo-button');
     this.badgeChip = this.element('button', 'chip badge-chip', this.topBar, '<span class="star">' + Icons.svg('medal', { size: 18 }) + '</span><span class="count">0</span>');
     this.badgeChip.type = 'button';
@@ -143,12 +159,14 @@ export class RepresentarVisualEnvironment {
     item('undo', dictionaryAt('Undo'), () => this.withProject(project => project.boardModel.backToPreviousBoardState()), 'menu-undo');
     item('reset', T('menu.backToStart'), () => this.withProject(project => project.boardModel.resetBoard()), 'menu-reset');
     item(this.sounds.enabled ? 'sound' : 'soundOff', this.sounds.enabled ? T('sound.on') : T('sound.off'), () => this.sounds.setEnabled(!this.sounds.enabled), 'menu-sound');
-    group(T('menu.forBuilding'));
-    item('zoomIn', dictionaryAt('ZoomIn'), () => this.withProject(project => project.boardModel.zoomIn()), 'menu-zoom-in');
-    item('zoomOut', dictionaryAt('ZoomOut'), () => this.withProject(project => project.boardModel.zoomOut()), 'menu-zoom-out');
-    item('flag', T('menu.setStart'), () => this.withProject(project => { project.boardModel.setCurrentAsResetBoard(); this.flash(); }), 'menu-set');
-    item('share', T('menu.reuse'), () => this.openMenuToChooseProjectsToReuse(), 'menu-reuse');
-    item('save', dictionaryAt('FileOut') + ' (.dialog.ar)', () => this.fileOut(), 'menu-file-out');
+    if (this.session === null) {                       // fuera del tutorial: las herramientas de armar
+      group(T('menu.forBuilding'));
+      item('zoomIn', dictionaryAt('ZoomIn'), () => this.withProject(project => project.boardModel.zoomIn()), 'menu-zoom-in');
+      item('zoomOut', dictionaryAt('ZoomOut'), () => this.withProject(project => project.boardModel.zoomOut()), 'menu-zoom-out');
+      item('flag', T('menu.setStart'), () => this.withProject(project => { project.boardModel.setCurrentAsResetBoard(); this.flash(); }), 'menu-set');
+      item('share', T('menu.reuse'), () => this.openMenuToChooseProjectsToReuse(), 'menu-reuse');
+      item('save', dictionaryAt('FileOut') + ' (.dialog.ar)', () => this.fileOut(), 'menu-file-out');
+    }
   }
 
   openAchievements() {
@@ -210,8 +228,13 @@ export class RepresentarVisualEnvironment {
   openChallenge(challenge) {
     const userDrawings = this.mainSpace !== null && this.mainSpace.progress ? this.mainSpace.progress.userDrawings() : [];
     this.openProject(challenge.projectFor({ gridSize: RepresentarVisualEnvironment.sideOfSymbolsOnEnvironmentPalet(), userDrawings }));
+    this.refreshChallengeButtons();
     const fit = this.challengeGridSize(challenge.columns, challenge.rows);
-    if (fit !== this.currentProject.boardModel.gridSize) { this.currentProject.boardModel.changeGridSizeTo(fit); this.currentProject.boardModel.setCurrentAsResetBoard(); }
+    if (fit !== this.currentProject.boardModel.gridSize) {
+      this.currentProject.boardModel.changeGridSizeTo(fit);
+      this.currentProject.boardModel.setCurrentAsResetBoard();
+      this.currentProject.boardModel.forgetUndoHistory();    // con el tamaño ya ajustado: deshacer no lo achica
+    }
     return this.session;
   }
 
@@ -223,6 +246,28 @@ export class RepresentarVisualEnvironment {
   }
 
   isInChallenge() { return this.session !== null; }
+
+  // Volver a jugar el nivel anterior (siempre se puede rehacer un nivel, esté hecho o no).
+  previousChallenge() {
+    if (this.session === null || this.session.challenge.kind !== 'challenge') return null;
+    return Challenges.all()[this.session.challenge.number - 2] || null;
+  }
+
+  openPreviousChallenge() { const previous = this.previousChallenge(); if (previous !== null) this.openChallenge(previous); }
+
+  refreshChallengeButtons() {
+    this.previousButton.hidden = this.previousChallenge() === null;
+    // En un nivel del tutorial, arriba va el contador (3/25): el nombre largo no entra y el objetivo ya se lee abajo.
+    const challenge = this.session === null ? null : this.session.challenge;
+    const counter = challenge !== null && challenge.kind === 'challenge' ? challenge.number + '/' + Challenges.all().length : null;
+    this.titleText.hidden = counter !== null;
+    this.levelCounter.hidden = counter === null;
+    this.levelCounter.textContent = counter || '';
+    // En un tutorial el menú no va: sólo deshacer, volver a empezar, zoom, sonido e idioma.
+    const inTutorial = this.session !== null && this.session.challenge.kind === 'challenge';
+    this.moreButton.hidden = inTutorial;
+    this.badgeChip.hidden = inTutorial || this.achievements.count() === 0;
+  }
   // En un desafío de la escalera no hay halos (acciones sobre fichas): sólo arrastrar, tocar y jugar.
   halosEnabled() { return this.session === null || this.session.challenge.kind !== 'challenge'; }
 
@@ -267,7 +312,7 @@ export class RepresentarVisualEnvironment {
       return created;
     };
     if (next !== null) button(T('success.next'), 'arrowRight', () => { this.closeSuccess(); this.openChallenge(next); }, 'primary next-challenge');
-    else button(T('success.home'), 'home', () => { this.closeSuccess(); this.backAction(); }, 'primary next-challenge');
+    else button(T('end.download'), 'home', () => { this.closeSuccess(); this.backAction(); }, 'primary next-challenge');
     if (this.mainSpace === null || !this.mainSpace.progress || this.mainSpace.progress.freeUnlocked()) button(T('success.stay'), 'pencil', () => { this.closeSuccess(); this.makeItMine(); }, 'secondary make-it-mine');
     this.success = overlay;
   }
@@ -301,10 +346,11 @@ export class RepresentarVisualEnvironment {
   refreshJoysticks() {
     if (this.currentProject === null) return;
     const board = this.currentProject.boardModel;
-    const arrows = board.itemsMovableByArrows().length > 0;
-    const wasd = board.itemsMovableByWASD().length > 0;
-    const space = board.existsASubstitutionThatAppliesTo(Sentence.of('spaceBar'));
-    const enter = board.existsASubstitutionThatAppliesTo(Sentence.of('enterKey'));
+    const touch = RepresentarVisualEnvironment.isTouchDevice();
+    const arrows = touch && board.itemsMovableByArrows().length > 0;
+    const wasd = touch && board.itemsMovableByWASD().length > 0;
+    const space = touch && board.existsASubstitutionThatAppliesTo(Sentence.of('spaceBar'));
+    const enter = touch && board.existsASubstitutionThatAppliesTo(Sentence.of('enterKey'));
     this.joysticks.arrows.showExtraKeys({ enter, space });
     if (this.joysticks.arrows.element.hidden === !(arrows || space || enter) && this.joysticks.wasd.element.hidden === !wasd) return;
     this.joysticks.arrows.show(arrows || space || enter);

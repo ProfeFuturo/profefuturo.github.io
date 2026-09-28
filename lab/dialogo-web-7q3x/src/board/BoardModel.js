@@ -1411,6 +1411,11 @@ export class BoardModel {
     return true;
   }
 
+  // Olvida la historia: el estado actual pasa a ser el punto más atrás al que se puede deshacer.
+  forgetUndoHistory() {
+    this.undoRecord = new BaseUndoRecord(new Map(this.itemPositions), this.gridSize, new Map(this.currentResizeFactors));
+  }
+
   backToPreviousBoardState() {
     if (!this.undoRecord.hasPrevious()) return this.backToBoardState(this.undoRecord);
     if (this.lastRecordedStateEqualsCurrentState()) {

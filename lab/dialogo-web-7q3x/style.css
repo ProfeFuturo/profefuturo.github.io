@@ -115,7 +115,7 @@ img { max-width: 100%; }
 
 /* ---------- míos y logros ---------- */
 .list-top { display: flex; align-items: center; gap: 8px; padding: 14px 16px 8px; }
-.list-top h2 { flex: 1; margin: 0; font-size: 24px; font-weight: 700; letter-spacing: -0.02em; }
+.list-top h2 { flex: 1; margin: 0; font-size: 21px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.15; text-wrap: balance; min-width: 0; }
 .profile { display: flex; align-items: center; gap: 12px; padding: 4px 16px 12px; }
 .profile .avatar { width: 52px; height: 52px; font-size: 20px; }
 .profile .stats { display: flex; gap: 16px; font-size: 13px; color: var(--muted); }
@@ -229,7 +229,7 @@ img { max-width: 100%; }
 .inspector-definition canvas.inspect-point { box-shadow: 0 0 0 3px var(--good); border-radius: 6px; }
 
 /* ---------- avisos ---------- */
-.toast { position: absolute; left: 50%; top: 14px; transform: translateX(-50%); background: var(--ink); color: var(--bg); padding: 10px 16px 10px 12px; border-radius: 999px; display: flex; align-items: center; gap: 10px; box-shadow: var(--shadow); z-index: 40; animation: drop 300ms cubic-bezier(.2, .9, .3, 1.3); font-weight: 700; font-size: 14px; white-space: nowrap; max-width: calc(100% - 32px); overflow: hidden; text-overflow: ellipsis; }
+.toast { position: absolute; left: 50%; top: auto; bottom: 84px; transform: translateX(-50%); background: var(--ink); color: var(--bg); padding: 10px 16px 10px 12px; border-radius: 999px; display: flex; align-items: center; gap: 10px; box-shadow: var(--shadow); z-index: 40; animation: drop 300ms cubic-bezier(.2, .9, .3, 1.3); font-weight: 700; font-size: 14px; white-space: nowrap; max-width: calc(100% - 32px); overflow: hidden; text-overflow: ellipsis; }
 .toast .emoji { font-size: 22px; }
 @keyframes drop { from { transform: translate(-50%, -140%); } }
 .toast.leaving { animation: none; transition: opacity 250ms, transform 250ms; opacity: 0; transform: translate(-50%, -140%); }
@@ -314,3 +314,22 @@ button.world-heading .world-count { margin-left: auto; }
 .board-area.arena-band .joystick { bottom: 2px; right: 50%; transform: translateX(50%); width: 120px; height: 114px; grid-template-columns: repeat(3, 40px); grid-template-rows: repeat(3, 38px); }
 .board-area.arena-band .joystick-key .icon { width: 20px; height: 20px; }
 .start-over { display: inline-flex; align-items: center; gap: 6px; align-self: center; margin-top: 18px; padding: 10px 14px; border-radius: 999px; border: none; background: var(--surface); color: var(--muted); font-family: var(--font); font-size: 13px; font-weight: 700; cursor: pointer; box-shadow: var(--shadow-s); min-height: 44px; }
+.challenge-texts { flex: 1; display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+.challenge-mission { font-weight: 800; font-size: 15px; line-height: 1.2; text-wrap: balance; }
+.challenge-goal { font-weight: 600; font-size: 13px; line-height: 1.25; color: var(--muted); text-wrap: balance; }
+.ladder-step.done .icon.play { opacity: 0.5; }
+.icon-button.muted { color: var(--muted); }
+.icon-button.muted::after { content: ''; position: absolute; width: 26px; height: 2px; background: currentColor; transform: rotate(-45deg); border-radius: 2px; }
+.icon-button { position: relative; }
+.title-text { min-width: 44px; }
+.topbar .zoom-button { display: none; }                      /* el zoom sólo donde sobra lugar */
+@container (min-width: 600px) { .topbar .zoom-button { display: inline-flex; } }
+.play-subtitle { margin: 0 4px 12px; color: var(--muted); font-size: 14px; line-height: 1.35; }
+.end-card { display: flex; flex-direction: column; gap: 6px; padding: 18px; border-radius: 18px; background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: white; box-shadow: 0 8px 20px rgba(255, 90, 60, 0.3); margin-bottom: 10px; }
+.end-card .end-emoji { font-size: 32px; }
+.end-card b { font-size: 18px; }
+.end-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+.end-link { display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; border-radius: 999px; font-weight: 800; font-size: 14px; text-decoration: none; }
+.end-link.primary { background: white; color: var(--accent); }
+.end-link.secondary { background: rgba(255, 255, 255, 0.18); color: white; box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.6); }
+.level-counter { flex: 1; font-weight: 800; font-size: 15px; color: var(--muted); padding-left: 4px; }

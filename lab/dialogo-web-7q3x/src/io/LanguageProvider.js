@@ -32,6 +32,22 @@ export class LanguageProvider {
     return new LanguageProvider(entries.get('Language'), entries);
   }
 
+  // Elige diccionario: ?lang=xx, después lo guardado, después el idioma del navegador, si no inglés.
+  static choose(dictionaries, { requested = null, preferred = null, browser = '' } = {}) {
+    const byCode = code => {
+      if (!code) return null;
+      const short = String(code).toLowerCase().slice(0, 2);
+      const names = { es: /espa/i, en: /english/i, fr: /fran/i, de: /deutsch/i, pt: /portug/i, it: /italian/i, ar: /arab/i, zh: /mandarin/i, hi: /hindi/i, ja: /japan/i };
+      const pattern = names[short];
+      return pattern ? dictionaries.find(each => pattern.test(each.name)) || null : null;
+    };
+    return byCode(requested)
+      || dictionaries.find(each => each.name === preferred)
+      || byCode(browser)
+      || dictionaries.find(each => /english/i.test(each.name))
+      || dictionaries[0];
+  }
+
   static current() { return LanguageProvider.currentProvider; }
   static setCurrent(provider) { LanguageProvider.currentProvider = provider; }
 

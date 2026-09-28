@@ -124,7 +124,7 @@ export class Feed {
     caption.className = 'post-caption';
     const who = document.createElement('div');
     who.className = 'who';
-    who.innerHTML = '<span class="avatar">' + (entry.source === 'stored' ? 'V' : 'R') + '</span><span>' + (entry.source === 'stored' ? T('feed.you') : 'Representar') + '</span>';
+    who.innerHTML = '<span class="avatar">' + (entry.source === 'stored' ? T('feed.you').slice(0, 1) : 'D') + '</span><span>' + (entry.source === 'stored' ? T('feed.you') : 'Diálogo') + '</span>';
     caption.appendChild(who);
     const title = document.createElement('div');
     title.className = 'title';

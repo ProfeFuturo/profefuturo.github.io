@@ -8,15 +8,13 @@ class Achievement {
   get hint() { return T('badge.' + this.id).split('|')[1] || ''; }
 }
 
+// Sólo las del tutorial: cosas que pasan jugando los 25 niveles.
 export const ACHIEVEMENTS = [
   new Achievement('first-drop', '🧩'),
   new Achievement('rule', '✨'),
   new Achievement('first-move', '🕹️'),
   new Achievement('artist', '🎨'),
   new Achievement('detective', '🔍'),
-  new Achievement('explorer', '🧭'),
-  new Achievement('remix', '🔁'),
-  new Achievement('saver', '💾'),
   new Achievement('world', '🌍'),
   new Achievement('ladder', '👑'),
 ];

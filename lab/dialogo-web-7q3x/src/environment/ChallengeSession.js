@@ -32,7 +32,10 @@ export class ChallengeSession {
     this.banner = document.createElement('div');
     this.banner.className = 'challenge-banner';
     this.banner.setAttribute('role', 'status');
-    this.banner.innerHTML = '<span class="challenge-emoji">' + this.challenge.emoji + '</span><span class="challenge-goal">' + this.challenge.goalIn(this.project) + '</span>';
+    // Primero el objetivo (qué queremos), después el paso (cómo se hace).
+    this.banner.innerHTML = '<span class="challenge-emoji">' + this.challenge.emoji + '</span>'
+      + '<span class="challenge-texts"><span class="challenge-mission">' + this.challenge.mission + '</span>'
+      + '<span class="challenge-goal">' + this.challenge.goalIn(this.project) + '</span></span>';
     const restart = document.createElement('button');
     restart.type = 'button';
     restart.className = 'icon-button ghost challenge-restart';

@@ -5,7 +5,7 @@ import { LanguageProvider } from '../io/LanguageProvider.js';
 // diccionario elegido (LanguageProvider): 'Español' → es, cualquier otro → en.
 const TEXTS = {
   // navegación y pantallas
-  'nav.play': { en: 'Play', es: 'Jugar' },
+  'nav.play': { en: 'Tutorial', es: 'Tutorial' },
   'nav.home': { en: 'Home', es: 'Inicio' },
   'nav.mine': { en: 'Mine', es: 'Míos' },
   'nav.badges': { en: 'Badges', es: 'Logros' },
@@ -14,7 +14,12 @@ const TEXTS = {
   'mine.projects': { en: 'projects', es: 'proyectos' },
   'mine.badges': { en: 'badges', es: 'logros' },
   'badges.title': { en: 'Badges', es: 'Logros' },
-  'play.title': { en: 'Play', es: 'Jugar' },
+  'app.title': { en: 'Introduction to Diálogo', es: 'Introducción a Diálogo' },
+  'play.title': { en: 'Introduction to Diálogo', es: 'Introducción a Diálogo' },
+  'play.subtitle': { en: 'A tutorial to get you started: play, learn the rules, then download Diálogo.', es: 'Un tutorial para empezar: jugá, aprendé las reglas y después bajá Diálogo.' },
+  'play.goal': { en: 'Goal', es: 'Objetivo' },
+  'play.previous': { en: 'Previous level', es: 'Nivel anterior' },
+  'play.redo': { en: 'Play it again', es: 'Jugarlo de nuevo' },
   'play.next': { en: 'Next challenge', es: 'Próximo desafío' },
   'play.locked': { en: 'Finish the challenges to unlock', es: 'Terminá los desafíos para destrabar' },
   'play.builds': { en: 'Build your own games', es: 'Armá tus propios juegos' },
@@ -89,6 +94,12 @@ const TEXTS = {
   'badge.saver': { en: 'Collector|Save a project of yours', es: 'Coleccionista|Guardá un proyecto tuyo' },
   'badge.world': { en: 'World complete|Finish every challenge of a world', es: 'Mundo completo|Terminá todos los desafíos de un mundo' },
   'badge.ladder': { en: 'Champion|Finish every challenge', es: 'Campeón|Terminá todos los desafíos' },
+  // final del tutorial
+  'end.title': { en: 'You finished the tutorial!', es: '¡Terminaste el tutorial!' },
+  'end.text': { en: 'You know how rules work. Now download Diálogo and build your own games, starting with Class 1: Chess.', es: 'Ya sabés cómo funcionan las reglas. Ahora bajá Diálogo y armá tus propios juegos, empezando por la Clase 1: Ajedrez.' },
+  'end.download': { en: 'Download Diálogo', es: 'Bajar Diálogo' },
+  'end.watch': { en: 'Class 1: Chess (video)', es: 'Clase 1: Ajedrez (video)' },
+  'end.later': { en: 'Not now', es: 'Ahora no' },
 };
 
 export class Texts {
