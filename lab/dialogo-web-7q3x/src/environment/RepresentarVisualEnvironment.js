@@ -363,8 +363,6 @@ export class RepresentarVisualEnvironment {
       const download = document.createElement('a');           // el final del tutorial: bajar el ambiente
       download.className = 'success-button primary download-link';
       download.href = 'https://dialog.ar/';
-      download.target = '_blank';
-      download.rel = 'noopener';
       download.innerHTML = Icons.svg('save') + '<span>' + T('end.download') + '</span>';
       actions.appendChild(download);
       button(T('success.home'), 'home', () => { this.closeSuccess(); this.backAction(); }, 'secondary next-challenge');

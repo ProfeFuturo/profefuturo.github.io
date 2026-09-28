@@ -269,14 +269,13 @@ export class RepresentarApp {
     const card = this.element('div', 'end-card', container);
     card.innerHTML = '<span class="end-emoji">🎓</span><b>' + T('end.title') + '</b><span>' + T('end.text') + '</span>';
     const actions = this.element('div', 'end-actions', card);
-    const link = (label, href, className) => {
+    const link = (label, href, className, sameTab = false) => {
       const anchor = this.element('a', 'end-link ' + className, actions);
       anchor.href = href;
-      anchor.target = '_blank';
-      anchor.rel = 'noopener';
+      if (!sameTab) { anchor.target = '_blank'; anchor.rel = 'noopener'; }
       anchor.textContent = label;
     };
-    link(T('end.download'), 'https://dialog.ar/', 'primary');
+    link(T('end.download'), 'https://dialog.ar/', 'primary', true);     // el home, en la misma pestaña
     link(T('end.watch'), 'https://youtu.be/CYuRk_dKHYg', 'secondary');
   }
 
