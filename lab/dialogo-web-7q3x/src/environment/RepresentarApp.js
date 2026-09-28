@@ -62,7 +62,12 @@ export class RepresentarApp {
   build() {
     this.root.innerHTML = '';
     this.root.classList.add('app');
-    if (typeof document !== 'undefined') document.title = T('app.title');
+    if (typeof document !== 'undefined') {
+      document.title = T('app.title');
+      const code = LanguageProvider.codeOf(LanguageProvider.current()) || 'en';
+      document.documentElement.lang = code;
+      document.documentElement.dir = code === 'ar' ? 'rtl' : 'ltr';        // el árabe se lee al revés
+    }
     this.body = this.element('div', 'app-body', this.root);
     this.playScreen = this.element('div', 'screen screen-play list-screen', this.body);
     this.feedScreen = this.element('div', 'screen screen-feed', this.body);

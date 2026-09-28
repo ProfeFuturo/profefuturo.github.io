@@ -55,15 +55,22 @@ export async function start(root) {
   const [dictionaries, bundledProjects] = await Promise.all([loadDictionaries(), loadBundledProjectsIndex(), loadPredefinedImages()]);
   let storage = null;
   try { storage = window.localStorage; } catch (error) { /* sin storage */ }
-  // ?reset=1: empezar de cero con el mismo link (sin incógnito ni borrar caché); el parámetro se saca de la URL.
-  if (new URLSearchParams(window.location.search).has('reset')) {
+  const parameters = new URLSearchParams(window.location.search);
+  // ?reset=1: empezar de cero con el mismo link (sin incógnito ni borrar caché). Se saca de la URL
+  // el parámetro `reset`, pero se conservan los demás (por ejemplo ?lang=ja).
+  if (parameters.has('reset')) {
     try { for (const key of Object.keys(storage || {})) if (key.startsWith('representar.')) storage.removeItem(key); } catch (error) { /* sin storage */ }
-    try { window.history.replaceState(null, '', window.location.pathname); } catch (error) { /* sin history */ }
+    try {
+      const rest = new URLSearchParams(window.location.search);
+      rest.delete('reset');
+      const query = rest.toString();
+      window.history.replaceState(null, '', window.location.pathname + (query === '' ? '' : '?' + query));
+    } catch (error) { /* sin history */ }
   }
   let preferred = null;
   try { preferred = storage === null ? null : storage.getItem('representar.language'); } catch (error) { /* sin storage */ }
   // El idioma sale de ?lang=es|en, de lo elegido antes, o del idioma del navegador (inglés si no se reconoce).
-  const requestedLanguage = new URLSearchParams(window.location.search).get('lang');
+  const requestedLanguage = parameters.get('lang');
   if (requestedLanguage) {
     try { if (storage !== null) storage.removeItem('representar.language'); } catch (error) { /* sin storage */ }
     preferred = null;

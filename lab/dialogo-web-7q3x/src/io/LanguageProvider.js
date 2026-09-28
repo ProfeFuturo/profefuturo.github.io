@@ -46,26 +46,25 @@ export class LanguageProvider {
   }
 
   // Elige diccionario: ?lang=xx, después lo guardado, después el idioma del navegador, si no inglés.
+  // El idioma de cada diccionario se reconoce con `codeOf` (una sola tabla para todo).
   static choose(dictionaries, { requested = null, preferred = null, browser = '' } = {}) {
     const byCode = code => {
-      if (!code) return null;
-      const short = String(code).toLowerCase().slice(0, 2);
-      const names = { es: /espa/i, en: /english/i, fr: /fran/i, de: /deutsch/i, pt: /portug/i, it: /italian/i, ar: /arab/i, zh: /mandarin/i, hi: /hindi/i, ja: /japan/i };
-      const pattern = names[short];
-      return pattern ? dictionaries.find(each => pattern.test(each.name)) || null : null;
+      const short = String(code || '').toLowerCase().slice(0, 2);
+      return short === '' ? null : dictionaries.find(each => LanguageProvider.codeOf(each) === short) || null;
     };
     return byCode(requested)
       || dictionaries.find(each => each.name === preferred)
       || byCode(browser)
-      || dictionaries.find(each => /english/i.test(each.name))
+      || byCode('en')
       || dictionaries[0];
   }
 
   // El código del idioma (para el atributo lang: la escritura se ve con la tipografía correcta).
   static codeOf(provider) {
     const name = provider === null || provider === undefined ? '' : String(provider.name);
-    const codes = [[/espa/i, 'es'], [/english/i, 'en'], [/fran/i, 'fr'], [/deutsch/i, 'de'], [/portug/i, 'pt'],
-      [/italian/i, 'it'], [/zhong|mandarin/i, 'zh'], [/hindi/i, 'hi'], [/nihongo|japan/i, 'ja'], [/arab/i, 'ar']];
+    const codes = [[/espa|español/i, 'es'], [/english/i, 'en'], [/fran/i, 'fr'], [/deutsch|german/i, 'de'],
+      [/portug/i, 'pt'], [/italian/i, 'it'], [/zhong|mandarin|chin|中文/i, 'zh'], [/hindi|हिन/i, 'hi'],
+      [/nihongo|japan|日本/i, 'ja'], [/arab|arabiyah|عرب/i, 'ar']];
     const found = codes.find(([pattern]) => pattern.test(name));
     return found ? found[1] : '';
   }

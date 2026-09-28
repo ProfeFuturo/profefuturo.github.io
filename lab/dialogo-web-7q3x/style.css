@@ -335,3 +335,6 @@ button.world-heading .world-count { margin-left: auto; }
 .level-counter { flex: 1; font-weight: 800; font-size: 15px; color: var(--muted); padding-left: 4px; }
 .icon-button:disabled { opacity: 0.35; cursor: default; }
 a.success-button { text-decoration: none; }
+/* de derecha a izquierda (árabe): el tablero y las fichas no se dan vuelta, el texto sí */
+[dir="rtl"] .board-area, [dir="rtl"] .tray, [dir="rtl"] .joystick { direction: ltr; }
+[dir="rtl"] .challenge-texts, [dir="rtl"] .list-top h2, [dir="rtl"] .play-subtitle, [dir="rtl"] .ladder-title, [dir="rtl"] .world-title { text-align: right; }

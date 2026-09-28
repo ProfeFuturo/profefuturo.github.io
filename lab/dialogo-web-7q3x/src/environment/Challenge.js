@@ -15,14 +15,14 @@ export class Challenge {
     this.rows = rows;
     this.id = id;
     this.number = number;
-    const english = ENGLISH[id] || { title, steps: [], praise, mission };
-    this.texts = { title: { es: title, en: english.title }, praise: { es: praise, en: english.praise || praise }, mission: { es: mission, en: english.mission || mission } };
+    // Los textos viven en texts/<idioma>.js, por id de desafío.
     this.emoji = emoji;
     this.symbols = symbols;             // selectores de predefinidos disponibles en la bandeja
     this.pencil = pencil;               // si la bandeja muestra el lápiz
     this.slots = slots;                 // celdas vacías de la regla que hay que completar
-    // la consigna, de a un paso: [{ text: { en, es }, done(project) }]; el último paso es lograr el desafío
-    this.steps = (steps || [{ text: goal, done: null }]).map((step, index) => ({ text: { es: step.text, en: english.steps[index] || step.text }, done: step.done }));
+    // La consigna, de a un paso; el último es lograr el desafío. El texto se busca en texts/ cada
+    // vez que se lee (con `stepText`): así cambiar de idioma cambia también las consignas.
+    this.steps = (steps || [{ text: goal, done: null }]).map(step => ({ done: step.done }));
     this.world = world;                 // el mundo (capítulo) al que pertenece
     this.solution = solution;           // cómo se resuelve, para los tests: (play) → void
     this.build = build;                 // (project, drawings, predefined, userDrawings) → void
@@ -53,18 +53,23 @@ export class Challenge {
     return predefined;
   }
 
-  get title() { return Texts.pick(this.texts.title); }
+  get title() { return Texts.challenge(this.id, 'title'); }
   // Lo primero que se lee: qué queremos lograr. El paso (cómo) va debajo, secundario.
-  get mission() { return Texts.pick(this.texts.mission) || this.goal; }
-  get praise() { return Texts.pick(this.texts.praise); }
-  get goal() { return Texts.pick(this.steps[0].text); }
+  get mission() { return Texts.challenge(this.id, 'mission') || this.goal; }
+  get praise() { return Texts.challenge(this.id, 'praise'); }
+  get goal() { return this.stepText(0); }
+
+  stepText(index) { return Texts.challenge(this.id, 'steps', index); }
 
   completedIn(project) { return this.isCompleted(project, project.challengeDrawings); }
 
   // La consigna de este momento: el primer paso que falta (el último es lograr el desafío).
   goalIn(project) {
-    for (const step of this.steps) if (step.done !== null && !step.done(project)) return Texts.pick(step.text);
-    return Texts.pick(this.steps[this.steps.length - 1].text);
+    for (let index = 0; index < this.steps.length; index++) {
+      const step = this.steps[index];
+      if (step.done !== null && !step.done(project)) return this.stepText(index);
+    }
+    return this.stepText(this.steps.length - 1);
   }
   hintIn(project) { return this.hintFor(project, project.challengeDrawings); }
 
@@ -114,51 +119,21 @@ export class Challenge {
 
 // Los mundos: capítulos de la escalera, cada uno alrededor de una idea del lenguaje.
 class World {
-  constructor(id, emoji, titles) { this.id = id; this.emoji = emoji; this.titles = titles; }
-  get title() { return Texts.pick(this.titles); }
+  constructor(id, emoji) { this.id = id; this.emoji = emoji; }
+  get title() { return Texts.at('world.' + this.id); }
 }
 
 export const WORLDS = [
-  new World('primeros', '🚀', { en: 'First steps', es: 'Primeros pasos' }),
-  new World('choques', '💥', { en: 'Collisions', es: 'Choques' }),
-  new World('categorias', '🏷️', { en: 'Categories', es: 'Categorías' }),
-  new World('sustitucion', '🔁', { en: 'Substitution', es: 'Sustitución' }),
-  new World('metaprogramacion', '🧠', { en: 'Rules that change', es: 'Reglas que cambian' }),
-  new World('naves', '🚀', { en: 'Ships and time', es: 'Naves y tiempo' }),
-  new World('numeros', '🔢', { en: 'Numbers', es: 'Números' }),
-  new World('puntos', '🏆', { en: 'Score', es: 'Puntos' }),
+  new World('primeros', '🚀'),
+  new World('choques', '💥'),
+  new World('categorias', '🏷️'),
+  new World('sustitucion', '🔁'),
+  new World('metaprogramacion', '🧠'),
+  new World('naves', '🚀'),
+  new World('numeros', '🔢'),
+  new World('puntos', '🏆'),
 ];
 
-// Los textos en inglés de cada desafío (los de español están en la definición, al lado de la
-// lógica). Mismo criterio: un verbo por frase, la ficha entre comillas, la idea al lograrlo.
-const ENGLISH = {
-  'reach-star': { mission: "Get the character to the star.", title: 'Reach the star', steps: ['Take the character to the star with the arrows'], praise: 'The character is next to the arrows: that is why it moves.' },
-  'make-rule': { mission: "Make the character move, then get it to the star.", title: 'Make the rule', steps: ['Drag the arrows to the little square, next to the character', 'Now it moves! Take it to the star'], praise: 'Character + arrows = it moves. That is a rule.' },
-  'eat-star': { mission: "Make the character remove every star from the board.", title: 'Eat the stars', steps: ['Drag the black hole to the little square at the end of the rule', 'Now crash into both stars'], praise: 'When the character crashes into a star, the star falls into the black hole: it disappears for good.' },
-  'draw': { mission: "Draw your own character.", title: 'Draw', steps: ['Tap the pencil. Draw your character'], praise: 'Your drawing is a character now. Next, we make it move.' },
-  'bring-to-life': { mission: "Bring your drawing to life and get it to the star.", title: 'Bring it to life', steps: ['Drag your drawing to the little square, next to the arrows', 'Your drawing moves! Take it to the star'], praise: 'Your drawing + arrows = your drawing moves. You made that rule.' },
-  'run': { mission: "Make the monster reach the star on its own.", title: 'The monster runs', steps: ['Drag "runs to" to the little square, between the monster and the star', 'Look: the monster runs by itself'], praise: 'Monster + runs to + star: the monster goes to the star on its own, without you touching anything.' },
-  'push': { mission: "Get the box onto the star.", title: 'Push the box', steps: ['Drag "pushes" to the little square, between the character and the box', 'Now push the box to the star'], praise: 'Character + pushes + box: when the character crashes into the box, the box moves.' },
-  'walls': { mission: "Stop the monster with the wall so it never reaches you.", title: 'The wall', steps: ['Drag "can\'t pass" to the little square, between the monster and the wall', 'Watch what the monster does'], praise: "Monster + can't pass + wall: the monster runs, but the wall stops it." },
-  'eyes': { mission: "See what a rule says, without playing.", title: 'The eyes', steps: ['Drag the eyes to the little square, next to the star'], praise: 'The eyes show what the rule says: here, the star becomes a heart.' },
-  'sun': { mission: "Make the sun come out over the clouds.", title: 'The sun comes out', steps: ['Drag "teleport" to the little square, between the sun and the cloud', 'Take the sheep to the grass'], praise: 'When the sheep crashes into the grass, the sun appears in the clouds. A crash can make things appear.' },
-  'eat-all': { mission: "Make the character remove every apple and every star.", title: 'Eat everything', steps: ['Drag the black hole to the little square', 'Now eat the apples and the stars'], praise: 'One rule for each thing you eat. With two rules, the character eats two things.' },
-  'portal': { mission: "Get the character across the wall to the star.", title: 'The portal', steps: ['Drag "teleport" to the little square, between the character and the door', 'Go into the portal and reach the star'], praise: 'Character crashes into portal → the character appears at the door. That is how you cross a wall.' },
-  'pull': { mission: "Take the box along with you to the star.", title: 'Pull the box', steps: ['Drag "pulls" to the little square, between the character and the box', 'Take the character to the star. The box follows'], praise: 'Character + pulls + box: the box goes behind the character.' },
-  'nobody-passes': { mission: "Keep the ghost out and get to the star.", title: 'Nobody passes', steps: ['Drag the wildcard to the little square, before "can\'t pass"', "Take the character to the star. The ghost can't pass"], praise: 'The wildcard stands for anything: nobody passes the wall, not the ghost, not you.' },
-  'food': { mission: "Make the character eat apples and fish: a balanced diet.", title: 'It is all food', steps: ['Drag "is inside" to the little square, between the fish and the food', 'Now eat everything'], praise: 'The apple is inside food, and so is the fish: one rule eats both. That is a category.' },
-  'one-rule': { mission: "Eat three different things with a single rule.", title: 'One rule for everything', steps: ['Drag "food" to both little squares of the rule', 'Now eat everything'], praise: 'Three different things, one rule: the rule talks about the category, not about each thing.' },
-  'day-night': { mission: "Turn the sun into the moon.", title: 'Day and night', steps: ['Drag "turns into" to the little square, between the sun and the moon', 'Now put the eyes next to the sun at the top'], praise: 'Sun → moon: the sun turns into the moon. That is a substitution.' },
-  'chain': { mission: "Turn the sun into a star, step by step.", title: 'In a chain', steps: ['Drag "turns into" to the little square, between the moon and the star', 'Now put the eyes next to the sun at the top'], praise: 'Sun → moon → star: substitutions chain all the way to the end.' },
-  'break-rule': { mission: "Break your own rule to get through the wall.", title: 'Break the rule', steps: ['Push "can\'t pass" out of the rule', 'Now walk through the wall to the star'], praise: 'You pushed a piece of your program. The game changes its own rules while you play.' },
-  'rule-by-playing': { mission: "Make a rule by pushing its pieces, then reach the star.", title: 'Make a rule by playing', steps: ['Push "pulls" into the little square of the rule', 'Now take the character to the star. The box follows'], praise: 'You made a rule without the tray: by pushing its pieces around the board.' },
-  'fire': { mission: "Shoot an arrow at the ghost.", title: 'Bullseye', steps: ['Drag "runs to" to the little square, between the arrow and the ghost', 'Tap the space bar'], praise: 'The space bar makes the arrow appear at the ship, and the arrow runs to the ghost. Two rules, one bullseye.' },
-  'missile': { mission: "Shoot the ghost down so it disappears.", title: 'Make it vanish', steps: ['Drag the black hole to the little square at the end of the top rule', 'Tap the space bar'], praise: 'One more rule: when the arrow crashes into the ghost, the ghost falls into the black hole. It disappears for good.' },
-  'next': { mission: "Invent the number 3.", title: 'The next one', steps: ['Put the eyes next to the 2 at the top', 'Now drag the 3 to the little square: the next one after 2 is 3'], praise: 'There are no numbers in Diálogo: you invent them. "Next of 2 → 3" is a rule like any other.' },
-  'add-zero': { mission: "Teach Diálogo to add zero.", title: 'Adding zero', steps: ['Put the eyes next to the 2 at the top', 'Now drag "number" to the little square at the end of the rule'], praise: 'Zero plus a number is that number. Addition starts with that rule: the base case.' },
-  'build-chess': { title: 'Chess', steps: ['Tap the pencil and draw a black piece', 'Now draw a white piece', 'Put a black piece and a white piece on the board', 'Make the rule: black piece · arrows', 'Make the eating rule: black · bumps · white · turns into · white · teleport · black hole', 'Eat the white piece'], praise: 'You built a tiny chess: your pieces, your rules. The real one adds categories: "black piece" for all the black ones.' },
-  'score': { mission: "Make the score go up when you eat a star.", title: 'Score', steps: ['Drag "points to" to the little square at the end of the rule', 'Put the eyes next to the score', 'Crash into both stars and watch the score'], praise: 'Crashing does not set a number: it swaps the rule "score → 0" for "score → the next one". It adds one every time. No variables.' },
-};
 
 // La escalera. Cada desafío entra en 7 × 8 celdas; la regla va abajo, el juego arriba.
 export class Challenges {
