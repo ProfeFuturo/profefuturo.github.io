@@ -10,7 +10,7 @@
   },
   "scripts_extra": "",
   "meta_title": "Diálogo – 用画画来编程",
-  "meta_description": "Diálogo 是一个免费的声明式可视化编程环境，孩子用自己画的符号搭建游戏和模拟。可在 Windows、Mac 和 Linux 上离线运行，并配有七节课的教学序列。",
+  "meta_description": "Diálogo 是一个声明式可视化编程环境，孩子用自己画的符号搭建游戏和模拟。可在 Windows、Mac 和 Linux 上离线运行，并配有七个活动组成的序列。",
   "meta_keywords": "可视化编程, 声明式编程, 儿童编程, 中小学信息技术教育, 画图编程, 元编程, 积木式编程的替代方案, 计算思维, 不写代码做游戏",
   "og_description": "一个声明式可视化编程环境，孩子在其中画出自己的符号。",
   "nav_label": "语言",
@@ -30,7 +30,7 @@
     "从第一节课就是声明式的，没有语法，也不需要先学命令式编程",
     "在配置一般的电脑上离线运行，不需要账号和服务器；项目保存在本机",
     "界面支持十种语言；再加一种只需翻译一个文本文件",
-    "七节课的教学序列以视频形式讲给孩子听，这套工具因此很容易采用"
+    "七个活动的序列以视频形式讲给孩子听，这套工具因此很容易采用"
   ],
   "gif_h2": "从第一笔画到可玩的游戏，只要几分钟",
   "gif_alt": "Diálogo 动画演示：画出符号并把它们组合成游戏",
@@ -46,47 +46,47 @@
   "watch_youtube": "在 YouTube 上观看",
   "online_note": "也可以试试<a href=\"https://www.smalltalkjsvm.com.ar/#zip=https://dialog.ar/Dialogo.zip\" target=\"_blank\" rel=\"noopener\" class=\"text-link underline\">在线版</a>：完整的 Diálogo 直接在浏览器里运行，不用安装，还能保存文件，但速度较慢，首次使用要下载约 30 MB。要真正使用，安装版好得多；只是想看看它是什么，<a href=\"/lab/dialogo-web-7q3x/?lang=zh\" class=\"text-link underline\">入门教程</a>更快。",
   "dev_note": "Diálogo 仍在持续开发中。欢迎把问题报告和课堂上的故事寄到 <a href=\"mailto:agustin@dialog.ar\" class=\"text-link underline\">agustin@dialog.ar</a>。",
-  "step3_h2": "七节课的免费课程",
-  "step3_p1": "每节课通过<strong>一个可玩的作品</strong>引入<strong>一种抽象机制</strong>。第 1 到 5 课做游戏；第 6、7 课转向抽象的符号模型。第 1 到 3 课自成一个完整的入门，第 2 课就能做出可玩的游戏。",
-  "step3_p2": "课程是直接讲给孩子听的视频。<strong>目前视频为西班牙语。</strong>",
+  "step3_h2": "七个活动组成的序列",
+  "step3_p1": "每个活动通过<strong>一个可玩的作品</strong>引入<strong>一种抽象机制</strong>。项目 1 到 5 做游戏；项目 6、7 转向抽象的符号模型。项目 1 到 3 自成一个完整的入门，项目 2 就能做出可玩的游戏。",
+  "step3_p2": "这些活动是直接讲给孩子听的视频。<strong>目前视频为西班牙语。</strong>",
   "clases": [
     {
-      "titulo": "第 1 课：国际象棋",
+      "titulo": "项目 1：国际象棋",
       "texto": "归类，第一种抽象机制。先做出棋盘和能互相吃子的棋子，再把一条条针对具体情况的规则换成针对类别的规则。"
     },
     {
-      "titulo": "第 2 课：贪吃蛇",
+      "titulo": "项目 2：贪吃蛇",
       "texto": "替换，第二种机制。会变长的蛇、去掉重复的代码，以及作为调试器的执行查看器。"
     },
     {
-      "titulo": "第 3 课：从吃豆人到科考潜水艇",
+      "titulo": "项目 3：从吃豆人到科考潜水艇",
       "texto": "一个让所有组合子都派上用场的经典游戏，然后换一身皮，搬到新的场景里。规则很简单，结果出人意料。"
     },
     {
-      "titulo": "第 4 课：元编程谜题",
+      "titulo": "项目 4：元编程谜题",
       "texto": "当程序修改自己时会发生什么？一个迷宫，它的规则可以在游玩时被推走、被拉回。"
     },
     {
-      "titulo": "第 5 课：太空飞船",
+      "titulo": "项目 5：太空飞船",
       "texto": "游戏开发里的想法：由事件驱动的规则、隐藏的物体、碰撞和时间控制，全都汇合到一个射击游戏里。"
     },
     {
-      "titulo": "第 6 课：我的计算器",
+      "titulo": "项目 6：我的计算器",
       "texto": "递归与抽象的符号操作。从零开始构造数字和加法，没有游戏，也没有角色。"
     },
     {
-      "titulo": "第 7 课：计分与复用",
+      "titulo": "项目 7：计分与复用",
       "texto": "模块化与复用。给之前做的游戏加上计分系统，完全不用变量。"
     }
   ],
   "research_h2": "给教师和研究者",
   "research_intro": "介绍过这个项目的部分论文和学术报告：",
   "paper1_when": "2027 年 2 月。已录用，即将发表。",
-  "paper1_note": "环境的设计、它在一次面授工作坊和一门在线课程中的演变，以及七节课的教学序列。",
+  "paper1_note": "环境的设计、它在一次面授工作坊和一门在线课程中的演变，以及由七个活动组成的序列。",
   "paper2_note": "概念基础：替换与归类，作为构造这门语言的两种关系。",
   "talk_at": "演讲，",
   "watch_video": "观看视频",
-  "research_contact": "想在课堂或研究中使用 Diálogo、翻译教学序列，或者用它开展研究吗？请写信到 <a href=\"mailto:agustin@dc.uba.ar\" class=\"text-link underline\">agustin@dc.uba.ar</a>。",
+  "research_contact": "想在课堂或研究中使用 Diálogo、翻译这套活动序列，或者用它开展研究吗？请写信到 <a href=\"mailto:agustin@dc.uba.ar\" class=\"text-link underline\">agustin@dc.uba.ar</a>。",
   "affiliation": "Agustín Rafael Martínez，布宜诺斯艾利斯大学精确与自然科学学院计算机系。",
   "shows_h2": "Nerdearla 上的舞台演出",
   "shows_p": "两场用 Diálogo 做的完整舞台演出，面向普通观众。西班牙语，带字幕。",

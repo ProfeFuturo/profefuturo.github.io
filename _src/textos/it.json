@@ -10,7 +10,7 @@
   },
   "scripts_extra": "",
   "meta_title": "Diálogo – Programmare disegnando",
-  "meta_description": "Diálogo è un ambiente di programmazione visuale dichiarativa, gratuito, in cui i bambini costruiscono giochi e simulazioni a partire da simboli che disegnano loro stessi. Funziona offline su Windows, Mac e Linux, con una sequenza didattica di sette lezioni.",
+  "meta_description": "Diálogo è un ambiente di programmazione visuale dichiarativa in cui i bambini costruiscono giochi e simulazioni a partire da simboli che disegnano loro stessi. Funziona offline su Windows, Mac e Linux, con una sequenza di sette attività.",
   "meta_keywords": "programmazione visuale, programmazione dichiarativa, programmazione per bambini, informatica a scuola, programmare disegnando, metaprogrammazione, alternativa ai blocchi, pensiero computazionale, giochi senza codice",
   "og_description": "Un ambiente di programmazione visuale dichiarativa in cui i bambini disegnano i propri simboli.",
   "nav_label": "Lingue",
@@ -30,7 +30,7 @@
     "Dichiarativo fin dalla prima lezione, senza sintassi e senza prerequisiti imperativi",
     "Funziona offline su macchine modeste, senza account né server; i progetti restano sul computer",
     "Interfaccia in dieci lingue; aggiungerne un'altra significa tradurre un solo file di testo",
-    "Una sequenza di sette lezioni in video rivolti ai bambini, così lo strumento si adotta facilmente"
+    "Una sequenza di sette attività in video rivolti ai bambini, così lo strumento si adotta facilmente"
   ],
   "gif_h2": "Da un primo disegno a un gioco giocabile in pochi minuti",
   "gif_alt": "Demo animata di Diálogo: disegnare simboli e combinarli in un gioco",
@@ -46,47 +46,47 @@
   "watch_youtube": "Guarda su YouTube",
   "online_note": "Oppure prova la <a href=\"https://www.smalltalkjsvm.com.ar/#zip=https://dialog.ar/Dialogo.zip\" target=\"_blank\" rel=\"noopener\" class=\"text-link underline\">versione online</a>: fa girare Diálogo per intero nel browser, senza installare nulla, e permette di salvare i tuoi file, ma è lenta e la prima volta scarica circa 30 MB. Per usarlo davvero conviene la versione installata, e per capire di cosa si tratta è più rapido il <a href=\"/lab/dialogo-web-7q3x/?lang=it\" class=\"text-link underline\">tutorial</a>.",
   "dev_note": "Diálogo è in sviluppo attivo. Segnalazioni di errori e racconti dalla classe sono benvenuti a <a href=\"mailto:agustin@dialog.ar\" class=\"text-link underline\">agustin@dialog.ar</a>.",
-  "step3_h2": "Corso gratuito di sette lezioni",
-  "step3_p1": "Ogni lezione introduce <strong>un meccanismo di astrazione</strong> attraverso <strong>qualcosa di giocabile</strong>. Le lezioni da 1 a 5 costruiscono giochi; le lezioni 6 e 7 vanno verso modelli simbolici astratti. Le lezioni da 1 a 3 formano un'introduzione autonoma, con un gioco giocabile già nella lezione 2.",
-  "step3_p2": "Le lezioni sono video rivolti direttamente ai bambini. <strong>Per ora i video sono in spagnolo.</strong>",
+  "step3_h2": "Sequenza di sette attività",
+  "step3_p1": "Ogni attività introduce <strong>un meccanismo di astrazione</strong> attraverso <strong>qualcosa di giocabile</strong>. I progetti da 1 a 5 costruiscono giochi; i progetti 6 e 7 vanno verso modelli simbolici astratti. I progetti da 1 a 3 formano un'introduzione autonoma, con un gioco giocabile già nel progetto 2.",
+  "step3_p2": "Le attività sono video rivolti direttamente ai bambini. <strong>Per ora i video sono in spagnolo.</strong>",
   "clases": [
     {
-      "titulo": "Lezione 1: Scacchi",
+      "titulo": "Progetto 1: Scacchi",
       "texto": "La categorizzazione, primo meccanismo di astrazione. Costruisci una scacchiera e pezzi che si mangiano tra loro, poi sostituisci le regole caso per caso con regole sulle categorie."
     },
     {
-      "titulo": "Lezione 2: Il serpente",
+      "titulo": "Progetto 2: Il serpente",
       "texto": "La sostituzione, secondo meccanismo. Un serpente che cresce, l'eliminazione del codice ripetuto, e il visualizzatore di esecuzione come debugger."
     },
     {
-      "titulo": "Lezione 3: Da Pac-Man al sottomarino di ricerca",
+      "titulo": "Progetto 3: Da Pac-Man al sottomarino di ricerca",
       "texto": "Un classico che mette al lavoro tutti i combinatori, e poi cambia pelle per un dominio nuovo. Regole semplici, risultato sorprendente."
     },
     {
-      "titulo": "Lezione 4: Enigmi di metaprogrammazione",
+      "titulo": "Progetto 4: Enigmi di metaprogrammazione",
       "texto": "Che cosa succede quando un programma modifica se stesso? Un labirinto le cui regole si possono spingere e attirare mentre si gioca."
     },
     {
-      "titulo": "Lezione 5: Navi spaziali",
+      "titulo": "Progetto 5: Navi spaziali",
       "texto": "Idee dallo sviluppo di videogiochi: regole guidate da eventi, oggetti nascosti, collisioni e controllo del tempo, tutto insieme in uno sparatutto."
     },
     {
-      "titulo": "Lezione 6: La mia calcolatrice",
+      "titulo": "Progetto 6: La mia calcolatrice",
       "texto": "Ricorsione e manipolazione astratta di simboli. I numeri e l'addizione costruiti da zero, senza gioco e senza personaggio."
     },
     {
-      "titulo": "Lezione 7: Punteggio e riuso",
+      "titulo": "Progetto 7: Punteggio e riuso",
       "texto": "Modularità e riuso. Aggiungi un sistema di punteggio a un gioco precedente, senza nessuna variabile."
     }
   ],
   "research_h2": "Per insegnanti e ricercatori",
   "research_intro": "Alcuni articoli e interventi accademici in cui il progetto è stato presentato:",
   "paper1_when": "febbraio 2027. Accettato, in stampa.",
-  "paper1_note": "Il progetto dell'ambiente, la sua evoluzione attraverso un laboratorio in presenza e un corso online, e la sequenza di sette lezioni.",
+  "paper1_note": "Il progetto dell'ambiente, la sua evoluzione attraverso un laboratorio in presenza e un corso online, e la sequenza di sette attività.",
   "paper2_note": "La base concettuale: sostituzione e categorizzazione come le due relazioni da cui è costruito il linguaggio.",
   "talk_at": "Intervento a",
   "watch_video": "Guarda il video",
-  "research_contact": "Ti interessa usare Diálogo in classe o nella tua ricerca, tradurre la sequenza didattica, o condurre uno studio con esso? Scrivi a <a href=\"mailto:agustin@dc.uba.ar\" class=\"text-link underline\">agustin@dc.uba.ar</a>.",
+  "research_contact": "Ti interessa usare Diálogo in classe o nella tua ricerca, tradurre la sequenza di attività, o condurre uno studio con esso? Scrivi a <a href=\"mailto:agustin@dc.uba.ar\" class=\"text-link underline\">agustin@dc.uba.ar</a>.",
   "affiliation": "Agustín Rafael Martínez, Departamento de Computación, Facultad de Ciencias Exactas y Naturales, Universidad de Buenos Aires.",
   "shows_h2": "Spettacoli a Nerdearla",
   "shows_p": "Due spettacoli completi costruiti con Diálogo per il grande pubblico. In spagnolo, con sottotitoli.",

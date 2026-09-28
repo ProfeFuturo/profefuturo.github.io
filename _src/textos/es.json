@@ -10,7 +10,7 @@
   },
   "scripts_extra": "  <script src=\"/formulario.js\"></script>\n  <script src=\"/validacion.js\"></script>\n",
   "meta_title": "Diálogo – Programar dibujando",
-  "meta_description": "Diálogo es un entorno de programación visual declarativa, gratuito, en el que los chicos construyen juegos y simulaciones a partir de símbolos que dibujan ellos mismos. Funciona sin conexión en Windows, Mac y Linux, con una secuencia didáctica de 7 clases.",
+  "meta_description": "Diálogo es un entorno de programación visual declarativa en el que los chicos construyen juegos y simulaciones a partir de símbolos que dibujan ellos mismos. Funciona sin conexión en Windows, Mac y Linux, con una secuencia de 7 actividades.",
   "meta_keywords": "programación visual, programación declarativa, programación para chicos, educación en computación, programar dibujando, metaprogramación, alternativas a bloques, pensamiento computacional, videojuegos sin código",
   "og_description": "Un entorno de programación visual declarativa en el que los chicos dibujan sus propios símbolos.",
   "nav_label": "Idiomas",
@@ -30,7 +30,7 @@
     "Declarativo desde la primera clase, sin sintaxis y sin prerrequisito imperativo",
     "Funciona sin conexión en computadoras modestas, sin cuenta ni servidor; los proyectos se guardan en la máquina",
     "Interfaz en diez idiomas; agregar uno más es traducir un solo archivo de texto",
-    "Una secuencia didáctica de 7 clases en videos dirigidos a los chicos, así podés adoptar la herramienta fácilmente"
+    "Una secuencia de 7 actividades en videos dirigidos a los chicos, así podés adoptar la herramienta fácilmente"
   ],
   "gif_h2": "De un primer dibujo a un juego jugable en minutos",
   "gif_alt": "Demo animada de Diálogo: dibujar símbolos y combinarlos en un juego",
@@ -46,47 +46,47 @@
   "watch_youtube": "Ver en YouTube",
   "online_note": "O probá la <a href=\"https://www.smalltalkjsvm.com.ar/#zip=https://dialog.ar/Dialogo.zip\" target=\"_blank\" rel=\"noopener\" class=\"text-link underline\">versión online</a>: corre el Diálogo completo en el navegador, sin instalar nada, y permite guardar tus archivos, pero anda lenta y la primera vez descarga unos 30 MB. Para usarlo en serio conviene la versión instalada, y para ver de qué se trata es más rápido el <a href=\"/lab/dialogo-web-7q3x/?lang=es\" class=\"text-link underline\">tutorial</a>.",
   "dev_note": "Diálogo está en desarrollo activo. Los reportes de errores y las historias de aula son bienvenidos en <a href=\"mailto:agustin@dialog.ar\" class=\"text-link underline\">agustin@dialog.ar</a>.",
-  "step3_h2": "Curso gratuito de 7 clases",
-  "step3_p1": "Cada clase introduce <strong>un mecanismo de abstracción</strong> a través de <strong>algo jugable</strong>. Las clases 1 a 5 construyen juegos; las clases 6 y 7 avanzan hacia modelos simbólicos abstractos. Las clases 1 a 3 forman una introducción autocontenida, con un juego jugable ya en la clase 2.",
-  "step3_p2": "Las clases son videos dirigidos directamente a los chicos.",
+  "step3_h2": "Secuencia de 7 actividades",
+  "step3_p1": "Cada actividad introduce <strong>un mecanismo de abstracción</strong> a través de <strong>algo jugable</strong>. Los proyectos 1 a 5 construyen juegos; los proyectos 6 y 7 avanzan hacia modelos simbólicos abstractos. Los proyectos 1 a 3 forman una introducción autocontenida, con un juego jugable ya en el proyecto 2.",
+  "step3_p2": "Las actividades son videos dirigidos directamente a los chicos.",
   "clases": [
     {
-      "titulo": "Clase 1: Ajedrez",
+      "titulo": "Proyecto 1: Ajedrez",
       "texto": "Categorización, el primer mecanismo de abstracción. Armá un tablero y piezas que se comen entre sí, y después reemplazá las reglas caso por caso por reglas sobre categorías."
     },
     {
-      "titulo": "Clase 2: La viborita",
+      "titulo": "Proyecto 2: La viborita",
       "texto": "Sustitución, el segundo mecanismo. Una víbora que crece, sacar código repetido, y el visualizador de ejecución como debugger."
     },
     {
-      "titulo": "Clase 3: Del Pac-Man al submarino del CONICET",
+      "titulo": "Proyecto 3: Del Pac-Man al submarino del CONICET",
       "texto": "Un clásico que pone a trabajar todos los combinadores, y después cambia de piel a un dominio nuevo. Reglas simples, resultado sorprendente."
     },
     {
-      "titulo": "Clase 4: Enigmas de metaprogramación",
+      "titulo": "Proyecto 4: Enigmas de metaprogramación",
       "texto": "¿Qué pasa cuando un programa se modifica a sí mismo? Un laberinto cuyas reglas se pueden empujar y atraer mientras jugás."
     },
     {
-      "titulo": "Clase 5: Naves espaciales",
+      "titulo": "Proyecto 5: Naves espaciales",
       "texto": "Ideas del desarrollo de videojuegos: reglas por eventos, objetos ocultos, colisiones y control del tiempo, todo combinado en un juego de disparos."
     },
     {
-      "titulo": "Clase 6: Mi calculadora",
+      "titulo": "Proyecto 6: Mi calculadora",
       "texto": "Recursión y manipulación abstracta de símbolos. Los números y la suma construidos desde cero, sin juego y sin personaje."
     },
     {
-      "titulo": "Clase 7: Puntaje y reuso",
+      "titulo": "Proyecto 7: Puntaje y reuso",
       "texto": "Modularidad y reuso. Sumale un sistema de puntaje a un juego anterior, sin ninguna variable."
     }
   ],
   "research_h2": "Para docentes e investigadores",
   "research_intro": "Algunos artículos y charlas académicas donde se ha presentado el proyecto:",
   "paper1_when": "febrero de 2027. Aceptado, en prensa.",
-  "paper1_note": "El diseño del entorno, su evolución a lo largo de un taller presencial y un curso online, y la secuencia de 7 clases.",
+  "paper1_note": "El diseño del entorno, su evolución a lo largo de un taller presencial y un curso online, y la secuencia de 7 actividades.",
   "paper2_note": "La base conceptual: sustitución y categorización como las dos relaciones a partir de las cuales se construye el lenguaje.",
   "talk_at": "Charla en",
   "watch_video": "Ver el video",
-  "research_contact": "¿Te interesa usar Diálogo en tu aula o en tu investigación, traducir la secuencia didáctica, o hacer un estudio con él? Escribí a <a href=\"mailto:agustin@dc.uba.ar\" class=\"text-link underline\">agustin@dc.uba.ar</a>.",
+  "research_contact": "¿Te interesa usar Diálogo en tu aula o en tu investigación, traducir la secuencia de actividades, o hacer un estudio con él? Escribí a <a href=\"mailto:agustin@dc.uba.ar\" class=\"text-link underline\">agustin@dc.uba.ar</a>.",
   "affiliation": "Agustín Rafael Martínez, Departamento de Computación, Facultad de Ciencias Exactas y Naturales, Universidad de Buenos Aires.",
   "shows_h2": "Shows en Nerdearla",
   "shows_p": "Dos shows completos armados con Diálogo para público general. Los subtítulos están activados por defecto, por si los mirás sin sonido.",

@@ -10,7 +10,7 @@
   },
   "scripts_extra": "",
   "meta_title": "Diálogo – Programming with drawings",
-  "meta_description": "Diálogo is a free declarative visual programming environment in which children build games and simulations from symbols they draw themselves. Runs offline on Windows, Mac and Linux, with a seven-session curriculum.",
+  "meta_description": "Diálogo is a declarative visual programming environment in which children build games and simulations from symbols they draw themselves. Runs offline on Windows, Mac and Linux, with a sequence of seven activities.",
   "meta_keywords": "visual programming, declarative programming, programming for kids, K-12 computing education, drawing-based programming, metaprogramming, block-based alternatives, computational thinking, games without code",
   "og_description": "A declarative visual programming environment where children draw their own symbols.",
   "nav_label": "Languages",
@@ -30,7 +30,7 @@
     "Declarative from the first session, with no syntax and no imperative prerequisite",
     "Runs offline on modest hardware, with no account or server; projects are saved locally",
     "Interface in ten languages; adding one more means translating a single text file",
-    "A seven-session curriculum delivered as videos addressed to the children, so the tool is easy to adopt"
+    "A sequence of seven activities delivered as videos addressed to the children, so the tool is easy to adopt"
   ],
   "gif_h2": "From a first drawing to a playable game in minutes",
   "gif_alt": "Animated demo of Diálogo: drawing symbols and combining them into a game",
@@ -46,47 +46,47 @@
   "watch_youtube": "Watch on YouTube",
   "online_note": "Or try the <a href=\"https://www.smalltalkjsvm.com.ar/#zip=https://dialog.ar/Dialogo.zip\" target=\"_blank\" rel=\"noopener\" class=\"text-link underline\">online version</a>: it runs the full Diálogo in the browser, with no installation, and can save your files, but it is slow and downloads about 30 MB the first time. For real use, the installed version is much better, and to simply see what Diálogo is about, the <a href=\"/lab/dialogo-web-7q3x/?lang=en\" class=\"text-link underline\">tutorial</a> is faster.",
   "dev_note": "Diálogo is under active development. Bug reports and classroom stories are welcome at <a href=\"mailto:agustin@dialog.ar\" class=\"text-link underline\">agustin@dialog.ar</a>.",
-  "step3_h2": "A free seven-session course",
-  "step3_p1": "Each session introduces <strong>one abstraction mechanism</strong> through a <strong>playable artifact</strong>. Sessions 1 to 5 build games; sessions 6 and 7 move toward abstract symbolic models. Sessions 1 to 3 form a self-contained introduction, with a playable game already in session 2.",
-  "step3_p2": "The lessons are videos addressed directly to the children. <strong>The videos are currently in Spanish; an English version is in preparation.</strong>",
+  "step3_h2": "A sequence of seven activities",
+  "step3_p1": "Each activity introduces <strong>one abstraction mechanism</strong> through a <strong>playable artifact</strong>. Projects 1 to 5 build games; projects 6 and 7 move toward abstract symbolic models. Projects 1 to 3 form a self-contained introduction, with a playable game already in project 2.",
+  "step3_p2": "The activities are videos addressed directly to the children. <strong>The videos are currently in Spanish; an English version is in preparation.</strong>",
   "clases": [
     {
-      "titulo": "Session 1: Chess",
+      "titulo": "Project 1: Chess",
       "texto": "Categorization, the first mechanism of abstraction. Build a board and pieces that capture each other, then replace case-by-case rules with rules over categories."
     },
     {
-      "titulo": "Session 2: The Snake",
+      "titulo": "Project 2: The Snake",
       "texto": "Substitution, the second mechanism. A growing-body snake, removing duplicated code, and the execution viewer as a debugger."
     },
     {
-      "titulo": "Session 3: From Pac-Man to a research submarine",
+      "titulo": "Project 3: From Pac-Man to a research submarine",
       "texto": "A classic that puts every combinator to work, then re-skinned into a new domain. Simple rules, surprising results."
     },
     {
-      "titulo": "Session 4: Metaprogramming puzzles",
+      "titulo": "Project 4: Metaprogramming puzzles",
       "texto": "What happens when a program modifies itself? A labyrinth whose rules can be pushed and pulled during play."
     },
     {
-      "titulo": "Session 5: Space ships",
+      "titulo": "Project 5: Space ships",
       "texto": "Ideas from game development: event-driven rules, hidden objects, collisions and time control, all combined in one shooter."
     },
     {
-      "titulo": "Session 6: My calculator",
+      "titulo": "Project 6: My calculator",
       "texto": "Recursion and abstract symbol manipulation. Numbers and addition built from scratch, with no game and no character."
     },
     {
-      "titulo": "Session 7: Score and reuse",
+      "titulo": "Project 7: Score and reuse",
       "texto": "Modularity and reuse. Add a scoring system to an earlier game, with no variables at all."
     }
   ],
   "research_h2": "For educators and researchers",
   "research_intro": "Some papers and academic talks where the project has been presented:",
   "paper1_when": "February 2027. To appear.",
-  "paper1_note": "The environment's design, its evolution across an in-person workshop and an online course, and the seven-session sequence.",
+  "paper1_note": "The environment's design, its evolution across an in-person workshop and an online course, and the sequence of seven activities.",
   "paper2_note": "The conceptual foundation: substitution and categorization as the two relations from which the language is built.",
   "talk_at": "Talk at",
   "watch_video": "Watch the video",
-  "research_contact": "Interested in using Diálogo in your classroom or your research, in translating the curriculum, or in running a study with it? Write to <a href=\"mailto:agustin@dc.uba.ar\" class=\"text-link underline\">agustin@dc.uba.ar</a>.",
+  "research_contact": "Interested in using Diálogo in your classroom or your research, in translating the sequence of activities, or in running a study with it? Write to <a href=\"mailto:agustin@dc.uba.ar\" class=\"text-link underline\">agustin@dc.uba.ar</a>.",
   "affiliation": "Agustín Rafael Martínez, Departamento de Computación, Facultad de Ciencias Exactas y Naturales, Universidad de Buenos Aires.",
   "shows_h2": "Shows at Nerdearla (with English subtitles)",
   "shows_p": "Two full stage shows built with Diálogo for a general audience. Spoken in Spanish; English subtitles are on by default.",

@@ -10,7 +10,7 @@
   },
   "scripts_extra": "",
   "meta_title": "Diálogo – Programmieren durch Zeichnen",
-  "meta_description": "Diálogo ist eine kostenlose deklarative visuelle Programmierumgebung, in der Kinder Spiele und Simulationen aus selbst gezeichneten Symbolen bauen. Läuft offline unter Windows, Mac und Linux, mit einer Unterrichtsreihe aus sieben Einheiten.",
+  "meta_description": "Diálogo ist eine deklarative visuelle Programmierumgebung, in der Kinder Spiele und Simulationen aus selbst gezeichneten Symbolen bauen. Läuft offline unter Windows, Mac und Linux, mit einer Folge von sieben Aktivitäten.",
   "meta_keywords": "visuelle Programmierung, deklarative Programmierung, Programmieren für Kinder, Informatikunterricht, Programmieren durch Zeichnen, Metaprogrammierung, Alternative zu Blöcken, informatisches Denken, Spiele ohne Code",
   "og_description": "Eine deklarative visuelle Programmierumgebung, in der Kinder ihre eigenen Symbole zeichnen.",
   "nav_label": "Sprachen",
@@ -30,7 +30,7 @@
     "Deklarativ von der ersten Einheit an, ohne Syntax und ohne imperative Vorkenntnisse",
     "Läuft offline auf bescheidener Hardware, ohne Konto und ohne Server; Projekte bleiben auf dem Rechner",
     "Oberfläche in zehn Sprachen; eine weitere hinzuzufügen heißt, eine einzige Textdatei zu übersetzen",
-    "Eine Reihe aus sieben Einheiten als Videos für die Kinder, so lässt sich das Werkzeug leicht übernehmen"
+    "Eine Folge von sieben Aktivitäten als Videos für die Kinder, so lässt sich das Werkzeug leicht übernehmen"
   ],
   "gif_h2": "Von der ersten Zeichnung zum spielbaren Spiel in Minuten",
   "gif_alt": "Animierte Demo von Diálogo: Symbole zeichnen und zu einem Spiel zusammensetzen",
@@ -46,47 +46,47 @@
   "watch_youtube": "Auf YouTube ansehen",
   "online_note": "Oder probiere die <a href=\"https://www.smalltalkjsvm.com.ar/#zip=https://dialog.ar/Dialogo.zip\" target=\"_blank\" rel=\"noopener\" class=\"text-link underline\">Online-Version</a>: Sie führt das ganze Diálogo im Browser aus, ohne Installation, und kann deine Dateien speichern, ist aber langsam und lädt beim ersten Mal etwa 30 MB. Für den echten Einsatz ist die installierte Version deutlich besser, und um einfach zu sehen, worum es geht, ist das <a href=\"/lab/dialogo-web-7q3x/?lang=de\" class=\"text-link underline\">Tutorial</a> schneller.",
   "dev_note": "Diálogo wird aktiv weiterentwickelt. Fehlermeldungen und Berichte aus dem Unterricht sind willkommen unter <a href=\"mailto:agustin@dialog.ar\" class=\"text-link underline\">agustin@dialog.ar</a>.",
-  "step3_h2": "Kostenloser Kurs aus sieben Einheiten",
-  "step3_p1": "Jede Einheit führt <strong>einen Abstraktionsmechanismus</strong> anhand von <strong>etwas Spielbarem</strong> ein. Die Einheiten 1 bis 5 bauen Spiele; die Einheiten 6 und 7 gehen zu abstrakten symbolischen Modellen über. Die Einheiten 1 bis 3 bilden eine in sich geschlossene Einführung, mit einem spielbaren Spiel schon in Einheit 2.",
-  "step3_p2": "Die Einheiten sind Videos, die sich direkt an die Kinder richten. <strong>Die Videos sind vorerst auf Spanisch.</strong>",
+  "step3_h2": "Eine Folge von sieben Aktivitäten",
+  "step3_p1": "Jede Aktivität führt <strong>einen Abstraktionsmechanismus</strong> anhand von <strong>etwas Spielbarem</strong> ein. Die Projekte 1 bis 5 bauen Spiele; die Projekte 6 und 7 gehen zu abstrakten symbolischen Modellen über. Die Projekte 1 bis 3 bilden eine in sich geschlossene Einführung, mit einem spielbaren Spiel schon in Projekt 2.",
+  "step3_p2": "Die Aktivitäten sind Videos, die sich direkt an die Kinder richten. <strong>Die Videos sind vorerst auf Spanisch.</strong>",
   "clases": [
     {
-      "titulo": "Einheit 1: Schach",
+      "titulo": "Projekt 1: Schach",
       "texto": "Kategorisierung, der erste Abstraktionsmechanismus. Bau ein Brett und Figuren, die einander schlagen, und ersetze dann die Regeln Fall für Fall durch Regeln über Kategorien."
     },
     {
-      "titulo": "Einheit 2: Die Schlange",
+      "titulo": "Projekt 2: Die Schlange",
       "texto": "Ersetzung, der zweite Mechanismus. Eine wachsende Schlange, das Entfernen von wiederholtem Code und das Ausführungsfenster als Debugger."
     },
     {
-      "titulo": "Einheit 3: Von Pac-Man zum Forschungs-U-Boot",
+      "titulo": "Projekt 3: Von Pac-Man zum Forschungs-U-Boot",
       "texto": "Ein Klassiker, der alle Kombinatoren zum Einsatz bringt und danach in eine neue Domäne umgezogen wird. Einfache Regeln, überraschendes Ergebnis."
     },
     {
-      "titulo": "Einheit 4: Rätsel der Metaprogrammierung",
+      "titulo": "Projekt 4: Rätsel der Metaprogrammierung",
       "texto": "Was passiert, wenn ein Programm sich selbst verändert? Ein Labyrinth, dessen Regeln man im Spiel schieben und ziehen kann."
     },
     {
-      "titulo": "Einheit 5: Raumschiffe",
+      "titulo": "Projekt 5: Raumschiffe",
       "texto": "Ideen aus der Spieleentwicklung: ereignisgesteuerte Regeln, versteckte Objekte, Kollisionen und Zeitsteuerung, alles zusammen in einem Shooter."
     },
     {
-      "titulo": "Einheit 6: Mein Taschenrechner",
+      "titulo": "Projekt 6: Mein Taschenrechner",
       "texto": "Rekursion und abstrakte Symbolmanipulation. Zahlen und Addition von Grund auf gebaut, ohne Spiel und ohne Figur."
     },
     {
-      "titulo": "Einheit 7: Punktestand und Wiederverwendung",
+      "titulo": "Projekt 7: Punktestand und Wiederverwendung",
       "texto": "Modularität und Wiederverwendung. Füge einem früheren Spiel ein Punktesystem hinzu, ganz ohne Variablen."
     }
   ],
   "research_h2": "Für Lehrkräfte und Forschende",
   "research_intro": "Einige Aufsätze und wissenschaftliche Vorträge, in denen das Projekt vorgestellt wurde:",
   "paper1_when": "Februar 2027. Angenommen, im Erscheinen.",
-  "paper1_note": "Der Entwurf der Umgebung, ihre Entwicklung über einen Präsenzworkshop und einen Onlinekurs hinweg, und die Reihe aus sieben Einheiten.",
+  "paper1_note": "Der Entwurf der Umgebung, ihre Entwicklung über einen Präsenzworkshop und einen Onlinekurs hinweg, und die Folge von sieben Aktivitäten.",
   "paper2_note": "Die begriffliche Grundlage: Ersetzung und Kategorisierung als die zwei Beziehungen, aus denen die Sprache aufgebaut ist.",
   "talk_at": "Vortrag auf der",
   "watch_video": "Video ansehen",
-  "research_contact": "Möchten Sie Diálogo im Unterricht oder in der Forschung einsetzen, die Unterrichtsreihe übersetzen oder eine Studie damit durchführen? Schreiben Sie an <a href=\"mailto:agustin@dc.uba.ar\" class=\"text-link underline\">agustin@dc.uba.ar</a>.",
+  "research_contact": "Möchten Sie Diálogo im Unterricht oder in der Forschung einsetzen, die Folge von Aktivitäten übersetzen oder eine Studie damit durchführen? Schreiben Sie an <a href=\"mailto:agustin@dc.uba.ar\" class=\"text-link underline\">agustin@dc.uba.ar</a>.",
   "affiliation": "Agustín Rafael Martínez, Departamento de Computación, Facultad de Ciencias Exactas y Naturales, Universidad de Buenos Aires.",
   "shows_h2": "Bühnenshows bei Nerdearla",
   "shows_p": "Zwei vollständige Bühnenshows, mit Diálogo gebaut, für ein allgemeines Publikum. Auf Spanisch, mit Untertiteln.",
