@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="{{lang}}"{{dir_attr}}>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{{meta_title}}</title>
+
+  <meta name="description" content="{{meta_description}}" />
+  <meta name="keywords" content="{{meta_keywords}}" />
+  <meta name="author" content="Agustín Rafael Martínez" />
+
+  <!-- Idiomas -->
+{{hreflangs}}
+  <link rel="canonical" href="{{url}}" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="{{meta_title}}" />
+  <meta property="og:description" content="{{og_description}}" />
+  <meta property="og:image" content="https://dialog.ar/preview.jpg" />
+  <meta property="og:url" content="{{url}}" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="{{og_locale}}" />
+{{og_alternates}}
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="{{meta_title}}" />
+  <meta name="twitter:description" content="{{og_description}}" />
+  <meta name="twitter:image" content="https://dialog.ar/preview.jpg" />
+{{lang_script}}
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZEE7HG86H1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-ZEE7HG86H1');
+  </script>
+
+  <!-- Estilos -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="icon" href="/logo.png" type="image/png" />
+  <link rel="stylesheet" href="/dialogo.css" />
+</head>
+
+<body class="bg-gray-100 text-gray-800">
+  <header class="bg-white shadow p-6">
+    <div class="max-w-4xl mx-auto text-center">
+      <img src="/logo.svg" alt="Diálogo" class="mx-auto mb-4" style="width: 440px; height: auto;">
+      <h1 class="text-3xl md:text-5xl font-bold text-indigo-600 sr-only">Diálogo</h1>
+      <p class="text-lg mt-2 font-semibold">{{tagline}}</p>
+      <nav class="selector-idioma mt-4 text-sm" aria-label="{{nav_label}}">
+{{language_nav}}
+      </nav>
+    </div>
+  </header>
+
+  <main class="max-w-3xl mx-auto px-6 py-12 space-y-16">
+    <section class="animate-fade-in">
+      <h2 class="text-2xl font-semibold text-violeta">{{what_h2}}</h2>
+      <p class="mt-2 text-gray-700 leading-relaxed">{{what_p1}}</p>
+      <p class="mt-4 text-gray-700 leading-relaxed">{{what_p2}}</p>
+    </section>
+
+    <section class="grid md:grid-cols-2 gap-8 animate-fade-in">
+      <div>
+        <h3 class="font-semibold text-lg text-yellow-500">🎮 {{for_learners}}</h3>
+        <ul class="list-disc list-inside text-gray-700 space-y-1 mt-2">
+{{learners_items}}
+        </ul>
+      </div>
+      <div>
+        <h3 class="font-semibold text-lg text-yellow-500">🏫 {{for_teachers}}</h3>
+        <ul class="list-disc list-inside text-gray-700 space-y-1 mt-2">
+{{teachers_items}}
+        </ul>
+      </div>
+    </section>
+
+    <section class="animate-fade-in">
+      <h2 class="text-xl font-semibold text-subtitulo text-center mb-4">🌀 {{gif_h2}}</h2>
+      <img src="/demo.gif" alt="{{gif_alt}}" class="mx-auto rounded-xl shadow-lg max-w-full h-auto" />
+    </section>
+
+    <!-- Paso 1: tutorial -->
+    <section class="max-w-4xl mx-auto my-16 px-4 bg-white rounded-2xl shadow-lg p-8" id="tutorial">
+      <p class="text-center text-sm font-semibold text-acento uppercase tracking-widest mb-1">{{step1_label}}</p>
+      <h2 class="text-3xl md:text-4xl font-bold text-center text-violeta mb-4">🎯 {{step1_h2}}</h2>
+      <p class="text-center text-lg text-gray-700 mb-8">{{step1_p}}</p>
+      <!-- CAPTURA -->
+      <div class="text-center">
+        <a href="/lab/dialogo-web-7q3x/?lang={{lang}}"
+           class="inline-block bg-acento hover:bg-subtitulo text-white font-bold py-4 px-10 rounded-xl shadow-md hover:shadow-xl transition text-lg">
+          {{step1_cta}}
+        </a>
+      </div>
+    </section>
+
+    <!-- Paso 2: descarga -->
+    <section class="max-w-4xl mx-auto my-16 px-4 bg-white rounded-2xl shadow-lg p-8" id="{{id_download}}">
+      <p class="text-center text-sm font-semibold text-acento uppercase tracking-widest mb-1">{{step2_label}}</p>
+      <h2 class="text-3xl md:text-4xl font-bold text-center text-violeta mb-6">⬇️ {{step2_h2}}</h2>
+      <p class="text-center text-lg text-gray-700 mb-8">{{step2_p}}</p>
+      <div class="grid md:grid-cols-3 gap-6">
+        <a href="/DialogoSetup.exe"
+           class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-6 px-4 rounded-xl text-center transition shadow-md hover:shadow-xl">
+          <div class="text-4xl mb-2">🪟</div>
+          <div class="text-xl">Windows</div>
+          <div class="text-sm mt-2 opacity-90">DialogoSetup.exe</div>
+        </a>
+        <a href="/Dialogo.dmg"
+           class="bg-gray-700 hover:bg-gray-800 text-white font-bold py-6 px-4 rounded-xl text-center transition shadow-md hover:shadow-xl">
+          <div class="text-4xl mb-2">🍎</div>
+          <div class="text-xl">Mac</div>
+          <div class="text-sm mt-2 opacity-90">Dialogo.dmg</div>
+        </a>
+        <a href="/Dialogo.zip"
+           class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-6 px-4 rounded-xl text-center transition shadow-md hover:shadow-xl">
+          <div class="text-4xl mb-2">💻</div>
+          <div class="text-xl">{{cross_platform}}</div>
+          <div class="text-sm mt-2 opacity-90">Dialogo.zip</div>
+        </a>
+      </div>
+      <p class="text-center text-sm text-gray-600 mt-6">
+        <em>{{zip_note}}</em>
+      </p>
+      <details class="leccion leccion-inline mt-4 text-sm text-gray-600 text-center" data-video="CYuRk_dKHYg">
+        <summary class="text-link underline inline-block">{{install_help}}</summary>
+        <div class="mt-3 max-w-xl mx-auto">
+          <div class="leccion-video">
+            <a href="https://youtu.be/CYuRk_dKHYg" target="_blank" rel="noopener" class="text-link underline">{{watch_youtube}}</a>
+          </div>
+          <p class="mt-2">{{install_help_note}}</p>
+        </div>
+      </details>
+      <p class="text-center text-sm text-gray-600 mt-4">{{online_note}}</p>
+      <p class="text-center text-sm text-gray-600 mt-2">{{dev_note}}</p>
+    </section>
+
+    <!-- Paso 3: curso -->
+    <section class="max-w-4xl mx-auto my-16 px-4" id="{{id_course}}">
+      <div class="bg-white rounded-2xl shadow-lg p-8">
+        <p class="text-center text-sm font-semibold text-acento uppercase tracking-widest mb-1">{{step3_label}}</p>
+        <h2 class="text-3xl md:text-4xl font-bold text-center text-violeta mb-4">🎓 {{step3_h2}}</h2>
+        <p class="text-center text-lg text-gray-700 mb-4">{{step3_p1}}</p>
+        <p class="text-center text-gray-700">{{step3_p2}}</p>
+      </div>
+
+      <div class="space-y-4 mt-8">
+{{lessons}}
+      </div>
+    </section>
+
+    <!-- Para docentes e investigadores -->
+    <section class="max-w-4xl mx-auto my-16 px-4 bg-white rounded-2xl shadow-lg p-8" id="{{id_research}}">
+      <h2 class="text-3xl md:text-4xl font-bold text-center text-violeta mb-6">🔬 {{research_h2}}</h2>
+      <p class="text-center text-lg text-gray-700 mb-8">{{research_intro}}</p>
+      <ul class="space-y-5 text-gray-700">
+        <li class="border-l-4 border-indigo-500 pl-4">
+          <p class="font-semibold text-subtitulo" lang="en">Programming with Drawings: A Declarative Visual Environment and Its Classroom Evolution</p>
+          <p>Agustín R. Martínez. <em>SIGCSE Technical Symposium 2027</em>, Sacramento, California, {{paper1_when}}</p>
+          <p class="text-sm text-gray-600">{{paper1_note}}</p>
+        </li>
+        <li class="border-l-4 border-indigo-500 pl-4">
+          <p class="font-semibold text-subtitulo" lang="en">A Language Based on Two Relations between Symbols</p>
+          <p>Agustín R. Martínez. <em>Onward! 2022</em> (SPLASH), Auckland. ACM. <a href="https://doi.org/10.1145/3563835.3567660" target="_blank" rel="noopener" class="text-link underline">doi:10.1145/3563835.3567660</a></p>
+          <p class="text-sm text-gray-600">{{paper2_note}}</p>
+        </li>
+        <li class="border-l-4 border-indigo-500 pl-4">
+          <p class="font-semibold text-subtitulo" lang="en">Teaching Kids to Hack Their Own Games: Metaprogramming, Debugging, and Creativity from Age 7</p>
+          <p>{{talk_at}} <em>Smalltalks 2025</em>, Buenos Aires. <a href="https://youtu.be/EqioMI1I5E8" target="_blank" rel="noopener" class="text-link underline">{{watch_video}}</a></p>
+        </li>
+      </ul>
+      <p class="mt-8 text-gray-700 leading-relaxed">{{research_contact}}</p>
+      <p class="mt-2 text-sm text-gray-600">{{affiliation}}</p>
+    </section>
+
+    <!-- Nerdearla -->
+    <section class="animate-fade-in mt-16">
+      <h2 class="text-2xl font-semibold text-violeta text-center mb-6">🎤 {{shows_h2}}</h2>
+      <p class="text-center text-gray-700 mb-8">{{shows_p}}</p>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="aspect-w-16 aspect-h-9">
+          <iframe
+            class="w-full h-full rounded-xl shadow-lg"
+            style="aspect-ratio: 16/9; min-height: 250px;"
+            src="https://www.youtube.com/embed/OMulIPUosDs?cc_load_policy=1&amp;cc_lang_pref={{cc_lang}}&amp;hl={{lang}}"
+            title="Diálogo, Nerdearla 1"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+          </iframe>
+        </div>
+        <div class="aspect-w-16 aspect-h-9">
+          <iframe
+            class="w-full h-full rounded-xl shadow-lg"
+            style="aspect-ratio: 16/9; min-height: 250px;"
+            src="https://www.youtube.com/embed/w2mqMSp40Hk?cc_load_policy=1&amp;cc_lang_pref={{cc_lang}}&amp;hl={{lang}}"
+            title="Diálogo, Nerdearla 2"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+    </section>
+
+    <section class="text-center text-sm text-gray-500 animate-fade-in">
+      <p>{{made_by}}</p>
+    </section>
+  </main>
+
+  <footer class="text-center text-gray-500 text-sm p-6 space-y-2 mt-16">
+    <div class="flex justify-center flex-wrap gap-4 text-lg">
+      <a href="https://www.instagram.com/elprofefuturo" target="_blank" rel="noopener" class="hover:text-subtitulo transition">📸 Instagram</a>
+      <a href="https://www.tiktok.com/@elprofefuturo" target="_blank" rel="noopener" class="hover:text-subtitulo transition">🎵 TikTok</a>
+      <a href="https://x.com/elprofefuturo" target="_blank" rel="noopener" class="hover:text-subtitulo transition">🦅 X</a>
+      <a href="https://www.youtube.com/@elprofefuturo" target="_blank" rel="noopener" class="hover:text-subtitulo transition">▶️ YouTube</a>
+      <a href="mailto:agustin@dialog.ar" class="hover:text-subtitulo transition">📬 agustin@dialog.ar</a>
+    </div>
+    <p class="text-xs text-gray-400">© 2026 Diálogo. {{rights}}</p>
+  </footer>
+{{extra_scripts}}
+  <script src="/clases.js"></script>
+</body>
+</html>

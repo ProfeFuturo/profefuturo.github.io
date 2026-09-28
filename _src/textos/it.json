@@ -1,0 +1,96 @@
+{
+  "nombre": "Italiano",
+  "og_locale": "it_IT",
+  "cc_lang": "it",
+  "dir": "ltr",
+  "ids": {
+    "descarga": "scarica",
+    "curso": "corso",
+    "investigacion": "ricerca"
+  },
+  "scripts_extra": "",
+  "meta_title": "Diálogo – Programmare disegnando",
+  "meta_description": "Diálogo è un ambiente di programmazione visuale dichiarativa, gratuito, in cui i bambini costruiscono giochi e simulazioni a partire da simboli che disegnano loro stessi. Funziona offline su Windows, Mac e Linux, con una sequenza didattica di sette lezioni.",
+  "meta_keywords": "programmazione visuale, programmazione dichiarativa, programmazione per bambini, informatica a scuola, programmare disegnando, metaprogrammazione, alternativa ai blocchi, pensiero computazionale, giochi senza codice",
+  "og_description": "Un ambiente di programmazione visuale dichiarativa in cui i bambini disegnano i propri simboli.",
+  "nav_label": "Lingue",
+  "tagline": "Un ambiente di programmazione visuale in cui i bambini disegnano i propri simboli",
+  "what_h2": "Che cos'è Diálogo?",
+  "what_p1": "Diálogo è un ambiente di programmazione gratuito per bambini e ragazzi (all'incirca dai 10 ai 17 anni; i più piccoli con un adulto accanto) in cui i programmi si costruiscono a partire da simboli che i bambini disegnano loro stessi, invece che da blocchi predefiniti. Il linguaggio poggia su due relazioni tra simboli, la <strong>sostituzione</strong> e la <strong>categorizzazione</strong>, più una decina di combinatori visuali (spingere, attirare, teletrasportare, far collidere, jolly, un visualizzatore di valutazione). Con un insieme così piccolo i bambini costruiscono giochi, simulazioni e modelli simbolici astratti, come i numeri e l'addizione da zero.",
+  "what_p2": "Le regole stanno sulla stessa tavola del gioco. Un personaggio può spingere una regola e cambiare il programma mentre gira, così la metaprogrammazione diventa qualcosa che un bambino può vedere e toccare. Un visualizzatore di esecuzione passo passo mostra quale regola è stata applicata a ogni passo, e serve anche da debugger.",
+  "for_learners": "Per i bambini:",
+  "para_chicos": [
+    "Costruisci giochi con i tuoi disegni",
+    "Dai un comportamento ai personaggi combinando pochi combinatori visuali",
+    "Guarda, passo per passo, perché il gioco fa quello che fa",
+    "Fai giochi che riscrivono le proprie regole mentre giochi"
+  ],
+  "for_teachers": "Per insegnanti e ricercatori:",
+  "para_docentes": [
+    "Dichiarativo fin dalla prima lezione, senza sintassi e senza prerequisiti imperativi",
+    "Funziona offline su macchine modeste, senza account né server; i progetti restano sul computer",
+    "Interfaccia in dieci lingue; aggiungerne un'altra significa tradurre un solo file di testo",
+    "Una sequenza di sette lezioni in video rivolti direttamente ai bambini, così si può adottare prima di padroneggiare il paradigma"
+  ],
+  "gif_h2": "Da un primo disegno a un gioco giocabile in pochi minuti",
+  "gif_alt": "Demo animata di Diálogo: disegnare simboli e combinarli in un gioco",
+  "step1_h2": "Comincia dal tutorial",
+  "step1_p": "Un'introduzione che si gioca nel browser, risolvendo sfide brevi. Insegna le due relazioni su cui poggia il linguaggio, senza installare nulla e senza creare un account.",
+  "step1_cta": "Inizia il tutorial",
+  "step2_h2": "Scarica Diálogo",
+  "step2_p": "Gratis e senza account. Scegli la versione per il tuo sistema operativo:",
+  "cross_platform": "Multipiattaforma",
+  "zip_note": "Lo ZIP funziona su Linux, e anche su Windows e Mac come alternativa agli installatori.",
+  "install_help": "Problemi a installarlo? C'è un video che lo spiega",
+  "install_help_note": "Come installare Diálogo su Windows, Mac o Linux. In spagnolo.",
+  "watch_youtube": "Guarda su YouTube",
+  "online_note": "Oppure prova la <a href=\"https://www.smalltalkjsvm.com.ar/#zip=https://dialog.ar/Dialogo.zip\" target=\"_blank\" rel=\"noopener\" class=\"text-link underline\">versione online</a>: fa girare Diálogo per intero nel browser, senza installare nulla, e permette di salvare i tuoi file, ma è lenta e la prima volta scarica circa 30 MB. Per usarlo davvero conviene la versione installata, e per capire di cosa si tratta è più rapido il <a href=\"/lab/dialogo-web-7q3x/?lang=it\" class=\"text-link underline\">tutorial</a>.",
+  "dev_note": "Diálogo è in sviluppo attivo. Segnalazioni di errori e racconti dalla classe sono benvenuti a <a href=\"mailto:agustin@dialog.ar\" class=\"text-link underline\">agustin@dialog.ar</a>.",
+  "step3_h2": "Corso gratuito di sette lezioni",
+  "step3_p1": "Ogni lezione introduce <strong>un meccanismo di astrazione</strong> attraverso <strong>qualcosa di giocabile</strong>. Le lezioni da 1 a 5 costruiscono giochi; le lezioni 6 e 7 vanno verso modelli simbolici astratti. Le lezioni da 1 a 3 formano un'introduzione autonoma, con un gioco giocabile già nella lezione 2.",
+  "step3_p2": "Le lezioni sono video rivolti direttamente ai bambini. <strong>Per ora i video sono in spagnolo.</strong>",
+  "clases": [
+    {
+      "titulo": "Lezione 1: Scacchi",
+      "texto": "La categorizzazione, primo meccanismo di astrazione. Costruisci una scacchiera e pezzi che si mangiano tra loro, poi sostituisci le regole caso per caso con regole sulle categorie."
+    },
+    {
+      "titulo": "Lezione 2: Il serpente",
+      "texto": "La sostituzione, secondo meccanismo. Un serpente che cresce, l'eliminazione del codice ripetuto, e il visualizzatore di esecuzione come debugger."
+    },
+    {
+      "titulo": "Lezione 3: Da Pac-Man al sottomarino di ricerca",
+      "texto": "Un classico che mette al lavoro tutti i combinatori, e poi cambia pelle per un dominio nuovo. Regole semplici, risultato sorprendente."
+    },
+    {
+      "titulo": "Lezione 4: Enigmi di metaprogrammazione",
+      "texto": "Che cosa succede quando un programma modifica se stesso? Un labirinto le cui regole si possono spingere e attirare mentre si gioca."
+    },
+    {
+      "titulo": "Lezione 5: Navi spaziali",
+      "texto": "Idee dallo sviluppo di videogiochi: regole guidate da eventi, oggetti nascosti, collisioni e controllo del tempo, tutto insieme in uno sparatutto."
+    },
+    {
+      "titulo": "Lezione 6: La mia calcolatrice",
+      "texto": "Ricorsione e manipolazione astratta di simboli. I numeri e l'addizione costruiti da zero, senza gioco e senza personaggio."
+    },
+    {
+      "titulo": "Lezione 7: Punteggio e riuso",
+      "texto": "Modularità e riuso. Aggiungi un sistema di punteggio a un gioco precedente, senza nessuna variabile."
+    }
+  ],
+  "research_h2": "Per insegnanti e ricercatori",
+  "research_intro": "Diálogo è sviluppato all'Università di Buenos Aires come progetto di ricerca sulla programmazione dichiarativa per bambini. Sia l'ambiente sia la sequenza didattica sono pubblicati come artefatti, per l'adozione e lo studio empirico.",
+  "paper1_when": "febbraio 2027. Accettato, in stampa.",
+  "paper1_note": "Il progetto dell'ambiente, la sua evoluzione attraverso un laboratorio in presenza e un corso online, e la sequenza di sette lezioni.",
+  "paper2_note": "La base concettuale: sostituzione e categorizzazione come le due relazioni da cui è costruito il linguaggio.",
+  "talk_at": "Intervento a",
+  "watch_video": "Guarda il video",
+  "research_contact": "Ti interessa usare Diálogo in classe o nella tua ricerca, tradurre la sequenza didattica, o condurre uno studio con esso? Scrivi a <a href=\"mailto:agustin@dc.uba.ar\" class=\"text-link underline\">agustin@dc.uba.ar</a>.",
+  "affiliation": "Agustín Rafael Martínez, Departamento de Computación, Facultad de Ciencias Exactas y Naturales, Universidad de Buenos Aires.",
+  "shows_h2": "Spettacoli a Nerdearla",
+  "shows_p": "Due spettacoli completi costruiti con Diálogo per il grande pubblico. In spagnolo, con sottotitoli.",
+  "made_by": "Realizzato da Agustín, insegnante e ricercatore all'Università di Buenos Aires, conosciuto anche come <strong>Profe Futuro</strong> 🚀",
+  "rights": "Tutti i diritti riservati.",
+  "step_format": "Passo {n}"
+}

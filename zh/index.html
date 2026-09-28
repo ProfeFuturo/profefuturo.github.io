@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Diálogo – 用画画来编程</title>
+
+  <meta name="description" content="Diálogo 是一个免费的声明式可视化编程环境，孩子用自己画的符号搭建游戏和模拟。可在 Windows、Mac 和 Linux 上离线运行，并配有七节课的教学序列。" />
+  <meta name="keywords" content="可视化编程, 声明式编程, 儿童编程, 中小学信息技术教育, 画图编程, 元编程, 积木式编程的替代方案, 计算思维, 不写代码做游戏" />
+  <meta name="author" content="Agustín Rafael Martínez" />
+
+  <!-- Idiomas -->
+  <link rel="alternate" hreflang="es" href="https://dialog.ar/es/" />
+  <link rel="alternate" hreflang="en" href="https://dialog.ar/" />
+  <link rel="alternate" hreflang="fr" href="https://dialog.ar/fr/" />
+  <link rel="alternate" hreflang="de" href="https://dialog.ar/de/" />
+  <link rel="alternate" hreflang="pt" href="https://dialog.ar/pt/" />
+  <link rel="alternate" hreflang="it" href="https://dialog.ar/it/" />
+  <link rel="alternate" hreflang="zh" href="https://dialog.ar/zh/" />
+  <link rel="alternate" hreflang="hi" href="https://dialog.ar/hi/" />
+  <link rel="alternate" hreflang="ja" href="https://dialog.ar/ja/" />
+  <link rel="alternate" hreflang="ar" href="https://dialog.ar/ar/" />
+  <link rel="alternate" hreflang="x-default" href="https://dialog.ar/" />
+  <link rel="canonical" href="https://dialog.ar/zh/" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Diálogo – 用画画来编程" />
+  <meta property="og:description" content="一个声明式可视化编程环境，孩子在其中画出自己的符号。" />
+  <meta property="og:image" content="https://dialog.ar/preview.jpg" />
+  <meta property="og:url" content="https://dialog.ar/zh/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="zh_CN" />
+  <meta property="og:locale:alternate" content="es_AR" />
+  <meta property="og:locale:alternate" content="en_US" />
+  <meta property="og:locale:alternate" content="fr_FR" />
+  <meta property="og:locale:alternate" content="de_DE" />
+  <meta property="og:locale:alternate" content="pt_BR" />
+  <meta property="og:locale:alternate" content="it_IT" />
+  <meta property="og:locale:alternate" content="hi_IN" />
+  <meta property="og:locale:alternate" content="ja_JP" />
+  <meta property="og:locale:alternate" content="ar_AR" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Diálogo – 用画画来编程" />
+  <meta name="twitter:description" content="一个声明式可视化编程环境，孩子在其中画出自己的符号。" />
+  <meta name="twitter:image" content="https://dialog.ar/preview.jpg" />
+
+  <!-- Idioma elegido: la raíz lo usa para no volver a redirigir -->
+  <script>try { localStorage.setItem("dialogo-lang", "zh"); } catch (e) {}</script>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZEE7HG86H1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-ZEE7HG86H1');
+  </script>
+
+  <!-- Estilos -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="icon" href="/logo.png" type="image/png" />
+  <link rel="stylesheet" href="/dialogo.css" />
+</head>
+
+<body class="bg-gray-100 text-gray-800">
+  <header class="bg-white shadow p-6">
+    <div class="max-w-4xl mx-auto text-center">
+      <img src="/logo.svg" alt="Diálogo" class="mx-auto mb-4" style="width: 440px; height: auto;">
+      <h1 class="text-3xl md:text-5xl font-bold text-indigo-600 sr-only">Diálogo</h1>
+      <p class="text-lg mt-2 font-semibold">一个孩子画出自己符号的可视化编程环境</p>
+      <nav class="selector-idioma mt-4 text-sm" aria-label="语言">
+        <a href="/es/" lang="es" hreflang="es" class="text-link hover:text-subtitulo transition">Español</a>
+        <a href="/?lang=en" lang="en" hreflang="en" class="text-link hover:text-subtitulo transition">English</a>
+        <a href="/fr/" lang="fr" hreflang="fr" class="text-link hover:text-subtitulo transition">Français</a>
+        <a href="/de/" lang="de" hreflang="de" class="text-link hover:text-subtitulo transition">Deutsch</a>
+        <a href="/pt/" lang="pt" hreflang="pt" class="text-link hover:text-subtitulo transition">Português</a>
+        <a href="/it/" lang="it" hreflang="it" class="text-link hover:text-subtitulo transition">Italiano</a>
+        <span class="idioma-actual" aria-current="true" lang="zh">中文</span>
+        <a href="/hi/" lang="hi" hreflang="hi" class="text-link hover:text-subtitulo transition">हिन्दी</a>
+        <a href="/ja/" lang="ja" hreflang="ja" class="text-link hover:text-subtitulo transition">日本語</a>
+        <a href="/ar/" lang="ar" hreflang="ar" class="text-link hover:text-subtitulo transition">العربية</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="max-w-3xl mx-auto px-6 py-12 space-y-16">
+    <section class="animate-fade-in">
+      <h2 class="text-2xl font-semibold text-violeta">Diálogo 是什么？</h2>
+      <p class="mt-2 text-gray-700 leading-relaxed">Diálogo 是一个面向孩子的免费编程环境（大约 10 到 17 岁；更小的孩子可在大人陪同下使用）。程序不是用现成的积木搭起来的，而是用孩子自己画的符号。这门语言建立在符号之间的两种关系之上，<strong>替换</strong>和<strong>归类</strong>，再加上十来个可视化组合子（推、拉、传送、碰撞、通配符、求值查看器）。靠这么小的一套东西，孩子就能做出游戏、模拟，以及抽象的符号模型，比如从零开始构造自然数和加法。</p>
+      <p class="mt-4 text-gray-700 leading-relaxed">规则和游戏放在同一块板上。角色可以把一条规则推开，在程序运行时改变它，于是元编程变成孩子看得见、摸得着的东西。逐步执行查看器会显示每一步应用了哪条规则，同时也是调试器。</p>
+    </section>
+
+    <section class="grid md:grid-cols-2 gap-8 animate-fade-in">
+      <div>
+        <h3 class="font-semibold text-lg text-yellow-500">🎮 给孩子：</h3>
+        <ul class="list-disc list-inside text-gray-700 space-y-1 mt-2">
+          <li>用你自己的画来做游戏</li>
+          <li>把几个可视化组合子拼起来，给角色加上行为</li>
+          <li>一步一步地看清楚，游戏为什么会这样运行</li>
+          <li>做出在游玩过程中改写自身规则的游戏</li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="font-semibold text-lg text-yellow-500">🏫 给教师和研究者：</h3>
+        <ul class="list-disc list-inside text-gray-700 space-y-1 mt-2">
+          <li>从第一节课就是声明式的，没有语法，也不需要先学命令式编程</li>
+          <li>在配置一般的电脑上离线运行，不需要账号和服务器；项目保存在本机</li>
+          <li>界面支持十种语言；再加一种只需翻译一个文本文件</li>
+          <li>七节课的教学序列以视频形式直接讲给孩子听，教师不必先掌握这一范式就能采用</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="animate-fade-in">
+      <h2 class="text-xl font-semibold text-subtitulo text-center mb-4">🌀 从第一笔画到可玩的游戏，只要几分钟</h2>
+      <img src="/demo.gif" alt="Diálogo 动画演示：画出符号并把它们组合成游戏" class="mx-auto rounded-xl shadow-lg max-w-full h-auto" />
+    </section>
+
+    <!-- Paso 1: tutorial -->
+    <section class="max-w-4xl mx-auto my-16 px-4 bg-white rounded-2xl shadow-lg p-8" id="tutorial">
+      <p class="text-center text-sm font-semibold text-acento uppercase tracking-widest mb-1">第 1 步</p>
+      <h2 class="text-3xl md:text-4xl font-bold text-center text-violeta mb-4">🎯 先做这个入门教程</h2>
+      <p class="text-center text-lg text-gray-700 mb-8">一个在浏览器里玩的入门教程，通过一个个小关卡，带你认识这门语言依赖的两种关系。不用安装，也不用注册账号。</p>
+      <!-- CAPTURA -->
+      <div class="text-center">
+        <a href="/lab/dialogo-web-7q3x/?lang=zh"
+           class="inline-block bg-acento hover:bg-subtitulo text-white font-bold py-4 px-10 rounded-xl shadow-md hover:shadow-xl transition text-lg">
+          开始教程
+        </a>
+      </div>
+    </section>
+
+    <!-- Paso 2: descarga -->
+    <section class="max-w-4xl mx-auto my-16 px-4 bg-white rounded-2xl shadow-lg p-8" id="download">
+      <p class="text-center text-sm font-semibold text-acento uppercase tracking-widest mb-1">第 2 步</p>
+      <h2 class="text-3xl md:text-4xl font-bold text-center text-violeta mb-6">⬇️ 下载 Diálogo</h2>
+      <p class="text-center text-lg text-gray-700 mb-8">免费，无需账号。请选择你的操作系统：</p>
+      <div class="grid md:grid-cols-3 gap-6">
+        <a href="/DialogoSetup.exe"
+           class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-6 px-4 rounded-xl text-center transition shadow-md hover:shadow-xl">
+          <div class="text-4xl mb-2">🪟</div>
+          <div class="text-xl">Windows</div>
+          <div class="text-sm mt-2 opacity-90">DialogoSetup.exe</div>
+        </a>
+        <a href="/Dialogo.dmg"
+           class="bg-gray-700 hover:bg-gray-800 text-white font-bold py-6 px-4 rounded-xl text-center transition shadow-md hover:shadow-xl">
+          <div class="text-4xl mb-2">🍎</div>
+          <div class="text-xl">Mac</div>
+          <div class="text-sm mt-2 opacity-90">Dialogo.dmg</div>
+        </a>
+        <a href="/Dialogo.zip"
+           class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-6 px-4 rounded-xl text-center transition shadow-md hover:shadow-xl">
+          <div class="text-4xl mb-2">💻</div>
+          <div class="text-xl">跨平台</div>
+          <div class="text-sm mt-2 opacity-90">Dialogo.zip</div>
+        </a>
+      </div>
+      <p class="text-center text-sm text-gray-600 mt-6">
+        <em>ZIP 版可在 Linux 上运行，也可以作为安装包之外的选择用于 Windows 和 Mac。</em>
+      </p>
+      <details class="leccion leccion-inline mt-4 text-sm text-gray-600 text-center" data-video="CYuRk_dKHYg">
+        <summary class="text-link underline inline-block">安装遇到问题？这里有一个讲解视频</summary>
+        <div class="mt-3 max-w-xl mx-auto">
+          <div class="leccion-video">
+            <a href="https://youtu.be/CYuRk_dKHYg" target="_blank" rel="noopener" class="text-link underline">在 YouTube 上观看</a>
+          </div>
+          <p class="mt-2">如何在 Windows、Mac 或 Linux 上安装 Diálogo。视频为西班牙语。</p>
+        </div>
+      </details>
+      <p class="text-center text-sm text-gray-600 mt-4">也可以试试<a href="https://www.smalltalkjsvm.com.ar/#zip=https://dialog.ar/Dialogo.zip" target="_blank" rel="noopener" class="text-link underline">在线版</a>：完整的 Diálogo 直接在浏览器里运行，不用安装，还能保存文件，但速度较慢，首次使用要下载约 30 MB。要真正使用，安装版好得多；只是想看看它是什么，<a href="/lab/dialogo-web-7q3x/?lang=zh" class="text-link underline">入门教程</a>更快。</p>
+      <p class="text-center text-sm text-gray-600 mt-2">Diálogo 仍在持续开发中。欢迎把问题报告和课堂上的故事寄到 <a href="mailto:agustin@dialog.ar" class="text-link underline">agustin@dialog.ar</a>。</p>
+    </section>
+
+    <!-- Paso 3: curso -->
+    <section class="max-w-4xl mx-auto my-16 px-4" id="course">
+      <div class="bg-white rounded-2xl shadow-lg p-8">
+        <p class="text-center text-sm font-semibold text-acento uppercase tracking-widest mb-1">第 3 步</p>
+        <h2 class="text-3xl md:text-4xl font-bold text-center text-violeta mb-4">🎓 七节课的免费课程</h2>
+        <p class="text-center text-lg text-gray-700 mb-4">每节课通过<strong>一个可玩的作品</strong>引入<strong>一种抽象机制</strong>。第 1 到 5 课做游戏；第 6、7 课转向抽象的符号模型。第 1 到 3 课自成一个完整的入门，第 2 课就能做出可玩的游戏。</p>
+        <p class="text-center text-gray-700">课程是直接讲给孩子听的视频。<strong>目前视频为西班牙语。</strong></p>
+      </div>
+
+      <div class="space-y-4 mt-8">
+        <details class="leccion leccion-card bg-white shadow-md rounded-2xl border-l-4 border-indigo-500 transition hover:shadow-xl" data-video="FuQt50J9T2I">
+          <summary class="p-6">
+            <h3 class="font-semibold text-xl mb-1 text-subtitulo">♟️ 第 1 课：国际象棋</h3>
+            <p class="text-gray-700">归类，第一种抽象机制。先做出棋盘和能互相吃子的棋子，再把一条条针对具体情况的规则换成针对类别的规则。</p>
+          </summary>
+          <div class="px-6 pb-6">
+            <div class="leccion-video">
+              <a href="https://youtu.be/FuQt50J9T2I" target="_blank" rel="noopener" class="text-link underline">在 YouTube 上观看</a>
+            </div>
+          </div>
+        </details>
+        <details class="leccion leccion-card bg-white shadow-md rounded-2xl border-l-4 border-indigo-500 transition hover:shadow-xl" data-video="qVxvzTLY3pM">
+          <summary class="p-6">
+            <h3 class="font-semibold text-xl mb-1 text-subtitulo">🐍 第 2 课：贪吃蛇</h3>
+            <p class="text-gray-700">替换，第二种机制。会变长的蛇、去掉重复的代码，以及作为调试器的执行查看器。</p>
+          </summary>
+          <div class="px-6 pb-6">
+            <div class="leccion-video">
+              <a href="https://youtu.be/qVxvzTLY3pM" target="_blank" rel="noopener" class="text-link underline">在 YouTube 上观看</a>
+            </div>
+          </div>
+        </details>
+        <details class="leccion leccion-card bg-white shadow-md rounded-2xl border-l-4 border-indigo-500 transition hover:shadow-xl" data-video="oypNK7dX_rY">
+          <summary class="p-6">
+            <h3 class="font-semibold text-xl mb-1 text-subtitulo">👻 第 3 课：从吃豆人到科考潜水艇</h3>
+            <p class="text-gray-700">一个让所有组合子都派上用场的经典游戏，然后换一身皮，搬到新的场景里。规则很简单，结果出人意料。</p>
+          </summary>
+          <div class="px-6 pb-6">
+            <div class="leccion-video">
+              <a href="https://youtu.be/oypNK7dX_rY" target="_blank" rel="noopener" class="text-link underline">在 YouTube 上观看</a>
+            </div>
+          </div>
+        </details>
+        <details class="leccion leccion-card bg-white shadow-md rounded-2xl border-l-4 border-indigo-500 transition hover:shadow-xl" data-video="AfAFcP5FNVg">
+          <summary class="p-6">
+            <h3 class="font-semibold text-xl mb-1 text-subtitulo">🧠 第 4 课：元编程谜题</h3>
+            <p class="text-gray-700">当程序修改自己时会发生什么？一个迷宫，它的规则可以在游玩时被推走、被拉回。</p>
+          </summary>
+          <div class="px-6 pb-6">
+            <div class="leccion-video">
+              <a href="https://youtu.be/AfAFcP5FNVg" target="_blank" rel="noopener" class="text-link underline">在 YouTube 上观看</a>
+            </div>
+          </div>
+        </details>
+        <details class="leccion leccion-card bg-white shadow-md rounded-2xl border-l-4 border-indigo-500 transition hover:shadow-xl" data-video="VLwuOLksRy0">
+          <summary class="p-6">
+            <h3 class="font-semibold text-xl mb-1 text-subtitulo">🚀 第 5 课：太空飞船</h3>
+            <p class="text-gray-700">游戏开发里的想法：由事件驱动的规则、隐藏的物体、碰撞和时间控制，全都汇合到一个射击游戏里。</p>
+          </summary>
+          <div class="px-6 pb-6">
+            <div class="leccion-video">
+              <a href="https://youtu.be/VLwuOLksRy0" target="_blank" rel="noopener" class="text-link underline">在 YouTube 上观看</a>
+            </div>
+          </div>
+        </details>
+        <details class="leccion leccion-card bg-white shadow-md rounded-2xl border-l-4 border-indigo-500 transition hover:shadow-xl" data-video="3AMOQ4n1YU0">
+          <summary class="p-6">
+            <h3 class="font-semibold text-xl mb-1 text-subtitulo">🔢 第 6 课：我的计算器</h3>
+            <p class="text-gray-700">递归与抽象的符号操作。从零开始构造数字和加法，没有游戏，也没有角色。</p>
+          </summary>
+          <div class="px-6 pb-6">
+            <div class="leccion-video">
+              <a href="https://youtu.be/3AMOQ4n1YU0" target="_blank" rel="noopener" class="text-link underline">在 YouTube 上观看</a>
+            </div>
+          </div>
+        </details>
+        <details class="leccion leccion-card bg-white shadow-md rounded-2xl border-l-4 border-indigo-500 transition hover:shadow-xl" data-video="ei_hErKm0IM">
+          <summary class="p-6">
+            <h3 class="font-semibold text-xl mb-1 text-subtitulo">🏁 第 7 课：计分与复用</h3>
+            <p class="text-gray-700">模块化与复用。给之前做的游戏加上计分系统，完全不用变量。</p>
+          </summary>
+          <div class="px-6 pb-6">
+            <div class="leccion-video">
+              <a href="https://youtu.be/ei_hErKm0IM" target="_blank" rel="noopener" class="text-link underline">在 YouTube 上观看</a>
+            </div>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <!-- Para docentes e investigadores -->
+    <section class="max-w-4xl mx-auto my-16 px-4 bg-white rounded-2xl shadow-lg p-8" id="research">
+      <h2 class="text-3xl md:text-4xl font-bold text-center text-violeta mb-6">🔬 给教师和研究者</h2>
+      <p class="text-center text-lg text-gray-700 mb-8">Diálogo 由布宜诺斯艾利斯大学开发，是一个关于儿童声明式编程的研究项目。环境和教学序列都作为可复用的成果公开发布，供采用和实证研究。</p>
+      <ul class="space-y-5 text-gray-700">
+        <li class="border-l-4 border-indigo-500 pl-4">
+          <p class="font-semibold text-subtitulo" lang="en">Programming with Drawings: A Declarative Visual Environment and Its Classroom Evolution</p>
+          <p>Agustín R. Martínez. <em>SIGCSE Technical Symposium 2027</em>, Sacramento, California, 2027 年 2 月。已录用，即将发表。</p>
+          <p class="text-sm text-gray-600">环境的设计、它在一次面授工作坊和一门在线课程中的演变，以及七节课的教学序列。</p>
+        </li>
+        <li class="border-l-4 border-indigo-500 pl-4">
+          <p class="font-semibold text-subtitulo" lang="en">A Language Based on Two Relations between Symbols</p>
+          <p>Agustín R. Martínez. <em>Onward! 2022</em> (SPLASH), Auckland. ACM. <a href="https://doi.org/10.1145/3563835.3567660" target="_blank" rel="noopener" class="text-link underline">doi:10.1145/3563835.3567660</a></p>
+          <p class="text-sm text-gray-600">概念基础：替换与归类，作为构造这门语言的两种关系。</p>
+        </li>
+        <li class="border-l-4 border-indigo-500 pl-4">
+          <p class="font-semibold text-subtitulo" lang="en">Teaching Kids to Hack Their Own Games: Metaprogramming, Debugging, and Creativity from Age 7</p>
+          <p>演讲， <em>Smalltalks 2025</em>, Buenos Aires. <a href="https://youtu.be/EqioMI1I5E8" target="_blank" rel="noopener" class="text-link underline">观看视频</a></p>
+        </li>
+      </ul>
+      <p class="mt-8 text-gray-700 leading-relaxed">想在课堂或研究中使用 Diálogo、翻译教学序列，或者用它开展研究吗？请写信到 <a href="mailto:agustin@dc.uba.ar" class="text-link underline">agustin@dc.uba.ar</a>。</p>
+      <p class="mt-2 text-sm text-gray-600">Agustín Rafael Martínez，布宜诺斯艾利斯大学精确与自然科学学院计算机系。</p>
+    </section>
+
+    <!-- Nerdearla -->
+    <section class="animate-fade-in mt-16">
+      <h2 class="text-2xl font-semibold text-violeta text-center mb-6">🎤 Nerdearla 上的舞台演出</h2>
+      <p class="text-center text-gray-700 mb-8">两场用 Diálogo 做的完整舞台演出，面向普通观众。西班牙语，带字幕。</p>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="aspect-w-16 aspect-h-9">
+          <iframe
+            class="w-full h-full rounded-xl shadow-lg"
+            style="aspect-ratio: 16/9; min-height: 250px;"
+            src="https://www.youtube.com/embed/OMulIPUosDs?cc_load_policy=1&amp;cc_lang_pref=zh-Hans&amp;hl=zh"
+            title="Diálogo, Nerdearla 1"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+          </iframe>
+        </div>
+        <div class="aspect-w-16 aspect-h-9">
+          <iframe
+            class="w-full h-full rounded-xl shadow-lg"
+            style="aspect-ratio: 16/9; min-height: 250px;"
+            src="https://www.youtube.com/embed/w2mqMSp40Hk?cc_load_policy=1&amp;cc_lang_pref=zh-Hans&amp;hl=zh"
+            title="Diálogo, Nerdearla 2"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+    </section>
+
+    <section class="text-center text-sm text-gray-500 animate-fade-in">
+      <p>由 Agustín 制作，布宜诺斯艾利斯大学的教师与研究者，也被称为 <strong>Profe Futuro</strong> 🚀</p>
+    </section>
+  </main>
+
+  <footer class="text-center text-gray-500 text-sm p-6 space-y-2 mt-16">
+    <div class="flex justify-center flex-wrap gap-4 text-lg">
+      <a href="https://www.instagram.com/elprofefuturo" target="_blank" rel="noopener" class="hover:text-subtitulo transition">📸 Instagram</a>
+      <a href="https://www.tiktok.com/@elprofefuturo" target="_blank" rel="noopener" class="hover:text-subtitulo transition">🎵 TikTok</a>
+      <a href="https://x.com/elprofefuturo" target="_blank" rel="noopener" class="hover:text-subtitulo transition">🦅 X</a>
+      <a href="https://www.youtube.com/@elprofefuturo" target="_blank" rel="noopener" class="hover:text-subtitulo transition">▶️ YouTube</a>
+      <a href="mailto:agustin@dialog.ar" class="hover:text-subtitulo transition">📬 agustin@dialog.ar</a>
+    </div>
+    <p class="text-xs text-gray-400">© 2026 Diálogo. 保留所有权利。</p>
+  </footer>
+
+  <script src="/clases.js"></script>
+</body>
+</html>

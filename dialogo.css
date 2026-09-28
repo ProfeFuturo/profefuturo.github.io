@@ -98,3 +98,42 @@
       height: 100%;
       border: 0;
     }
+
+    /* Selector de idioma */
+    .selector-idioma {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.25rem 1rem;
+    }
+
+    .selector-idioma .idioma-actual {
+      font-weight: 600;
+      color: var(--dialogo-color-subtitulo);
+    }
+
+    /* Escritura de derecha a izquierda */
+    [dir="rtl"] .leccion-card > summary {
+      padding-right: 1.5rem;
+      padding-left: 3rem;
+    }
+
+    [dir="rtl"] .leccion-card > summary::after {
+      right: auto;
+      left: 1.5rem;
+      transform: rotate(180deg);
+    }
+
+    [dir="rtl"] .leccion-card[open] > summary::after { transform: rotate(90deg); }
+
+    [dir="rtl"] .border-l-4 {
+      border-left-width: 0;
+      border-right-width: 4px;
+    }
+
+    [dir="rtl"] .pl-4 {
+      padding-left: 0;
+      padding-right: 1rem;
+    }
+
+    [dir="rtl"] .list-inside { text-align: right; }

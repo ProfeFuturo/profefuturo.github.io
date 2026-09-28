@@ -1,19 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Basic -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Diálogo – Programming with drawings</title>
 
-  <!-- SEO + author -->
   <meta name="description" content="Diálogo is a free declarative visual programming environment in which children build games and simulations from symbols they draw themselves. Runs offline on Windows, Mac and Linux, with a seven-session curriculum." />
   <meta name="keywords" content="visual programming, declarative programming, programming for kids, K-12 computing education, drawing-based programming, metaprogramming, block-based alternatives, computational thinking, games without code" />
   <meta name="author" content="Agustín Rafael Martínez" />
 
-  <!-- Language alternates -->
+  <!-- Idiomas -->
   <link rel="alternate" hreflang="es" href="https://dialog.ar/es/" />
   <link rel="alternate" hreflang="en" href="https://dialog.ar/" />
+  <link rel="alternate" hreflang="fr" href="https://dialog.ar/fr/" />
+  <link rel="alternate" hreflang="de" href="https://dialog.ar/de/" />
+  <link rel="alternate" hreflang="pt" href="https://dialog.ar/pt/" />
+  <link rel="alternate" hreflang="it" href="https://dialog.ar/it/" />
+  <link rel="alternate" hreflang="zh" href="https://dialog.ar/zh/" />
+  <link rel="alternate" hreflang="hi" href="https://dialog.ar/hi/" />
+  <link rel="alternate" hreflang="ja" href="https://dialog.ar/ja/" />
+  <link rel="alternate" hreflang="ar" href="https://dialog.ar/ar/" />
   <link rel="alternate" hreflang="x-default" href="https://dialog.ar/" />
   <link rel="canonical" href="https://dialog.ar/" />
 
@@ -25,6 +31,14 @@
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="en_US" />
   <meta property="og:locale:alternate" content="es_AR" />
+  <meta property="og:locale:alternate" content="fr_FR" />
+  <meta property="og:locale:alternate" content="de_DE" />
+  <meta property="og:locale:alternate" content="pt_BR" />
+  <meta property="og:locale:alternate" content="it_IT" />
+  <meta property="og:locale:alternate" content="zh_CN" />
+  <meta property="og:locale:alternate" content="hi_IN" />
+  <meta property="og:locale:alternate" content="ja_JP" />
+  <meta property="og:locale:alternate" content="ar_AR" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
@@ -32,20 +46,20 @@
   <meta name="twitter:description" content="A declarative visual programming environment where children draw their own symbols." />
   <meta name="twitter:image" content="https://dialog.ar/preview.jpg" />
 
-  <!-- Language detection. English is the default; a visitor whose browser
-       prefers one of the languages below is sent to that version on first
-       visit. A choice made through the language links (?lang=xx) is kept in
-       localStorage and wins over the browser setting. To add a language,
-       publish /<code>/index.html and add the code to AVAILABLE. -->
+  <!-- Detección de idioma. El inglés es el predeterminado; a quien tenga el
+       navegador en uno de los idiomas de abajo se lo manda a esa versión en la
+       primera visita. Lo elegido con los enlaces de idioma (?lang=xx) queda en
+       localStorage y pesa más que el navegador. Para agregar un idioma, se
+       publica /<código>/index.html y se lo suma a AVAILABLE. -->
   <script>
     (function () {
-      var AVAILABLE = { es: "/es/" };
+      var AVAILABLE = {"es": "/es/", "fr": "/fr/", "de": "/de/", "pt": "/pt/", "it": "/it/", "zh": "/zh/", "hi": "/hi/", "ja": "/ja/", "ar": "/ar/"};
       var DEFAULT = "en";
       var params = new URLSearchParams(location.search);
       var store = function (code) { try { localStorage.setItem("dialogo-lang", code); } catch (e) {} };
       var stored = function () { try { return localStorage.getItem("dialogo-lang"); } catch (e) { return null; } };
 
-      // Old email-validation links (?token=...) belong to the Spanish page.
+      // Los enlaces viejos de validación (?token=...) son de la página en español.
       if (params.has("token")) { location.replace("/es/" + location.search); return; }
 
       var chosen = params.get("lang");
@@ -79,7 +93,7 @@
     gtag('config', 'G-ZEE7HG86H1');
   </script>
 
-  <!-- Styles -->
+  <!-- Estilos -->
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet" />
   <link rel="icon" href="/logo.png" type="image/png" />
@@ -88,25 +102,30 @@
 
 <body class="bg-gray-100 text-gray-800">
   <header class="bg-white shadow p-6">
-    <div class="max-w-4xl mx-auto text-center relative">
-      <p class="text-sm text-right md:absolute md:top-0 md:right-0">
-        <a href="/es/" lang="es" hreflang="es" class="text-link hover:text-subtitulo transition">🌐 Español</a>
-      </p>
+    <div class="max-w-4xl mx-auto text-center">
       <img src="/logo.svg" alt="Diálogo" class="mx-auto mb-4" style="width: 440px; height: auto;">
       <h1 class="text-3xl md:text-5xl font-bold text-indigo-600 sr-only">Diálogo</h1>
       <p class="text-lg mt-2 font-semibold">A visual programming environment where children draw their own symbols</p>
+      <nav class="selector-idioma mt-4 text-sm" aria-label="Languages">
+        <a href="/es/" lang="es" hreflang="es" class="text-link hover:text-subtitulo transition">Español</a>
+        <span class="idioma-actual" aria-current="true" lang="en">English</span>
+        <a href="/fr/" lang="fr" hreflang="fr" class="text-link hover:text-subtitulo transition">Français</a>
+        <a href="/de/" lang="de" hreflang="de" class="text-link hover:text-subtitulo transition">Deutsch</a>
+        <a href="/pt/" lang="pt" hreflang="pt" class="text-link hover:text-subtitulo transition">Português</a>
+        <a href="/it/" lang="it" hreflang="it" class="text-link hover:text-subtitulo transition">Italiano</a>
+        <a href="/zh/" lang="zh" hreflang="zh" class="text-link hover:text-subtitulo transition">中文</a>
+        <a href="/hi/" lang="hi" hreflang="hi" class="text-link hover:text-subtitulo transition">हिन्दी</a>
+        <a href="/ja/" lang="ja" hreflang="ja" class="text-link hover:text-subtitulo transition">日本語</a>
+        <a href="/ar/" lang="ar" hreflang="ar" class="text-link hover:text-subtitulo transition">العربية</a>
+      </nav>
     </div>
   </header>
 
   <main class="max-w-3xl mx-auto px-6 py-12 space-y-16">
     <section class="animate-fade-in">
       <h2 class="text-2xl font-semibold text-violeta">What is Diálogo?</h2>
-      <p class="mt-2 text-gray-700 leading-relaxed">
-        Diálogo is a free programming environment for children (roughly ages 10 to 17; younger kids with an adult alongside) in which programs are built from symbols the children draw themselves, rather than from predefined blocks. The language rests on two relations between symbols, <strong>substitution</strong> and <strong>categorization</strong>, plus about ten visual combinators (push, pull, teleport, collide, wildcards, an evaluation viewer). From that small set, children build games, simulations and abstract symbolic models, such as numbers and addition from scratch.
-      </p>
-      <p class="mt-4 text-gray-700 leading-relaxed">
-        Rules live on the same board as the game. A character can push a rule out of the way and change the program while it runs, so metaprogramming becomes something a child can see and touch. A step-by-step execution viewer shows which rule fired at each step, and doubles as the debugger.
-      </p>
+      <p class="mt-2 text-gray-700 leading-relaxed">Diálogo is a free programming environment for children (roughly ages 10 to 17; younger kids with an adult alongside) in which programs are built from symbols the children draw themselves, rather than from predefined blocks. The language rests on two relations between symbols, <strong>substitution</strong> and <strong>categorization</strong>, plus about ten visual combinators (push, pull, teleport, collide, wildcards, an evaluation viewer). From that small set, children build games, simulations and abstract symbolic models, such as numbers and addition from scratch.</p>
+      <p class="mt-4 text-gray-700 leading-relaxed">Rules live on the same board as the game. A character can push a rule out of the way and change the program while it runs, so metaprogramming becomes something a child can see and touch. A step-by-step execution viewer shows which rule fired at each step, and doubles as the debugger.</p>
     </section>
 
     <section class="grid md:grid-cols-2 gap-8 animate-fade-in">
@@ -124,7 +143,7 @@
         <ul class="list-disc list-inside text-gray-700 space-y-1 mt-2">
           <li>Declarative from the first session, with no syntax and no imperative prerequisite</li>
           <li>Runs offline on modest hardware, with no account or server; projects are saved locally</li>
-          <li>Interface in English and Spanish; adding a language means translating one text file</li>
+          <li>Interface in ten languages; adding one more means translating a single text file</li>
           <li>A seven-session curriculum delivered as videos addressed to the children, so you can adopt it before mastering the paradigm</li>
         </ul>
       </div>
@@ -135,13 +154,11 @@
       <img src="/demo.gif" alt="Animated demo of Diálogo: drawing symbols and combining them into a game" class="mx-auto rounded-xl shadow-lg max-w-full h-auto" />
     </section>
 
-    <!-- Step 1: tutorial -->
+    <!-- Paso 1: tutorial -->
     <section class="max-w-4xl mx-auto my-16 px-4 bg-white rounded-2xl shadow-lg p-8" id="tutorial">
       <p class="text-center text-sm font-semibold text-acento uppercase tracking-widest mb-1">Step 1</p>
       <h2 class="text-3xl md:text-4xl font-bold text-center text-violeta mb-4">🎯 Start with the tutorial</h2>
-      <p class="text-center text-lg text-gray-700 mb-8">
-        An introduction you play in the browser, solving small challenges. It teaches the two relations the language is built on, and it needs no installation and no account.
-      </p>
+      <p class="text-center text-lg text-gray-700 mb-8">An introduction you play in the browser, solving small challenges. It teaches the two relations the language is built on, and it needs no installation and no account.</p>
       <!-- CAPTURA -->
       <div class="text-center">
         <a href="/lab/dialogo-web-7q3x/?lang=en"
@@ -151,13 +168,11 @@
       </div>
     </section>
 
-    <!-- Download -->
+    <!-- Paso 2: descarga -->
     <section class="max-w-4xl mx-auto my-16 px-4 bg-white rounded-2xl shadow-lg p-8" id="download">
       <p class="text-center text-sm font-semibold text-acento uppercase tracking-widest mb-1">Step 2</p>
       <h2 class="text-3xl md:text-4xl font-bold text-center text-violeta mb-6">⬇️ Download Diálogo</h2>
-      <p class="text-center text-lg text-gray-700 mb-8">
-        Free, no account needed. Pick the version for your operating system:
-      </p>
+      <p class="text-center text-lg text-gray-700 mb-8">Free, no account needed. Pick the version for your operating system:</p>
       <div class="grid md:grid-cols-3 gap-6">
         <a href="/DialogoSetup.exe"
            class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-6 px-4 rounded-xl text-center transition shadow-md hover:shadow-xl">
@@ -190,25 +205,17 @@
           <p class="mt-2">Installing Diálogo on Windows, Mac or Linux. In Spanish.</p>
         </div>
       </details>
-      <p class="text-center text-sm text-gray-600 mt-4">
-        Or try the <a href="https://www.smalltalkjsvm.com.ar/#zip=https://dialog.ar/Dialogo.zip" target="_blank" rel="noopener" class="text-link underline">online version</a>: it runs the full Diálogo in the browser, with no installation, and can save your files, but it is slow and downloads about 30 MB the first time. For real use, the installed version is much better, and to simply see what Diálogo is about, the <a href="/lab/dialogo-web-7q3x/?lang=en" class="text-link underline">tutorial</a> is faster.
-      </p>
-      <p class="text-center text-sm text-gray-600 mt-2">
-        Diálogo is under active development. Bug reports and classroom stories are welcome at <a href="mailto:agustin@dialog.ar" class="text-link underline">agustin@dialog.ar</a>.
-      </p>
+      <p class="text-center text-sm text-gray-600 mt-4">Or try the <a href="https://www.smalltalkjsvm.com.ar/#zip=https://dialog.ar/Dialogo.zip" target="_blank" rel="noopener" class="text-link underline">online version</a>: it runs the full Diálogo in the browser, with no installation, and can save your files, but it is slow and downloads about 30 MB the first time. For real use, the installed version is much better, and to simply see what Diálogo is about, the <a href="/lab/dialogo-web-7q3x/?lang=en" class="text-link underline">tutorial</a> is faster.</p>
+      <p class="text-center text-sm text-gray-600 mt-2">Diálogo is under active development. Bug reports and classroom stories are welcome at <a href="mailto:agustin@dialog.ar" class="text-link underline">agustin@dialog.ar</a>.</p>
     </section>
 
-    <!-- Course -->
+    <!-- Paso 3: curso -->
     <section class="max-w-4xl mx-auto my-16 px-4" id="course">
       <div class="bg-white rounded-2xl shadow-lg p-8">
         <p class="text-center text-sm font-semibold text-acento uppercase tracking-widest mb-1">Step 3</p>
         <h2 class="text-3xl md:text-4xl font-bold text-center text-violeta mb-4">🎓 A free seven-session course</h2>
-        <p class="text-center text-lg text-gray-700 mb-4">
-          Each session introduces <strong>one abstraction mechanism</strong> through a <strong>playable artifact</strong>. Sessions 1 to 5 build games; sessions 6 and 7 move toward abstract symbolic models. Sessions 1 to 3 form a self-contained introduction, with a playable game already in session 2.
-        </p>
-        <p class="text-center text-gray-700">
-          The lessons are videos addressed directly to the children. <strong>The videos are currently in Spanish; an English version is in preparation.</strong>
-        </p>
+        <p class="text-center text-lg text-gray-700 mb-4">Each session introduces <strong>one abstraction mechanism</strong> through a <strong>playable artifact</strong>. Sessions 1 to 5 build games; sessions 6 and 7 move toward abstract symbolic models. Sessions 1 to 3 form a self-contained introduction, with a playable game already in session 2.</p>
+        <p class="text-center text-gray-700">The lessons are videos addressed directly to the children. <strong>The videos are currently in Spanish; an English version is in preparation.</strong></p>
       </div>
 
       <div class="space-y-4 mt-8">
@@ -292,38 +299,31 @@
       </div>
     </section>
 
-    <!-- Research -->
+    <!-- Para docentes e investigadores -->
     <section class="max-w-4xl mx-auto my-16 px-4 bg-white rounded-2xl shadow-lg p-8" id="research">
       <h2 class="text-3xl md:text-4xl font-bold text-center text-violeta mb-6">🔬 For educators and researchers</h2>
-      <p class="text-center text-lg text-gray-700 mb-8">
-        Diálogo is developed at the University of Buenos Aires as a research project on declarative programming for children. Both the environment and the curriculum are released as artifacts for adoption and empirical study.
-      </p>
+      <p class="text-center text-lg text-gray-700 mb-8">Diálogo is developed at the University of Buenos Aires as a research project on declarative programming for children. Both the environment and the curriculum are released as artifacts for adoption and empirical study.</p>
       <ul class="space-y-5 text-gray-700">
         <li class="border-l-4 border-indigo-500 pl-4">
-          <p class="font-semibold text-subtitulo">Programming with Drawings: A Declarative Visual Environment and Its Classroom Evolution</p>
+          <p class="font-semibold text-subtitulo" lang="en">Programming with Drawings: A Declarative Visual Environment and Its Classroom Evolution</p>
           <p>Agustín R. Martínez. <em>SIGCSE Technical Symposium 2027</em>, Sacramento, California, February 2027. To appear.</p>
           <p class="text-sm text-gray-600">The environment's design, its evolution across an in-person workshop and an online course, and the seven-session sequence.</p>
         </li>
         <li class="border-l-4 border-indigo-500 pl-4">
-          <p class="font-semibold text-subtitulo">A Language Based on Two Relations between Symbols</p>
+          <p class="font-semibold text-subtitulo" lang="en">A Language Based on Two Relations between Symbols</p>
           <p>Agustín R. Martínez. <em>Onward! 2022</em> (SPLASH), Auckland. ACM. <a href="https://doi.org/10.1145/3563835.3567660" target="_blank" rel="noopener" class="text-link underline">doi:10.1145/3563835.3567660</a></p>
           <p class="text-sm text-gray-600">The conceptual foundation: substitution and categorization as the two relations from which the language is built.</p>
         </li>
         <li class="border-l-4 border-indigo-500 pl-4">
-          <p class="font-semibold text-subtitulo">Teaching Kids to Hack Their Own Games: Metaprogramming, Debugging, and Creativity from Age 7</p>
-          <p>Talk at <em>Smalltalks 2025</em>, Buenos Aires (in English). <a href="https://youtu.be/EqioMI1I5E8" target="_blank" rel="noopener" class="text-link underline">Watch the video</a></p>
+          <p class="font-semibold text-subtitulo" lang="en">Teaching Kids to Hack Their Own Games: Metaprogramming, Debugging, and Creativity from Age 7</p>
+          <p>Talk at <em>Smalltalks 2025</em>, Buenos Aires. <a href="https://youtu.be/EqioMI1I5E8" target="_blank" rel="noopener" class="text-link underline">Watch the video</a></p>
         </li>
       </ul>
-      <p class="mt-8 text-gray-700 leading-relaxed">
-        Interested in using Diálogo in your classroom or your research, in translating the curriculum, or in running a study with it? Write to
-        <a href="mailto:agustin@dc.uba.ar" class="text-link underline">agustin@dc.uba.ar</a>.
-      </p>
-      <p class="mt-2 text-sm text-gray-600">
-        Agustín Rafael Martínez, Departamento de Computación, Facultad de Ciencias Exactas y Naturales, Universidad de Buenos Aires.
-      </p>
+      <p class="mt-8 text-gray-700 leading-relaxed">Interested in using Diálogo in your classroom or your research, in translating the curriculum, or in running a study with it? Write to <a href="mailto:agustin@dc.uba.ar" class="text-link underline">agustin@dc.uba.ar</a>.</p>
+      <p class="mt-2 text-sm text-gray-600">Agustín Rafael Martínez, Departamento de Computación, Facultad de Ciencias Exactas y Naturales, Universidad de Buenos Aires.</p>
     </section>
 
-    <!-- Talks (Spanish) -->
+    <!-- Nerdearla -->
     <section class="animate-fade-in mt-16">
       <h2 class="text-2xl font-semibold text-violeta text-center mb-6">🎤 Shows at Nerdearla (with English subtitles)</h2>
       <p class="text-center text-gray-700 mb-8">Two full stage shows built with Diálogo for a general audience. Spoken in Spanish; English subtitles are on by default.</p>
@@ -333,7 +333,7 @@
             class="w-full h-full rounded-xl shadow-lg"
             style="aspect-ratio: 16/9; min-height: 250px;"
             src="https://www.youtube.com/embed/OMulIPUosDs?cc_load_policy=1&amp;cc_lang_pref=en&amp;hl=en"
-            title="Diálogo at Nerdearla, part 1"
+            title="Diálogo, Nerdearla 1"
             frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen>
@@ -344,7 +344,7 @@
             class="w-full h-full rounded-xl shadow-lg"
             style="aspect-ratio: 16/9; min-height: 250px;"
             src="https://www.youtube.com/embed/w2mqMSp40Hk?cc_load_policy=1&amp;cc_lang_pref=en&amp;hl=en"
-            title="Diálogo at Nerdearla, part 2"
+            title="Diálogo, Nerdearla 2"
             frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen>
@@ -360,24 +360,15 @@
 
   <footer class="text-center text-gray-500 text-sm p-6 space-y-2 mt-16">
     <div class="flex justify-center flex-wrap gap-4 text-lg">
-      <a href="https://www.instagram.com/elprofefuturo" target="_blank" rel="noopener" class="hover:text-subtitulo transition">
-        📸 Instagram
-      </a>
-      <a href="https://www.tiktok.com/@elprofefuturo" target="_blank" rel="noopener" class="hover:text-subtitulo transition">
-        🎵 TikTok
-      </a>
-      <a href="https://x.com/elprofefuturo" target="_blank" rel="noopener" class="hover:text-subtitulo transition">
-        🦅 X
-      </a>
-      <a href="https://www.youtube.com/@elprofefuturo" target="_blank" rel="noopener" class="hover:text-subtitulo transition">
-        ▶️ YouTube
-      </a>
-      <a href="mailto:agustin@dialog.ar" class="hover:text-subtitulo transition">
-        📬 agustin@dialog.ar
-      </a>
+      <a href="https://www.instagram.com/elprofefuturo" target="_blank" rel="noopener" class="hover:text-subtitulo transition">📸 Instagram</a>
+      <a href="https://www.tiktok.com/@elprofefuturo" target="_blank" rel="noopener" class="hover:text-subtitulo transition">🎵 TikTok</a>
+      <a href="https://x.com/elprofefuturo" target="_blank" rel="noopener" class="hover:text-subtitulo transition">🦅 X</a>
+      <a href="https://www.youtube.com/@elprofefuturo" target="_blank" rel="noopener" class="hover:text-subtitulo transition">▶️ YouTube</a>
+      <a href="mailto:agustin@dialog.ar" class="hover:text-subtitulo transition">📬 agustin@dialog.ar</a>
     </div>
     <p class="text-xs text-gray-400">© 2026 Diálogo. All rights reserved.</p>
   </footer>
+
   <script src="/clases.js"></script>
 </body>
 </html>

@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Diálogo – البرمجة بالرسم</title>
+
+  <meta name="description" content="Diálogo بيئة برمجة مرئية تصريحية مجانية، يبني فيها الأطفال ألعابًا ومحاكاتٍ من رموز يرسمونها بأنفسهم. تعمل دون اتصال على Windows وMac وLinux، ومعها سلسلة تعليمية من سبعة دروس." />
+  <meta name="keywords" content="برمجة مرئية, برمجة تصريحية, برمجة للأطفال, تعليم الحوسبة, البرمجة بالرسم, البرمجة الفوقية, بديل عن اللبنات, التفكير الحاسوبي, ألعاب بلا كتابة شيفرة" />
+  <meta name="author" content="Agustín Rafael Martínez" />
+
+  <!-- Idiomas -->
+  <link rel="alternate" hreflang="es" href="https://dialog.ar/es/" />
+  <link rel="alternate" hreflang="en" href="https://dialog.ar/" />
+  <link rel="alternate" hreflang="fr" href="https://dialog.ar/fr/" />
+  <link rel="alternate" hreflang="de" href="https://dialog.ar/de/" />
+  <link rel="alternate" hreflang="pt" href="https://dialog.ar/pt/" />
+  <link rel="alternate" hreflang="it" href="https://dialog.ar/it/" />
+  <link rel="alternate" hreflang="zh" href="https://dialog.ar/zh/" />
+  <link rel="alternate" hreflang="hi" href="https://dialog.ar/hi/" />
+  <link rel="alternate" hreflang="ja" href="https://dialog.ar/ja/" />
+  <link rel="alternate" hreflang="ar" href="https://dialog.ar/ar/" />
+  <link rel="alternate" hreflang="x-default" href="https://dialog.ar/" />
+  <link rel="canonical" href="https://dialog.ar/ar/" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Diálogo – البرمجة بالرسم" />
+  <meta property="og:description" content="بيئة برمجة مرئية تصريحية يرسم فيها الأطفال رموزهم الخاصة." />
+  <meta property="og:image" content="https://dialog.ar/preview.jpg" />
+  <meta property="og:url" content="https://dialog.ar/ar/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="ar_AR" />
+  <meta property="og:locale:alternate" content="es_AR" />
+  <meta property="og:locale:alternate" content="en_US" />
+  <meta property="og:locale:alternate" content="fr_FR" />
+  <meta property="og:locale:alternate" content="de_DE" />
+  <meta property="og:locale:alternate" content="pt_BR" />
+  <meta property="og:locale:alternate" content="it_IT" />
+  <meta property="og:locale:alternate" content="zh_CN" />
+  <meta property="og:locale:alternate" content="hi_IN" />
+  <meta property="og:locale:alternate" content="ja_JP" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Diálogo – البرمجة بالرسم" />
+  <meta name="twitter:description" content="بيئة برمجة مرئية تصريحية يرسم فيها الأطفال رموزهم الخاصة." />
+  <meta name="twitter:image" content="https://dialog.ar/preview.jpg" />
+
+  <!-- Idioma elegido: la raíz lo usa para no volver a redirigir -->
+  <script>try { localStorage.setItem("dialogo-lang", "ar"); } catch (e) {}</script>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZEE7HG86H1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-ZEE7HG86H1');
+  </script>
+
+  <!-- Estilos -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="icon" href="/logo.png" type="image/png" />
+  <link rel="stylesheet" href="/dialogo.css" />
+</head>
+
+<body class="bg-gray-100 text-gray-800">
+  <header class="bg-white shadow p-6">
+    <div class="max-w-4xl mx-auto text-center">
+      <img src="/logo.svg" alt="Diálogo" class="mx-auto mb-4" style="width: 440px; height: auto;">
+      <h1 class="text-3xl md:text-5xl font-bold text-indigo-600 sr-only">Diálogo</h1>
+      <p class="text-lg mt-2 font-semibold">بيئة برمجة مرئية يرسم فيها الأطفال رموزهم الخاصة</p>
+      <nav class="selector-idioma mt-4 text-sm" aria-label="اللغات">
+        <a href="/es/" lang="es" hreflang="es" class="text-link hover:text-subtitulo transition">Español</a>
+        <a href="/?lang=en" lang="en" hreflang="en" class="text-link hover:text-subtitulo transition">English</a>
+        <a href="/fr/" lang="fr" hreflang="fr" class="text-link hover:text-subtitulo transition">Français</a>
+        <a href="/de/" lang="de" hreflang="de" class="text-link hover:text-subtitulo transition">Deutsch</a>
+        <a href="/pt/" lang="pt" hreflang="pt" class="text-link hover:text-subtitulo transition">Português</a>
+        <a href="/it/" lang="it" hreflang="it" class="text-link hover:text-subtitulo transition">Italiano</a>
+        <a href="/zh/" lang="zh" hreflang="zh" class="text-link hover:text-subtitulo transition">中文</a>
+        <a href="/hi/" lang="hi" hreflang="hi" class="text-link hover:text-subtitulo transition">हिन्दी</a>
+        <a href="/ja/" lang="ja" hreflang="ja" class="text-link hover:text-subtitulo transition">日本語</a>
+        <span class="idioma-actual" aria-current="true" lang="ar">العربية</span>
+      </nav>
+    </div>
+  </header>
+
+  <main class="max-w-3xl mx-auto px-6 py-12 space-y-16">
+    <section class="animate-fade-in">
+      <h2 class="text-2xl font-semibold text-violeta">ما هو Diálogo؟</h2>
+      <p class="mt-2 text-gray-700 leading-relaxed">‏Diálogo بيئة برمجة مجانية للأطفال (من عشر سنوات إلى سبع عشرة تقريبًا؛ والأصغر سنًا بصحبة شخص بالغ)، تُبنى فيها البرامج من رموز يرسمها الأطفال بأنفسهم، لا من لبنات جاهزة. تقوم اللغة على علاقتين بين الرموز، <strong>الاستبدال</strong> و<strong>التصنيف</strong>، يضاف إليهما نحو عشرة مركّبات مرئية (الدفع والجذب والانتقال الآني والتصادم ورموز شاملة ونافذة للتقييم). من هذه المجموعة الصغيرة يبني الأطفال ألعابًا ومحاكاتٍ ونماذج رمزية مجردة، مثل بناء الأعداد والجمع من الصفر.</p>
+      <p class="mt-4 text-gray-700 leading-relaxed">القواعد تعيش على اللوح نفسه الذي تعيش عليه اللعبة. تستطيع الشخصية أن تدفع قاعدة فتغيّر البرنامج وهو يعمل، فتصير البرمجة الفوقية شيئًا يراه الطفل ويلمسه. ويعرض عارض التنفيذ خطوةً بخطوة أيّ قاعدة طُبّقت في كل خطوة، وهو نفسه أداة تتبّع الأخطاء.</p>
+    </section>
+
+    <section class="grid md:grid-cols-2 gap-8 animate-fade-in">
+      <div>
+        <h3 class="font-semibold text-lg text-yellow-500">🎮 للأطفال:</h3>
+        <ul class="list-disc list-inside text-gray-700 space-y-1 mt-2">
+          <li>ابنِ ألعابًا من رسومك أنت</li>
+          <li>امنح الشخصيات سلوكًا بتركيب بضعة مركّبات مرئية</li>
+          <li>انظر، خطوةً بخطوة، لماذا تفعل اللعبة ما تفعله</li>
+          <li>اصنع ألعابًا تعيد كتابة قواعدها وأنت تلعب</li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="font-semibold text-lg text-yellow-500">🏫 للمعلمين والباحثين:</h3>
+        <ul class="list-disc list-inside text-gray-700 space-y-1 mt-2">
+          <li>تصريحية من الدرس الأول، بلا قواعد كتابة وبلا اشتراط خبرة سابقة بالبرمجة الأمرية</li>
+          <li>تعمل دون اتصال على أجهزة متواضعة، بلا حساب وبلا خادم؛ وتُحفظ المشاريع على الجهاز نفسه</li>
+          <li>الواجهة بعشر لغات؛ وإضافة لغة أخرى تعني ترجمة ملف نصي واحد</li>
+          <li>سلسلة من سبعة دروس في مقاطع مصوّرة تخاطب الأطفال مباشرة، فيمكن تبنّيها قبل إتقان هذا النمط البرمجي</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="animate-fade-in">
+      <h2 class="text-xl font-semibold text-subtitulo text-center mb-4">🌀 من أول رسم إلى لعبة قابلة للعب في دقائق</h2>
+      <img src="/demo.gif" alt="عرض متحرك لـ Diálogo: رسم الرموز وتركيبها في لعبة" class="mx-auto rounded-xl shadow-lg max-w-full h-auto" />
+    </section>
+
+    <!-- Paso 1: tutorial -->
+    <section class="max-w-4xl mx-auto my-16 px-4 bg-white rounded-2xl shadow-lg p-8" id="tutorial">
+      <p class="text-center text-sm font-semibold text-acento uppercase tracking-widest mb-1">الخطوة 1</p>
+      <h2 class="text-3xl md:text-4xl font-bold text-center text-violeta mb-4">🎯 ابدأ بالدرس التفاعلي</h2>
+      <p class="text-center text-lg text-gray-700 mb-8">مقدمة تُلعب في المتصفح، عبر تحديات قصيرة. تعلّم العلاقتين اللتين تقوم عليهما اللغة، دون تثبيت أي شيء ودون إنشاء حساب.</p>
+      <!-- CAPTURA -->
+      <div class="text-center">
+        <a href="/lab/dialogo-web-7q3x/?lang=ar"
+           class="inline-block bg-acento hover:bg-subtitulo text-white font-bold py-4 px-10 rounded-xl shadow-md hover:shadow-xl transition text-lg">
+          ابدأ الدرس التفاعلي
+        </a>
+      </div>
+    </section>
+
+    <!-- Paso 2: descarga -->
+    <section class="max-w-4xl mx-auto my-16 px-4 bg-white rounded-2xl shadow-lg p-8" id="download">
+      <p class="text-center text-sm font-semibold text-acento uppercase tracking-widest mb-1">الخطوة 2</p>
+      <h2 class="text-3xl md:text-4xl font-bold text-center text-violeta mb-6">⬇️ نزّل Diálogo</h2>
+      <p class="text-center text-lg text-gray-700 mb-8">مجاني وبلا حساب. اختر نسخة نظام التشغيل لديك:</p>
+      <div class="grid md:grid-cols-3 gap-6">
+        <a href="/DialogoSetup.exe"
+           class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-6 px-4 rounded-xl text-center transition shadow-md hover:shadow-xl">
+          <div class="text-4xl mb-2">🪟</div>
+          <div class="text-xl">Windows</div>
+          <div class="text-sm mt-2 opacity-90">DialogoSetup.exe</div>
+        </a>
+        <a href="/Dialogo.dmg"
+           class="bg-gray-700 hover:bg-gray-800 text-white font-bold py-6 px-4 rounded-xl text-center transition shadow-md hover:shadow-xl">
+          <div class="text-4xl mb-2">🍎</div>
+          <div class="text-xl">Mac</div>
+          <div class="text-sm mt-2 opacity-90">Dialogo.dmg</div>
+        </a>
+        <a href="/Dialogo.zip"
+           class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-6 px-4 rounded-xl text-center transition shadow-md hover:shadow-xl">
+          <div class="text-4xl mb-2">💻</div>
+          <div class="text-xl">متعدد المنصات</div>
+          <div class="text-sm mt-2 opacity-90">Dialogo.zip</div>
+        </a>
+      </div>
+      <p class="text-center text-sm text-gray-600 mt-6">
+        <em>ملف ZIP يعمل على Linux، وكذلك على Windows وMac كبديل عن برامج التثبيت.</em>
+      </p>
+      <details class="leccion leccion-inline mt-4 text-sm text-gray-600 text-center" data-video="CYuRk_dKHYg">
+        <summary class="text-link underline inline-block">هل تواجه صعوبة في التثبيت؟ هذا المقطع يشرحه</summary>
+        <div class="mt-3 max-w-xl mx-auto">
+          <div class="leccion-video">
+            <a href="https://youtu.be/CYuRk_dKHYg" target="_blank" rel="noopener" class="text-link underline">شاهد على YouTube</a>
+          </div>
+          <p class="mt-2">كيفية تثبيت Diálogo على Windows أو Mac أو Linux. المقطع بالإسبانية.</p>
+        </div>
+      </details>
+      <p class="text-center text-sm text-gray-600 mt-4">أو جرّب <a href="https://www.smalltalkjsvm.com.ar/#zip=https://dialog.ar/Dialogo.zip" target="_blank" rel="noopener" class="text-link underline">النسخة على الإنترنت</a>: تشغّل Diálogo كاملًا داخل المتصفح، دون تثبيت، وتتيح حفظ ملفاتك، لكنها بطيئة وتنزّل نحو 30 ميغابايت في المرة الأولى. للاستعمال الجدّي النسخة المثبّتة أفضل بكثير، ولمجرد معرفة ما هو Diálogo فإن <a href="/lab/dialogo-web-7q3x/?lang=ar" class="text-link underline">الدرس التفاعلي</a> أسرع.</p>
+      <p class="text-center text-sm text-gray-600 mt-2">‏Diálogo قيد التطوير المستمر. نرحّب ببلاغات الأخطاء وقصص الصفوف على <a href="mailto:agustin@dialog.ar" class="text-link underline">agustin@dialog.ar</a>.</p>
+    </section>
+
+    <!-- Paso 3: curso -->
+    <section class="max-w-4xl mx-auto my-16 px-4" id="course">
+      <div class="bg-white rounded-2xl shadow-lg p-8">
+        <p class="text-center text-sm font-semibold text-acento uppercase tracking-widest mb-1">الخطوة 3</p>
+        <h2 class="text-3xl md:text-4xl font-bold text-center text-violeta mb-4">🎓 دورة مجانية من سبعة دروس</h2>
+        <p class="text-center text-lg text-gray-700 mb-4">يقدّم كل درس <strong>آلية تجريد واحدة</strong> من خلال <strong>شيء قابل للعب</strong>. الدروس من الأول إلى الخامس تبني ألعابًا؛ والدرسان السادس والسابع ينتقلان إلى نماذج رمزية مجردة. والدروس من الأول إلى الثالث مقدمة قائمة بذاتها، وفيها لعبة قابلة للعب منذ الدرس الثاني.</p>
+        <p class="text-center text-gray-700">الدروس مقاطع مصوّرة تخاطب الأطفال مباشرة. <strong>المقاطع بالإسبانية في الوقت الحالي.</strong></p>
+      </div>
+
+      <div class="space-y-4 mt-8">
+        <details class="leccion leccion-card bg-white shadow-md rounded-2xl border-l-4 border-indigo-500 transition hover:shadow-xl" data-video="FuQt50J9T2I">
+          <summary class="p-6">
+            <h3 class="font-semibold text-xl mb-1 text-subtitulo">♟️ الدرس 1: الشطرنج</h3>
+            <p class="text-gray-700">التصنيف، أولى آليات التجريد. ابنِ رقعة وقطعًا يأكل بعضها بعضًا، ثم استبدل بالقواعد المكتوبة حالةً حالة قواعد تخاطب الفئات.</p>
+          </summary>
+          <div class="px-6 pb-6">
+            <div class="leccion-video">
+              <a href="https://youtu.be/FuQt50J9T2I" target="_blank" rel="noopener" class="text-link underline">شاهد على YouTube</a>
+            </div>
+          </div>
+        </details>
+        <details class="leccion leccion-card bg-white shadow-md rounded-2xl border-l-4 border-indigo-500 transition hover:shadow-xl" data-video="qVxvzTLY3pM">
+          <summary class="p-6">
+            <h3 class="font-semibold text-xl mb-1 text-subtitulo">🐍 الدرس 2: الأفعى</h3>
+            <p class="text-gray-700">الاستبدال، الآلية الثانية. أفعى يطول جسمها، والتخلص من التكرار، وعارض التنفيذ بوصفه أداة لتتبع الأخطاء.</p>
+          </summary>
+          <div class="px-6 pb-6">
+            <div class="leccion-video">
+              <a href="https://youtu.be/qVxvzTLY3pM" target="_blank" rel="noopener" class="text-link underline">شاهد على YouTube</a>
+            </div>
+          </div>
+        </details>
+        <details class="leccion leccion-card bg-white shadow-md rounded-2xl border-l-4 border-indigo-500 transition hover:shadow-xl" data-video="oypNK7dX_rY">
+          <summary class="p-6">
+            <h3 class="font-semibold text-xl mb-1 text-subtitulo">👻 الدرس 3: من باك-مان إلى غواصة أبحاث</h3>
+            <p class="text-gray-700">لعبة كلاسيكية تُشغّل كل المركّبات، ثم تُنقل بثوب جديد إلى مجال آخر. قواعد بسيطة ونتيجة مدهشة.</p>
+          </summary>
+          <div class="px-6 pb-6">
+            <div class="leccion-video">
+              <a href="https://youtu.be/oypNK7dX_rY" target="_blank" rel="noopener" class="text-link underline">شاهد على YouTube</a>
+            </div>
+          </div>
+        </details>
+        <details class="leccion leccion-card bg-white shadow-md rounded-2xl border-l-4 border-indigo-500 transition hover:shadow-xl" data-video="AfAFcP5FNVg">
+          <summary class="p-6">
+            <h3 class="font-semibold text-xl mb-1 text-subtitulo">🧠 الدرس 4: ألغاز البرمجة الفوقية</h3>
+            <p class="text-gray-700">ماذا يحدث حين يعدّل البرنامج نفسه؟ متاهة يمكن دفع قواعدها وجذبها أثناء اللعب.</p>
+          </summary>
+          <div class="px-6 pb-6">
+            <div class="leccion-video">
+              <a href="https://youtu.be/AfAFcP5FNVg" target="_blank" rel="noopener" class="text-link underline">شاهد على YouTube</a>
+            </div>
+          </div>
+        </details>
+        <details class="leccion leccion-card bg-white shadow-md rounded-2xl border-l-4 border-indigo-500 transition hover:shadow-xl" data-video="VLwuOLksRy0">
+          <summary class="p-6">
+            <h3 class="font-semibold text-xl mb-1 text-subtitulo">🚀 الدرس 5: سفن الفضاء</h3>
+            <p class="text-gray-700">أفكار من تطوير الألعاب: قواعد تقودها الأحداث، وأشياء مخفية، وتصادمات، وتحكّم في الزمن، تجتمع كلها في لعبة إطلاق نار.</p>
+          </summary>
+          <div class="px-6 pb-6">
+            <div class="leccion-video">
+              <a href="https://youtu.be/VLwuOLksRy0" target="_blank" rel="noopener" class="text-link underline">شاهد على YouTube</a>
+            </div>
+          </div>
+        </details>
+        <details class="leccion leccion-card bg-white shadow-md rounded-2xl border-l-4 border-indigo-500 transition hover:shadow-xl" data-video="3AMOQ4n1YU0">
+          <summary class="p-6">
+            <h3 class="font-semibold text-xl mb-1 text-subtitulo">🔢 الدرس 6: آلتي الحاسبة</h3>
+            <p class="text-gray-700">الاستدعاء الذاتي والتعامل المجرد مع الرموز. بناء الأعداد والجمع من الصفر، بلا لعبة وبلا شخصية.</p>
+          </summary>
+          <div class="px-6 pb-6">
+            <div class="leccion-video">
+              <a href="https://youtu.be/3AMOQ4n1YU0" target="_blank" rel="noopener" class="text-link underline">شاهد على YouTube</a>
+            </div>
+          </div>
+        </details>
+        <details class="leccion leccion-card bg-white shadow-md rounded-2xl border-l-4 border-indigo-500 transition hover:shadow-xl" data-video="ei_hErKm0IM">
+          <summary class="p-6">
+            <h3 class="font-semibold text-xl mb-1 text-subtitulo">🏁 الدرس 7: النقاط وإعادة الاستعمال</h3>
+            <p class="text-gray-700">التقسيم إلى وحدات وإعادة الاستعمال. أضف نظام نقاط إلى لعبة سابقة، دون أي متغيّر.</p>
+          </summary>
+          <div class="px-6 pb-6">
+            <div class="leccion-video">
+              <a href="https://youtu.be/ei_hErKm0IM" target="_blank" rel="noopener" class="text-link underline">شاهد على YouTube</a>
+            </div>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <!-- Para docentes e investigadores -->
+    <section class="max-w-4xl mx-auto my-16 px-4 bg-white rounded-2xl shadow-lg p-8" id="research">
+      <h2 class="text-3xl md:text-4xl font-bold text-center text-violeta mb-6">🔬 للمعلمين والباحثين</h2>
+      <p class="text-center text-lg text-gray-700 mb-8">يُطوَّر Diálogo في جامعة بوينس آيرس بوصفه مشروعًا بحثيًا في البرمجة التصريحية للأطفال. وتُنشر البيئة والسلسلة التعليمية معًا بوصفهما مادةً متاحة للتبنّي وللدراسة الميدانية.</p>
+      <ul class="space-y-5 text-gray-700">
+        <li class="border-l-4 border-indigo-500 pl-4">
+          <p class="font-semibold text-subtitulo" lang="en">Programming with Drawings: A Declarative Visual Environment and Its Classroom Evolution</p>
+          <p>Agustín R. Martínez. <em>SIGCSE Technical Symposium 2027</em>, Sacramento, California, شباط/فبراير 2027. مقبول، قيد النشر.</p>
+          <p class="text-sm text-gray-600">تصميم البيئة، وتطوّرها عبر ورشة حضورية ودورة على الإنترنت، والسلسلة المكوّنة من سبعة دروس.</p>
+        </li>
+        <li class="border-l-4 border-indigo-500 pl-4">
+          <p class="font-semibold text-subtitulo" lang="en">A Language Based on Two Relations between Symbols</p>
+          <p>Agustín R. Martínez. <em>Onward! 2022</em> (SPLASH), Auckland. ACM. <a href="https://doi.org/10.1145/3563835.3567660" target="_blank" rel="noopener" class="text-link underline">doi:10.1145/3563835.3567660</a></p>
+          <p class="text-sm text-gray-600">الأساس المفاهيمي: الاستبدال والتصنيف بوصفهما العلاقتين اللتين تُبنى منهما اللغة.</p>
+        </li>
+        <li class="border-l-4 border-indigo-500 pl-4">
+          <p class="font-semibold text-subtitulo" lang="en">Teaching Kids to Hack Their Own Games: Metaprogramming, Debugging, and Creativity from Age 7</p>
+          <p>محاضرة في <em>Smalltalks 2025</em>, Buenos Aires. <a href="https://youtu.be/EqioMI1I5E8" target="_blank" rel="noopener" class="text-link underline">شاهد المقطع</a></p>
+        </li>
+      </ul>
+      <p class="mt-8 text-gray-700 leading-relaxed">هل تودّ استعمال Diálogo في صفّك أو في بحثك، أو ترجمة السلسلة التعليمية، أو إجراء دراسة به؟ اكتب إلى <a href="mailto:agustin@dc.uba.ar" class="text-link underline">agustin@dc.uba.ar</a>.</p>
+      <p class="mt-2 text-sm text-gray-600">Agustín Rafael Martínez، قسم علوم الحاسوب، كلية العلوم الدقيقة والطبيعية، جامعة بوينس آيرس.</p>
+    </section>
+
+    <!-- Nerdearla -->
+    <section class="animate-fade-in mt-16">
+      <h2 class="text-2xl font-semibold text-violeta text-center mb-6">🎤 عروض في Nerdearla</h2>
+      <p class="text-center text-gray-700 mb-8">عرضان كاملان على المسرح بُنيا بـ Diálogo لجمهور عام. بالإسبانية، مع ترجمة مكتوبة.</p>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="aspect-w-16 aspect-h-9">
+          <iframe
+            class="w-full h-full rounded-xl shadow-lg"
+            style="aspect-ratio: 16/9; min-height: 250px;"
+            src="https://www.youtube.com/embed/OMulIPUosDs?cc_load_policy=1&amp;cc_lang_pref=ar&amp;hl=ar"
+            title="Diálogo, Nerdearla 1"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+          </iframe>
+        </div>
+        <div class="aspect-w-16 aspect-h-9">
+          <iframe
+            class="w-full h-full rounded-xl shadow-lg"
+            style="aspect-ratio: 16/9; min-height: 250px;"
+            src="https://www.youtube.com/embed/w2mqMSp40Hk?cc_load_policy=1&amp;cc_lang_pref=ar&amp;hl=ar"
+            title="Diálogo, Nerdearla 2"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+    </section>
+
+    <section class="text-center text-sm text-gray-500 animate-fade-in">
+      <p>من إعداد Agustín، مدرّس وباحث في جامعة بوينس آيرس، ويُعرف أيضًا بـ <strong>Profe Futuro</strong> 🚀</p>
+    </section>
+  </main>
+
+  <footer class="text-center text-gray-500 text-sm p-6 space-y-2 mt-16">
+    <div class="flex justify-center flex-wrap gap-4 text-lg">
+      <a href="https://www.instagram.com/elprofefuturo" target="_blank" rel="noopener" class="hover:text-subtitulo transition">📸 Instagram</a>
+      <a href="https://www.tiktok.com/@elprofefuturo" target="_blank" rel="noopener" class="hover:text-subtitulo transition">🎵 TikTok</a>
+      <a href="https://x.com/elprofefuturo" target="_blank" rel="noopener" class="hover:text-subtitulo transition">🦅 X</a>
+      <a href="https://www.youtube.com/@elprofefuturo" target="_blank" rel="noopener" class="hover:text-subtitulo transition">▶️ YouTube</a>
+      <a href="mailto:agustin@dialog.ar" class="hover:text-subtitulo transition">📬 agustin@dialog.ar</a>
+    </div>
+    <p class="text-xs text-gray-400">© 2026 Diálogo. جميع الحقوق محفوظة.</p>
+  </footer>
+
+  <script src="/clases.js"></script>
+</body>
+</html>

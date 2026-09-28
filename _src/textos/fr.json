@@ -1,0 +1,96 @@
+{
+  "nombre": "Français",
+  "og_locale": "fr_FR",
+  "cc_lang": "fr",
+  "dir": "ltr",
+  "ids": {
+    "descarga": "telecharger",
+    "curso": "cours",
+    "investigacion": "recherche"
+  },
+  "scripts_extra": "",
+  "meta_title": "Diálogo – Programmer en dessinant",
+  "meta_description": "Diálogo est un environnement de programmation visuelle déclarative, gratuit, où les enfants construisent des jeux et des simulations à partir de symboles qu'ils dessinent eux-mêmes. Fonctionne hors ligne sous Windows, Mac et Linux, avec une séquence pédagogique de sept séances.",
+  "meta_keywords": "programmation visuelle, programmation déclarative, programmation pour enfants, informatique à l'école, programmer en dessinant, métaprogrammation, alternative aux blocs, pensée informatique, jeux sans code",
+  "og_description": "Un environnement de programmation visuelle déclarative où les enfants dessinent leurs propres symboles.",
+  "nav_label": "Langues",
+  "tagline": "Un environnement de programmation visuelle où les enfants dessinent leurs propres symboles",
+  "what_h2": "Qu'est-ce que Diálogo ?",
+  "what_p1": "Diálogo est un environnement de programmation gratuit pour les enfants (environ 10 à 17 ans ; les plus jeunes accompagnés d'un adulte) où les programmes se construisent à partir de symboles que les enfants dessinent eux-mêmes, plutôt qu'avec des blocs prédéfinis. Le langage repose sur deux relations entre symboles, la <strong>substitution</strong> et la <strong>catégorisation</strong>, plus une dizaine de combinateurs visuels (pousser, attirer, téléporter, entrer en collision, jokers, un visualiseur d'évaluation). À partir de cet ensemble réduit, les enfants construisent des jeux, des simulations et des modèles symboliques abstraits, comme les nombres et l'addition à partir de rien.",
+  "what_p2": "Les règles vivent sur le même plateau que le jeu. Un personnage peut pousser une règle et modifier le programme pendant qu'il tourne : la métaprogrammation devient ainsi quelque chose qu'un enfant peut voir et toucher. Un visualiseur d'exécution pas à pas montre quelle règle s'est appliquée à chaque étape, et sert aussi de débogueur.",
+  "for_learners": "Pour les enfants :",
+  "para_chicos": [
+    "Construis des jeux avec tes propres dessins",
+    "Donne un comportement aux personnages en combinant quelques combinateurs visuels",
+    "Regarde, pas à pas, pourquoi le jeu fait ce qu'il fait",
+    "Fais des jeux qui réécrivent leurs propres règles pendant que tu joues"
+  ],
+  "for_teachers": "Pour les enseignants et les chercheurs :",
+  "para_docentes": [
+    "Déclaratif dès la première séance, sans syntaxe et sans prérequis impératif",
+    "Fonctionne hors ligne sur du matériel modeste, sans compte ni serveur ; les projets sont enregistrés sur la machine",
+    "Interface en dix langues ; en ajouter une de plus revient à traduire un seul fichier texte",
+    "Une séquence de sept séances en vidéos adressées directement aux enfants : vous pouvez l'adopter avant de maîtriser le paradigme"
+  ],
+  "gif_h2": "D'un premier dessin à un jeu jouable en quelques minutes",
+  "gif_alt": "Démo animée de Diálogo : dessiner des symboles et les combiner en un jeu",
+  "step1_h2": "Commencez par le tutoriel",
+  "step1_p": "Une introduction qui se joue dans le navigateur, en résolvant de courts défis. Elle enseigne les deux relations sur lesquelles repose le langage, sans rien installer et sans créer de compte.",
+  "step1_cta": "Commencer le tutoriel",
+  "step2_h2": "Téléchargez Diálogo",
+  "step2_p": "Gratuit et sans compte. Choisissez la version pour votre système d'exploitation :",
+  "cross_platform": "Multiplateforme",
+  "zip_note": "Le ZIP fonctionne sous Linux, et aussi sous Windows et Mac comme alternative aux installateurs.",
+  "install_help": "Des difficultés à l'installer ? Une vidéo l'explique",
+  "install_help_note": "Installer Diálogo sous Windows, Mac ou Linux. En espagnol.",
+  "watch_youtube": "Voir sur YouTube",
+  "online_note": "Ou essayez la <a href=\"https://www.smalltalkjsvm.com.ar/#zip=https://dialog.ar/Dialogo.zip\" target=\"_blank\" rel=\"noopener\" class=\"text-link underline\">version en ligne</a> : elle fait tourner Diálogo entier dans le navigateur, sans rien installer, et permet d'enregistrer vos fichiers, mais elle est lente et télécharge environ 30 Mo la première fois. Pour un usage réel, la version installée est bien meilleure, et pour simplement voir de quoi il s'agit, le <a href=\"/lab/dialogo-web-7q3x/?lang=fr\" class=\"text-link underline\">tutoriel</a> est plus rapide.",
+  "dev_note": "Diálogo est en développement actif. Les rapports de bugs et les récits de classe sont les bienvenus à <a href=\"mailto:agustin@dialog.ar\" class=\"text-link underline\">agustin@dialog.ar</a>.",
+  "step3_h2": "Un cours gratuit de sept séances",
+  "step3_p1": "Chaque séance introduit <strong>un mécanisme d'abstraction</strong> à travers <strong>quelque chose de jouable</strong>. Les séances 1 à 5 construisent des jeux ; les séances 6 et 7 vont vers des modèles symboliques abstraits. Les séances 1 à 3 forment une introduction autonome, avec un jeu jouable dès la séance 2.",
+  "step3_p2": "Les séances sont des vidéos adressées directement aux enfants. <strong>Les vidéos sont pour l'instant en espagnol.</strong>",
+  "clases": [
+    {
+      "titulo": "Séance 1 : Les échecs",
+      "texto": "La catégorisation, premier mécanisme d'abstraction. Construis un plateau et des pièces qui se capturent, puis remplace les règles cas par cas par des règles sur des catégories."
+    },
+    {
+      "titulo": "Séance 2 : Le serpent",
+      "texto": "La substitution, deuxième mécanisme. Un serpent dont le corps s'allonge, l'élimination du code répété, et le visualiseur d'exécution comme débogueur."
+    },
+    {
+      "titulo": "Séance 3 : Du Pac-Man au sous-marin de recherche",
+      "texto": "Un classique qui met tous les combinateurs à l'œuvre, puis change d'habillage pour un nouveau domaine. Des règles simples, un résultat surprenant."
+    },
+    {
+      "titulo": "Séance 4 : Énigmes de métaprogrammation",
+      "texto": "Que se passe-t-il quand un programme se modifie lui-même ? Un labyrinthe dont les règles se poussent et s'attirent pendant la partie."
+    },
+    {
+      "titulo": "Séance 5 : Vaisseaux spatiaux",
+      "texto": "Des idées du développement de jeux : règles déclenchées par des événements, objets cachés, collisions et contrôle du temps, réunis dans un jeu de tir."
+    },
+    {
+      "titulo": "Séance 6 : Ma calculatrice",
+      "texto": "Récursion et manipulation abstraite de symboles. Les nombres et l'addition construits à partir de rien, sans jeu ni personnage."
+    },
+    {
+      "titulo": "Séance 7 : Score et réutilisation",
+      "texto": "Modularité et réutilisation. Ajoute un système de score à un jeu précédent, sans aucune variable."
+    }
+  ],
+  "research_h2": "Pour les enseignants et les chercheurs",
+  "research_intro": "Diálogo est développé à l'Université de Buenos Aires comme projet de recherche sur la programmation déclarative pour les enfants. L'environnement comme la séquence pédagogique sont publiés en tant qu'artefacts, pour l'adoption et l'étude empirique.",
+  "paper1_when": "février 2027. Accepté, à paraître.",
+  "paper1_note": "La conception de l'environnement, son évolution au fil d'un atelier en présentiel et d'un cours en ligne, et la séquence de sept séances.",
+  "paper2_note": "La base conceptuelle : la substitution et la catégorisation comme les deux relations à partir desquelles le langage est construit.",
+  "talk_at": "Conférence à",
+  "watch_video": "Voir la vidéo",
+  "research_contact": "Vous souhaitez utiliser Diálogo dans votre classe ou votre recherche, traduire la séquence pédagogique, ou mener une étude avec lui ? Écrivez à <a href=\"mailto:agustin@dc.uba.ar\" class=\"text-link underline\">agustin@dc.uba.ar</a>.",
+  "affiliation": "Agustín Rafael Martínez, Departamento de Computación, Facultad de Ciencias Exactas y Naturales, Universidad de Buenos Aires.",
+  "shows_h2": "Spectacles à Nerdearla",
+  "shows_p": "Deux spectacles complets construits avec Diálogo pour le grand public. En espagnol, avec sous-titres.",
+  "made_by": "Réalisé par Agustín, enseignant et chercheur à l'Université de Buenos Aires, connu aussi comme <strong>Profe Futuro</strong> 🚀",
+  "rights": "Tous droits réservés.",
+  "step_format": "Étape {n}"
+}
