@@ -470,11 +470,11 @@ export class RepresentarApp {
   }
 
   openLanguageMenu() {
-    if (this.languages.length === 0) return this.toast('🌐', LanguageProvider.current().name);
+    if (this.languages.length === 0) return this.toast('🌐', LanguageProvider.current().displayName);
     const sheet = new Sheet(this.root, { title: T('language'), className: 'menu-sheet' });
     for (const language of this.languages) {
       const current = LanguageProvider.current() === language;
-      const button = this.element('button', 'menu-item' + (current ? ' checked' : ''), sheet.body, Icons.svg(current ? 'check' : 'globe') + '<span>' + language.name + '</span>');
+      const button = this.element('button', 'menu-item' + (current ? ' checked' : ''), sheet.body, Icons.svg(current ? 'check' : 'globe') + '<span lang="' + LanguageProvider.codeOf(language) + '">' + language.displayName + '</span>');
       button.type = 'button';
       button.addEventListener('click', () => { sheet.close(); this.currentLanguageName(language); });
     }

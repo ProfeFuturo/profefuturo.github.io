@@ -19,11 +19,24 @@ export const DICTIONARY_KEYS = ['Language', 'unknown', 'NewProject', 'GalleryOfP
   'InspectingWhenApplied', 'inspectExecutionWhenApplied',
   'PublicWhenShareing', 'PrivateWhenShareing', 'PointToADirection'];
 
+// Los diccionarios latinizados se muestran con la escritura del propio idioma (el archivo sigue
+// siendo el romanizado: es lo que el entorno sabe leer).
+const NATIVE_NAMES = {
+  'Zhongwén': '中文',
+  'Hindi': 'हिन्दी',
+  'Nihongo': '日本語',
+  'Al-‘arabiyah': 'العربية',
+  "Al-'arabiyah": 'العربية',
+};
+
 export class LanguageProvider {
   constructor(name, entries = new Map()) {
     this.name = name;
     this.entries = entries;
   }
+
+  // Cómo se llama el idioma en su propia escritura (para el menú de idiomas).
+  get displayName() { return NATIVE_NAMES[this.name] || this.name; }
 
   static fromText(text) {
     const lines = text.split(/\r?\n/);
@@ -46,6 +59,15 @@ export class LanguageProvider {
       || byCode(browser)
       || dictionaries.find(each => /english/i.test(each.name))
       || dictionaries[0];
+  }
+
+  // El código del idioma (para el atributo lang: la escritura se ve con la tipografía correcta).
+  static codeOf(provider) {
+    const name = provider === null || provider === undefined ? '' : String(provider.name);
+    const codes = [[/espa/i, 'es'], [/english/i, 'en'], [/fran/i, 'fr'], [/deutsch/i, 'de'], [/portug/i, 'pt'],
+      [/italian/i, 'it'], [/zhong|mandarin/i, 'zh'], [/hindi/i, 'hi'], [/nihongo|japan/i, 'ja'], [/arab/i, 'ar']];
+    const found = codes.find(([pattern]) => pattern.test(name));
+    return found ? found[1] : '';
   }
 
   static current() { return LanguageProvider.currentProvider; }
