@@ -27,6 +27,7 @@ export class RepresentarVisualEnvironment {
     this.root = root;
     this.mainSpace = mainSpace;
     this.sounds = mainSpace !== null && mainSpace.sounds ? mainSpace.sounds : new Sounds();
+    this.storage = mainSpace !== null && mainSpace.storage !== undefined ? mainSpace.storage : null;
     this.achievements = mainSpace !== null && mainSpace.achievements ? mainSpace.achievements : new Achievements();
     this.currentProject = null;
     this.boardView = null;
@@ -229,12 +230,13 @@ export class RepresentarVisualEnvironment {
     const userDrawings = this.mainSpace !== null && this.mainSpace.progress ? this.mainSpace.progress.userDrawings() : [];
     this.openProject(challenge.projectFor({ gridSize: RepresentarVisualEnvironment.sideOfSymbolsOnEnvironmentPalet(), userDrawings }));
     this.refreshChallengeButtons();
-    const fit = this.challengeGridSize(challenge.columns, challenge.rows);
+    const fit = Math.max(24, Math.round(this.challengeGridSize(challenge.columns, challenge.rows) * this.zoomFactor));
     if (fit !== this.currentProject.boardModel.gridSize) {
       this.currentProject.boardModel.changeGridSizeTo(fit);
       this.currentProject.boardModel.setCurrentAsResetBoard();
       this.currentProject.boardModel.forgetUndoHistory();    // con el tamaño ya ajustado: deshacer no lo achica
     }
+    this.refreshZoomButtons();
     return this.session;
   }
 
@@ -255,21 +257,47 @@ export class RepresentarVisualEnvironment {
 
   openPreviousChallenge() { const previous = this.previousChallenge(); if (previous !== null) this.openChallenge(previous); }
 
-  // Zoom a la vista: cambia el tamaño de las celdas ya mismo (el tiempo puede estar detenido).
+  // El zoom es una proporción del tamaño que entra en la pantalla (1 = el tablero entero a la
+  // vista, que es el máximo: en un desafío nada tiene que quedar afuera). Se mantiene de un
+  // nivel al siguiente y entre sesiones.
+  get zoomFactor() {
+    if (this.storedZoomFactor === undefined) {
+      let saved = null;
+      try { saved = this.storage === null ? null : this.storage.getItem('representar.zoom'); } catch (error) { /* sin storage */ }
+      this.storedZoomFactor = Math.max(0.4, Math.min(1, Number(saved) || 1));
+    }
+    return this.storedZoomFactor;
+  }
+
+  setZoomFactor(factor) {
+    this.storedZoomFactor = Math.max(0.4, Math.min(1, factor));
+    try { if (this.storage !== null) this.storage.setItem('representar.zoom', String(this.storedZoomFactor)); } catch (error) { /* sin storage */ }
+  }
+
   zoomBy(delta) {
     this.withProject(project => {
       const board = project.boardModel;
-      const size = Math.max(24, Math.min(120, board.gridSize + delta));
+      const fit = this.fitGridSize();
+      const size = Math.max(24, Math.min(fit, board.gridSize + delta));
       if (size === board.gridSize) return;
+      this.setZoomFactor(size / fit);
       board.changeGridSizeTo(size);
       this.refreshZoomButtons();
     });
   }
 
+  // El tamaño de celda con el que el tablero entra entero (en un proyecto libre, el de siempre).
+  fitGridSize() {
+    if (this.currentProject === null) return RepresentarVisualEnvironment.sideOfSymbolsOnEnvironmentPalet();
+    const board = this.currentProject.boardModel;
+    if (!board.areaLocked) return Math.max(board.gridSize, RepresentarVisualEnvironment.sideOfSymbolsOnEnvironmentPalet());
+    return this.challengeGridSize(board.columns, board.rows);
+  }
+
   refreshZoomButtons() {
     const size = this.currentProject === null ? 0 : this.currentProject.boardModel.gridSize;
     this.zoomOutButton.disabled = size <= 24;
-    this.zoomInButton.disabled = size >= 120;
+    this.zoomInButton.disabled = size >= this.fitGridSize();
   }
 
   refreshChallengeButtons() {
