@@ -3,11 +3,13 @@ import { Icons } from './Icons.js';
 import { Challenge, Challenges } from './Challenge.js';
 
 const HINT_DELAY_MS = 20000;
+const SLOT_DELAY_MS = 10000;      // el cuadradito punteado no está desde el principio: aparece si el chico duda
 
 // Un desafío corriendo en el editor: muestra la meta, mira si se logró después de cada paso,
 // da una pista si pasa un rato sin progreso, y celebra. Registra todo en el UsageLog.
 export class ChallengeSession {
-  constructor(environment, project, { usage = null, hintDelayMs = HINT_DELAY_MS, clock = () => Date.now() } = {}) {
+  constructor(environment, project, { usage = null, hintDelayMs = HINT_DELAY_MS, slotDelayMs = SLOT_DELAY_MS, clock = () => Date.now() } = {}) {
+    this.slotDelayMs = slotDelayMs;
     this.environment = environment;
     this.project = project;
     this.challenge = project.challenge;
@@ -18,7 +20,8 @@ export class ChallengeSession {
     this.hintsShown = 0;
     this.startedAt = clock();
     this.buildBanner();
-    environment.boardView.showSlots(this.challenge.slots);
+    environment.boardView.showSlots([]);
+    this.slotTimer = setTimeout(() => this.showSlots(), this.slotDelayMs);
     this.refreshPause();
     this.log('challenge.start');
     this.armHint();
@@ -88,6 +91,13 @@ export class ChallengeSession {
     return true;
   }
 
+  // El cuadradito donde va la ficha: se muestra recién si pasaron unos segundos sin resolverlo.
+  showSlots() {
+    if (this.completed) return;
+    this.environment.boardView.showSlots(this.challenge.slots);
+    this.slotsShown = true;
+  }
+
   // Los símbolos del tablero: las reglas que hicieron que pase lo que pasó.
   ruleItems() { return this.project.boardModel.items().filter(item => item.consideredSymbol); }
 
@@ -101,6 +111,7 @@ export class ChallengeSession {
 
   showHint() {
     if (this.completed) return;
+    this.showSlots();
     const hint = this.challenge.hintIn(this.project);
     if (hint === null) return;
     this.currentHint = hint;
@@ -137,6 +148,7 @@ export class ChallengeSession {
 
   dispose() {
     clearTimeout(this.hintTimer);
+    clearTimeout(this.slotTimer);
     this.clearHint();
     this.banner.remove();
     if (this.environment.boardView !== null) this.environment.boardView.showSlots([]);

@@ -56,6 +56,17 @@ export class RepresentarVisualEnvironment {
 
   // Como en Cuis (StateOfArtBuilderForVisualEnvironment>>sideOfSymbolsOnEnvironmentPalet): la grilla
   // de un proyecto nuevo es 1/20 del ancho de la pantalla, nunca menos de 44 px (un dedo).
+  // En pantalla angosta (celular) el joystick vive dentro de la barra de fichas, a la derecha:
+  // así no tapa las reglas del tablero. En pantalla ancha vuelve a flotar sobre el tablero.
+  placeJoysticks(touch) {
+    const inTray = touch && this.layout.clientWidth < 900;
+    const parent = inTray ? this.trayJoysticks : this.joystickLayer;
+    for (const joystick of [this.joysticks.arrows, this.joysticks.wasd]) {
+      if (joystick.element.parentElement !== parent) parent.appendChild(joystick.element);
+    }
+    this.trayContainer.classList.toggle('with-joysticks', inTray);
+  }
+
   // El joystick en pantalla es para dedos: en una PC con teclado no hace falta.
   static isTouchDevice() {
     if (typeof window === 'undefined') return true;
@@ -85,6 +96,7 @@ export class RepresentarVisualEnvironment {
     this.joysticks.wasd.show(false);
     this.trayContainer = this.element('div', 'tray-container', this.layout);
     this.tray = new SymbolTray(this, this.trayContainer, this.dragController);
+    this.trayJoysticks = this.element('div', 'tray-joysticks', this.trayContainer);   // el joystick va después: a la derecha de las fichas
     this.inspector = new VisualInspector(document.createElement('div'), this);
     this.sheet = null;
   }
@@ -209,7 +221,7 @@ export class RepresentarVisualEnvironment {
     }
     this.root.hidden = false;
     this.fitBoardToScreen();
-    if (project.challenge) this.session = new ChallengeSession(this, project, { usage: this.usage, hintDelayMs: this.hintDelayMs });
+    if (project.challenge) this.session = new ChallengeSession(this, project, { usage: this.usage, hintDelayMs: this.hintDelayMs, slotDelayMs: this.slotDelayMs });
     this.boardView.canvas.focus({ preventScroll: true });
     this.opening = false;
     this.dirty = false;
@@ -401,6 +413,7 @@ export class RepresentarVisualEnvironment {
     if (this.currentProject === null) return;
     const board = this.currentProject.boardModel;
     const touch = RepresentarVisualEnvironment.isTouchDevice();
+    this.placeJoysticks(touch);
     const arrows = touch && board.itemsMovableByArrows().length > 0;
     const wasd = touch && board.itemsMovableByWASD().length > 0;
     const space = touch && board.existsASubstitutionThatAppliesTo(Sentence.of('spaceBar'));
