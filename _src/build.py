@@ -19,13 +19,13 @@ IDIOMAS = ["es", "en", "fr", "de", "pt", "it", "zh", "hi", "ja", "ar"]
 
 # Las clases son las mismas en todos los idiomas: solo cambian titulo y texto.
 VIDEOS = [
-    ("FuQt50J9T2I", "♟️"),
-    ("qVxvzTLY3pM", "🐍"),
-    ("oypNK7dX_rY", "👻"),
-    ("AfAFcP5FNVg", "🧠"),
-    ("VLwuOLksRy0", "🚀"),
-    ("3AMOQ4n1YU0", "🔢"),
-    ("ei_hErKm0IM", "🏁"),
+    ("sQ5pWzz7so8", "♟️"),
+    ("Jw-Bgbqa2kQ", "🐍"),
+    ("Re9i-SOailU", "👻"),
+    ("JM29V-XCKwM", "🧠"),
+    ("DXOJP-63LMo", "🚀"),
+    ("00bAUVMoFgU", "🔢"),
+    ("afCA6EIdwWs", "🏁"),
 ]
 
 SCRIPT_IDIOMA = '''
