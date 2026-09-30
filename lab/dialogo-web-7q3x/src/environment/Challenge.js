@@ -9,7 +9,8 @@ const ROWS = 8;
 // Un desafío de la escalera (ver docs/desafios.md): arma un tablero chico con la regla casi
 // hecha, dice qué símbolos van en la bandeja, sabe cuándo se logró la meta y qué pista dar.
 export class Challenge {
-  constructor({ id, number, world = 'primeros', title, mission = '', goal, steps = null, praise = '', emoji, symbols, pencil = false, slots = [], build, isCompleted, hint = () => null, solution = null, columns = COLUMNS, rows = ROWS, kind = 'challenge' }) {
+  constructor({ id, number, world = 'primeros', title, mission = '', goal, steps = null, praise = '', emoji, symbols, pencil = false, slots = [], build, isCompleted, hint = () => null, solution = null, columns = COLUMNS, rows = ROWS, kind = 'challenge', backToStartWhen = null }) {
+    this.backToStartWhen = backToStartWhen;   // cuándo el nivel volvió solo al principio (y el tiempo se detiene otra vez)
     this.kind = kind;                   // 'challenge' (la escalera) o 'build' (armar un juego del curso, con toda la bandeja)
     this.columns = columns;
     this.rows = rows;
@@ -437,6 +438,8 @@ const LADDER = [
     },
     isCompleted: (project, drawings) => !Challenge.ruleCellIsEmpty(project, 0, 8) && Challenge.anyOnTopOf(project, drawings.kid, drawings.star),
     hint: project => Challenge.ruleCellIsEmpty(project, 0, 8) ? { cell: Point.at(0, 8), selector: 'jokerWithBalls' } : { joystick: true },
+    // Si el fantasma lo tocó, los dos volvieron a su lugar: el nivel empieza de nuevo y espera quieto.
+    backToStartWhen: (project, drawings) => Challenge.anyOnTopOf(project, drawings.kid, drawings.door) && Challenge.anyOnTopOf(project, drawings.ghost, drawings.cloud),
     solution: play => { play.drop('jokerWithBalls', 0, 8); play.right(9); },
   }),
 

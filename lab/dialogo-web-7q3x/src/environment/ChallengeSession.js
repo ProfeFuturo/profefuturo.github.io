@@ -108,6 +108,12 @@ export class ChallengeSession {
   check() {
     if (this.completed || this.environment.currentProject !== this.project) return false;
     this.refreshGoal();
+    // Algunos niveles vuelven solos al principio (te tocó el fantasma): ahí el tiempo se detiene
+    // otra vez, y todo queda quieto hasta que el chico vuelva a jugar.
+    if (this.timeStarted && this.challenge.backToStartWhen !== null && this.challenge.backToStartWhen(this.project, this.project.challengeDrawings)) {
+      this.timeStarted = false;
+      this.refreshPause();
+    }
     if (!this.challenge.completedIn(this.project)) return false;
     this.completed = true;
     this.clearHint();
