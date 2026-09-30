@@ -21,6 +21,7 @@ export class ChallengeSession {
     this.startedAt = clock();
     this.buildBanner();
     environment.boardView.showSlots([]);
+    this.refreshGoal();
     this.slotTimer = setTimeout(() => this.showSlots(), this.slotDelayMs);
     this.refreshPause();
     this.log('challenge.start');
@@ -35,10 +36,11 @@ export class ChallengeSession {
     this.banner = document.createElement('div');
     this.banner.className = 'challenge-banner';
     this.banner.setAttribute('role', 'status');
-    // Primero el objetivo (qué queremos), después el paso (cómo se hace).
+    // Primero el objetivo (qué queremos), después el paso (cómo se hace). Si el paso dice
+    // casi lo mismo que el objetivo, no se repite: queda una sola línea.
     this.banner.innerHTML = '<span class="challenge-emoji">' + this.challenge.emoji + '</span>'
       + '<span class="challenge-texts"><span class="challenge-mission">' + this.challenge.mission + '</span>'
-      + '<span class="challenge-goal">' + this.challenge.goalIn(this.project) + '</span></span>';
+      + '<span class="challenge-goal"></span></span>';
     const restart = document.createElement('button');
     restart.type = 'button';
     restart.className = 'icon-button ghost challenge-restart';
@@ -76,8 +78,21 @@ export class ChallengeSession {
   // La consigna cambia con lo que el chico ya hizo (un paso por vez).
   refreshGoal() {
     const goal = this.banner.querySelector('.challenge-goal');
-    const text = this.challenge.goalIn(this.project);
-    if (goal !== null && goal.textContent !== text) { goal.textContent = text; goal.classList.remove('changed'); void goal.offsetWidth; goal.classList.add('changed'); }
+    if (goal === null) return;
+    const step = this.challenge.goalIn(this.project);
+    const text = ChallengeSession.saysTheSameAs(step, this.challenge.mission) ? '' : step;
+    goal.hidden = text === '';
+    if (goal.textContent !== text) { goal.textContent = text; goal.classList.remove('changed'); void goal.offsetWidth; goal.classList.add('changed'); }
+  }
+
+  // Dos textos dicen lo mismo si comparten casi todas sus palabras largas (sirve en cualquier idioma).
+  static saysTheSameAs(one, other) {
+    const words = text => new Set(String(text).toLowerCase().replace(/[^\p{L}\p{N} ]/gu, ' ').split(/\s+/).filter(word => word.length > 3));
+    const first = words(one);
+    const second = words(other);
+    if (first.size === 0 || second.size === 0) return String(one).trim() === String(other).trim();
+    const shared = [...first].filter(word => second.has(word)).length;
+    return shared / Math.min(first.size, second.size) >= 0.75;
   }
 
   check() {

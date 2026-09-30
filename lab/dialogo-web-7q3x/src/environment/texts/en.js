@@ -229,7 +229,7 @@ export const en = {
       title: "Make a rule by playing",
       mission: "Make a rule by pushing its pieces, then reach the star.",
       steps: ["Push \"pulls\" into the little square of the rule", "Now take the character to the star. The box follows"],
-      praise: "You made a rule without the tray: by pushing its pieces around the board.",
+      praise: "You made a rule without taking tiles from the bar: by pushing its pieces around the board.",
     },
     "fire": {
       title: "Bullseye",

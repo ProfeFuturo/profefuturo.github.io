@@ -228,7 +228,7 @@ export const it = {
       title: "Costruisci una regola giocando",
       mission: "Costruisci una regola spingendo i suoi pezzi e arriva alla stella.",
       steps: ["Spingi «tira» nel quadratino della regola", "Adesso porta il personaggio alla stella. La scatola lo segue"],
-      praise: "Hai costruito una regola senza il vassoio: spingendo i suoi pezzi sulla scacchiera.",
+      praise: "Hai costruito una regola senza prendere pezzi dalla barra: spingendo i suoi pezzi sulla scacchiera.",
     },
     "fire": {
       title: "Nel segno",

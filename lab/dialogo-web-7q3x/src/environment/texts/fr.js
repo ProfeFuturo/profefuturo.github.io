@@ -228,7 +228,7 @@ export const fr = {
       title: "Fais une règle en jouant",
       mission: "Fais une règle en poussant ses pièces, puis arrive à l'étoile.",
       steps: ["Pousse « tire » dans la petite case de la règle", "Maintenant, amène le personnage à l'étoile. La caisse le suit"],
-      praise: "Tu as fait une règle sans le plateau de tuiles : en poussant ses pièces sur le plateau.",
+      praise: "Tu as fait une règle sans prendre de tuiles en bas : en poussant ses pièces sur le plateau.",
     },
     "fire": {
       title: "En plein dans le mille",

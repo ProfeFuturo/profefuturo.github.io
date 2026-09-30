@@ -412,27 +412,29 @@ const LADDER = [
   }),
   new Challenge({
     id: 'nobody-passes', number: 14, world: 'choques', title: 'Nadie pasa', emoji: '🚧',
-    mission: 'Dejá al fantasma afuera y llegá a la estrella.',
+    mission: 'Dejá al fantasma encerrado y llegá a la estrella.',
     goal: 'Arrastrá el comodín hasta el cuadradito, antes de «no puede pasar»',
     steps: [
       { text: 'Arrastrá el comodín hasta el cuadradito, antes de «no puede pasar»', done: project => !Challenge.ruleCellIsEmpty(project, 0, 7) },
-      { text: 'Llevá al personaje hasta la estrella. El fantasma no pasa', done: null },
+      { text: 'Ahora llevá al personaje hasta la estrella', done: null },
     ],
-    praise: 'El comodín vale por cualquier cosa: nadie pasa la pared, ni el fantasma ni vos.',
+    praise: 'El comodín vale por cualquier cosa: ni el fantasma pasa la pared. Si te toca, volvés a la puerta.',
     symbols: ['jokerWithBalls'], slots: [Point.at(0, 7)],
+    // Sin la regla, el fantasma sale del corral, toca al personaje y lo manda de vuelta a la puerta.
     build(project, drawings, predefined) {
+      Challenge.rule(project, [drawings.kid, predefined.arrowKeysSymbol], 4);
       Challenge.rule(project, [drawings.ghost, predefined.runSymbol, drawings.kid], 5);
-      Challenge.rule(project, [drawings.kid, predefined.arrowKeysSymbol], 6);
+      Challenge.rule(project, [drawings.kid, predefined.collisionSymbol, drawings.ghost, predefined.pointsSymbol, drawings.kid, predefined.teleportSymbol, drawings.door], 6);
       Challenge.rule(project, [null, predefined.canNotTranspassSymbol, drawings.wall], 7);
-      for (let row = 0; row < 5; row++) Challenge.element(project, drawings.wall, 3, row);         // la pared del medio
-      for (let column = 0; column < 7; column++) Challenge.element(project, drawings.wall, column, 5);   // el piso: nadie se escapa por abajo
-      Challenge.element(project, drawings.ghost, 0, 2);
-      Challenge.element(project, drawings.kid, 5, 4);
-      Challenge.element(project, drawings.star, 5, 0);
+      for (const [column, row] of [[3, 0], [3, 1], [3, 2], [4, 0], [4, 2], [5, 0], [5, 1], [5, 2]]) Challenge.element(project, drawings.wall, column, row);
+      Challenge.element(project, drawings.ghost, 4, 1);
+      Challenge.element(project, drawings.door, 0, 3);
+      Challenge.element(project, drawings.kid, 0, 3);
+      Challenge.element(project, drawings.star, 6, 3);
     },
-    isCompleted: (project, drawings) => !Challenge.ruleCellIsEmpty(project, 0, 7) && Challenge.anyOnTopOf(project, drawings.kid, drawings.star) && Challenge.positionsOf(project, drawings.ghost).every(position => position.x <= 2),
+    isCompleted: (project, drawings) => !Challenge.ruleCellIsEmpty(project, 0, 7) && Challenge.anyOnTopOf(project, drawings.kid, drawings.star),
     hint: project => Challenge.ruleCellIsEmpty(project, 0, 7) ? { cell: Point.at(0, 7), selector: 'jokerWithBalls' } : { joystick: true },
-    solution: play => { play.drop('jokerWithBalls', 0, 7); play.up(4); play.steps(6); },
+    solution: play => { play.drop('jokerWithBalls', 0, 7); play.right(6); },
   }),
 
   // ---------- Mundo 3: Categorías ----------

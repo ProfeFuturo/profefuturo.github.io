@@ -19,6 +19,7 @@ export class Joystick {
     }
     this.goKey = this.key('go', 'play', T('joystick.enter'), () => environment.currentProject.enterKeyPressed());
     this.spaceKey = this.key('space', 'space', T('joystick.space'), () => environment.currentProject.spaceBarPressed());
+    this.spaceKey.appendChild(Object.assign(document.createElement('span'), { className: 'space-label', textContent: T('joystick.space') }));
     container.appendChild(this.element);
   }
 
@@ -26,6 +27,8 @@ export class Joystick {
   showExtraKeys({ enter, space }) {
     this.goKey.classList.toggle('unused', !enter);
     this.spaceKey.hidden = !space;
+    // La barra va afuera de la cruz de flechas: abajo y al centro, como en un teclado.
+    if (this.environment.trayContainer) this.environment.trayContainer.classList.toggle('with-space', space && this.keys === 'arrows');
   }
 
   key(name, icon, label, action) {

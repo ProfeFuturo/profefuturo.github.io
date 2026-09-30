@@ -228,7 +228,7 @@ export const de = {
       title: "Bau eine Regel beim Spielen",
       mission: "Bau eine Regel, indem du ihre Teile schiebst, und komm zum Stern.",
       steps: ["Schieb „zieht“ in das Kästchen der Regel", "Jetzt bring die Figur zum Stern. Die Kiste folgt"],
-      praise: "Du hast eine Regel ohne die Leiste gebaut: indem du ihre Teile über das Brett geschoben hast.",
+      praise: "Du hast eine Regel gebaut, ohne Steine von unten zu nehmen: indem du ihre Teile über das Brett geschoben hast.",
     },
     "fire": {
       title: "Volltreffer",

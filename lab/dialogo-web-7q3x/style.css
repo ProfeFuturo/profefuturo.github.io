@@ -342,3 +342,9 @@ a.success-button { text-decoration: none; }
 /* de derecha a izquierda (árabe): el tablero y las fichas no se dan vuelta, el texto sí */
 [dir="rtl"] .board-area, [dir="rtl"] .tray, [dir="rtl"] .joystick { direction: ltr; }
 [dir="rtl"] .challenge-texts, [dir="rtl"] .list-top h2, [dir="rtl"] .play-subtitle, [dir="rtl"] .ladder-title, [dir="rtl"] .world-title { text-align: right; }
+/* la barra espaciadora: ancha, con su nombre, centrada abajo (como en un teclado) */
+.tray-container.with-space { padding-bottom: 54px; position: relative; }
+.tray-container.with-space .joystick-key.space { position: absolute; left: 50%; transform: translateX(-50%); bottom: max(8px, var(--safe-bottom)); width: min(260px, 62vw); height: 44px; border-radius: 10px; gap: 8px; }
+.tray-container.with-space .joystick-key.space .icon { width: 18px; height: 18px; }
+.joystick-key.space .space-label { display: none; font-size: 13px; font-weight: 700; }
+.tray-container.with-space .joystick-key.space .space-label { display: inline; }

@@ -228,7 +228,7 @@ export const pt = {
       title: "Monte uma regra jogando",
       mission: "Monte uma regra empurrando as peças dela e chegue à estrela.",
       steps: ["Empurre “puxa” até o quadradinho da regra", "Agora leve o personagem até a estrela. A caixa vai atrás"],
-      praise: "Você montou uma regra sem a bandeja: empurrando as peças pelo tabuleiro.",
+      praise: "Você montou uma regra sem pegar peças de baixo: empurrando as peças pelo tabuleiro.",
     },
     "fire": {
       title: "Na mosca",
