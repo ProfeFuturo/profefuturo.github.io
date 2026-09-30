@@ -10,6 +10,7 @@ const SLOT_DELAY_MS = 10000;      // el cuadradito punteado no está desde el pr
 export class ChallengeSession {
   constructor(environment, project, { usage = null, hintDelayMs = HINT_DELAY_MS, slotDelayMs = SLOT_DELAY_MS, clock = () => Date.now() } = {}) {
     this.slotDelayMs = slotDelayMs;
+    this.timeStarted = false;            // el tiempo arranca con la primera tecla del chico
     this.environment = environment;
     this.project = project;
     this.challenge = project.challenge;
@@ -54,7 +55,9 @@ export class ChallengeSession {
 
   restart() {
     this.environment.sounds.whoosh();
+    this.timeStarted = false;            // volver a empezar también detiene el tiempo
     this.project.boardModel.resetBoard();
+    this.refreshPause();
     this.clearHint();
     this.armHint();
     this.log('challenge.restart');
@@ -73,7 +76,14 @@ export class ChallengeSession {
   // que el chico armó la regla (si no, el monstruo llega antes de que exista la pared).
   slotsPending() { return this.challenge.slots.some(slot => Challenge.ruleCellIsEmpty(this.project, slot.x, slot.y)); }
 
-  refreshPause() { this.environment.pausedBySlots = !this.completed && this.slotsPending(); }
+  refreshPause() { this.environment.pausedBySlots = !this.completed && !this.timeStarted && this.slotsPending(); }
+
+  // El chico tocó una tecla: el tiempo corre, aunque la regla esté a medias.
+  userMoved() {
+    if (this.timeStarted) return;
+    this.timeStarted = true;
+    this.refreshPause();
+  }
 
   // La consigna cambia con lo que el chico ya hizo (un paso por vez).
   refreshGoal() {

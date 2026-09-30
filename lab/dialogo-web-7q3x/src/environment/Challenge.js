@@ -411,30 +411,33 @@ const LADDER = [
     solution: play => { play.drop('pullSymbol', 1, 7); play.right(4); },
   }),
   new Challenge({
-    id: 'nobody-passes', number: 14, world: 'choques', title: 'Nadie pasa', emoji: '🚧',
-    mission: 'Dejá al fantasma encerrado y llegá a la estrella.',
+    id: 'nobody-passes', number: 14, world: 'choques', title: 'Nadie pasa', emoji: '🚧', columns: 10, rows: 9,
+    mission: 'Dejá al fantasma afuera y llegá a la estrella.',
     goal: 'Arrastrá el comodín hasta el cuadradito, antes de «no puede pasar»',
     steps: [
-      { text: 'Arrastrá el comodín hasta el cuadradito, antes de «no puede pasar»', done: project => !Challenge.ruleCellIsEmpty(project, 0, 7) },
-      { text: 'Ahora llevá al personaje hasta la estrella', done: null },
+      { text: 'Arrastrá el comodín hasta el cuadradito, antes de «no puede pasar»', done: project => !Challenge.ruleCellIsEmpty(project, 0, 8) },
+      { text: 'Llevá al personaje hasta la estrella. El fantasma no pasa', done: null },
     ],
-    praise: 'El comodín vale por cualquier cosa: ni el fantasma pasa la pared. Si te toca, volvés a la puerta.',
-    symbols: ['jokerWithBalls'], slots: [Point.at(0, 7)],
-    // La pared cruza todo el tablero: el fantasma vive en las dos filas de arriba. Sin la regla
-    // baja, se come la estrella y ya no se puede ganar: hay que poner el comodín antes de moverse.
+    praise: 'El comodín vale por cualquier cosa: nadie pasa la pared, ni el fantasma ni vos.',
+    symbols: ['jokerWithBalls'], slots: [Point.at(0, 8)],
+    // La pared cruza todo el tablero: el fantasma vive en las dos filas de arriba. Si te toca,
+    // volvés a la puerta y el fantasma vuelve a su nube: el nivel se reinicia solo.
     build(project, drawings, predefined) {
-      Challenge.rule(project, [drawings.kid, predefined.arrowKeysSymbol], 4);
-      Challenge.rule(project, [drawings.ghost, predefined.runSymbol, drawings.star], 5);
-      Challenge.rule(project, [drawings.ghost, predefined.collisionSymbol, drawings.star, predefined.pointsSymbol, drawings.star, predefined.teleportSymbol, predefined.blackHoleSymbol], 6);
-      Challenge.rule(project, [null, predefined.canNotTranspassSymbol, drawings.wall], 7);
-      for (let column = 0; column < COLUMNS; column++) Challenge.element(project, drawings.wall, column, 2);
-      Challenge.element(project, drawings.ghost, 3, 0);
-      Challenge.element(project, drawings.kid, 0, 3);
-      Challenge.element(project, drawings.star, 5, 3);
+      Challenge.rule(project, [drawings.kid, predefined.arrowKeysSymbol], 5);
+      Challenge.rule(project, [drawings.ghost, predefined.runSymbol, drawings.kid], 6);
+      Challenge.rule(project, [drawings.kid, predefined.collisionSymbol, drawings.ghost, predefined.pointsSymbol,
+        drawings.kid, predefined.teleportSymbol, drawings.door, drawings.ghost, predefined.teleportSymbol, drawings.cloud], 7);
+      Challenge.rule(project, [null, predefined.canNotTranspassSymbol, drawings.wall], 8);
+      for (let column = 0; column < 10; column++) Challenge.element(project, drawings.wall, column, 2);
+      Challenge.element(project, drawings.cloud, 9, 0);
+      Challenge.element(project, drawings.ghost, 9, 0);
+      Challenge.element(project, drawings.door, 0, 4);
+      Challenge.element(project, drawings.kid, 0, 4);
+      Challenge.element(project, drawings.star, 9, 4);
     },
-    isCompleted: (project, drawings) => !Challenge.ruleCellIsEmpty(project, 0, 7) && Challenge.anyOnTopOf(project, drawings.kid, drawings.star),
-    hint: project => Challenge.ruleCellIsEmpty(project, 0, 7) ? { cell: Point.at(0, 7), selector: 'jokerWithBalls' } : { joystick: true },
-    solution: play => { play.drop('jokerWithBalls', 0, 7); play.right(5); },
+    isCompleted: (project, drawings) => !Challenge.ruleCellIsEmpty(project, 0, 8) && Challenge.anyOnTopOf(project, drawings.kid, drawings.star),
+    hint: project => Challenge.ruleCellIsEmpty(project, 0, 8) ? { cell: Point.at(0, 8), selector: 'jokerWithBalls' } : { joystick: true },
+    solution: play => { play.drop('jokerWithBalls', 0, 8); play.right(9); },
   }),
 
   // ---------- Mundo 3: Categorías ----------

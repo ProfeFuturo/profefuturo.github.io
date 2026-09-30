@@ -44,7 +44,8 @@ export class Joystick {
       this.environment.sounds.step();
       const board = this.environment.currentProject.boardModel;
       action(board);
-      if (this.environment.pausedBySlots) { board.makeAllEnqueuedActions(); if (this.environment.session !== null) this.environment.session.check(); }   // el chico se mueve; lo que corre solo, espera
+      if (this.environment.session) this.environment.session.userMoved();   // desde acá el tiempo corre
+      if (this.environment.pausedBySlots) { board.makeAllEnqueuedActions(); if (this.environment.session) this.environment.session.check(); }
       this.environment.achievements.unlock('first-move');
     });
     button.addEventListener('contextmenu', event => event.preventDefault());

@@ -410,7 +410,8 @@ export class BoardView {
     if (action === undefined) return;
     action();
     if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'w', 'a', 's', 'd', 'q', 'e', 'z', 'c'].includes(event.key)) board.recordCurrentBoard();
-    if (this.environment.pausedBySlots) { board.makeAllEnqueuedActions(); if (this.environment.session !== null) this.environment.session.check(); }
+    if (this.environment.session) this.environment.session.userMoved();
+    if (this.environment.pausedBySlots) { board.makeAllEnqueuedActions(); if (this.environment.session) this.environment.session.check(); }
     if (this.environment.achievements) this.environment.achievements.unlock('first-move');
     event.preventDefault();
   }
