@@ -6,6 +6,7 @@
       --dialogo-color-fondo: #FAF9F6;
       --dialogo-color-texto: #333333;
       --dialogo-color-violeta: #8B5CF6;
+      --dialogo-color-aviso: #C2410C;
     }
 
     body {
@@ -137,3 +138,9 @@
     }
 
     [dir="rtl"] .list-inside { text-align: right; }
+
+    /* Una advertencia dentro de un texto corrido, sin romper la lectura */
+    .aviso {
+      color: var(--dialogo-color-aviso);
+      font-weight: 600;
+    }

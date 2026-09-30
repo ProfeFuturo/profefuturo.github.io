@@ -72,7 +72,7 @@
     },
     {
       "titulo": "Projet 6 : Ma calculatrice",
-      "texto": "Récursion et manipulation abstraite de symboles. Les nombres et l'addition construits à partir de rien, sans jeu ni personnage. Il commence simplement et finit par être le plus exigeant des sept."
+      "texto": "Récursion et manipulation abstraite de symboles. Les nombres et l'addition construits à partir de rien, sans jeu ni personnage. <span class=\"aviso\">Il commence simplement et finit par être le plus exigeant des sept.</span>"
     },
     {
       "titulo": "Projet 7 : Score et réutilisation",

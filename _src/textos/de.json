@@ -72,7 +72,7 @@
     },
     {
       "titulo": "Projekt 6: Mein Taschenrechner",
-      "texto": "Rekursion und abstrakte Symbolmanipulation. Zahlen und Addition von Grund auf gebaut, ohne Spiel und ohne Figur. Es fängt einfach an und wird am Ende das anspruchsvollste der sieben."
+      "texto": "Rekursion und abstrakte Symbolmanipulation. Zahlen und Addition von Grund auf gebaut, ohne Spiel und ohne Figur. <span class=\"aviso\">Es fängt einfach an und wird am Ende das anspruchsvollste der sieben.</span>"
     },
     {
       "titulo": "Projekt 7: Punktestand und Wiederverwendung",
