@@ -168,11 +168,11 @@ const LADDER = [
     build(project, drawings, predefined) {
       Challenge.rule(project, [drawings.kid, predefined.arrowKeysSymbol], 7);
       Challenge.element(project, drawings.kid, 1, 3);
-      Challenge.element(project, drawings.star, 5, 3);
+      Challenge.element(project, drawings.star, 6, 3);
     },
     isCompleted: (project, drawings) => Challenge.anyOnTopOf(project, drawings.kid, drawings.star),
     hint: (project, drawings) => ({ cell: Challenge.positionsOf(project, drawings.star)[0] || null, joystick: true }),
-    solution: play => play.right(4),
+    solution: play => play.right(5),
   }),
   new Challenge({
     id: 'make-rule', number: 2, title: 'Armá la regla', goal: 'Arrastrá las flechas hasta el cuadradito, al lado del personaje', emoji: '🧩',
@@ -186,11 +186,11 @@ const LADDER = [
     build(project, drawings) {
       Challenge.rule(project, [drawings.kid], 7);
       Challenge.element(project, drawings.kid, 1, 3);
-      Challenge.element(project, drawings.star, 5, 3);
+      Challenge.element(project, drawings.star, 6, 3);
     },
     isCompleted: (project, drawings) => Challenge.anyOnTopOf(project, drawings.kid, drawings.star),
     hint: project => Challenge.ruleCellIsEmpty(project, 1, 7) ? { cell: Point.at(1, 7), selector: 'arrowKeysSymbol' } : { joystick: true },
-    solution: play => { play.drop('arrowKeysSymbol', 1, 7); play.right(4); },
+    solution: play => { play.drop('arrowKeysSymbol', 1, 7); play.right(5); },
   }),
   new Challenge({
     id: 'eat-star', number: 3, title: 'Comé las estrellas', goal: 'Arrastrá el agujero negro hasta el cuadradito del final de la regla', emoji: '🕳️',
@@ -235,13 +235,13 @@ const LADDER = [
     build(project, drawings, predefined, userDrawings) {
       const mine = userDrawings[0] || drawings.monster;
       Challenge.symbol(project, predefined.arrowKeysSymbol, 1, 7);
-      Challenge.element(project, drawings.star, 5, 3);
+      Challenge.element(project, drawings.star, 6, 3);
       project.receiveDrawnSymbol(mine);
       Challenge.element(project, mine, 1, 3);
     },
     isCompleted: (project, drawings) => Challenge.anyOnTopOf(project, project.drawingsMadeByUser()[0], drawings.star),
     hint: project => Challenge.ruleCellIsEmpty(project, 0, 7) ? { cell: Point.at(0, 7), drawing: project.drawingsMadeByUser()[0] } : { joystick: true },
-    solution: play => { play.dropUserDrawing(0, 0, 7); play.right(4); },
+    solution: play => { play.dropUserDrawing(0, 0, 7); play.right(5); },
   }),
   new Challenge({
     id: 'run', number: 6, title: 'El monstruo corre', goal: 'Arrastrá «corre hacia» hasta el cuadradito, entre el monstruo y la estrella', emoji: '🏃',
@@ -275,11 +275,11 @@ const LADDER = [
       Challenge.rule(project, [drawings.kid, null, drawings.box], 7);
       Challenge.element(project, drawings.kid, 1, 3);
       Challenge.element(project, drawings.box, 2, 3);
-      Challenge.element(project, drawings.star, 5, 3);
+      Challenge.element(project, drawings.star, 6, 3);
     },
     isCompleted: (project, drawings) => Challenge.anyOnTopOf(project, drawings.box, drawings.star),
     hint: project => Challenge.ruleCellIsEmpty(project, 1, 7) ? { cell: Point.at(1, 7), selector: 'pushSymbol' } : { joystick: true },
-    solution: play => { play.drop('pushSymbol', 1, 7); play.right(3); },
+    solution: play => { play.drop('pushSymbol', 1, 7); play.right(4); },
   }),
   new Challenge({
     id: 'walls', number: 8, title: 'La pared', goal: 'Arrastrá «no puede pasar» hasta el cuadradito, entre el monstruo y la pared', emoji: '🧱',
@@ -575,11 +575,12 @@ const LADDER = [
       Challenge.rule(project, [drawings.kid, predefined.arrowKeysSymbol], 7);
       Challenge.element(project, drawings.kid, 2, 0);
       Challenge.element(project, drawings.box, 6, 2);
-      Challenge.element(project, drawings.star, 5, 2);
+      Challenge.element(project, drawings.star, 5, 4);
     },
-    isCompleted: (project, drawings) => !Challenge.ruleCellIsEmpty(project, 2, 3) && Challenge.anyOnTopOf(project, drawings.kid, drawings.star),
+    // Se gana cuando la caja llega a la estrella: hay que engancharla con «tira de» y llevarla.
+    isCompleted: (project, drawings) => !Challenge.ruleCellIsEmpty(project, 2, 3) && Challenge.anyOnTopOf(project, drawings.box, drawings.star),
     hint: project => Challenge.ruleCellIsEmpty(project, 2, 3) ? { cell: Point.at(2, 3), joystick: true } : { joystick: true },
-    solution: play => { play.down(2); play.right(3); },
+    solution: play => { play.down(2); play.right(4); play.down(2); play.left(1); play.down(1); },
   }),
 
   // ---------- Mundo 6: Naves y tiempo ----------

@@ -90,7 +90,7 @@ export const es = {
     "end.title": "¡Felicitaciones!",
     "end.text": "Ya entendiste los básico del Diálogo. Podés seguir con los proyectos, a través de los videotutoriales. El próximo paso es descargar Diálogo y luego el primer proyecto de Ajedrez.",
     "end.note": "Diálogo se instala en una computadora: desde el celular no vas a poder seguir.",
-    "end.download": "Bajar Diálogo en la computadora",
+    "end.download": "Paso 2: Bajar Diálogo en la computadora",
     "end.watch": "Clase 1: Ajedrez (video)",
     "end.later": "Ahora no",
     "color.white": "Blanco",
@@ -228,8 +228,8 @@ export const es = {
     },
     "rule-by-playing": {
       title: "Creá la regla jugando",
-      mission: "Armá una regla empujando símbolos y llegá a la estrella.",
-      steps: ["Empujá «tira de» entre los dos símbolos sueltos", "Ahora llevá al personaje hasta la caja y pasá por arriba de la estrella. La caja lo sigue"],
+      mission: "Armá la regla empujando símbolos y llevá la caja a la estrella.",
+      steps: ["Empujá «tira de» entre los dos símbolos sueltos", "Ahora llevá la caja hasta la estrella: la caja te sigue"],
       praise: "Armaste una regla sin sacar fichas de abajo: empujando símbolos por el tablero.",
     },
     "fire": {

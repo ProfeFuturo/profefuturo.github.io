@@ -97,7 +97,7 @@ export const pt = {
     "end.title": "Parabéns!",
     "end.text": "Você já entendeu o básico do Diálogo. Dá para seguir com os projetos pelos videotutoriais. O próximo passo é baixar o Diálogo e depois fazer o primeiro projeto de xadrez.",
     "end.note": "O Diálogo se instala num computador: pelo celular não dá para continuar.",
-    "end.download": "Baixar o Diálogo no computador",
+    "end.download": "Passo 2: Baixar o Diálogo no computador",
     "end.watch": "Aula 1: Xadrez (vídeo)",
     "end.later": "Agora não",
     "world.primeros": "Primeiros passos",
@@ -227,8 +227,8 @@ export const pt = {
     },
     "rule-by-playing": {
       title: "Crie a regra jogando",
-      mission: "Monte uma regra empurrando símbolos e chegue à estrela.",
-      steps: ["Empurre «puxa» entre os dois símbolos soltos", "Agora leve o personagem até a caixa e passe por cima da estrela. A caixa vai atrás"],
+      mission: "Monte a regra empurrando símbolos e leve a caixa até a estrela.",
+      steps: ["Empurre «puxa» entre os dois símbolos soltos", "Agora leve a caixa até a estrela: a caixa vai atrás de você"],
       praise: "Você montou uma regra sem pegar peças de baixo: empurrando símbolos pelo tabuleiro.",
     },
     "fire": {

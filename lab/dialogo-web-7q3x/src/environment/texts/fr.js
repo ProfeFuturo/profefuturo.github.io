@@ -97,7 +97,7 @@ export const fr = {
     "end.title": "Félicitations !",
     "end.text": "Tu comprends les bases de Diálogo. Tu peux continuer avec les projets grâce aux tutoriels vidéo. La prochaine étape : télécharger Diálogo, puis faire le premier projet d'échecs.",
     "end.note": "Diálogo s'installe sur un ordinateur : depuis le téléphone, tu ne pourras pas continuer.",
-    "end.download": "Télécharger Diálogo sur l'ordinateur",
+    "end.download": "Étape 2 : Télécharger Diálogo sur l'ordinateur",
     "end.watch": "Cours 1 : Échecs (vidéo)",
     "end.later": "Pas maintenant",
     "world.primeros": "Premiers pas",
@@ -227,8 +227,8 @@ export const fr = {
     },
     "rule-by-playing": {
       title: "Crée la règle en jouant",
-      mission: "Fais une règle en poussant des symboles et atteins l'étoile.",
-      steps: ["Pousse « tire » entre les deux symboles isolés", "Amène maintenant le personnage jusqu'à la caisse et passe au-dessus de l'étoile. La caisse le suit"],
+      mission: "Fais la règle en poussant des symboles et amène la caisse à l'étoile.",
+      steps: ["Pousse « tire » entre les deux symboles isolés", "Amène maintenant la caisse jusqu'à l'étoile : la caisse te suit"],
       praise: "Tu as fait une règle sans prendre de tuiles en bas : en poussant des symboles sur le plateau.",
     },
     "fire": {

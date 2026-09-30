@@ -97,7 +97,7 @@ export const zh = {
     "end.title": "恭喜你！",
     "end.text": "你已经懂得 Diálogo 的基础了。接着可以跟着视频教程继续做项目。下一步是下载 Diálogo，然后做第一个国际象棋项目。",
     "end.note": "Diálogo 要装在电脑上：用手机没法继续。",
-    "end.download": "在电脑上下载 Diálogo",
+    "end.download": "第二步：在电脑上下载 Diálogo",
     "end.watch": "第 1 课：国际象棋（视频）",
     "end.later": "现在不用",
     "world.primeros": "第一步",
@@ -227,8 +227,8 @@ export const zh = {
     },
     "rule-by-playing": {
       title: "边玩边做出规则",
-      mission: "推着符号做出一条规则，然后走到星星那里。",
-      steps: ["把“拉”推到两个散开的符号中间", "现在把角色带到箱子那里，并走过星星。箱子会跟着"],
+      mission: "推着符号做出规则，把箱子带到星星那里。",
+      steps: ["把“拉”推到两个散开的符号中间", "现在把箱子带到星星那里：箱子会跟着你"],
       praise: "你没有从下面取图块就做出了一条规则：在棋盘上推符号。",
     },
     "fire": {

@@ -40,7 +40,8 @@ export class ChallengeSession {
     // Primero el objetivo (qué queremos), después el paso (cómo se hace). Si el paso dice
     // casi lo mismo que el objetivo, no se repite: queda una sola línea.
     this.banner.innerHTML = '<span class="challenge-emoji">' + this.challenge.emoji + '</span>'
-      + '<span class="challenge-texts"><span class="challenge-mission">' + this.challenge.mission + '</span>'
+      + '<span class="challenge-texts"><span class="challenge-name">' + this.challenge.number + '. ' + this.challenge.title + '</span>'
+      + '<span class="challenge-mission">' + this.challenge.mission + '</span>'
       + '<span class="challenge-goal"></span></span>';
     const restart = document.createElement('button');
     restart.type = 'button';

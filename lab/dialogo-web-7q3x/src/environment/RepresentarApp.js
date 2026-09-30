@@ -271,8 +271,7 @@ export class RepresentarApp {
       if (!sameTab) { anchor.target = '_blank'; anchor.rel = 'noopener'; }
       anchor.textContent = label;
     };
-    link(T('end.download'), 'https://dialog.ar/', 'primary', true);     // el home, en la misma pestaña
-    link(T('end.watch'), 'https://youtu.be/CYuRk_dKHYg', 'secondary');
+    link(T('end.download'), 'https://dialog.ar/', 'primary', true);     // el sitio, en la misma pestaña
   }
 
   renderWorld(world, container) {

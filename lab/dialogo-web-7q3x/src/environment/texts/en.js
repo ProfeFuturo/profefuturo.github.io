@@ -90,7 +90,7 @@ export const en = {
     "end.title": "Congratulations!",
     "end.text": "You understand the basics of Diálogo now. You can go on with the projects through the video tutorials. The next step is to download Diálogo and then do the first chess project.",
     "end.note": "Diálogo runs on a computer: you cannot go on from the phone.",
-    "end.download": "Download Diálogo on a computer",
+    "end.download": "Step 2: Download Diálogo on a computer",
     "end.watch": "Class 1: Chess (video)",
     "end.later": "Not now",
     "color.white": "White",
@@ -228,8 +228,8 @@ export const en = {
     },
     "rule-by-playing": {
       title: "Make the rule by playing",
-      mission: "Make a rule by pushing symbols and reach the star.",
-      steps: ["Push \"pulls\" between the two loose symbols", "Now take the character to the box and go over the star. The box follows"],
+      mission: "Make the rule by pushing symbols and take the box to the star.",
+      steps: ["Push \"pulls\" between the two loose symbols", "Now take the box to the star: the box follows you"],
       praise: "You made a rule without taking tiles from the bar: by pushing symbols around the board.",
     },
     "fire": {

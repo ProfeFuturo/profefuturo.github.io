@@ -97,7 +97,7 @@ export const de = {
     "end.title": "Herzlichen Glückwunsch!",
     "end.text": "Du verstehst jetzt die Grundlagen von Diálogo. Mit den Video-Tutorials kannst du bei den Projekten weitermachen. Der nächste Schritt: Diálogo herunterladen und dann das erste Schachprojekt bauen.",
     "end.note": "Diálogo läuft auf einem Computer: vom Handy aus geht es nicht weiter.",
-    "end.download": "Diálogo auf dem Computer laden",
+    "end.download": "Schritt 2: Diálogo auf dem Computer laden",
     "end.watch": "Kurs 1: Schach (Video)",
     "end.later": "Jetzt nicht",
     "world.primeros": "Erste Schritte",
@@ -227,8 +227,8 @@ export const de = {
     },
     "rule-by-playing": {
       title: "Bau die Regel beim Spielen",
-      mission: "Bau eine Regel, indem du Symbole schiebst, und erreich den Stern.",
-      steps: ["Schieb „zieht“ zwischen die beiden losen Symbole", "Bring jetzt die Figur zur Kiste und geh über den Stern. Die Kiste folgt"],
+      mission: "Bau die Regel, indem du Symbole schiebst, und bring die Kiste zum Stern.",
+      steps: ["Schieb „zieht“ zwischen die beiden losen Symbole", "Bring jetzt die Kiste zum Stern: die Kiste folgt dir"],
       praise: "Du hast eine Regel gebaut, ohne Steine von unten zu nehmen: indem du Symbole über das Brett geschoben hast.",
     },
     "fire": {

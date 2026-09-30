@@ -97,7 +97,7 @@ export const it = {
     "end.title": "Congratulazioni!",
     "end.text": "Hai capito le basi di Diálogo. Puoi continuare con i progetti seguendo i videotutorial. Il prossimo passo è scaricare Diálogo e poi fare il primo progetto di scacchi.",
     "end.note": "Diálogo si installa su un computer: dal telefono non si può continuare.",
-    "end.download": "Scarica Diálogo sul computer",
+    "end.download": "Passo 2: Scarica Diálogo sul computer",
     "end.watch": "Lezione 1: Scacchi (video)",
     "end.later": "Non adesso",
     "world.primeros": "Primi passi",
@@ -227,8 +227,8 @@ export const it = {
     },
     "rule-by-playing": {
       title: "Crea la regola giocando",
-      mission: "Costruisci una regola spingendo simboli e arriva alla stella.",
-      steps: ["Spingi «tira» tra i due simboli sciolti", "Adesso porta il personaggio fino alla scatola e passa sopra la stella. La scatola lo segue"],
+      mission: "Costruisci la regola spingendo simboli e porta la scatola alla stella.",
+      steps: ["Spingi «tira» tra i due simboli sciolti", "Adesso porta la scatola fino alla stella: la scatola ti segue"],
       praise: "Hai costruito una regola senza prendere pezzi dalla barra: spingendo simboli sulla scacchiera.",
     },
     "fire": {
