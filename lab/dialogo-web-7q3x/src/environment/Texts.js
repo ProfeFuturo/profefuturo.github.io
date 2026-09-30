@@ -23,6 +23,13 @@ export class Texts {
 
   static of(code) { return LANGUAGES[code] || LANGUAGES.en; }
 
+  // El sitio de Diálogo en el idioma que el chico está usando (dialog.ar/es/, /fr/, /ja/…;
+  // el inglés vive en la raíz).
+  static siteUrl() {
+    const code = Texts.language();
+    return code === 'en' ? 'https://dialog.ar/' : 'https://dialog.ar/' + code + '/';
+  }
+
   static languageCodes() { return Object.keys(LANGUAGES); }
 
   static at(key) {

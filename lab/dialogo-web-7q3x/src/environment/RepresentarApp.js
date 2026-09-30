@@ -1,4 +1,4 @@
-import { T } from './Texts.js';
+import { T, Texts } from './Texts.js';
 import { Icons } from './Icons.js';
 import { Feed } from './Feed.js';
 import { Sheet } from './Sheet.js';
@@ -271,7 +271,7 @@ export class RepresentarApp {
       if (!sameTab) { anchor.target = '_blank'; anchor.rel = 'noopener'; }
       anchor.textContent = label;
     };
-    link(T('end.download'), 'https://dialog.ar/', 'primary', true);     // el sitio, en la misma pestaña
+    link(T('end.download'), Texts.siteUrl(), 'primary', true);     // el sitio, en su idioma y en la misma pestaña
   }
 
   renderWorld(world, container) {
