@@ -420,21 +420,21 @@ const LADDER = [
     ],
     praise: 'El comodín vale por cualquier cosa: ni el fantasma pasa la pared. Si te toca, volvés a la puerta.',
     symbols: ['jokerWithBalls'], slots: [Point.at(0, 7)],
-    // Sin la regla, el fantasma sale del corral, toca al personaje y lo manda de vuelta a la puerta.
+    // La pared cruza todo el tablero: el fantasma vive en las dos filas de arriba. Sin la regla
+    // baja, se come la estrella y ya no se puede ganar: hay que poner el comodín antes de moverse.
     build(project, drawings, predefined) {
       Challenge.rule(project, [drawings.kid, predefined.arrowKeysSymbol], 4);
-      Challenge.rule(project, [drawings.ghost, predefined.runSymbol, drawings.kid], 5);
-      Challenge.rule(project, [drawings.kid, predefined.collisionSymbol, drawings.ghost, predefined.pointsSymbol, drawings.kid, predefined.teleportSymbol, drawings.door], 6);
+      Challenge.rule(project, [drawings.ghost, predefined.runSymbol, drawings.star], 5);
+      Challenge.rule(project, [drawings.ghost, predefined.collisionSymbol, drawings.star, predefined.pointsSymbol, drawings.star, predefined.teleportSymbol, predefined.blackHoleSymbol], 6);
       Challenge.rule(project, [null, predefined.canNotTranspassSymbol, drawings.wall], 7);
-      for (const [column, row] of [[3, 0], [3, 1], [3, 2], [4, 0], [4, 2], [5, 0], [5, 1], [5, 2]]) Challenge.element(project, drawings.wall, column, row);
-      Challenge.element(project, drawings.ghost, 4, 1);
-      Challenge.element(project, drawings.door, 0, 3);
+      for (let column = 0; column < COLUMNS; column++) Challenge.element(project, drawings.wall, column, 2);
+      Challenge.element(project, drawings.ghost, 3, 0);
       Challenge.element(project, drawings.kid, 0, 3);
-      Challenge.element(project, drawings.star, 6, 3);
+      Challenge.element(project, drawings.star, 5, 3);
     },
     isCompleted: (project, drawings) => !Challenge.ruleCellIsEmpty(project, 0, 7) && Challenge.anyOnTopOf(project, drawings.kid, drawings.star),
     hint: project => Challenge.ruleCellIsEmpty(project, 0, 7) ? { cell: Point.at(0, 7), selector: 'jokerWithBalls' } : { joystick: true },
-    solution: play => { play.drop('jokerWithBalls', 0, 7); play.right(6); },
+    solution: play => { play.drop('jokerWithBalls', 0, 7); play.right(5); },
   }),
 
   // ---------- Mundo 3: Categorías ----------
