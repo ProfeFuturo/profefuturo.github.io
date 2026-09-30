@@ -243,15 +243,6 @@ export class RepresentarApp {
       button.addEventListener('click', () => this.openChallenge(next));
     }
     for (const world of Challenges.worlds()) this.renderWorld(world, this.playList);
-    const builds = this.element('div', 'world-heading' + (this.progress.buildsUnlocked() ? '' : ' locked'), this.playList);
-    builds.innerHTML = '<span class="world-emoji">🛠️</span><span class="world-title">' + T('play.builds') + '</span><span class="world-count">' + (this.progress.buildsUnlocked() ? Builds.all().filter(build => this.progress.isCompleted(build)).length + '/' + Builds.all().length : Icons.svg('lock')) + '</span>';
-    if (this.progress.buildsUnlocked()) {
-      const ladder = this.element('div', 'ladder', this.playList);
-      for (const build of Builds.all()) this.renderStep(build, ladder);
-    } else this.element('div', 'locked-hint', this.playList).textContent = T('play.locked');
-    const free = this.element('div', 'world-heading' + (this.progress.freeUnlocked() ? '' : ' locked'), this.playList);
-    free.innerHTML = '<span class="world-emoji">🎨</span><span class="world-title">' + T('play.free') + '</span><span class="world-count">' + (this.progress.freeUnlocked() ? Icons.svg('check') : Icons.svg('lock')) + '</span>';
-    if (!this.progress.freeUnlocked()) this.element('div', 'locked-hint', this.playList).textContent = T('play.freeHint');
     const startOver = this.element('button', 'start-over', this.playList, Icons.svg('reset', { size: 16 }) + '<span>' + T('play.startOver') + '</span>');
     startOver.type = 'button';
     startOver.addEventListener('click', () => { if (this.confirmStartOver()) this.startOver(); });
@@ -272,7 +263,7 @@ export class RepresentarApp {
   // Terminado el tutorial: bajar Diálogo y seguir con la Clase 1 (Ajedrez), en video.
   renderEnd(container) {
     const card = this.element('div', 'end-card', container);
-    card.innerHTML = '<span class="end-emoji">🎓</span><b>' + T('end.title') + '</b><span>' + T('end.text') + '</span>';
+    card.innerHTML = '<span class="end-emoji">🎓</span><b>' + T('end.title') + '</b><span>' + T('end.text') + '</span><span class="end-note">' + T('end.note') + '</span>';
     const actions = this.element('div', 'end-actions', card);
     const link = (label, href, className, sameTab = false) => {
       const anchor = this.element('a', 'end-link ' + className, actions);

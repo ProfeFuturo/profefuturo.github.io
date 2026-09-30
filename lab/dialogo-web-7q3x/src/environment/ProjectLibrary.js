@@ -98,7 +98,7 @@ export class ProjectLibrary {
   async remix(entry) {
     await this.ensureBytesOf(entry);
     const project = await this.projectFromBytes(entry.bytes);
-    project.setProjectName(T('myVersionOf') + this.titleOf(entry));
+    project.setProjectName(T('myVersionOf') + ' ' + this.titleOf(entry));
     return project;
   }
 

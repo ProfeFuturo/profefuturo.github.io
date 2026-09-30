@@ -651,7 +651,28 @@ const LADDER = [
 
   // ---------- Mundo 8: Puntos ----------
   new Challenge({
-    id: 'score', number: 24, world: 'puntos', title: 'Puntos', emoji: '🏆',
+    id: 'add-zero', number: 24, world: 'numeros', title: 'Sumar cero', emoji: '➕',
+    mission: 'Enseñale a Diálogo a sumar cero.',
+    goal: 'Poné los ojitos al lado del 2 de arriba',
+    steps: [
+      { text: 'Poné los ojitos al lado del 2 de arriba', done: project => !Challenge.ruleCellIsEmpty(project, 3, 2) },
+      { text: 'Ahora arrastrá «número» hasta el cuadradito del final de la regla', done: null },
+    ],
+    praise: 'Cero más un número es ese número. Con esa regla empieza la suma: es el caso base.',
+    symbols: ['replSymbol'], slots: [Point.at(4, 7), Point.at(3, 2)],
+    build(project, drawings, predefined) {
+      project.receiveDrawnSymbol(drawings.number);
+      Challenge.rule(project, [drawings.zero, drawings.plus, drawings.two], 2);
+      Challenge.rule(project, [drawings.one, predefined.categorizeSymbol, drawings.number], 5);
+      Challenge.rule(project, [drawings.two, predefined.categorizeSymbol, drawings.number], 6);
+      Challenge.rule(project, [drawings.zero, drawings.plus, drawings.number, predefined.pointsSymbol, null], 7);
+    },
+    isCompleted: (project, drawings) => project.boardModel.symbolsInPosition(Point.at(4, 2)).some(item => item.visualSymbolAssociated.equals(drawings.two)),
+    hint: (project, drawings) => Challenge.ruleCellIsEmpty(project, 3, 2) ? { cell: Point.at(3, 2), selector: 'replSymbol' } : { cell: Point.at(4, 7), drawing: drawings.number },
+    solution: play => { play.drop('replSymbol', 3, 2); play.dropDrawing('number', 4, 7); },
+  }),
+  new Challenge({
+    id: 'score', number: 25, world: 'puntos', title: 'Puntos', emoji: '🏆',
     mission: 'Hacé que los puntos suban cuando comés una estrella.',
     goal: 'Arrastrá «apunta a» hasta el cuadradito del final de la regla',
     steps: [
@@ -681,60 +702,10 @@ const LADDER = [
     hint: (project, drawings) => Challenge.ruleCellIsEmpty(project, 6, 7) ? { cell: Point.at(6, 7), drawing: drawings.pin } : Challenge.ruleCellIsEmpty(project, 5, 1) ? { cell: Point.at(5, 1), selector: 'replSymbol' } : { joystick: true },
     solution: play => { play.dropDrawing('pin', 6, 7); play.drop('replSymbol', 5, 1); play.right(4); play.steps(1); },
   }),
-  new Challenge({
-    id: 'add-zero', number: 25, world: 'numeros', title: 'Sumar cero', emoji: '➕',
-    mission: 'Enseñale a Diálogo a sumar cero.',
-    goal: 'Poné los ojitos al lado del 2 de arriba',
-    steps: [
-      { text: 'Poné los ojitos al lado del 2 de arriba', done: project => !Challenge.ruleCellIsEmpty(project, 3, 2) },
-      { text: 'Ahora arrastrá «número» hasta el cuadradito del final de la regla', done: null },
-    ],
-    praise: 'Cero más un número es ese número. Con esa regla empieza la suma: es el caso base.',
-    symbols: ['replSymbol'], slots: [Point.at(4, 7), Point.at(3, 2)],
-    build(project, drawings, predefined) {
-      project.receiveDrawnSymbol(drawings.number);
-      Challenge.rule(project, [drawings.zero, drawings.plus, drawings.two], 2);
-      Challenge.rule(project, [drawings.one, predefined.categorizeSymbol, drawings.number], 5);
-      Challenge.rule(project, [drawings.two, predefined.categorizeSymbol, drawings.number], 6);
-      Challenge.rule(project, [drawings.zero, drawings.plus, drawings.number, predefined.pointsSymbol, null], 7);
-    },
-    isCompleted: (project, drawings) => project.boardModel.symbolsInPosition(Point.at(4, 2)).some(item => item.visualSymbolAssociated.equals(drawings.two)),
-    hint: (project, drawings) => Challenge.ruleCellIsEmpty(project, 3, 2) ? { cell: Point.at(3, 2), selector: 'replSymbol' } : { cell: Point.at(4, 7), drawing: drawings.number },
-    solution: play => { play.drop('replSymbol', 3, 2); play.dropDrawing('number', 4, 7); },
-  }),
 ];
 
-// Los juegos del curso, en versión chica y guiada. Cada uno enseña la idea de su clase con el
-// menor tablero posible; el chico dibuja sus piezas y arma las reglas con toda la bandeja.
-const BUILDS = [
-  new Challenge({
-    id: 'build-chess', number: 17, world: 'builds', kind: 'build', columns: 8, rows: 12, emoji: '♟️',
-    title: 'Ajedrez',
-    goal: 'Tocá el lápiz y dibujá una pieza negra',
-    steps: [
-      { text: 'Tocá el lápiz y dibujá una pieza negra', done: project => project.drawingsMadeByUser().length >= 1 },
-      { text: 'Ahora dibujá una pieza blanca', done: project => project.drawingsMadeByUser().length >= 2 },
-      { text: 'Poné una pieza negra y una blanca en el tablero', done: project => { const [black, white] = project.drawingsMadeByUser(); return black && white && Challenge.elementsOf(project, black).length > 0 && (Challenge.elementsOf(project, white).length > 0 || Challenge.hasRule(project, rule => rule.some(symbol => symbol.buildingSelector === 'collisionSymbol'))); } },
-      { text: 'Armá la regla: pieza negra · flechas', done: project => project.boardModel.itemsMovableByArrows().length > 0 },
-      { text: 'Armá la regla de comer: negra · choca · blanca · se transforma en · blanca · teletransportar · agujero negro', done: project => Challenge.hasRule(project, rule => rule.length >= 7 && rule.some(symbol => symbol.buildingSelector === 'collisionSymbol') && rule.some(symbol => symbol.buildingSelector === 'blackHoleSymbol')) },
-      { text: 'Comé la pieza blanca', done: null },
-    ],
-    praise: 'Armaste un ajedrez chiquito: tus piezas, tus reglas. El de verdad agrega categorías: «pieza negra» para todas las negras.',
-    symbols: 'all', pencil: true,
-    build() {},
-    isCompleted: project => {
-      const drawings = project.drawingsMadeByUser();
-      return drawings.length >= 2 && Challenge.hasRule(project, rule => rule.some(symbol => symbol.buildingSelector === 'collisionSymbol'))
-        && Challenge.elementsOf(project, drawings[0]).length > 0 && Challenge.elementsOf(project, drawings[1]).length === 0 && project.boardModel.itemsMovableByArrows().length > 0;
-    },
-    hint: project => project.drawingsMadeByUser().length < 2 ? { pencil: true } : project.boardModel.itemsMovableByArrows().length === 0 ? { selector: 'arrowKeysSymbol' } : { joystick: true },
-    solution: play => {
-      play.draw('pawn'); play.draw('rook');
-      play.dropUserDrawing(0, 1, 1); play.dropUserDrawing(1, 3, 1);
-      play.dropUserDrawing(0, 0, 9); play.drop('arrowKeysSymbol', 1, 9);
-      play.dropUserDrawing(0, 0, 10); play.drop('collisionSymbol', 1, 10); play.dropUserDrawing(1, 2, 10); play.drop('pointsSymbol', 3, 10); play.dropUserDrawing(1, 4, 10); play.drop('teleportSymbol', 5, 10); play.drop('blackHoleSymbol', 6, 10);
-      play.right(2);
-    },
-  }),
-];
+// Armar los juegos del curso quedó afuera del tutorial: se hacen con Diálogo en la computadora,
+// siguiendo los videos. La lista queda vacía a propósito.
+const BUILDS = [];
+
 

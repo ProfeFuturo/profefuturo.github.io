@@ -349,3 +349,8 @@ a.success-button { text-decoration: none; }
 .tray-container.with-space .joystick-key.space .icon { width: 18px; height: 18px; }
 .joystick-key.space .space-label { display: none; font-size: 13px; font-weight: 700; }
 .tray-container.with-space .joystick-key.space .space-label { display: inline; }
+/* la tarjeta final: el botón de bajar Diálogo lleva un texto largo, y la aclaración del celular */
+.success-note { font-size: 13px; font-weight: 700; color: var(--accent); text-wrap: balance; margin-top: -2px; }
+.end-note { font-size: 13px; font-weight: 700; opacity: 0.95; }
+.success-button.download-link { font-size: 15px; height: 48px; padding: 0 14px; }
+@container (min-width: 600px) { .success-button.download-link { font-size: 14px; height: 44px; } }

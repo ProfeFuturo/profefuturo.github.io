@@ -137,7 +137,7 @@ export class Feed {
     this.library.projectOf(entry).then(project => {
       state.view = new PreviewView(project, canvas, { maxCellFactor: 1.4, minCell: 34 * (window.devicePixelRatio || 1) });
       this.layoutPost(state);
-    }).catch(error => { console.error(error); title.textContent = T('error.openNamed') + this.library.titleOf(entry); });
+    }).catch(error => { console.error(error); title.textContent = T('error.openNamed') + ' ' + this.library.titleOf(entry); });
     return post;
   }
 

@@ -364,7 +364,8 @@ export class RepresentarVisualEnvironment {
     const overlay = this.element('div', 'challenge-success', this.root);
     overlay.setAttribute('role', 'dialog');
     const last = next === null && challenge.kind === 'challenge';
-    overlay.innerHTML = '<div class="success-card"><div class="success-medal">' + (last ? '🎓' : challenge.emoji) + '</div><div class="success-title">' + (last ? T('end.title') : T('success.title')) + '</div><div class="success-subtitle">' + (last ? T('end.text') : (challenge.praise || challenge.title)) + '</div><div class="success-actions"></div></div>';
+    overlay.innerHTML = '<div class="success-card"><div class="success-medal">' + (last ? '🎓' : challenge.emoji) + '</div><div class="success-title">' + (last ? T('end.title') : T('success.title')) + '</div><div class="success-subtitle">' + (last ? T('end.text') : (challenge.praise || challenge.title)) + '</div>'
+      + (last ? '<div class="success-note">' + T('end.note') + '</div>' : '') + '<div class="success-actions"></div></div>';
     const actions = overlay.querySelector('.success-actions');
     const button = (label, iconName, action, className) => {
       const created = this.element('button', 'success-button ' + className, actions, Icons.svg(iconName) + '<span>' + label + '</span>');
@@ -398,7 +399,7 @@ export class RepresentarVisualEnvironment {
     this.endSession();
     project.challenge = null;
     project.availableSymbols = null;
-    project.setProjectName(project.projectName + T('mineSuffix'));
+    project.setProjectName(project.projectName + ' ' + T('mineSuffix'));
     this.titleText.value = project.projectName;
     this.tray.rebuild();
     this.markDirty();
