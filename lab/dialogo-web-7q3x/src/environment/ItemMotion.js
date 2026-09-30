@@ -2,7 +2,7 @@
 // vista desliza cada ítem hasta su nueva celda (un saltito corto) y hace aparecer los nuevos
 // con un "pop". Los teleports (más de dos celdas) no se deslizan: aparecen en destino.
 export class ItemMotion {
-  constructor({ clock = () => (typeof performance !== 'undefined' ? performance.now() : Date.now()), slideMs = 90, popMs = 160 } = {}) {
+  constructor({ clock = () => (typeof performance !== 'undefined' ? performance.now() : Date.now()), slideMs = 150, popMs = 160 } = {}) {
     this.clock = clock;
     this.slideMs = slideMs;
     this.popMs = popMs;

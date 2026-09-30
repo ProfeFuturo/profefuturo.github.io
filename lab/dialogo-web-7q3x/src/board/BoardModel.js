@@ -23,6 +23,8 @@ export class BoardModel {
     this.columns = columns;
     this.rows = rows;
     this.areaLocked = false;             // un desafío: el área de juego no crece con la pantalla (nadie se escapa por afuera)
+    this.runEverySteps = 1;              // cada cuántos pasos avanza lo que corre solo (la vista lo pone más lento)
+    this.runCountdown = 0;
     this.random = random;
     this.boardView = new NullBoardView();
     this.topicName = 'Board';
@@ -953,6 +955,10 @@ export class BoardModel {
   // --- correr ---
 
   refreshRunningElementsOnBoard() {
+    if (this.runEverySteps > 1) {
+      this.runCountdown = (this.runCountdown + 1) % this.runEverySteps;
+      if (this.runCountdown !== 0) return;
+    }
     for (const element of this.zOrder.slice()) {
       if (!element.consideredElement()) continue;
       const sentence = Sentence.of(this.symbolRepresenting(element), 'self', 'drive', 'action');

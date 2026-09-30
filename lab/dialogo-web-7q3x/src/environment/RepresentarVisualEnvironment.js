@@ -16,6 +16,7 @@ import { RepresentarVisualExporter } from '../io/RepresentarVisualExporter.js';
 import { dictionaryAt } from '../io/LanguageProvider.js';
 
 const STEP_INTERVAL_MS = 100;
+const RUN_EVERY_STEPS = 3;              // un personaje que corre solo avanza una celda cada 300 ms
 const AUTOSAVE_MS = 1500;
 
 // El editor de un proyecto (lo que en Cuis era la ventana RepresentarVisualEnvironment):
@@ -208,6 +209,7 @@ export class RepresentarVisualEnvironment {
     // En un celular, celdas más chicas para que entre más tablero.
     const side = RepresentarVisualEnvironment.sideOfSymbolsOnEnvironmentPalet();
     if (project.boardModel.gridSize > side + 8 && project.boardModel.items().length > 0) project.boardModel.changeGridSizeTo(side);
+    project.boardModel.runEverySteps = RUN_EVERY_STEPS;      // lo que corre solo, despacio y a la vista
     this.boardView = new BoardView(this, project, this.boardContainer, this.dragController);
     this.tray.bind(project);
     this.paused = false;

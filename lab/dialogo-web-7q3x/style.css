@@ -307,8 +307,9 @@ img { max-width: 100%; }
 button.world-heading { width: 100%; border: none; background: none; font-family: var(--font); color: var(--ink); cursor: pointer; text-align: left; }
 button.world-heading .icon { color: var(--muted); margin-left: 6px; }
 button.world-heading .world-count { margin-left: auto; }
-.board-container.arena { display: flex; align-items: flex-end; justify-content: center; background: #eceef1; }   /* en el celular, las reglas pegadas a la bandeja */
-.board-container.arena .board-canvas { border-radius: 12px; box-shadow: var(--shadow-s); }
+/* el área de juego de un desafío: tablero blanco liso, sin marco ni sombra (como en Diálogo) */
+.board-container.arena { display: flex; align-items: flex-end; justify-content: center; background: white; }
+.board-container.arena .board-canvas { border-radius: 0; box-shadow: none; }
 .joystick-key.go.unused { visibility: hidden; }              /* el centro queda vacío cuando Enter no hace nada */
 /* el joystick dentro de la barra de fichas (celular): a la derecha, al lado de las fichas, nunca encima */
 .tray-joysticks { display: contents; }
