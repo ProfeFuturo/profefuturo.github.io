@@ -41,10 +41,9 @@ export class Progress {
 
   ladderDone() { return Challenges.all().every(challenge => this.completed.has(challenge.id)); }
   worldDone(world) { const inWorld = Challenges.inWorld(world.id); return inWorld.length > 0 && inWorld.every(challenge => this.completed.has(challenge.id)); }
-  buildsUnlocked() { return this.ladderDone(); }
-  buildsDone() { return Builds.all().every(build => this.completed.has(build.id)); }
-  freeUnlocked() { return this.forcedFree || (this.ladderDone() && this.buildsDone()); }
-  phase() { return !this.ladderDone() ? 'ladder' : !this.buildsDone() && !this.forcedFree ? 'builds' : 'free'; }
+  // La creación libre no es parte del tutorial: sólo se enciende a mano (docentes y pruebas).
+  freeUnlocked() { return this.forcedFree; }
+  phase() { return this.forcedFree ? 'free' : 'ladder'; }
 
   // Para docentes y pruebas: destrabar la creación libre sin pasar por todo (?free=1).
   unlockFree() { this.forcedFree = true; try { if (this.storage !== null) this.storage.setItem('representar.free', '1'); } catch (error) { /* sin storage */ } for (const listener of this.listeners) listener(null); }
