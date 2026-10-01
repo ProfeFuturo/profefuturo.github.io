@@ -5,6 +5,9 @@
   if (!lecciones.length) return;
 
   var lang = (document.documentElement.lang || "en").slice(0, 2);
+  // Código de la pista de subtítulos subida a YouTube, que no siempre es el del
+  // idioma: el español está subido como es-419. Viene del JSON de cada idioma.
+  var ccLang = document.documentElement.getAttribute("data-cc-lang") || lang;
 
   function caja(d) { return d.querySelector(".leccion-video"); }
 
@@ -16,7 +19,8 @@
     var titulo = d.querySelector("summary h3, summary");
     var iframe = document.createElement("iframe");
     iframe.src = "https://www.youtube.com/embed/" + id +
-      "?autoplay=1&rel=0&hl=" + lang;
+      "?autoplay=1&rel=0&hl=" + lang +
+      "&cc_load_policy=1&cc_lang_pref=" + encodeURIComponent(ccLang);
     iframe.title = titulo ? titulo.textContent.trim() : "Diálogo";
     iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
     iframe.setAttribute("allowfullscreen", "");
