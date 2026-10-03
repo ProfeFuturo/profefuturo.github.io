@@ -2,6 +2,7 @@
   "nombre": "العربية",
   "og_locale": "ar_AR",
   "cc_lang": "ar",
+  "cc_lang_charlas": "ar",
   "dir": "rtl",
   "step_format": "الخطوة {n}",
   "ids": {

@@ -2,6 +2,7 @@
   "nombre": "Español",
   "og_locale": "es_AR",
   "cc_lang": "es-419",
+  "cc_lang_charlas": "es",
   "dir": "ltr",
   "ids": {
     "descarga": "descargar",

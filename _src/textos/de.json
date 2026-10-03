@@ -2,6 +2,7 @@
   "nombre": "Deutsch",
   "og_locale": "de_DE",
   "cc_lang": "de",
+  "cc_lang_charlas": "de",
   "dir": "ltr",
   "ids": {
     "descarga": "download",

@@ -2,6 +2,7 @@
   "nombre": "हिन्दी",
   "og_locale": "hi_IN",
   "cc_lang": "hi",
+  "cc_lang_charlas": "hi",
   "dir": "ltr",
   "step_format": "चरण {n}",
   "ids": {
