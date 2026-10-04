@@ -176,8 +176,12 @@
       <p class="mt-2 text-sm text-gray-600">{{affiliation}}</p>
     </section>
 
-    <!-- Nerdearla. cc_lang_charlas y no cc_lang: el español de estas dos está
-         cargado en YouTube como «es» y el de las clases como «es-419». -->
+    <!-- Nerdearla. La Falsa Historia usa cc_lang como las clases, porque tiene
+         el español cargado como «es-419». La Alucinante Aventura lo tiene como
+         «es» a secas y por eso va con cc_lang_aventura: si se le pidiera
+         «es-419» no coincidiría, y si a la otra se le pidiera «es» YouTube le
+         daría la pista automática, que también se llama «es». Cuando se
+         resuba el español de la Aventura como es-419, esta variable sobra. -->
     <section class="animate-fade-in mt-16">
       <h2 class="text-2xl font-semibold text-violeta text-center mb-6">🎤 {{shows_h2}}</h2>
       <p class="text-center text-gray-700 mb-8">{{shows_p}}</p>
@@ -186,7 +190,7 @@
           <iframe
             class="w-full h-full rounded-xl shadow-lg"
             style="aspect-ratio: 16/9; min-height: 250px;"
-            src="https://www.youtube.com/embed/Iv3o0Ck2utU?cc_load_policy=1&amp;cc_lang_pref={{cc_lang_charlas}}&amp;hl={{lang}}"
+            src="https://www.youtube.com/embed/Iv3o0Ck2utU?cc_load_policy=1&amp;cc_lang_pref={{cc_lang_aventura}}&amp;hl={{lang}}"
             title="Diálogo, Nerdearla 1"
             frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -197,7 +201,7 @@
           <iframe
             class="w-full h-full rounded-xl shadow-lg"
             style="aspect-ratio: 16/9; min-height: 250px;"
-            src="https://www.youtube.com/embed/w2mqMSp40Hk?cc_load_policy=1&amp;cc_lang_pref={{cc_lang_charlas}}&amp;hl={{lang}}"
+            src="https://www.youtube.com/embed/w2mqMSp40Hk?cc_load_policy=1&amp;cc_lang_pref={{cc_lang}}&amp;hl={{lang}}"
             title="Diálogo, Nerdearla 2"
             frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
