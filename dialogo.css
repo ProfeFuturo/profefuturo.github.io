@@ -78,6 +78,19 @@
     .leccion-inline > summary::after { content: " \25B8"; }
     .leccion-inline[open] > summary::after { content: " \25BE"; }
 
+    /* Las clases que tienen audio doblado lo avisan en la tarjeta */
+    .insignia-audio {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      line-height: 1.4;
+      padding: 0.15rem 0.65rem;
+      border-radius: 9999px;
+      color: var(--dialogo-color-link);
+      background-color: #E6F7FC;
+      border: 1px solid var(--dialogo-color-acento);
+    }
+
     .leccion-video {
       position: relative;
       aspect-ratio: 16 / 9;

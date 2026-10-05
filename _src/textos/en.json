@@ -44,6 +44,8 @@
   "install_help": "Trouble installing? There is a video that walks you through it",
   "install_help_note": "Installing Diálogo on Windows, Mac or Linux. In Spanish.",
   "watch_youtube": "Watch on YouTube",
+  "dub_badge": "🎧 English audio",
+  "dub_help": "This class has an English audio track. If it starts in Spanish, open the player settings (the gear) and pick Audio track, English.",
   "online_note": "Or try the <a href=\"https://www.smalltalkjsvm.com.ar/#zip=https://dialog.ar/Dialogo.zip\" target=\"_blank\" rel=\"noopener\" class=\"text-link underline\">online version</a>: it runs the full Diálogo in the browser, with no installation, and can save your files, but it is slow and downloads about 30 MB the first time. For real use, the installed version is much better, and to simply see what Diálogo is about, the <a href=\"/lab/dialogo-web-7q3x/?lang=en\" class=\"text-link underline\">introduction by playing</a> is faster.",
   "dev_note": "Diálogo is under active development. Bug reports and classroom stories are welcome at <a href=\"mailto:agustin@dialog.ar\" class=\"text-link underline\">agustin@dialog.ar</a>.",
   "step3_h2": "A sequence of seven activities",

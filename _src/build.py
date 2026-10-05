@@ -18,14 +18,17 @@ PREDETERMINADO = "en"
 IDIOMAS = ["es", "en", "fr", "de", "pt", "it", "zh", "hi", "ja", "ar"]
 
 # Las clases son las mismas en todos los idiomas: solo cambian titulo y texto.
+# El tercer campo dice si el video tiene pista de audio doblada al ingles en
+# YouTube. No se puede elegir la pista desde el embed, asi que lo unico que se
+# puede hacer es avisar que esta y como cambiarla.
 VIDEOS = [
-    ("sQ5pWzz7so8", "♟️"),
-    ("Jw-Bgbqa2kQ", "🐍"),
-    ("Re9i-SOailU", "👻"),
-    ("JM29V-XCKwM", "🧠"),
-    ("DXOJP-63LMo", "🚀"),
-    ("00bAUVMoFgU", "🔢"),
-    ("afCA6EIdwWs", "🏁"),
+    ("sQ5pWzz7so8", "♟️", True),
+    ("Jw-Bgbqa2kQ", "🐍", True),
+    ("Re9i-SOailU", "👻", True),
+    ("JM29V-XCKwM", "🧠", True),
+    ("DXOJP-63LMo", "🚀", False),
+    ("00bAUVMoFgU", "🔢", False),
+    ("afCA6EIdwWs", "🏁", False),
 ]
 
 SCRIPT_IDIOMA = '''
@@ -101,19 +104,27 @@ def lista(items):
     return "\n".join('          <li>%s</li>' % item for item in items)
 
 def clases(t):
+    # El aviso del doblaje solo sale donde el JSON del idioma lo trae.
+    insignia = t.get("dub_badge", "")
+    ayuda = t.get("dub_help", "")
     salida = []
-    for (video, emoji), clase in zip(VIDEOS, t["clases"]):
+    for (video, emoji, doblado), clase in zip(VIDEOS, t["clases"]):
+        marca = ('\n            <p class="mt-2"><span class="insignia-audio">%s</span></p>' % insignia
+                 if doblado and insignia else "")
+        nota = ('<p class="text-sm text-gray-600 mb-3">%s</p>\n            ' % ayuda
+                if doblado and ayuda else "")
         salida.append('''        <details class="leccion leccion-card bg-white shadow-md rounded-2xl border-l-4 border-indigo-500 transition hover:shadow-xl" data-video="%s">
           <summary class="p-6">
             <h3 class="font-semibold text-xl mb-1 text-subtitulo">%s %s</h3>
-            <p class="text-gray-700">%s</p>
+            <p class="text-gray-700">%s</p>%s
           </summary>
           <div class="px-6 pb-6">
-            <div class="leccion-video">
+            %s<div class="leccion-video">
               <a href="https://youtu.be/%s" target="_blank" rel="noopener" class="text-link underline">%s</a>
             </div>
           </div>
-        </details>''' % (video, emoji, clase["titulo"], clase["texto"], video, t["watch_youtube"]))
+        </details>''' % (video, emoji, clase["titulo"], clase["texto"], marca,
+                        nota, video, t["watch_youtube"]))
     return "\n".join(salida)
 
 def construir(codigo, textos):
