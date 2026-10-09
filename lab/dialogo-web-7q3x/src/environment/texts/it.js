@@ -186,7 +186,7 @@ export const it = {
     "pull": {
       title: "Tirare le cose",
       mission: "Porta la scatola con te fino alla stella.",
-      steps: ["Trascina «tira» tra il simbolo del personaggio e quello della scatola", "Porta il personaggio alla stella. La scatola lo segue"],
+      steps: ["Trascina «tira» tra il simbolo del personaggio e quello della scatola", "Porta la scatola fino alla stella: la scatola ti segue"],
       praise: "Personaggio + tira + scatola: la scatola va dietro al personaggio.",
     },
     "nobody-passes": {

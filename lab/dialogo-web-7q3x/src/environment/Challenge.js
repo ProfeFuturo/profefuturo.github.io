@@ -414,10 +414,10 @@ const LADDER = [
       Challenge.element(project, drawings.kid, 1, 3);
       Challenge.element(project, drawings.star, 5, 3);
     },
-    // Llegó a la estrella y la caja viene pegada atrás: desde cualquier dirección vale.
-    isCompleted: (project, drawings) => Challenge.anyOnTopOf(project, drawings.kid, drawings.star) && Challenge.isNextTo(project, drawings.box, drawings.kid),
+    // Se gana cuando la caja llega a la estrella, no importa dónde quede el personaje.
+    isCompleted: (project, drawings) => Challenge.anyOnTopOf(project, drawings.box, drawings.star),
     hint: project => Challenge.ruleCellIsEmpty(project, 1, 7) ? { cell: Point.at(1, 7), selector: 'pullSymbol' } : { joystick: true },
-    solution: play => { play.drop('pullSymbol', 1, 7); play.right(4); },
+    solution: play => { play.drop('pullSymbol', 1, 7); play.right(5); },
   }),
   new Challenge({
     id: 'nobody-passes', number: 14, world: 'choques', title: 'Nadie pasa', emoji: '🚧', columns: 10, rows: 9,

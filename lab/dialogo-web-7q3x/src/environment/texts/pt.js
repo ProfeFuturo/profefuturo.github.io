@@ -186,7 +186,7 @@ export const pt = {
     "pull": {
       title: "Puxar coisas",
       mission: "Leve a caixa junto com você até a estrela.",
-      steps: ["Arraste «puxa» entre o símbolo do personagem e o da caixa", "Leve o personagem até a estrela. A caixa vai atrás"],
+      steps: ["Arraste «puxa» entre o símbolo do personagem e o da caixa", "Leve a caixa até a estrela: a caixa vai atrás de você"],
       praise: "Personagem + puxa + caixa: a caixa vai atrás do personagem.",
     },
     "nobody-passes": {

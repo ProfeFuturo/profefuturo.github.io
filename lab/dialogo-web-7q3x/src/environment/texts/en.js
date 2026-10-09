@@ -187,7 +187,7 @@ export const en = {
     "pull": {
       title: "Pulling things",
       mission: "Take the box along with you to the star.",
-      steps: ["Drag \"pulls\" between the character symbol and the box one", "Take the character to the star. The box follows"],
+      steps: ["Drag \"pulls\" between the character symbol and the box one", "Take the box to the star: the box follows behind you"],
       praise: "Character + pulls + box: the box goes behind the character.",
     },
     "nobody-passes": {

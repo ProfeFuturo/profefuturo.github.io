@@ -186,7 +186,7 @@ export const de = {
     "pull": {
       title: "Dinge ziehen",
       mission: "Nimm die Kiste mit zum Stern.",
-      steps: ["Zieh „zieht“ zwischen das Symbol der Figur und das der Kiste", "Bring die Figur zum Stern. Die Kiste folgt"],
+      steps: ["Zieh „zieht“ zwischen das Symbol der Figur und das der Kiste", "Bring die Kiste zum Stern: die Kiste folgt dir"],
       praise: "Figur + zieht + Kiste: die Kiste geht hinter der Figur her.",
     },
     "nobody-passes": {

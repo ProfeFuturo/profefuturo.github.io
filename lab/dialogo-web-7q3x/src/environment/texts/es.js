@@ -187,7 +187,7 @@ export const es = {
     "pull": {
       title: "Tirar de cosas",
       mission: "Llevate la caja con vos hasta la estrella.",
-      steps: ["Arrastrá «tira de» entre el simbolo del personaje y el de la caja", "Llevá al personaje hasta la estrella. La caja lo sigue"],
+      steps: ["Arrastrá «tira de» entre el simbolo del personaje y el de la caja", "Llevá la caja hasta la estrella: la caja va detrás tuyo"],
       praise: "Personaje + tira de + caja: la caja va detrás del personaje.",
     },
     "nobody-passes": {

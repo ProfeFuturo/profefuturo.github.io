@@ -186,7 +186,7 @@ export const fr = {
     "pull": {
       title: "Tirer des choses",
       mission: "Emmène la caisse avec toi jusqu'à l'étoile.",
-      steps: ["Glisse « tire » entre le symbole du personnage et celui de la caisse", "Amène le personnage à l'étoile. La caisse le suit"],
+      steps: ["Glisse « tire » entre le symbole du personnage et celui de la caisse", "Amène la caisse jusqu'à l'étoile : la caisse te suit"],
       praise: "Personnage + tire + caisse : la caisse va derrière le personnage.",
     },
     "nobody-passes": {
