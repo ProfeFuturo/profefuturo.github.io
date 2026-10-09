@@ -99,6 +99,13 @@ export class Challenge {
     return Challenge.elementsOf(project, drawing).map(item => board.positionOfIfAbsent(item, () => null)).filter(position => position !== null);
   }
 
+  // Si algún elemento de un dibujo quedó en una celda vecina (arriba, abajo o al costado) de otro.
+  static isNextTo(project, drawing, otherDrawing) {
+    const others = Challenge.positionsOf(project, otherDrawing);
+    return Challenge.positionsOf(project, drawing).some(position =>
+      others.some(other => Math.abs(position.x - other.x) + Math.abs(position.y - other.y) === 1));
+  }
+
   static anyOnTopOf(project, drawing, otherDrawing) {
     const targets = Challenge.positionsOf(project, otherDrawing).map(position => position.key());
     return Challenge.positionsOf(project, drawing).some(position => targets.includes(position.key()));
@@ -407,7 +414,8 @@ const LADDER = [
       Challenge.element(project, drawings.kid, 1, 3);
       Challenge.element(project, drawings.star, 5, 3);
     },
-    isCompleted: (project, drawings) => Challenge.anyOnTopOf(project, drawings.kid, drawings.star) && Challenge.positionsOf(project, drawings.box).some(position => position.x === 4),
+    // Llegó a la estrella y la caja viene pegada atrás: desde cualquier dirección vale.
+    isCompleted: (project, drawings) => Challenge.anyOnTopOf(project, drawings.kid, drawings.star) && Challenge.isNextTo(project, drawings.box, drawings.kid),
     hint: project => Challenge.ruleCellIsEmpty(project, 1, 7) ? { cell: Point.at(1, 7), selector: 'pullSymbol' } : { joystick: true },
     solution: play => { play.drop('pullSymbol', 1, 7); play.right(4); },
   }),

@@ -28,7 +28,7 @@ export class SymbolTray {
     this.handle.type = 'button';
     this.handle.className = 'tray-handle';
     this.handle.setAttribute('aria-label', 'Mostrar u ocultar la bandeja');
-    this.handle.addEventListener('click', () => this.toggle());
+    this.handle.addEventListener('click', () => { if (this.canCollapse()) this.toggle(); });
     this.element.appendChild(this.handle);
     this.userRow = document.createElement('div');
     this.userRow.className = 'tray-row user-row';
@@ -39,7 +39,11 @@ export class SymbolTray {
     this.container.appendChild(this.element);
   }
 
-  toggle() { this.element.classList.toggle('collapsed'); }
+  // Dentro de un desafío la barra no se pliega: hay una o dos fichas y plegarla sólo confunde.
+  // Se mira el proyecto (y no la sesión) porque la bandeja se arma antes que la sesión.
+  canCollapse() { return this.project === null || !this.project.challenge; }
+
+  toggle() { if (this.canCollapse()) this.element.classList.toggle('collapsed'); }
   isCollapsed() { return this.element.classList.contains('collapsed'); }
 
   bind(project) {
@@ -53,6 +57,8 @@ export class SymbolTray {
     this.predefinedRow.innerHTML = '';
     if (this.project === null) return;
     const challenge = this.project.challenge || null;
+    this.handle.hidden = !this.canCollapse();
+    if (!this.canCollapse()) this.element.classList.remove('collapsed');
     if (challenge === null || challenge.pencil) this.userRow.appendChild(this.drawButton());
     for (const symbol of this.project.drawingsMadeByUser()) this.userRow.appendChild(this.tileFor(symbol, 'user'));
     const spacer = document.createElement('div');
